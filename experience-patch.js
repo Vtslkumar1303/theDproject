@@ -24,7 +24,7 @@
       if(!el)return false;
       if(el.classList.contains('memory-note')||el.classList.contains('favourite-side-note'))return true;
       const t=(el.textContent||'').replace(/\s+/g,' ').trim().toLowerCase();
-      return t.startsWith('her favourite songs')||t.startsWith('her favorite songs')||t.startsWith('songs that quietly sound like you');
+      return t.startsWith('her favourite songs')||t.startsWith('her favorite songs')||t.startsWith('songs that quietly sound like you')||t.startsWith('a little soundtrack i won’t explain')||t.startsWith("a little soundtrack i won't explain");
     };
     const reconcileFavouriteNote=()=>{
       const all=[...document.querySelectorAll('div,section,article,aside')].filter(isFavNote);
@@ -32,10 +32,10 @@
       const original=all.find(el=>el.classList.contains('memory-note'))||all[0];
       original.classList.add('memory-note','favourite-side-note');
       const heading=original.querySelector('h3');
-      if(heading)heading.textContent='Songs that quietly sound like you';
+      if(heading)heading.textContent='A little soundtrack I won’t explain';
       let sub=original.querySelector('.side-note-small');
       if(!sub){sub=document.createElement('span');sub.className='side-note-small';original.appendChild(sub)}
-      sub.textContent='A few melodies my heart somehow keeps placing beside your name.';
+      sub.textContent='Some songs just started sounding like you. I kept the reason to myself.';
       if(original.parentElement!==rail)rail.insertBefore(original,rail.firstChild);
       all.forEach(el=>{if(el!==original)el.remove()});
     };
@@ -55,26 +55,26 @@
       const target=card.querySelector('.verse-copy,.verse-body,.verse-content')||card;
       const title=(card.querySelector('h2')?.textContent||('Verse '+(i+1))).trim();
       const box=document.createElement('div');box.className='verse-response';
-      box.innerHTML='<button class="verse-response-toggle" type="button"><span class="response-toggle-kicker">A tiny place just for you</span><span class="response-toggle-main">Leave a little piece of your heart here</span><span class="response-toggle-hint">Tap to open</span></button><div class="verse-response-box"><div class="verse-response-inner"><label class="verse-response-label">If this verse made you pause, smile, overthink, or feel anything at all, you can leave a little note here.</label><textarea maxlength="1500" placeholder="Write something sweet, shy, honest, random... anything that feels like you."></textarea><div class="verse-response-actions"><div class="verse-response-meta"><span>Your words stay gently saved here.</span><span class="response-saved">Saved</span><span class="verse-submit-state"></span></div><button class="verse-submit" type="button">Send this little note</button></div></div></div>';
+      box.innerHTML='<button class="verse-response-toggle" type="button"><span class="response-toggle-kicker">A tiny corner that belongs to you</span><span class="response-toggle-main">Leave a little piece of your heart here</span><span class="response-toggle-hint">Open softly</span></button><div class="verse-response-box"><div class="verse-response-inner"><label class="verse-response-label">If this verse made you pause, smile, overthink, or feel anything at all, leave a tiny thought here. It can be sweet, shy, silly, honest — just yours.</label><textarea maxlength="1500" placeholder="Tell me the thought you almost kept to yourself..."></textarea><div class="verse-response-actions"><div class="verse-response-meta"><span>Your words stay gently saved here.</span><span class="response-saved">Saved</span><span class="verse-submit-state"></span></div><button class="verse-submit" type="button">Let this little note find me</button></div></div></div>';
       const toggle=box.querySelector('.verse-response-toggle'),ta=box.querySelector('textarea'),submit=box.querySelector('.verse-submit'),state=box.querySelector('.verse-submit-state'),savedTag=box.querySelector('.response-saved');
       ta.value=saved[i]||'';
       const setToggle=open=>{
         toggle.classList.toggle('is-open',open);
-        toggle.querySelector('.response-toggle-kicker').textContent=open?'Your little corner is open':'A tiny place just for you';
-        toggle.querySelector('.response-toggle-main').textContent=open?'Write whatever your heart wants to say':'Leave a little piece of your heart here';
-        toggle.querySelector('.response-toggle-hint').textContent=open?'Tap to hide':'Tap to open';
+        toggle.querySelector('.response-toggle-kicker').textContent=open?'Your little corner is open':'A tiny corner that belongs to you';
+        toggle.querySelector('.response-toggle-main').textContent=open?'Say the thing your heart almost kept quiet':'Leave a little piece of your heart here';
+        toggle.querySelector('.response-toggle-hint').textContent=open?'Close gently':'Open softly';
       };
       toggle.addEventListener('click',()=>{const open=box.classList.toggle('open');setToggle(open);if(open)setTimeout(()=>ta.focus(),220)});
       ta.addEventListener('input',()=>{saved[i]=ta.value;localStorage.setItem(responseKey,JSON.stringify(saved));savedTag.classList.add('show');clearTimeout(ta.__savedTimer);ta.__savedTimer=setTimeout(()=>savedTag.classList.remove('show'),1100)});
       submit.addEventListener('click',async()=>{
-        const value=ta.value.trim();if(!value){state.textContent='Write a little something first.';ta.focus();return}
-        submit.disabled=true;state.textContent='Sending your note...';
+        const value=ta.value.trim();if(!value){state.textContent='Leave me at least one tiny thought first.';ta.focus();return}
+        submit.disabled=true;state.textContent='Sending your little note...';
         try{
           const fd=new FormData();fd.append('_subject','The D Project — '+title+' response');fd.append('Verse',title);fd.append('Response',value);fd.append('_captcha','false');
           const r=await fetch('https://formsubmit.co/ajax/vtslpatel2113@gmail.com',{method:'POST',headers:{Accept:'application/json'},body:fd});
           if(!r.ok)throw new Error('send failed');
-          saved[i]=value;localStorage.setItem(responseKey,JSON.stringify(saved));savedTag.classList.add('show');state.textContent='Your little note found its way.';setTimeout(()=>savedTag.classList.remove('show'),1800);
-        }catch(e){state.textContent='Could not send it just yet. Please try once more.'}
+          saved[i]=value;localStorage.setItem(responseKey,JSON.stringify(saved));savedTag.classList.add('show');state.textContent='It found its way to me.';setTimeout(()=>savedTag.classList.remove('show'),1800);
+        }catch(e){state.textContent='It got a little lost. Try sending it once more.'}
         finally{submit.disabled=false}
       });
       target.appendChild(box);
