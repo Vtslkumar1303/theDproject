@@ -18,6 +18,10 @@
     if(!stage){stage=document.createElement('div');stage.className='verse-stage';wrap.parentNode.insertBefore(stage,wrap);stage.appendChild(wrap)}
     if(!rail){rail=document.createElement('aside');rail.className='verse-side-rail';rail.setAttribute('aria-label','Little extras beside the letter');stage.appendChild(rail)}
 
+    /* The verse page itself stays clean: remove every decorative PNG/SVG/object from the verse list and old generated backdrop. */
+    stage.querySelectorAll('.tdp-bg-decor').forEach(el=>el.remove());
+    wrap.querySelectorAll('img,.decor,.side-object,.scrapbook-png,.bouquet-cluster,.cassette-scene,.vinyl').forEach(el=>el.remove());
+
     const isFavNote=el=>{
       if(!el)return false;
       if(el.classList.contains('memory-note')||el.classList.contains('favourite-side-note'))return true;
@@ -39,20 +43,6 @@
       video=document.createElement('section');video.className='video-break-card';
       video.innerHTML='<h3>A little video break</h3><p>For whenever this letter feels a little too long.</p><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/l6E16JAk_Fs?rel=0" title="A little video break" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="video-caption">Press play, stay for a song, then come back whenever you want.</div>';
       rail.appendChild(video);
-    }
-
-    /* Doctor/medical sketches and sunflower bouquets live behind the centered letter, not in a card. */
-    if(!stage.querySelector('.tdp-stethoscope')){
-      const st=document.createElement('div');st.className='tdp-bg-decor tdp-stethoscope';
-      st.innerHTML='<svg viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M55 26v55c0 36 22 61 53 61s53-25 53-61V26" stroke="#6f554c" stroke-width="8" stroke-linecap="round"/><path d="M38 28c0-12 9-21 21-21M178 28c0-12-9-21-21-21" stroke="#6f554c" stroke-width="8" stroke-linecap="round"/><path d="M108 142v18c0 30 21 51 48 51 21 0 39-14 45-34" stroke="#6f554c" stroke-width="8" stroke-linecap="round"/><circle cx="199" cy="164" r="17" stroke="#6f554c" stroke-width="8"/></svg>';
-      const ecg=document.createElement('div');ecg.className='tdp-bg-decor tdp-ecg';ecg.innerHTML='<svg viewBox="0 0 260 90" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 48h50l14-26 21 54 24-69 21 41h31l14-23 17 23h62" stroke="#8a675a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-      const cross=document.createElement('div');cross.className='tdp-bg-decor tdp-med-cross';cross.innerHTML='<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><path d="M37 8h26v29h29v26H63v29H37V63H8V37h29z" fill="#9a7467"/></svg>';
-      const bouquetSvg='<svg viewBox="0 0 220 260" xmlns="http://www.w3.org/2000/svg"><defs><radialGradient id="p"><stop offset="0" stop-color="#6e4019"/><stop offset=".45" stop-color="#8d5a21"/><stop offset="1" stop-color="#3f2a17"/></radialGradient><linearGradient id="pet" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffd95d"/><stop offset=".55" stop-color="#e5a91f"/><stop offset="1" stop-color="#b87310"/></linearGradient><linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#55773b"/><stop offset="1" stop-color="#29472d"/></linearGradient></defs><g stroke="#355031" stroke-width="4" stroke-linecap="round"><path d="M112 112L103 238"/><path d="M75 139L106 240"/><path d="M154 145L110 242"/></g><g fill="url(#leaf)"><ellipse cx="91" cy="171" rx="16" ry="38" transform="rotate(-38 91 171)"/><ellipse cx="130" cy="188" rx="15" ry="35" transform="rotate(35 130 188)"/><ellipse cx="78" cy="207" rx="13" ry="30" transform="rotate(-52 78 207)"/></g><g transform="translate(112 78)"><g fill="url(#pet)">';
-      let petals='';for(let i=0;i<18;i++)petals+='<ellipse cx="0" cy="-39" rx="10" ry="31" transform="rotate('+(i*20)+')"/>';
-      const flower1=bouquetSvg+petals+'</g><circle r="28" fill="url(#p)"/></g><g transform="translate(62 120) scale(.78)"><g fill="url(#pet)">'+petals+'</g><circle r="28" fill="url(#p)"/></g><g transform="translate(161 128) scale(.72)"><g fill="url(#pet)">'+petals+'</g><circle r="28" fill="url(#p)"/></g><path d="M71 224 Q110 255 151 224 L139 260 H84z" fill="#d8c09b" opacity=".9"/><path d="M103 232q12 18 24 0" stroke="#9a6952" stroke-width="5" fill="none"/></svg>';
-      const b1=document.createElement('div');b1.className='tdp-bg-decor tdp-sunflower-bouquet';b1.innerHTML=flower1;
-      const b2=document.createElement('div');b2.className='tdp-bg-decor tdp-sunflower-bouquet second';b2.innerHTML=flower1;
-      stage.append(st,ecg,cross,b1,b2);
     }
 
     /* Cute response box for every verse; Submit sends to the configured email and stores locally. */
@@ -88,6 +78,28 @@
       card.appendChild(layer);setTimeout(()=>layer.remove(),1150);
     };
     cards.forEach(card=>{if(card.dataset.magicBound)return;card.dataset.magicBound='1';const trigger=card.querySelector('.verse-toggle,.verse-expander');if(trigger)trigger.addEventListener('click',()=>setTimeout(()=>{if(card.classList.contains('open'))burst(card)},80))});
+
+    /* Bottom player layout: Khat on the left, a single synced lyric line on the right. */
+    const player=document.querySelector('.spotify-player');
+    const masterAudio=document.getElementById('audio');
+    const title=document.getElementById('tt');
+    if(player&&masterAudio&&title&&!player.querySelector('.spotify-title-lyric-row')){
+      const row=document.createElement('div');row.className='spotify-title-lyric-row';
+      const lyric=document.createElement('div');lyric.id='khatLiveLyric';lyric.className='khat-live-lyric is-placeholder';lyric.textContent='Synced Hindi lyric line will appear here';
+      title.parentNode.insertBefore(row,title);row.append(title,lyric);
+
+      /* The timing engine is ready. Full copyrighted lyrics are intentionally not embedded here.
+         If user-provided lyric lines/timestamps are added to KHAT_SYNC_LINES, this displays one line at a time. */
+      const KHAT_SYNC_LINES=Array.isArray(window.KHAT_SYNC_LINES)?window.KHAT_SYNC_LINES:[];
+      const syncLyric=()=>{
+        if(!KHAT_SYNC_LINES.length){lyric.textContent='Synced Hindi lyric line will appear here';lyric.classList.add('is-placeholder');return}
+        let current='';
+        for(const item of KHAT_SYNC_LINES){if(masterAudio.currentTime>=item.t)current=item.line;else break}
+        lyric.textContent=current||'Khat';
+        lyric.classList.toggle('is-placeholder',!current);
+      };
+      masterAudio.addEventListener('timeupdate',syncLyric);masterAudio.addEventListener('seeked',syncLyric);masterAudio.addEventListener('loadedmetadata',syncLyric);syncLyric();
+    }
 
     const download=document.getElementById('downloadEd');if(download)download.style.display='none';
     const panel=document.querySelector('.editor-panel');if(panel&&!panel.querySelector('.autosave-status')){const s=document.createElement('div');s.className='autosave-status';s.innerHTML='<span class="autosave-dot"></span><span>Auto-save is on</span>';panel.prepend(s)}
