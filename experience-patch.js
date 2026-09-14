@@ -20,13 +20,17 @@
       stage.appendChild(rail);
     }
 
-    /* Pinned favourite songs note. Keep it outside every verse. */
-    let note=rail.querySelector('.favourite-side-note');
-    if(!note){
-      note=document.createElement('section');
-      note.className='favourite-side-note';
-      note.innerHTML='<h3>Her Favourite Songs</h3><ul><li>Khat — Navjot Ahuja</li><li>Maahiya</li><li>Ilahi</li><li>Iktara</li><li>Ranjha</li><li>Phir Le Aaya Dil</li></ul><span class="side-note-small">Pinned quietly beside the verses.</span>';
-      rail.appendChild(note);
+    /* Use the existing favourite-songs note and move it into the right rail.
+       Do not create a second copy. */
+    const originalNote=[...document.querySelectorAll('.memory-note')].find(el=>!el.closest('.verse-side-rail'));
+    const duplicateNote=rail.querySelector('.favourite-side-note:not(.memory-note)');
+    if(originalNote){
+      if(duplicateNote)duplicateNote.remove();
+      originalNote.classList.add('favourite-side-note');
+      rail.insertBefore(originalNote,rail.firstChild);
+    }else{
+      const existingNote=rail.querySelector('.memory-note,.favourite-side-note');
+      if(existingNote)existingNote.classList.add('favourite-side-note');
     }
 
     /* Video panel beside the verses. */
