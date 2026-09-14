@@ -85,20 +85,39 @@
     const title=document.getElementById('tt');
     if(player&&masterAudio&&title&&!player.querySelector('.spotify-title-lyric-row')){
       const row=document.createElement('div');row.className='spotify-title-lyric-row';
-      const lyric=document.createElement('div');lyric.id='khatLiveLyric';lyric.className='khat-live-lyric is-placeholder';lyric.textContent='Synced Hindi lyric line will appear here';
+      const lyric=document.createElement('div');lyric.id='khatLiveLyric';lyric.className='khat-live-lyric is-placeholder';lyric.textContent='Synced lyric line will appear here';
       title.parentNode.insertBefore(row,title);row.append(title,lyric);
 
-      /* The timing engine is ready. Full copyrighted lyrics are intentionally not embedded here.
-         If user-provided lyric lines/timestamps are added to KHAT_SYNC_LINES, this displays one line at a time. */
-      const KHAT_SYNC_LINES=Array.isArray(window.KHAT_SYNC_LINES)?window.KHAT_SYNC_LINES:[];
+      /* Fill khat-lyrics.js with user-supplied lines and timestamps. Empty rows are ignored. */
+      const KHAT_SYNC_LINES=(Array.isArray(window.KHAT_SYNC_LINES)?window.KHAT_SYNC_LINES:[])
+        .filter(item=>item&&Number.isFinite(Number(item.t))&&String(item.line||'').trim())
+        .map(item=>({t:Number(item.t),line:String(item.line).trim()}))
+        .sort((a,b)=>a.t-b.t);
+
+      let lastText='';
       const syncLyric=()=>{
-        if(!KHAT_SYNC_LINES.length){lyric.textContent='Synced Hindi lyric line will appear here';lyric.classList.add('is-placeholder');return}
+        if(!KHAT_SYNC_LINES.length){
+          lyric.textContent='Synced lyric line will appear here';
+          lyric.classList.add('is-placeholder');
+          return;
+        }
         let current='';
         for(const item of KHAT_SYNC_LINES){if(masterAudio.currentTime>=item.t)current=item.line;else break}
-        lyric.textContent=current||'Khat';
+        const nextText=current||'Khat';
+        if(nextText!==lastText){
+          lyric.classList.remove('lyric-pop');
+          void lyric.offsetWidth;
+          lyric.textContent=nextText;
+          lyric.classList.add('lyric-pop');
+          lastText=nextText;
+        }
         lyric.classList.toggle('is-placeholder',!current);
       };
-      masterAudio.addEventListener('timeupdate',syncLyric);masterAudio.addEventListener('seeked',syncLyric);masterAudio.addEventListener('loadedmetadata',syncLyric);syncLyric();
+      masterAudio.addEventListener('timeupdate',syncLyric);
+      masterAudio.addEventListener('seeked',syncLyric);
+      masterAudio.addEventListener('loadedmetadata',syncLyric);
+      masterAudio.addEventListener('play',syncLyric);
+      syncLyric();
     }
 
     const download=document.getElementById('downloadEd');if(download)download.style.display='none';
