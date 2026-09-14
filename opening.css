@@ -1,3 +1,7 @@
+/* Prevent the original DraftD cover from flashing before the replacement envelope is ready. */
+.open-screen{visibility:hidden;opacity:0;transition:opacity .18s ease}
+.open-screen.tdp-opening-ready{visibility:visible;opacity:1}
+
 /* Realistic sealed envelope / two-step password opening */
 .open-screen{
   perspective:1400px;
