@@ -24,13 +24,18 @@
       if(!el)return false;
       if(el.classList.contains('memory-note')||el.classList.contains('favourite-side-note'))return true;
       const t=(el.textContent||'').replace(/\s+/g,' ').trim().toLowerCase();
-      return t.startsWith('her favourite songs')||t.startsWith('her favorite songs');
+      return t.startsWith('her favourite songs')||t.startsWith('her favorite songs')||t.startsWith('songs that quietly sound like you');
     };
     const reconcileFavouriteNote=()=>{
       const all=[...document.querySelectorAll('div,section,article,aside')].filter(isFavNote);
       if(!all.length)return;
       const original=all.find(el=>el.classList.contains('memory-note'))||all[0];
       original.classList.add('memory-note','favourite-side-note');
+      const heading=original.querySelector('h3');
+      if(heading)heading.textContent='Songs that quietly sound like you';
+      let sub=original.querySelector('.side-note-small');
+      if(!sub){sub=document.createElement('span');sub.className='side-note-small';original.appendChild(sub)}
+      sub.textContent='A few melodies my heart somehow keeps placing beside your name.';
       if(original.parentElement!==rail)rail.insertBefore(original,rail.firstChild);
       all.forEach(el=>{if(el!==original)el.remove()});
     };
@@ -50,19 +55,26 @@
       const target=card.querySelector('.verse-copy,.verse-body,.verse-content')||card;
       const title=(card.querySelector('h2')?.textContent||('Verse '+(i+1))).trim();
       const box=document.createElement('div');box.className='verse-response';
-      box.innerHTML='<button class="verse-response-toggle" type="button">Want to say something on this</button><div class="verse-response-box"><div class="verse-response-inner"><textarea maxlength="1500" placeholder="Leave a little thought here... only if your heart wants to."></textarea><div class="verse-response-actions"><div class="verse-response-meta"><span>Your words are safe here.</span><span class="response-saved">Saved</span><span class="verse-submit-state"></span></div><button class="verse-submit" type="button">Submit this thought</button></div></div></div>';
+      box.innerHTML='<button class="verse-response-toggle" type="button"><span class="response-toggle-kicker">A tiny place just for you</span><span class="response-toggle-main">Leave a little piece of your heart here</span><span class="response-toggle-hint">Tap to open</span></button><div class="verse-response-box"><div class="verse-response-inner"><label class="verse-response-label">If this verse made you pause, smile, overthink, or feel anything at all, you can leave a little note here.</label><textarea maxlength="1500" placeholder="Write something sweet, shy, honest, random... anything that feels like you."></textarea><div class="verse-response-actions"><div class="verse-response-meta"><span>Your words stay gently saved here.</span><span class="response-saved">Saved</span><span class="verse-submit-state"></span></div><button class="verse-submit" type="button">Send this little note</button></div></div></div>';
       const toggle=box.querySelector('.verse-response-toggle'),ta=box.querySelector('textarea'),submit=box.querySelector('.verse-submit'),state=box.querySelector('.verse-submit-state'),savedTag=box.querySelector('.response-saved');
       ta.value=saved[i]||'';
-      toggle.addEventListener('click',()=>{const open=box.classList.toggle('open');toggle.textContent=open?'Hide your response':'Want to say something on this';if(open)setTimeout(()=>ta.focus(),220)});
+      const setToggle=open=>{
+        toggle.classList.toggle('is-open',open);
+        toggle.querySelector('.response-toggle-kicker').textContent=open?'Your little corner is open':'A tiny place just for you';
+        toggle.querySelector('.response-toggle-main').textContent=open?'Write whatever your heart wants to say':'Leave a little piece of your heart here';
+        toggle.querySelector('.response-toggle-hint').textContent=open?'Tap to hide':'Tap to open';
+      };
+      toggle.addEventListener('click',()=>{const open=box.classList.toggle('open');setToggle(open);if(open)setTimeout(()=>ta.focus(),220)});
+      ta.addEventListener('input',()=>{saved[i]=ta.value;localStorage.setItem(responseKey,JSON.stringify(saved));savedTag.classList.add('show');clearTimeout(ta.__savedTimer);ta.__savedTimer=setTimeout(()=>savedTag.classList.remove('show'),1100)});
       submit.addEventListener('click',async()=>{
-        const value=ta.value.trim();if(!value){state.textContent='Write something first.';ta.focus();return}
-        submit.disabled=true;state.textContent='Sending...';
+        const value=ta.value.trim();if(!value){state.textContent='Write a little something first.';ta.focus();return}
+        submit.disabled=true;state.textContent='Sending your note...';
         try{
           const fd=new FormData();fd.append('_subject','The D Project — '+title+' response');fd.append('Verse',title);fd.append('Response',value);fd.append('_captcha','false');
           const r=await fetch('https://formsubmit.co/ajax/vtslpatel2113@gmail.com',{method:'POST',headers:{Accept:'application/json'},body:fd});
           if(!r.ok)throw new Error('send failed');
-          saved[i]=value;localStorage.setItem(responseKey,JSON.stringify(saved));savedTag.classList.add('show');state.textContent='Sent.';setTimeout(()=>savedTag.classList.remove('show'),1800);
-        }catch(e){state.textContent='Could not send. Please try again.'}
+          saved[i]=value;localStorage.setItem(responseKey,JSON.stringify(saved));savedTag.classList.add('show');state.textContent='Your little note found its way.';setTimeout(()=>savedTag.classList.remove('show'),1800);
+        }catch(e){state.textContent='Could not send it just yet. Please try once more.'}
         finally{submit.disabled=false}
       });
       target.appendChild(box);
@@ -75,35 +87,6 @@
       card.appendChild(layer);setTimeout(()=>layer.remove(),1150);
     };
     cards.forEach(card=>{if(card.dataset.magicBound)return;card.dataset.magicBound='1';const trigger=card.querySelector('.verse-toggle,.verse-expander');if(trigger)trigger.addEventListener('click',()=>setTimeout(()=>{if(card.classList.contains('open'))burst(card)},80))});
-
-    const player=document.querySelector('.spotify-player');
-    const masterAudio=document.getElementById('audio');
-    const title=document.getElementById('tt');
-    if(player&&masterAudio&&title&&!player.querySelector('.spotify-title-lyric-row')){
-      const row=document.createElement('div');row.className='spotify-title-lyric-row';
-      const lyric=document.createElement('div');lyric.id='khatLiveLyric';lyric.className='khat-live-lyric';lyric.textContent='काग़ज़ के फूल लाऊँ तेरे लिए';
-      title.parentNode.insertBefore(row,title);row.append(title,lyric);
-
-      const embedded=[
-        'काग़ज़ के फूल लाऊँ तेरे लिए','ख़त लिखूँ तेरे लिए','मैं ख़ुदा में मानूँ नहीं','पर माँगूँ दुआ तेरे लिए','तेरे लिए घर बनाऊँ','दीवार नीले रंग से सजाऊँ','पसंद है तुम्हें, मालूम है','तुमने बताया था एक दफ़े','नीले फूल लाऊँ तेरे लिए','ख़त लिखूँ तेरे लिए','मैं ख़ुदा में मानूँ नहीं','पर माँगूँ दुआ तेरे लिए','तेरी बातें नासमझ-सी','फ़िर भी जायज़ लग रही हैं','तू परेशाँ कर रही है','फ़िर भी मासूम लग रही है','तेरे लिए मंदिर जाऊँ','तेरे नाम का दिया जलाऊँ','हँसता रहे तू चाहे जो हो','तेरी हँसी को नज़र ना लगे','काग़ज़ के फूल लाऊँ तेरे लिए','ख़त लिखूँ तेरे लिए','मैं ख़ुदा में मानूँ नहीं','पर माँगूँ दुआ तेरे लिए','वो-हो-हो, हाँ-हो','वो-हो-हो, हाँ-हो','वो-हो-हो','वो-हो-हो, हाँ-हो','वो-हो-हो, हाँ-हो','वो-हो-हो, हाँ-हो','वो-हो-हो','तेरे लिए हम बने हैं','तेरे लिए बदल रहे हैं','क्या मोहब्बत हो गई है?','तेरी ही तेरी बातें करें','तेरे लिए घर बनाऊँ','दीवार नीले रंग से सजाऊँ','पसंद है तुम्हें, मालूम है','तुमने बताया था एक दफ़े','देख, शायर बना तेरे लिए','नग़्मा लिखा तेरे लिए','मैं ख़ुदा में मानूँ क्यूँ?','तू ख़ुदा मेरे लिए'
-      ].map((line,i)=>({t:i*6,line}));
-
-      const external=(Array.isArray(window.KHAT_SYNC_LINES)?window.KHAT_SYNC_LINES:[])
-        .filter(item=>item&&Number.isFinite(Number(item.t))&&String(item.line||'').trim())
-        .map(item=>({t:Number(item.t),line:String(item.line).trim()}));
-      const KHAT_SYNC_LINES=(external.length?external:embedded).sort((a,b)=>a.t-b.t);
-
-      let lastText='';
-      const syncLyric=()=>{
-        let current=KHAT_SYNC_LINES[0]?.line||'Khat';
-        for(const item of KHAT_SYNC_LINES){if(masterAudio.currentTime>=item.t)current=item.line;else break}
-        if(current!==lastText){
-          lyric.classList.remove('lyric-pop');void lyric.offsetWidth;lyric.textContent=current;lyric.classList.add('lyric-pop');lastText=current;
-        }
-      };
-      ['timeupdate','seeked','loadedmetadata','play'].forEach(ev=>masterAudio.addEventListener(ev,syncLyric));
-      syncLyric();
-    }
 
     const download=document.getElementById('downloadEd');if(download)download.style.display='none';
     const panel=document.querySelector('.editor-panel');if(panel&&!panel.querySelector('.autosave-status')){const s=document.createElement('div');s.className='autosave-status';s.innerHTML='<span class="autosave-dot"></span><span>Auto-save is on</span>';panel.prepend(s)}
