@@ -5,6 +5,8 @@
 
   openScreen.innerHTML='<div class="open-card letter-front" id="envelopeCard"><div class="envelope-flap" aria-hidden="true"></div><div class="envelope-content"><div class="envelope-to">A letter meant only for you</div><h1 class="envelope-title">To, my March</h1><p class="envelope-sub">Some words waited quietly until they were brave enough to become a letter.</p><div class="wax-seal" aria-hidden="true"></div><button class="seal-open-btn" id="breakSealBtn" type="button">Open this letter</button><div class="password-reveal"><div class="password-reveal-inner"><div id="passwordGate" class="password-gate envelope-password"><label for="letterPassword" class="password-label">One tiny secret before the letter opens</label><p class="birthdate-hint">A little clue: four digits from the day and month the world became a little brighter because you arrived.</p><div class="password-row"><input id="letterPassword" class="password-input" type="password" inputmode="numeric" autocomplete="off" placeholder="DDMM" maxlength="4" aria-describedby="passwordMessage"><button id="unlockBtn" class="unlock-btn" type="button">Unlock</button></div><div id="passwordMessage" class="password-message" aria-live="polite"></div><div class="envelope-success">The seal knows you. Opening your letter...</div></div></div></div></div></div>';
 
+  requestAnimationFrame(()=>openScreen.classList.add('tdp-opening-ready'));
+
   const card=document.getElementById('envelopeCard');
   const breakSealBtn=document.getElementById('breakSealBtn');
   const passwordInput=document.getElementById('letterPassword');
