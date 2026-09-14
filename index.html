@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#efe0c2">
+<title>To, my March 🤍</title>
+<style>
+:root{
+  --ink:#4f2f24; --ink-soft:#755447; --paper:#efe1c6; --paper2:#f8ecd4;
+  --wine:#7c1f2a; --rose:#a63f4c; --gold:#a87943; --shadow:rgba(72,39,26,.18);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; color:var(--ink); background:#d8c4a5;
+  font-family: "Segoe Print", "Bradley Hand", "Comic Sans MS", cursive; overflow-x:hidden;
+}
+button,input{font:inherit}
+img{display:block;max-width:100%}
+a{color:inherit}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-3;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(255,255,255,.55), transparent 30%),
+    linear-gradient(180deg,#e9d7b7,#cdb28e);
+}
+.site{
+  width:min(960px,100%); margin:0 auto; min-height:100%;
+}
+.letter{
+  position:relative; overflow:hidden;
+  background:
+    linear-gradient(rgba(250,239,214,.84),rgba(245,227,194,.87)),
+    url("assets/asset-01-de12b7479609.png") center top/cover repeat-y;
+  box-shadow:0 0 40px var(--shadow), inset 0 0 70px rgba(114,72,34,.14);
+}
+.open-screen{
+  position:fixed; inset:0; z-index:9999; display:grid; place-items:center;
+  padding:24px; background:
+    radial-gradient(circle at 50% 22%,rgba(255,255,255,.22),transparent 40%),
+    rgba(61,35,26,.92); transition:opacity .8s ease,visibility .8s ease;
+}
+.open-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.open-card{
+  width:min(520px,92vw); text-align:center; color:#fff8eb;
+  padding:42px 24px; border:1px solid rgba(255,255,255,.2);
+  background:rgba(84,48,35,.35); backdrop-filter:blur(8px); border-radius:28px;
+}
+.open-card .eyebrow{font-size:.76rem;letter-spacing:.28em;text-transform:uppercase;opacity:.75}
+.open-card h1{font:italic 700 clamp(2.8rem,10vw,5.2rem)/.95 Georgia,serif;margin:14px 0}
+.open-card p{max-width:36ch;margin:0 auto 24px;line-height:1.65;opacity:.88}
+.open-btn{
+  border:0;border-radius:999px;padding:15px 24px;min-height:48px;cursor:pointer;
+  background:#fff5e5;color:#56362a;font-weight:700;box-shadow:0 8px 30px rgba(0,0,0,.18)
+}
+.open-btn:active{transform:scale(.98)}
+.hero{
+  min-height:88vh; display:grid; place-items:center; text-align:center;
+  padding:96px 22px 80px; position:relative; isolation:isolate;
+}
+.hero-inner{position:relative;z-index:3;max-width:700px}
+.kicker{letter-spacing:.28em;text-transform:uppercase;font-size:.7rem;opacity:.72}
+.hero h1{font:700 clamp(3.3rem,12vw,7rem)/.88 "Segoe Print","Bradley Hand",cursive;margin:18px 0 16px}
+.hero .subtitle{font:italic clamp(1rem,3.5vw,1.35rem)/1.7 "Segoe Print","Bradley Hand",cursive;max-width:46ch;margin:auto;color:var(--ink-soft)}
+.scroll-hint{margin-top:40px;font-size:.76rem;letter-spacing:.15em;text-transform:uppercase;opacity:.62}
+.decor{position:absolute;z-index:2;pointer-events:none;user-select:none}
+.hero-rose{width:190px;left:-46px;bottom:2%;transform:rotate(-11deg)}
+.hero-nazar{width:94px;right:20px;top:19%;transform:rotate(7deg)}
+.hero-breath{width:220px;right:-62px;bottom:8%;transform:rotate(12deg)}
+.section{
+  position:relative; padding:86px clamp(22px,7vw,80px); min-height:72vh;
+  display:flex; align-items:center;
+}
+.section:nth-of-type(even){background:rgba(255,255,255,.08)}
+.verse{
+  position:relative; z-index:3; width:min(680px,100%); margin:0 auto;
+  opacity:0; transform:translateY(28px); transition:opacity .9s ease,transform .9s ease;
+}
+.verse.visible{opacity:1;transform:none}
+.verse-number{font-size:.72rem;text-transform:uppercase;letter-spacing:.22em;color:var(--rose);font-weight:700}
+.verse h2{font:600 clamp(2rem,7vw,3.4rem)/1.05 "Segoe Print","Bradley Hand",cursive;margin:10px 0 24px}
+.verse p{font-family:"Segoe Print","Bradley Hand","Comic Sans MS",cursive;font-size:clamp(1rem,2.6vw,1.16rem);line-height:1.86;margin:0 0 18px}
+.verse .em{font-style:italic;color:#6c352c}
+.quote{
+  margin:28px 0;padding:22px 24px;border-left:3px solid var(--wine);
+  background:rgba(255,255,255,.24);font-style:italic;font-size:1.06rem;line-height:1.7
+}
+.small-note{font-size:.9rem!important;color:var(--ink-soft)}
+.music-card{
+  width:min(620px,calc(100% - 32px)); margin:24px auto 54px; padding:18px;
+  position:sticky;bottom:16px;z-index:40;border-radius:18px;
+  background:rgba(246,232,204,.88);backdrop-filter:blur(12px);
+  border:1px solid rgba(100,67,48,.14);box-shadow:0 12px 35px rgba(65,38,25,.16)
+}
+.music-row{display:grid;grid-template-columns:50px 1fr auto;gap:14px;align-items:center}
+.play{
+  width:50px;height:50px;border:0;border-radius:50%;cursor:pointer;background:#653a2c;color:white;font-size:1.05rem
+}
+.track-meta strong{display:block;font-size:.94rem}.track-meta span{font-size:.76rem;color:var(--ink-soft)}
+.time{font-variant-numeric:tabular-nums;font-size:.78rem;color:var(--ink-soft)}
+.seek{width:100%;accent-color:var(--wine);margin-top:12px}
+.cassette-scene{
+  position:relative;width:min(320px,72vw);margin:34px auto 8px;aspect-ratio:1.55/1;
+}
+.cassette-img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 14px 18px rgba(70,40,25,.14))}
+.reel{
+  position:absolute;border:3px dashed rgba(82,49,35,.46);border-radius:50%;
+  width:56px;height:56px;top:42%;animation:spin 2.6s linear infinite paused;
+}
+.reel.left{left:27%}.reel.right{right:27%}
+.playing .reel{animation-play-state:running}
+.vinyl{
+  width:160px;height:160px;border-radius:50%;position:absolute;right:-44px;top:16%;
+  background:
+   radial-gradient(circle,#c49a6c 0 7%,#6f2b25 7% 10%,#14100f 10% 15%,#25201f 15% 24%,#151211 24% 25%,#24201e 25% 38%,#151211 38% 39%,#25201f 39%);
+  box-shadow:0 14px 28px rgba(40,26,19,.18);
+  animation:spin 8s linear infinite paused;
+}
+.playing .vinyl{animation-play-state:running}
+@keyframes spin{to{transform:rotate(360deg)}}
+.petals{position:fixed;inset:0;z-index:60;pointer-events:none;overflow:hidden}
+.petal{
+ position:absolute;top:-15vh;width:34px;opacity:.78;
+ animation:fall var(--dur) linear infinite;animation-delay:var(--delay);
+ filter:drop-shadow(0 3px 5px rgba(85,40,29,.12))
+}
+@keyframes fall{
+ 0%{transform:translate3d(0,-10vh,0) rotate(0deg)}
+ 35%{transform:translate3d(var(--drift),35vh,0) rotate(170deg)}
+ 70%{transform:translate3d(calc(var(--drift)*-.4),75vh,0) rotate(310deg)}
+ 100%{transform:translate3d(var(--drift),120vh,0) rotate(500deg)}
+}
+.side-object{position:absolute;z-index:1;pointer-events:none;opacity:.92}
+.rose-right{width:170px;right:-45px;bottom:5%;transform:rotate(13deg)}
+.breath-left{width:180px;left:-62px;top:12%;transform:rotate(-12deg)}
+.nazar-right{width:78px;right:22px;top:8%;transform:rotate(8deg)}
+.headphones{width:210px;right:-54px;bottom:0;transform:rotate(-8deg)}
+.ending{
+ text-align:center;padding:100px 24px 130px;
+}
+.ending h2{font:italic 700 clamp(2.6rem,10vw,5.2rem)/.95 Georgia,serif;margin:0 0 20px}
+.ending p{font-size:1.05rem;line-height:1.8;max-width:540px;margin:0 auto}
+.signature{margin-top:42px;font:italic 1.3rem Georgia,serif}
+.spark{display:inline-block;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.18);opacity:.65}}
+.progress-line{position:fixed;top:0;left:0;height:3px;background:var(--wine);width:0;z-index:80}
+.mute-tip{font-size:.74rem;text-align:center;color:var(--ink-soft);margin-top:8px}
+@media (max-width:640px){
+ .section{padding-top:74px;padding-bottom:74px;min-height:auto}
+ .hero{min-height:82vh}
+ .hero-rose{width:150px}.hero-breath{width:170px}.hero-nazar{width:70px}
+ .vinyl{width:125px;height:125px;right:-55px}
+ .side-object{opacity:.72}
+ .rose-right{width:130px}.breath-left{width:140px}.headphones{width:160px}
+ .music-card{bottom:8px;margin-bottom:30px}
+}
+@media (prefers-reduced-motion:reduce){
+ html{scroll-behavior:auto}
+ *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition:none!important}
+ .petals{display:none}
+ .verse{opacity:1;transform:none}
+}
+
+.open-toggle{
+  position:absolute!important;
+  width:1px!important;height:1px!important;
+  opacity:0!important;pointer-events:none!important;
+}
+#letterOpened:checked ~ .open-screen{
+  opacity:0;visibility:hidden;pointer-events:none;
+}
+.open-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  user-select:none;-webkit-user-select:none;
+}
+
+
+.password-gate{margin:22px auto 0;max-width:360px}
+.password-label{display:block;margin-bottom:10px;font-size:.88rem;opacity:.86}
+.password-row{display:flex;gap:10px;align-items:center}
+.password-input{
+  min-width:0;flex:1;border:1px solid rgba(255,255,255,.28);
+  border-radius:999px;padding:13px 16px;background:rgba(255,255,255,.12);
+  color:#fff8eb;outline:none;font-size:16px
+}
+.password-input::placeholder{color:rgba(255,248,235,.55)}
+.password-input:focus{border-color:rgba(255,255,255,.72)}
+.unlock-btn{
+  border:0;border-radius:999px;padding:13px 16px;min-height:46px;cursor:pointer;
+  background:#fff5e5;color:#56362a;font-weight:700
+}
+.password-message{min-height:1.4em;margin-top:9px;font-size:.82rem;color:#ffe3e3}
+.unlocked-open{display:none!important;margin-top:18px}
+.open-card.is-unlocked .password-gate{display:none}
+.open-card.is-unlocked .unlocked-open{display:inline-flex!important}
+@media(max-width:420px){
+  .password-row{flex-direction:column}
+  .password-input,.unlock-btn{width:100%}
+}
+
+</style>
+</head>
+<body>
+<input id="letterOpened" class="open-toggle" type="checkbox" aria-hidden="true">
+<div class="progress-line" id="progressLine"></div>
+
+<div class="open-screen" id="openScreen">
+  <div class="open-card">
+    <div class="eyebrow">a little something I kept rewriting</div>
+    <h1>To, my March</h1>
+    <p>This is not a perfect letter. It is just a very honest one.</p>
+
+    <div id="passwordGate" class="password-gate">
+      <label for="letterPassword" class="password-label">Enter the little secret ✨</label>
+      <div class="password-row">
+        <input id="letterPassword" class="password-input" type="password" inputmode="numeric" autocomplete="off" placeholder="••••••" maxlength="12" aria-describedby="passwordMessage">
+        <button id="unlockBtn" class="unlock-btn" type="button">Unlock 🤍</button>
+      </div>
+      <div id="passwordMessage" class="password-message" aria-live="polite"></div>
+    </div>
+
+    <label class="open-btn unlocked-open" id="openBtn" for="letterOpened" role="button" tabindex="0">Open the letter 🤍</label>
+  </div>
+</div>
+
+<div class="petals" id="petals" aria-hidden="true"></div>
+
+<main class="site letter" id="letter">
+  <section class="hero">
+    <img class="decor hero-rose" src="assets/asset-02-8f5a2762061d.png" alt="">
+    <img class="decor hero-nazar" src="assets/asset-03-c31cbe5c4167.png" alt="">
+    <img class="decor hero-breath" src="assets/asset-04-96ecfc0d24b6.png" alt="">
+    <div class="vinyl" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="kicker">A letter I probably overthought too much</div>
+      <h1>To, my March</h1>
+      <p class="subtitle">Some feelings stay quiet for so long that eventually the only kind thing you can do is give them words.</p>
+      <div class="scroll-hint">scroll slowly ↓</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <img class="side-object rose-right" src="assets/asset-02-8f5a2762061d.png" alt="">
+    <article class="verse">
+      <div class="verse-number">Verse I</div>
+      <h2>A Thousand Thoughts Later</h2>
+      <p>So Heyya!!</p>
+      <p>I am writing all this to clear my mind. This is the 4th verse of this letter being presented in front of you!! Sorry, I overthink too much about certain things too. I have been thinking and thinking all the time, and my mind is just blowing up! So I need to get through it by sharing all of this with you. I don’t know whether I am doing it right or not, but as of now, I am serving justice to myself.</p>
+      <p>I am just pouring out all the voices in my head, and I know you don’t need to read all of this if you ever find it boring or something. It’s completely your choice.</p>
+      <p>I don’t even know if you’re single or already seeing someone, and that makes this a little scary… but I still wanted to be honest with myself as well as with you.</p>
+      <p>As I told you earlier, you were one of my crushes. I saw you for the first time at Tithal Beach during your earlier college days, maybe. After ages, we finally met again at your convocation, and then during Navratri. Somehow, I instantly clicked with you. That’s when I decided to give this bond a few months and simply see where it goes. And now, it’s been almost a year since we started talking… and I’ve finally finished writing all of this and am putting it in front of you.</p>
+    </article>
+  </section>
+
+  <section class="section">
+    <img class="side-object breath-left" src="assets/asset-04-96ecfc0d24b6.png" alt="">
+    <article class="verse">
+      <div class="verse-number">Verse II</div>
+      <h2>Then You Happened</h2>
+      <p>Since you crossed my path, I have just been stuck on you!</p>
+      <p>Maybe that’s the beauty of you being you — simple, sweet, kind-hearted, yet absolutely amazing. Only the people who have truly observed you can see this side of you.</p>
+      <p class="em">You’re gorgeous, but that’s honestly the least interesting thing about you.</p>
+      <p>Genuine souls like you are rare.</p>
+      <p>I have been trying to communicate with you for the past few months. Actually, I had given myself a certain period of time to create a bond between us, and you responded really well — no doubt about that. Maybe it was because I’m Shivangi’s brother, or maybe I was genuinely someone worth responding to… I honestly don’t know.</p>
+      <p>But I think I’ve failed to create that bond with you, as I never got much reassurance from your side. Or maybe you’re just too introverted or reserved — I don’t know — and that’s completely okay.</p>
+      <p>As far as I’ve gotten to know you, you seem to be an emotionally reserved person and express yourself less.</p>
+      <p>And sometimes, we connect with each other randomly. Like, without saying or doing anything, if you’ve ever observed it.</p>
+      <p>I have always respected your boundaries, and that’s why I’ve slowed down a bit in communicating, thinking that maybe I was over-exaggerating our conversations — probably discussing things you didn’t like, weren’t interested in, or simply didn’t want to talk about.</p>
+      <p>I have always tried to make sure you’re comfortable in our chats and also whenever we’ve met in person. I’ve always tried to respect your boundaries. And if, by chance, I have done something wrong or inappropriate, please forgive me, as my intentions were never to hurt you.</p>
+    </article>
+  </section>
+
+  <section class="section">
+    <img class="side-object nazar-right" src="assets/asset-03-c31cbe5c4167.png" alt="">
+    <article class="verse">
+      <div class="verse-number">Verse III</div>
+      <h2>The Art Of Noticing You</h2>
+      <p>So here it goes — straight from the heart: I’ve always felt that you could be someone really special for me. Not in a random, creepy way, but in the “I think we’d actually click if we gave it a shot” way.</p>
+      <p>I know it sounds sudden, but I didn’t want to look back years later and regret not saying anything.</p>
+      <p>You’re rare — in the most beautiful way.</p>
+      <p>The way you make people feel heard, seen, understood, and comfortable… it’s something I don’t see easily these days. Your humility, your warmth, your kindness — it all reflects how beautifully you’ve been raised. And I find myself falling for that, over and over again.</p>
+      <p>I honestly feel like we could be a really good duo… the kind of pair that just fits, that has its own vibe without trying too hard.</p>
+      <p>I don’t know how to explain it, but somehow I feel a really strong connection with you — like peace, comfort, reassurance, and good vibes all beautifully blended into one person.</p>
+      <p>You keep ticking these little boxes on my mental checklist — kindness, maturity, warmth, the way you carry yourself — and it makes you someone truly worth approaching.</p>
+      <p>That’s why I gathered the courage to say this.</p>
+    </article>
+  </section>
+
+  <section class="section">
+    <img class="side-object headphones" src="assets/asset-05-6d48267ac123.png" alt="">
+    <article class="verse">
+      <div class="verse-number">Verse IV</div>
+      <h2>Curiosity Is A Love Language</h2>
+      <p>Curiosity is a love language because I want to know how you think, how you feel, and how you react to those cute little moments when your favourite food comes — the feelings, the things you never say out loud.</p>
+      <p>I want someone to ask questions. I want someone who wants to know how my mind works, what I think about at night, what makes me smile for no reason. Ask me about my fears, my dreams, the small things I don’t tell everyone.</p>
+      <p class="em">Stay in the conversation. Don’t just hear me, understand me.</p>
+      <p>Love me enough to wonder about me, not just have me. Stay present, stay interested, choose to learn me every single day.</p>
+      <p>And maybe that’s also how I want to know you — not just the obvious things, but all those tiny pieces of you that most people might never stop long enough to notice.</p>
+    </article>
+  </section>
+
+  <section class="section">
+    <article class="verse">
+      <div class="verse-number">Verse V</div>
+      <h2>The Possibility Of Us</h2>
+      <p>I know there must be many people trying to impress you. And I’m not surprised — they’d be foolish not to try.</p>
+      <p>Even for me, there have been girls who showed interest… but none of them ever made me feel what I feel when I think of you.</p>
+      <p>That’s exactly why I believe this decision matters. Two people with the right potential shouldn’t miss the chance to discover what they could be. You match my potential, my effort, and the kind of compatibility I’ve always hoped for.</p>
+      <p>I don’t know if we’re on the same page right now, or if our maturity levels align perfectly — but I do believe that, if given a chance, we could be something unexpectedly wonderful.</p>
+      <p>I’m sharing this because you genuinely deserve someone who admires you, appreciates you, believes in you, and makes you feel valued.</p>
+      <p>And on my side, I’m looking for someone who truly deserves my sincerity and effort.</p>
+      <p>And I just want you to know that this should be the bare minimum for you. If guys have approached you like this before — or maybe someone has even done something bigger, smoother, or more beautiful than this — then I guess I’m still in my learning phase. But either way, you deserve to be approached with genuine intention, effort, and respect.</p>
+      <p>Maybe someday you will meet someone who goes above and beyond for you, and they will call it the bare minimum.</p>
+      <p>And maybe, just maybe, that kind of love doesn’t always arrive loudly. Some people enter your life gently, with pure intentions.</p>
+      <div class="cassette-scene" aria-hidden="true">
+        <img class="cassette-img" src="assets/asset-06-71b98f2e9f3c.png" alt="">
+        <span class="reel left"></span><span class="reel right"></span>
+      </div>
+    </article>
+  </section>
+
+  <section class="section">
+    <img class="side-object breath-left" src="assets/asset-04-96ecfc0d24b6.png" alt="">
+    <article class="verse">
+      <div class="verse-number">Verse VI</div>
+      <h2>The Girl In My Stories</h2>
+      <p>If this makes you uncomfortable in any way, I’m really sorry — that was never my intention. I just needed to be honest with you, because this feeling kept finding its way back to my heart.</p>
+      <p>You’ve been living in my stories, songs, and posts for a long time now — silently, beautifully, unintentionally.</p>
+      <p>I wish we could have met earlier in life and explored life together. I think we are both aligned at some point, and that’s the point that has been holding me onto you.</p>
+      <div class="quote">Musafir Cafe ka woh dialogue hai na —<br><br>“Life ki yahi problem hai… Tum jaise log thodi der se milte hain!” 🫠</div>
+      <p>And maybe that line makes a little too much sense to me when it comes to you.</p>
+      <p>So this is me — nervous, honest, but genuinely sure — telling you that I see something meaningful in you. Something real.</p>
+      <p>And trust me, I have thought about this a thousand times before writing it, just to make sure whether I should do this or not. And every single time, I felt just as sure as before.</p>
+      <p>I am genuinely interested in you.</p>
+      <p class="em">I like you. You don’t have to feel the same, and I won’t care about you any less for it. I just think you’re too beautiful a soul to leave these words unsaid.</p>
+      <p>Maybe God brought you into my life for a reason, maybe only for a season. I don’t know what tomorrow holds. So before it arrives, I just wanted you to know that you became someone my heart is genuinely grateful to have met.</p>
+    </article>
+  </section>
+
+  <section class="section">
+    <img class="side-object rose-right" src="assets/asset-02-8f5a2762061d.png" alt="">
+    <article class="verse">
+      <div class="verse-number">Verse VII</div>
+      <h2>Maybe This Time</h2>
+      <p>In case maybe you’re afraid to trust because of your past traumas or something, I completely understand that trusting someone new may not always feel easy.</p>
+      <p>I will request you to please give yourself a chance to meet a new person at least once.</p>
+      <p class="em">Maybe this time your heart won’t break.</p>
+      <p class="em">Maybe this time you’ll find yourself too.</p>
+      <p>Some people enter your life gently, with pure intentions.</p>
+      <p>And I’m not saying that person necessarily has to be me. I just hope you never stop yourself from experiencing something beautiful simply because something before it hurt you.</p>
+    </article>
+  </section>
+
+  <section class="section">
+    <article class="verse">
+      <div class="verse-number">Verse VIII</div>
+      <h2>The Courage Of Maybe</h2>
+      <p>Also, I want to make things easier for you. I don’t want this confession to feel like a burden in any way.</p>
+      <p>So you only need to reply if you’re unsure, need some time to think, don’t want to answer right now, or if somewhere in your heart you want to give “us” a chance. 🤍</p>
+      <p>And if you’re completely sure that we could never work, or if you simply don’t want this, then you can leave this message seen and unanswered. I’ll understand.</p>
+      <p>Though, if possible, do point out my red flags too — maybe they’ll help me become a better person someday.</p>
+      <p>I’m confessing all of this not to pressure you, but simply to free myself from this endless loop of overthinking.</p>
+      <p>I don’t want your pity or sympathy. You always seem to worry about how the other person might be feeling, what they might be thinking, or how they might react. But that’s the last thing I want from you.</p>
+      <p class="em">Just stay true to yourself — that’s more than enough for me.</p>
+    </article>
+  </section>
+
+  <section class="section">
+    <img class="side-object nazar-right" src="assets/asset-03-c31cbe5c4167.png" alt="">
+    <article class="verse">
+      <div class="verse-number">Verse IX</div>
+      <h2>Whatever Your Answer May Be</h2>
+      <p>If you ever feel stuck, confused, overwhelmed, or simply want to share your thoughts or overthinking, feel free to talk to me.</p>
+      <p>Maybe I can be one of the most honest, understanding, and reliable people for you to open up to. I genuinely put my energy and effort into listening carefully, so maybe you’ll always get the most thoughtful, unbiased, and well-analysed advice from me.</p>
+      <div class="quote">“Bolne wale toh bahot hote hai duniya mein, par sunne wala mushkil se milta hai.”</div>
+      <p>And honestly, I’d be more than happy to be your “sunne wala” — for as long as life allows me to. ✨</p>
+      <p class="em">And even if this doesn’t lead any further, I will always keep you as my favourite incomplete wish.</p>
+    </article>
+  </section>
+
+  <section class="section">
+    <img class="side-object headphones" src="assets/asset-05-6d48267ac123.png" alt="">
+    <article class="verse">
+      <div class="verse-number">Verse X</div>
+      <h2>Thank You, March</h2>
+      <p>No matter what you feel after reading this, thank you for being exactly who you are.</p>
+      <p>Thank you for simply existing in this world.</p>
+      <p>You truly are special.</p>
+      <p>And whatever happens after this, I’ll still be grateful that somewhere in this very random life, our paths crossed.</p>
+      <p>Maybe God brought you into my life for a reason, maybe only for a season — either way, I’m glad you happened.</p>
+    </article>
+  </section>
+
+  <section class="ending">
+    <h2>Until next time,</h2>
+    <p>when the moment finds us again. <span class="spark">🤍</span></p>
+    <div class="signature">— from someone who finally stopped overthinking long enough to say it</div>
+  </section>
+
+  <div class="music-card" id="musicCard">
+    <div class="music-row">
+      <button class="play" id="playBtn" type="button" aria-label="Play or pause song">▶</button>
+      <div class="track-meta">
+        <strong>Khat</strong>
+        <span>Navjot Ahuja • playing softly with the letter</span>
+      </div>
+      <div class="time" id="timeText">0:00 / 0:00</div>
+    </div>
+    <input class="seek" id="seek" type="range" min="0" max="1000" value="0" aria-label="Song progress">
+    <div class="mute-tip">If music doesn’t begin automatically, tap play once.</div>
+  </div>
+</main>
+
+<audio id="audio" preload="metadata" src="assets/asset-07-a968de82ccb4.mp3"></audio>
+
+<script>
+(function(){
+  const root = document.documentElement;
+  const body = document.body;
+  const openScreen = document.getElementById('openScreen');
+  const openBtn = document.getElementById('openBtn');
+  const letterOpened = document.getElementById('letterOpened');
+  const audio = document.getElementById('audio');
+  const playBtn = document.getElementById('playBtn');
+  const seek = document.getElementById('seek');
+  const timeText = document.getElementById('timeText');
+  const progressLine = document.getElementById('progressLine');
+  const petals = document.getElementById('petals');
+  const passwordInput = document.getElementById('letterPassword');
+  const unlockBtn = document.getElementById('unlockBtn');
+  const passwordMessage = document.getElementById('passwordMessage');
+  const openCard = document.querySelector('.open-card');
+
+  function tryUnlock(){
+    if(passwordInput.value === '160302'){
+      passwordMessage.textContent = '';
+      openCard.classList.add('is-unlocked');
+      setTimeout(()=>openBtn.focus(),80);
+    }else{
+      passwordMessage.textContent = 'That is not the one 🤍';
+      passwordInput.select();
+    }
+  }
+  unlockBtn.addEventListener('click', tryUnlock);
+  passwordInput.addEventListener('keydown', function(e){
+    if(e.key === 'Enter') tryUnlock();
+  });
+
+  function fmt(sec){
+    if(!isFinite(sec) || sec < 0) return '0:00';
+    const m = Math.floor(sec/60), s = Math.floor(sec%60);
+    return m + ':' + String(s).padStart(2,'0');
+  }
+  function setPlaying(on){
+    body.classList.toggle('playing', on);
+    playBtn.textContent = on ? '❚❚' : '▶';
+    playBtn.setAttribute('aria-label', on ? 'Pause song' : 'Play song');
+  }
+  async function startMusic(){
+    try{
+      await audio.play();
+      setPlaying(true);
+    }catch(e){
+      setPlaying(false);
+    }
+  }
+  function openLetter(){
+    openScreen.classList.add('hidden');
+    startMusic();
+    setTimeout(()=>window.scrollTo({top:0,behavior:'smooth'}),100);
+  }
+  letterOpened.addEventListener('change', function(){
+    if(letterOpened.checked) openLetter();
+  });
+  openBtn.addEventListener('keydown', function(e){
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      letterOpened.checked = true;
+      letterOpened.dispatchEvent(new Event('change'));
+    }
+  });
+  playBtn.addEventListener('click', async function(){
+    if(audio.paused) await startMusic(); else {audio.pause();setPlaying(false);}
+  });
+  audio.addEventListener('play',()=>setPlaying(true));
+  audio.addEventListener('pause',()=>setPlaying(false));
+  audio.addEventListener('ended',()=>setPlaying(false));
+  audio.addEventListener('loadedmetadata',()=>{
+    timeText.textContent = '0:00 / ' + fmt(audio.duration);
+  });
+  audio.addEventListener('timeupdate',()=>{
+    const d = audio.duration || 0;
+    const ratio = d ? audio.currentTime/d : 0;
+    seek.value = Math.round(ratio*1000);
+    timeText.textContent = fmt(audio.currentTime) + ' / ' + fmt(d);
+  });
+  seek.addEventListener('input',()=>{
+    if(audio.duration) audio.currentTime = audio.duration*(Number(seek.value)/1000);
+  });
+
+  const sections = [...document.querySelectorAll('.verse')];
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
+    },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+    sections.forEach(el=>io.observe(el));
+  } else sections.forEach(el=>el.classList.add('visible'));
+
+  function updateScroll(){
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? (scrollY/max)*100 : 0;
+    progressLine.style.width = Math.max(0,Math.min(100,p)) + '%';
+  }
+  addEventListener('scroll', updateScroll,{passive:true});
+  updateScroll();
+
+  const petalFiles = ['assets/asset-08-557f6c64cbb8.png','assets/asset-09-5662675cb497.png','assets/asset-10-e3c293db73ae.png'];
+  for(let i=0;i<18;i++){
+    const img=document.createElement('img');
+    img.className='petal';
+    img.alt='';
+    img.src=petalFiles[i%petalFiles.length];
+    img.style.left=(Math.random()*100)+'vw';
+    img.style.setProperty('--dur',(11+Math.random()*12)+'s');
+    img.style.setProperty('--delay',(-Math.random()*22)+'s');
+    img.style.setProperty('--drift',((Math.random()*2-1)*120)+'px');
+    img.style.width=(22+Math.random()*26)+'px';
+    img.style.opacity=(.34+Math.random()*.46);
+    petals.appendChild(img);
+  }
+})();
+</script>
+</body>
+</html>
