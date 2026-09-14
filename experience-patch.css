@@ -1,4 +1,4 @@
-/* Centered verses, right scrapbook rail, magical opening, and background decor */
+/* Centered verses, right scrapbook rail, magical opening, and responsive romantic replies */
 #downloadEd{display:none!important}
 body{overflow-x:hidden}
 
@@ -23,21 +23,27 @@ body{overflow-x:hidden}
   position:relative;border:1px solid rgba(100,69,47,.18);box-shadow:0 16px 34px rgba(72,44,30,.14);
   border-radius:18px;color:#56382d;background:rgba(249,238,214,.96)
 }
-.favourite-side-note{padding:25px 20px 20px;transform:rotate(1.2deg);overflow:visible}
+.favourite-side-note{
+  padding:34px 20px 20px;
+  transform:rotate(1.2deg);
+  overflow:visible;
+  background:
+    linear-gradient(rgba(248,232,194,.96),rgba(240,216,171,.98)),
+    repeating-linear-gradient(0deg,transparent 0 28px,rgba(131,95,64,.055) 29px 30px);
+}
 .favourite-side-note:before{content:"";position:absolute;top:-13px;left:50%;width:22px;height:22px;border-radius:50%;transform:translateX(-50%);background:radial-gradient(circle at 35% 30%,#f9d4dc 0 20%,#c46875 23% 65%,#713640 69% 100%);box-shadow:0 5px 10px rgba(66,36,30,.25)}
 .favourite-side-note:after{content:"";position:absolute;top:6px;left:50%;width:2px;height:14px;background:rgba(78,46,37,.45);transform:translateX(-50%) rotate(5deg)}
-.favourite-side-note h3,.video-break-card h3{margin:0 0 10px;font:700 1rem/1.3 "Segoe Print","Bradley Hand","Comic Sans MS",cursive}
+.favourite-side-note h3,.video-break-card h3{margin:0 0 10px;font:700 1rem/1.35 "Segoe Print","Bradley Hand","Comic Sans MS",cursive}
+.favourite-side-note h3{font-size:1.04rem;color:#69463a}
 .favourite-side-note ul{margin:0;padding-left:20px;font-size:.8rem;line-height:1.72}
-.favourite-side-note .side-note-small{display:block;margin-top:9px;font:italic .66rem/1.45 Georgia,serif;color:#8a6757}
+.favourite-side-note .side-note-small{display:block;margin-top:11px;font:italic .69rem/1.55 Georgia,serif;color:#8a6757}
 .video-break-card{padding:15px;transform:rotate(-.8deg)}
 .video-break-card p{margin:0 0 10px;font:italic .7rem/1.48 Georgia,serif;color:#826555}
 .video-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:#2a211e;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 8px 18px rgba(55,35,27,.13)}
 .video-frame iframe{width:100%;height:100%;border:0;display:block}.video-caption{margin-top:9px;text-align:center;font:italic .64rem/1.4 Georgia,serif;color:#8b6756}
 
-/* hide the old Rx screenshot-style card */
 .doctor-note-card,[data-role="doctor-note"],.rx-corner-card{display:none!important}
 
-/* Keep the verse reading area completely clean: no PNGs, SVG objects, bouquets, cassettes or side decorations. */
 .verse-list img,
 .verse-list svg,
 .verse-list .decor,
@@ -57,17 +63,116 @@ body{overflow-x:hidden}
 @keyframes magicWash{0%{opacity:0;transform:scale(.985)}35%{opacity:1}100%{opacity:0;transform:scale(1.01)}}
 @keyframes magicSpark{0%{opacity:0;transform:translate(0,0) scale(.25)}18%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(1.25)}}
 
+/* Romantic response area */
+.verse-response{
+  clear:both;
+  margin:20px 0 6px;
+  position:relative;
+  z-index:30;
+}
+.verse-response-toggle{
+  width:100%;
+  border:1px solid rgba(133,87,69,.16);
+  border-radius:20px;
+  padding:15px 17px;
+  background:
+    radial-gradient(circle at 90% 15%,rgba(255,255,255,.55),transparent 28%),
+    linear-gradient(180deg,rgba(255,249,240,.98),rgba(249,235,219,.9));
+  color:#6c4739;
+  cursor:pointer;
+  text-align:left;
+  box-shadow:0 11px 24px rgba(89,56,40,.08),inset 0 1px 0 rgba(255,255,255,.72);
+  transition:transform .24s ease,box-shadow .24s ease,border-color .24s ease,background .24s ease;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  grid-template-areas:"k h" "m h";
+  gap:3px 14px;
+  align-items:center;
+}
+.verse-response-toggle:hover{
+  transform:translateY(-1px);
+  border-color:rgba(155,92,78,.25);
+  box-shadow:0 15px 28px rgba(89,56,40,.12),inset 0 1px 0 rgba(255,255,255,.8);
+}
+.verse-response-toggle.is-open{
+  background:linear-gradient(180deg,rgba(255,247,237,.99),rgba(247,230,214,.94));
+}
+.response-toggle-kicker{grid-area:k;font:italic .66rem/1.35 Georgia,serif;color:#a27a69;letter-spacing:.01em}
+.response-toggle-main{grid-area:m;font:700 .84rem/1.35 "Segoe Print","Bradley Hand","Comic Sans MS",cursive;color:#714a3c}
+.response-toggle-hint{grid-area:h;align-self:center;white-space:nowrap;padding:7px 10px;border-radius:999px;background:rgba(142,88,70,.08);color:#8e6758;font:700 .59rem Arial,sans-serif;letter-spacing:.02em}
+
+.verse-response-box{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .44s cubic-bezier(.2,.8,.2,1),opacity .3s ease}
+.verse-response.open .verse-response-box{grid-template-rows:1fr;opacity:1}
+.verse-response-inner{overflow:hidden;padding-top:10px}
+.verse-response-label{display:block;margin:2px 3px 10px;color:#8b6657;font:italic .73rem/1.55 Georgia,serif}
+.verse-response textarea{
+  width:100%;
+  min-height:112px;
+  padding:15px 15px;
+  border:1px solid rgba(113,77,59,.17);
+  border-radius:17px;
+  background:rgba(255,252,245,.94);
+  color:#54382d;
+  resize:vertical;
+  outline:none;
+  font:500 .87rem/1.62 "Segoe Print","Bradley Hand","Comic Sans MS",cursive;
+  box-shadow:inset 0 1px 5px rgba(77,50,36,.055),0 6px 14px rgba(87,58,43,.04);
+  transition:border-color .2s ease,box-shadow .2s ease,background .2s ease;
+}
+.verse-response textarea:focus{border-color:rgba(153,91,78,.34);background:#fffdf8;box-shadow:0 0 0 3px rgba(153,91,78,.06),inset 0 1px 5px rgba(77,50,36,.04)}
+.verse-response-actions{margin-top:10px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.verse-response-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;color:#8b6858;font:italic .65rem/1.45 Georgia,serif;min-width:0;flex:1}
+.response-saved{opacity:0;transition:opacity .2s ease;color:#805f51}.response-saved.show{opacity:1}
+.verse-submit{
+  border:1px solid rgba(140,78,68,.08);
+  border-radius:999px;
+  padding:11px 18px;
+  background:linear-gradient(180deg,#d79a8d,#c97d72);
+  color:#fffaf4;
+  cursor:pointer;
+  font:700 .74rem/1 Arial,sans-serif;
+  letter-spacing:.01em;
+  box-shadow:0 10px 18px rgba(139,78,68,.18),inset 0 1px 0 rgba(255,255,255,.28);
+  transition:transform .2s ease,box-shadow .2s ease,filter .2s ease;
+  white-space:nowrap;
+}
+.verse-submit:hover{transform:translateY(-1px);filter:saturate(1.04);box-shadow:0 14px 21px rgba(139,78,68,.22),inset 0 1px 0 rgba(255,255,255,.34)}
+.verse-submit:disabled{opacity:.62;cursor:wait;transform:none}
+.verse-submit-state{font-style:normal;font-size:.61rem;color:#9b7261}
+
 /* Bottom player: title on the left, one live lyric line on the right. */
 .spotify-title-lyric-row{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center;gap:18px;margin:2px 0 6px;min-width:0}
 .spotify-title-lyric-row #tt{margin:0!important;white-space:nowrap}
 .khat-live-lyric{min-width:0;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fff3e4;font:600 .78rem/1.35 "Segoe Print","Bradley Hand","Comic Sans MS",cursive;opacity:.92}
-.khat-live-lyric.is-placeholder{opacity:.5;font-style:italic}
+.khat-live-lyric.lyric-pop{animation:lyricPop .34s ease both}
+@keyframes lyricPop{0%{opacity:0;transform:translateY(5px)}100%{opacity:.92;transform:none}}
 
 .autosave-status{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.09);font:600 .58rem Arial,sans-serif;opacity:.72}.autosave-dot{width:6px;height:6px;border-radius:50%;background:#b7d8a7;box-shadow:0 0 0 2px rgba(183,216,167,.12)}
 body.live-editing .verse-side-rail{pointer-events:none}
 
 @media(max-width:1370px){.verse-side-rail{left:calc(100% + 22px);width:270px}}
 @media(max-width:1220px){.verse-stage{width:min(820px,calc(100% - 28px))}.verse-side-rail{left:calc(100% + 16px);width:250px}}
-@media(max-width:1080px){.verse-stage{width:min(860px,calc(100% - 20px))}.verse-side-rail{position:relative;left:auto;top:auto;width:min(620px,100%);margin:24px auto 0;display:grid;grid-template-columns:1fr 1fr}.favourite-side-note,.video-break-card{transform:none}}
-@media(max-width:760px){.spotify-title-lyric-row{grid-template-columns:1fr;gap:4px}.khat-live-lyric{text-align:left}}
-@media(max-width:620px){.verse-side-rail{grid-template-columns:1fr}}
+@media(max-width:1080px){
+  .verse-stage{width:min(860px,calc(100% - 20px))}
+  .verse-side-rail{position:relative;left:auto;top:auto;width:min(620px,100%);margin:24px auto 0;display:grid;grid-template-columns:1fr 1fr}
+  .favourite-side-note,.video-break-card{transform:none}
+}
+@media(max-width:760px){
+  .spotify-title-lyric-row{grid-template-columns:1fr;gap:4px}
+  .khat-live-lyric{text-align:left;font-size:.72rem;line-height:1.45}
+  .verse-response{margin-top:16px}
+  .verse-response-toggle{border-radius:17px;padding:13px 14px;grid-template-columns:minmax(0,1fr);grid-template-areas:"k" "m" "h";gap:4px}
+  .response-toggle-kicker{font-size:.63rem}
+  .response-toggle-main{font-size:.79rem}
+  .response-toggle-hint{justify-self:start;margin-top:4px;padding:6px 9px;font-size:.56rem}
+  .verse-response-label{font-size:.69rem;line-height:1.5;margin-bottom:8px}
+  .verse-response textarea{min-height:100px;padding:13px;font-size:.82rem;border-radius:15px}
+  .verse-response-actions{display:grid;grid-template-columns:1fr;gap:9px}
+  .verse-response-meta{font-size:.62rem}
+  .verse-submit{width:100%;padding:12px 16px;text-align:center}
+}
+@media(max-width:620px){
+  .verse-side-rail{grid-template-columns:1fr}
+  .favourite-side-note{padding:31px 17px 17px}
+  .favourite-side-note h3{font-size:.97rem}
+}
