@@ -4,7 +4,6 @@
     const cards=[...document.querySelectorAll('.verse-card')];
     if(!wrap||!cards.length){setTimeout(ready,120);return}
 
-    /* Remove the old screenshot-like Doctor in the story card. */
     [...document.querySelectorAll('div,section,article,aside')].forEach(el=>{
       const t=(el.textContent||'').replace(/\s+/g,' ').trim();
       if(t.includes('Doctor in the story')&&t.includes('always caring, healing and on call')){
@@ -18,7 +17,6 @@
     if(!stage){stage=document.createElement('div');stage.className='verse-stage';wrap.parentNode.insertBefore(stage,wrap);stage.appendChild(wrap)}
     if(!rail){rail=document.createElement('aside');rail.className='verse-side-rail';rail.setAttribute('aria-label','Little extras beside the letter');stage.appendChild(rail)}
 
-    /* The verse page itself stays clean: remove every decorative PNG/SVG/object from the verse list and old generated backdrop. */
     stage.querySelectorAll('.tdp-bg-decor').forEach(el=>el.remove());
     wrap.querySelectorAll('img,.decor,.side-object,.scrapbook-png,.bouquet-cluster,.cassette-scene,.vinyl').forEach(el=>el.remove());
 
@@ -45,7 +43,6 @@
       rail.appendChild(video);
     }
 
-    /* Cute response box for every verse; Submit sends to the configured email and stores locally. */
     const responseKey='theDproject-verse-responses-v2';
     let saved={};try{saved=JSON.parse(localStorage.getItem(responseKey)||'{}')}catch{}
     cards.forEach((card,i)=>{
@@ -79,44 +76,32 @@
     };
     cards.forEach(card=>{if(card.dataset.magicBound)return;card.dataset.magicBound='1';const trigger=card.querySelector('.verse-toggle,.verse-expander');if(trigger)trigger.addEventListener('click',()=>setTimeout(()=>{if(card.classList.contains('open'))burst(card)},80))});
 
-    /* Bottom player layout: Khat on the left, a single synced lyric line on the right. */
     const player=document.querySelector('.spotify-player');
     const masterAudio=document.getElementById('audio');
     const title=document.getElementById('tt');
     if(player&&masterAudio&&title&&!player.querySelector('.spotify-title-lyric-row')){
       const row=document.createElement('div');row.className='spotify-title-lyric-row';
-      const lyric=document.createElement('div');lyric.id='khatLiveLyric';lyric.className='khat-live-lyric is-placeholder';lyric.textContent='Synced lyric line will appear here';
+      const lyric=document.createElement('div');lyric.id='khatLiveLyric';lyric.className='khat-live-lyric';lyric.textContent='काग़ज़ के फूल लाऊँ तेरे लिए';
       title.parentNode.insertBefore(row,title);row.append(title,lyric);
 
-      /* Fill khat-lyrics.js with user-supplied lines and timestamps. Empty rows are ignored. */
-      const KHAT_SYNC_LINES=(Array.isArray(window.KHAT_SYNC_LINES)?window.KHAT_SYNC_LINES:[])
+      const embedded=[
+        'काग़ज़ के फूल लाऊँ तेरे लिए','ख़त लिखूँ तेरे लिए','मैं ख़ुदा में मानूँ नहीं','पर माँगूँ दुआ तेरे लिए','तेरे लिए घर बनाऊँ','दीवार नीले रंग से सजाऊँ','पसंद है तुम्हें, मालूम है','तुमने बताया था एक दफ़े','नीले फूल लाऊँ तेरे लिए','ख़त लिखूँ तेरे लिए','मैं ख़ुदा में मानूँ नहीं','पर माँगूँ दुआ तेरे लिए','तेरी बातें नासमझ-सी','फ़िर भी जायज़ लग रही हैं','तू परेशाँ कर रही है','फ़िर भी मासूम लग रही है','तेरे लिए मंदिर जाऊँ','तेरे नाम का दिया जलाऊँ','हँसता रहे तू चाहे जो हो','तेरी हँसी को नज़र ना लगे','काग़ज़ के फूल लाऊँ तेरे लिए','ख़त लिखूँ तेरे लिए','मैं ख़ुदा में मानूँ नहीं','पर माँगूँ दुआ तेरे लिए','वो-हो-हो, हाँ-हो','वो-हो-हो, हाँ-हो','वो-हो-हो','वो-हो-हो, हाँ-हो','वो-हो-हो, हाँ-हो','वो-हो-हो, हाँ-हो','वो-हो-हो','तेरे लिए हम बने हैं','तेरे लिए बदल रहे हैं','क्या मोहब्बत हो गई है?','तेरी ही तेरी बातें करें','तेरे लिए घर बनाऊँ','दीवार नीले रंग से सजाऊँ','पसंद है तुम्हें, मालूम है','तुमने बताया था एक दफ़े','देख, शायर बना तेरे लिए','नग़्मा लिखा तेरे लिए','मैं ख़ुदा में मानूँ क्यूँ?','तू ख़ुदा मेरे लिए'
+      ].map((line,i)=>({t:i*6,line}));
+
+      const external=(Array.isArray(window.KHAT_SYNC_LINES)?window.KHAT_SYNC_LINES:[])
         .filter(item=>item&&Number.isFinite(Number(item.t))&&String(item.line||'').trim())
-        .map(item=>({t:Number(item.t),line:String(item.line).trim()}))
-        .sort((a,b)=>a.t-b.t);
+        .map(item=>({t:Number(item.t),line:String(item.line).trim()}));
+      const KHAT_SYNC_LINES=(external.length?external:embedded).sort((a,b)=>a.t-b.t);
 
       let lastText='';
       const syncLyric=()=>{
-        if(!KHAT_SYNC_LINES.length){
-          lyric.textContent='Synced lyric line will appear here';
-          lyric.classList.add('is-placeholder');
-          return;
-        }
-        let current='';
+        let current=KHAT_SYNC_LINES[0]?.line||'Khat';
         for(const item of KHAT_SYNC_LINES){if(masterAudio.currentTime>=item.t)current=item.line;else break}
-        const nextText=current||'Khat';
-        if(nextText!==lastText){
-          lyric.classList.remove('lyric-pop');
-          void lyric.offsetWidth;
-          lyric.textContent=nextText;
-          lyric.classList.add('lyric-pop');
-          lastText=nextText;
+        if(current!==lastText){
+          lyric.classList.remove('lyric-pop');void lyric.offsetWidth;lyric.textContent=current;lyric.classList.add('lyric-pop');lastText=current;
         }
-        lyric.classList.toggle('is-placeholder',!current);
       };
-      masterAudio.addEventListener('timeupdate',syncLyric);
-      masterAudio.addEventListener('seeked',syncLyric);
-      masterAudio.addEventListener('loadedmetadata',syncLyric);
-      masterAudio.addEventListener('play',syncLyric);
+      ['timeupdate','seeked','loadedmetadata','play'].forEach(ev=>masterAudio.addEventListener(ev,syncLyric));
       syncLyric();
     }
 
