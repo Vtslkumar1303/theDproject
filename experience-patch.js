@@ -4,7 +4,6 @@
     const cards=[...document.querySelectorAll('.verse-card')];
     if(!wrap||!cards.length){setTimeout(ready,120);return}
 
-    /* Build a visible right-side rail beside the centered verse list. */
     let stage=document.querySelector('.verse-stage');
     let rail=document.querySelector('.verse-side-rail');
     if(!stage){
@@ -20,20 +19,30 @@
       stage.appendChild(rail);
     }
 
-    /* Use the existing favourite-songs note and move it into the right rail.
-       Do not create a second copy. */
-    const originalNote=[...document.querySelectorAll('.memory-note')].find(el=>!el.closest('.verse-side-rail'));
-    const duplicateNote=rail.querySelector('.favourite-side-note:not(.memory-note)');
-    if(originalNote){
-      if(duplicateNote)duplicateNote.remove();
-      originalNote.classList.add('favourite-side-note');
-      rail.insertBefore(originalNote,rail.firstChild);
-    }else{
-      const existingNote=rail.querySelector('.memory-note,.favourite-side-note');
-      if(existingNote)existingNote.classList.add('favourite-side-note');
-    }
+    /* Keep exactly one favourite-songs note. Prefer the original note created by the base experience. */
+    const isFavNote=el=>{
+      if(!el) return false;
+      if(el.classList.contains('memory-note')||el.classList.contains('favourite-side-note')) return true;
+      const t=(el.textContent||'').replace(/\s+/g,' ').trim().toLowerCase();
+      return t.startsWith('her favourite songs')||t.startsWith('her favorite songs');
+    };
+    const reconcileFavouriteNote=()=>{
+      const all=[...document.querySelectorAll('div,section,article,aside')].filter(isFavNote);
+      if(!all.length) return;
 
-    /* Video panel beside the verses. */
+      const original=all.find(el=>el.classList.contains('memory-note'))||all[0];
+      original.classList.add('memory-note','favourite-side-note');
+      if(original.parentElement!==rail) rail.insertBefore(original,rail.firstChild);
+
+      all.forEach(el=>{if(el!==original) el.remove();});
+    };
+    reconcileFavouriteNote();
+    setTimeout(reconcileFavouriteNote,250);
+    setTimeout(reconcileFavouriteNote,900);
+    const observer=new MutationObserver(()=>reconcileFavouriteNote());
+    observer.observe(document.body,{childList:true,subtree:true});
+    setTimeout(()=>observer.disconnect(),5000);
+
     let video=rail.querySelector('.video-break-card');
     if(!video){
       video=document.createElement('section');
@@ -42,14 +51,12 @@
       rail.appendChild(video);
     }
 
-    /* Magical visual burst whenever a verse is expanded. */
     const burst=card=>{
       card.classList.remove('magic-open');
       void card.offsetWidth;
       card.classList.add('magic-open');
       clearTimeout(card.__magicTimer);
       card.__magicTimer=setTimeout(()=>card.classList.remove('magic-open'),1150);
-
       const old=card.querySelector('.magic-spark-layer');
       if(old)old.remove();
       const layer=document.createElement('div');
@@ -79,7 +86,6 @@
       }
     });
 
-    /* Preserve prior editor preference: save locally, no automatic JSON download. */
     const download=document.getElementById('downloadEd');
     if(download)download.style.display='none';
     const panel=document.querySelector('.editor-panel');
