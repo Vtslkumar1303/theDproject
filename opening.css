@@ -1,0 +1,29 @@
+/* Sealed letter front / two-step password opening */
+.open-screen{background:radial-gradient(circle at 50% 18%,rgba(255,247,226,.32),transparent 34%),linear-gradient(135deg,#5b3a2d,#2f201b)!important;padding:clamp(14px,3vw,32px)!important}
+.open-card.letter-front{position:relative;width:min(650px,94vw)!important;min-height:min(78vh,720px);padding:clamp(28px,6vw,58px)!important;color:#55382c!important;border-radius:18px!important;border:1px solid rgba(95,63,45,.22)!important;background:linear-gradient(rgba(249,235,205,.88),rgba(238,214,174,.9)),url("assets/asset-01-de12b7479609.png") center/cover!important;box-shadow:0 28px 80px rgba(19,11,8,.46),inset 0 0 55px rgba(116,75,37,.13)!important;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;backdrop-filter:none!important}
+.open-card.letter-front:before,.open-card.letter-front:after{content:"";position:absolute;left:0;right:0;height:49%;pointer-events:none;opacity:.46}
+.open-card.letter-front:before{top:0;background:linear-gradient(155deg,transparent 49.4%,rgba(117,79,52,.19) 50%,transparent 50.8%),linear-gradient(205deg,transparent 49.4%,rgba(117,79,52,.16) 50%,transparent 50.8%)}
+.open-card.letter-front:after{bottom:0;background:linear-gradient(25deg,transparent 49.4%,rgba(117,79,52,.18) 50%,transparent 50.8%),linear-gradient(-25deg,transparent 49.4%,rgba(117,79,52,.15) 50%,transparent 50.8%)}
+.envelope-content{position:relative;z-index:4;width:min(440px,90%)}
+.envelope-to{font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:#8b6955;margin-bottom:12px}
+.envelope-title{font:700 clamp(2.7rem,9vw,5rem)/.96 "Segoe Print","Bradley Hand","Comic Sans MS",cursive;margin:0;color:#553225}
+.envelope-sub{font:italic clamp(.92rem,2vw,1.05rem)/1.65 Georgia,serif;color:#74584a;margin:14px auto 26px;max-width:31ch}
+.wax-seal{width:88px;height:88px;border-radius:50%;margin:8px auto 20px;display:grid;place-items:center;color:#f1d9ad;background:radial-gradient(circle at 36% 30%,#b9675c 0 6%,#8c2d35 35%,#671c28 72%,#4c1420 100%);box-shadow:0 8px 18px rgba(75,27,30,.35),inset 0 0 0 5px rgba(255,220,185,.08),inset 0 0 0 9px rgba(69,11,20,.18);font:italic 700 1.55rem Georgia,serif;transform:rotate(-7deg)}
+.seal-open-btn{border:1px solid rgba(92,57,41,.2);border-radius:999px;padding:13px 24px;min-height:48px;background:#5b392d;color:#fff8e9;cursor:pointer;box-shadow:0 10px 24px rgba(72,43,31,.18);font-weight:700;transition:transform .25s ease,box-shadow .25s ease}
+.seal-open-btn:hover{transform:translateY(-2px);box-shadow:0 14px 28px rgba(72,43,31,.24)}
+.password-reveal{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .5s cubic-bezier(.2,.8,.2,1),opacity .35s ease;margin-top:0}
+.open-card.show-password .password-reveal{grid-template-rows:1fr;opacity:1;margin-top:18px}
+.password-reveal-inner{overflow:hidden}
+.open-card.show-password .seal-open-btn{display:none}
+.open-card.show-password .wax-seal{animation:sealBreak .55s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes sealBreak{55%{transform:rotate(8deg) scale(1.06)}100%{transform:translateY(-8px) rotate(16deg) scale(.86);opacity:.38}}
+.password-gate.envelope-password{margin:0 auto;max-width:390px;padding:18px 16px 4px;border-top:1px solid rgba(91,57,45,.18)}
+.envelope-password .password-label{color:#5e4034;font-size:.86rem;margin-bottom:9px}
+.birthdate-hint{font:italic .78rem/1.55 Georgia,serif;color:#8a6654;margin:0 auto 14px;max-width:34ch}
+.envelope-password .password-input{border:1px solid rgba(92,57,41,.22);background:rgba(255,250,238,.7);color:#53372c;box-shadow:inset 0 1px 4px rgba(82,51,37,.06)}
+.envelope-password .password-input::placeholder{color:rgba(83,55,44,.42)}
+.envelope-password .unlock-btn{background:#6b4435;color:#fff8ea;box-shadow:0 7px 18px rgba(67,40,29,.13)}
+.envelope-password .password-message{color:#8d2634;font-size:.76rem;margin-top:8px}
+.envelope-success{display:none;font:italic .9rem Georgia,serif;color:#6a4a3a;margin-top:12px}
+.open-card.is-unlocked .envelope-success{display:block}
+@media(max-width:520px){.open-card.letter-front{min-height:72vh;padding:28px 18px!important}.wax-seal{width:76px;height:76px}.envelope-title{font-size:clamp(2.5rem,14vw,4rem)}.password-row{flex-direction:column}.envelope-password .password-input,.envelope-password .unlock-btn{width:100%}}
