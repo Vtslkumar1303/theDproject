@@ -47,7 +47,7 @@
     if(!readingBreak&&cards.length){
       readingBreak=document.createElement('section');
       readingBreak.className='reading-break-card';
-      readingBreak.innerHTML='<div class="reading-break-kicker">For when these words get a little too much</div><h3>A tiny pause from the letter</h3><p>Take a minute here if you get bored of reading. The next verse will wait for you.</p><div class="reading-break-frame"><video class="reading-break-video" controls playsinline preload="metadata"><source src="https://the-d-project-media.floot.app/_cdn/static/2cea0587-6529-4f4c-9b73-87048b9f5aa4-reading-break.mp4" type="video/mp4">Your browser could not play this little video break.</video></div><div class="reading-break-caption">Stay here for a while. Come back whenever you feel like reading me again.</div>';
+      readingBreak.innerHTML='<div class="reading-break-kicker">For when these words get a little too much</div><h3>A tiny pause from the letter</h3><p>Take a minute here if you get bored of reading. The next verse will wait for you.</p><div class="reading-break-frame"><video class="reading-break-video" controls playsinline preload="metadata"><source src="https://the-d-project-media.floot.app/_cdn/static/4839cf05-bbc8-44cd-9d32-0fa06da8b777-reading-break-hq.mp4" type="video/mp4">Your browser could not play this little video break.</video></div><div class="reading-break-caption">Stay here for a while. Come back whenever you feel like reading me again.</div>';
       const anchor=cards[Math.min(2,cards.length-1)];
       anchor.insertAdjacentElement('afterend',readingBreak);
     }
