@@ -12,21 +12,24 @@
         <div class="envelope-ground-shadow"></div>
         <div class="envelope-back"></div>
 
-        <div class="confession-sheet" id="confessionSheet">
-          <span class="sheet-small">CONFESSION LETTER</span>
+        <div class="confession-sheet" id="confessionSheet" aria-hidden="true">
+          <div class="sheet-paper-edge"></div>
+          <span class="sheet-small">A LETTER I PROBABLY OVERTHOUGHT TOO MUCH</span>
           <strong>To, my March</strong>
-          <p class="sheet-whisper">Some words waited quietly until they were brave enough to become a letter.</p>
-          <span class="sheet-line line-one"></span>
-          <span class="sheet-line line-two"></span>
-          <span class="sheet-line line-three"></span>
-          <span class="sheet-sign">words I could not keep quiet anymore</span>
+          <p class="sheet-subtitle">Some feelings stay quiet for so long that eventually the only kind thing you can do is give them words.</p>
+          <div class="sheet-rule"></div>
+          <p class="sheet-preview"><b>So Heyya!!</b><br>I am writing all this to clear my mind. I am just pouring out all the voices in my head, and somehow they all kept leading me back here.</p>
+          <span class="sheet-sign">a confession, finally given words</span>
         </div>
 
         <div class="envelope-flap-real"></div>
         <div class="envelope-front-real"></div>
+        <div class="envelope-pocket-light"></div>
 
         <div id="passwordGate" class="envelope-password-panel" aria-hidden="true">
-          <label for="letterPassword" class="password-label">Enter the date in DDMM</label>
+          <div class="password-card-pin"></div>
+          <label for="letterPassword" class="password-label">One tiny secret</label>
+          <div class="password-hint">the day + month, in DDMM</div>
           <div class="password-row">
             <input id="letterPassword" class="password-input" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="DDMM" maxlength="4" aria-describedby="passwordMessage">
             <button id="unlockBtn" class="unlock-btn" type="button">Unlock</button>
@@ -34,11 +37,11 @@
           <div id="passwordMessage" class="password-message" aria-live="polite"></div>
         </div>
 
-        <button class="wax-seal-real" id="sealOpenBtn" type="button" aria-label="Open the password field"></button>
+        <button class="wax-seal-real" id="sealOpenBtn" type="button" aria-label="Reveal password"></button>
 
         <i class="magic-speck sp1"></i><i class="magic-speck sp2"></i><i class="magic-speck sp3"></i>
         <i class="magic-speck sp4"></i><i class="magic-speck sp5"></i><i class="magic-speck sp6"></i>
-        <i class="magic-speck sp7"></i><i class="magic-speck sp8"></i>
+        <i class="magic-speck sp7"></i><i class="magic-speck sp8"></i><i class="magic-speck sp9"></i><i class="magic-speck sp10"></i>
       </div>
     </div>`;
 
@@ -50,13 +53,14 @@
   const passwordInput=document.getElementById('letterPassword');
   const unlockBtn=document.getElementById('unlockBtn');
   const passwordMessage=document.getElementById('passwordMessage');
+  const confessionSheet=document.getElementById('confessionSheet');
   const expectedHash='bf0a60ee19adc7954e2248d0c4fd7fed44671ea2cff24a6c75127f9ce0183608';
 
   function revealPassword(){
-    if(card.classList.contains('password-visible'))return;
+    if(card.classList.contains('password-visible')||card.classList.contains('is-unlocking'))return;
     card.classList.add('password-visible');
     passwordGate.setAttribute('aria-hidden','false');
-    setTimeout(()=>passwordInput.focus(),420);
+    setTimeout(()=>passwordInput.focus(),360);
   }
 
   sealOpenBtn.addEventListener('click',revealPassword);
@@ -75,25 +79,30 @@
   async function unlockLetter(){
     if(card.classList.contains('is-unlocking'))return;
     if(passwordInput.value.length!==4){
-      passwordMessage.textContent='Enter four digits in DDMM format.';
+      passwordMessage.textContent='Four digits, in DDMM.';
       passwordInput.focus();
       return;
     }
 
     if(await sha256(passwordInput.value)===expectedHash){
       passwordMessage.textContent='';
-      card.classList.add('is-unlocking','magic-burst-final');
+      card.classList.add('is-unlocking');
       unlockBtn.disabled=true;
       passwordInput.readOnly=true;
       sealOpenBtn.disabled=true;
 
-      setTimeout(()=>card.classList.add('envelope-open'),180);
-      setTimeout(()=>card.classList.add('sheet-rise'),760);
-      setTimeout(()=>card.classList.add('letter-transition'),1550);
+      setTimeout(()=>card.classList.add('seal-released'),120);
+      setTimeout(()=>card.classList.add('envelope-open'),560);
+      setTimeout(()=>{
+        confessionSheet.setAttribute('aria-hidden','false');
+        card.classList.add('sheet-rise','magic-burst-final');
+      },1080);
+      setTimeout(()=>card.classList.add('sheet-expand'),1960);
+      setTimeout(()=>card.classList.add('letter-transition'),2580);
       setTimeout(()=>{
         letterOpened.checked=true;
         letterOpened.dispatchEvent(new Event('change'));
-      },2350);
+      },3220);
     }else{
       passwordMessage.textContent='Not quite. Think of the date that made March yours.';
       card.classList.remove('wrong-shake');
