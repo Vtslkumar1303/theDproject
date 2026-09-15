@@ -1,0 +1,123 @@
+/* Bold, neatly aligned verses + non-obstructive floating Khat control */
+
+/* Verse tabs/headlines stay strongly readable. */
+.verse-card .verse-toggle small,
+.verse-card .verse-toggle strong,
+.verse-card .verse-heading{
+  font-weight:800!important;
+}
+
+/* All actual verse copy is bold and consistently aligned. */
+.verse-card .verse-copy{
+  text-align:left!important;
+  font-weight:700!important;
+}
+.verse-card .verse-copy p,
+.verse-card .verse-copy blockquote,
+.verse-card .verse-copy .quote,
+.verse-card .verse-copy li{
+  font-weight:700!important;
+  text-align:left!important;
+  line-height:1.72!important;
+  max-width:100%!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+/* The first written line of every verse is visually stronger. */
+.verse-card .verse-copy > p:first-of-type,
+.verse-card .verse-copy > blockquote:first-of-type,
+.verse-card .verse-copy > .quote:first-of-type{
+  font-weight:900!important;
+}
+
+/* Keep non-letter UI inside an opened verse at its intended weight/alignment. */
+.verse-card .verse-audio,
+.verse-card .verse-response,
+.verse-card .verse-response *{
+  font-weight:inherit;
+}
+.verse-card .verse-response,
+.verse-card .verse-response *{
+  text-align:left;
+}
+
+/* Small floating controller for the SAME #audio element as the main Khat player. */
+.floating-khat-control{
+  position:fixed;
+  right:max(14px,env(safe-area-inset-right));
+  bottom:max(18px,calc(env(safe-area-inset-bottom) + 12px));
+  z-index:2147482000;
+  width:50px;
+  height:50px;
+  border:1px solid rgba(92,57,41,.18);
+  border-radius:50%;
+  padding:0;
+  display:grid;
+  place-items:center;
+  background:rgba(250,239,217,.94);
+  color:#56382d;
+  box-shadow:0 10px 24px rgba(55,35,27,.18),inset 0 1px 0 rgba(255,255,255,.72);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  cursor:pointer;
+  touch-action:manipulation;
+  transition:opacity .2s ease,transform .2s ease,box-shadow .2s ease;
+}
+.floating-khat-control:hover{transform:translateY(-1px);box-shadow:0 13px 28px rgba(55,35,27,.22),inset 0 1px 0 rgba(255,255,255,.78)}
+.floating-khat-control:active{transform:scale(.96)}
+.floating-khat-control[hidden]{display:none!important}
+.floating-khat-control .fk-icon{
+  position:relative;
+  width:18px;
+  height:18px;
+  display:block;
+}
+.floating-khat-control[data-state="paused"] .fk-icon:before{
+  content:"";
+  position:absolute;
+  left:5px;
+  top:2px;
+  width:0;
+  height:0;
+  border-top:7px solid transparent;
+  border-bottom:7px solid transparent;
+  border-left:11px solid currentColor;
+}
+.floating-khat-control[data-state="playing"] .fk-icon:before,
+.floating-khat-control[data-state="playing"] .fk-icon:after{
+  content:"";
+  position:absolute;
+  top:2px;
+  width:5px;
+  height:14px;
+  border-radius:2px;
+  background:currentColor;
+}
+.floating-khat-control[data-state="playing"] .fk-icon:before{left:3px}
+.floating-khat-control[data-state="playing"] .fk-icon:after{right:3px}
+
+/* Hide it while the locked envelope is covering the site. */
+body:not(.letter-main-open) .floating-khat-control{opacity:0!important;pointer-events:none!important;transform:translateY(8px)!important}
+body.letter-main-open .floating-khat-control{opacity:1}
+
+/* Keep it away from text edges and never make the layout wider. */
+@media(max-width:640px){
+  .verse-card .verse-copy p,
+  .verse-card .verse-copy blockquote,
+  .verse-card .verse-copy .quote,
+  .verse-card .verse-copy li{
+    text-align:left!important;
+    line-height:1.68!important;
+  }
+  .floating-khat-control{
+    right:max(12px,env(safe-area-inset-right));
+    bottom:max(14px,calc(env(safe-area-inset-bottom) + 10px));
+    width:46px;
+    height:46px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .floating-khat-control{transition:none!important}
+}
