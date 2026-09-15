@@ -13,13 +13,7 @@
         <div class="envelope-back"></div>
 
         <div class="confession-sheet" id="confessionSheet" aria-hidden="true">
-          <div class="sheet-paper-edge"></div>
-          <span class="sheet-small">A LETTER I PROBABLY OVERTHOUGHT TOO MUCH</span>
-          <strong>To, my March</strong>
-          <p class="sheet-subtitle">Some feelings stay quiet for so long that eventually the only kind thing you can do is give them words.</p>
-          <div class="sheet-rule"></div>
-          <p class="sheet-preview"><b>So Heyya!!</b><br>I am writing all this to clear my mind. I am just pouring out all the voices in my head, and somehow they all kept leading me back here.</p>
-          <span class="sheet-sign">a confession, finally given words</span>
+          <div class="sheet-letter-clone" id="sheetLetterClone"></div>
         </div>
 
         <div class="envelope-flap-real"></div>
@@ -27,7 +21,8 @@
         <div class="envelope-pocket-light"></div>
 
         <div id="passwordGate" class="envelope-password-panel" aria-hidden="true">
-          <div class="password-card-pin"></div>
+          <div class="password-tape"></div>
+          <div class="password-heart" aria-hidden="true">♡</div>
           <label for="letterPassword" class="password-label">One tiny secret</label>
           <div class="password-hint">the day + month, in DDMM</div>
           <div class="password-row">
@@ -45,6 +40,18 @@
       </div>
     </div>`;
 
+  const originalHero=document.querySelector('main .hero');
+  const sheetClone=document.getElementById('sheetLetterClone');
+  if(originalHero&&sheetClone){
+    const clone=originalHero.cloneNode(true);
+    clone.classList.add('sheet-original-hero');
+    clone.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
+    clone.querySelectorAll('[aria-hidden="false"]').forEach(el=>el.removeAttribute('aria-hidden'));
+    sheetClone.appendChild(clone);
+  }else if(sheetClone){
+    sheetClone.innerHTML='<div class="sheet-fallback"><div class="kicker">A letter I probably overthought too much</div><h1>To, my March</h1><p class="subtitle">Some feelings stay quiet for so long that eventually the only kind thing you can do is give them words.</p></div>';
+  }
+
   requestAnimationFrame(()=>openScreen.classList.add('tdp-opening-ready'));
 
   const card=document.getElementById('envelopeCard');
@@ -60,7 +67,7 @@
     if(card.classList.contains('password-visible')||card.classList.contains('is-unlocking'))return;
     card.classList.add('password-visible');
     passwordGate.setAttribute('aria-hidden','false');
-    setTimeout(()=>passwordInput.focus(),360);
+    setTimeout(()=>passwordInput.focus(),320);
   }
 
   sealOpenBtn.addEventListener('click',revealPassword);
@@ -92,17 +99,17 @@
       sealOpenBtn.disabled=true;
 
       setTimeout(()=>card.classList.add('seal-released'),120);
-      setTimeout(()=>card.classList.add('envelope-open'),560);
+      setTimeout(()=>card.classList.add('envelope-open'),520);
       setTimeout(()=>{
         confessionSheet.setAttribute('aria-hidden','false');
         card.classList.add('sheet-rise','magic-burst-final');
-      },1080);
-      setTimeout(()=>card.classList.add('sheet-expand'),1960);
+      },1020);
+      setTimeout(()=>card.classList.add('sheet-expand'),1880);
       setTimeout(()=>card.classList.add('letter-transition'),2580);
       setTimeout(()=>{
         letterOpened.checked=true;
         letterOpened.dispatchEvent(new Event('change'));
-      },3220);
+      },3300);
     }else{
       passwordMessage.textContent='Not quite. Think of the date that made March yours.';
       card.classList.remove('wrong-shake');
