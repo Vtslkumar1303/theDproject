@@ -1,0 +1,72 @@
+/* Latest UI fixes: envelope cover title, compact verse tabs, clean inside title */
+
+/* Cover title sits on the closed envelope above the blank wax seal. */
+.envelope-cover-title{
+  position:absolute;
+  left:50%;
+  top:112px;
+  z-index:17;
+  transform:translateX(-50%) rotate(-1deg) translateZ(16px);
+  width:76%;
+  text-align:center;
+  color:#674437;
+  font:700 clamp(1.28rem,3.8vw,1.82rem)/1.05 "Segoe Print","Bradley Hand","Comic Sans MS",cursive;
+  text-shadow:0 1px 0 rgba(255,255,255,.5);
+  white-space:nowrap;
+  transition:opacity .28s ease,transform .35s ease;
+  pointer-events:none;
+}
+.password-visible .envelope-cover-title,
+.is-unlocking .envelope-cover-title{
+  opacity:0;
+  transform:translateX(-50%) translateY(-7px) rotate(-1deg) translateZ(16px);
+}
+
+/* Keep the confession page title clean: no eye/sparkle marks inside. */
+.sheet-original-hero .title-real-emoji,
+body.letter-main-open .hero .title-real-emoji{display:none!important}
+
+/* Restore the compact verse-tab proportions. */
+.section.verse-card,
+body.letter-main-open .section.verse-card{
+  min-height:0!important;
+  height:auto!important;
+  padding:0!important;
+  margin:0 0 14px!important;
+  overflow:visible!important;
+}
+.section.verse-card .verse,
+body.letter-main-open .section.verse-card .verse{
+  min-height:0!important;
+  height:auto!important;
+  padding:0!important;
+  margin:0!important;
+}
+.verse-card .verse-toggle{
+  min-height:0!important;
+  padding:15px 18px!important;
+}
+.verse-card .verse-toggle small{font-size:.66rem!important}
+.verse-card .verse-toggle strong{font-size:clamp(1rem,2vw,1.34rem)!important}
+.verse-card .verse-expander{width:36px!important;height:36px!important}
+
+@media(max-width:640px){
+  .envelope-cover-title{
+    top:103px;
+    width:78%;
+    font-size:clamp(1.12rem,5.4vw,1.48rem);
+  }
+  .section.verse-card,
+  body.letter-main-open .section.verse-card{
+    padding:0!important;
+    margin:0 0 11px!important;
+    border-radius:18px!important;
+  }
+  .verse-stage{width:calc(100% - 18px)!important;margin-bottom:56px!important}
+  .verse-card .verse-toggle{padding:12px 15px!important;gap:10px!important}
+  .verse-card .verse-toggle small{font-size:.61rem!important;letter-spacing:.15em!important}
+  .verse-card .verse-toggle strong{font-size:.98rem!important;line-height:1.25!important}
+  .verse-card .verse-expander{width:33px!important;height:33px!important}
+  .verse-card .verse-copy{padding-left:15px!important;padding-right:15px!important}
+  .verse-card.open .verse-copy{padding:2px 15px 18px!important}
+}
