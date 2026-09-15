@@ -1,0 +1,56 @@
+/* Keep the main confession letter mobile layout identical to the original experience after the envelope finishes. */
+.title-real-emoji{
+  display:inline-block;
+  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif!important;
+  font-style:normal!important;
+  font-weight:400!important;
+  font-size:.42em!important;
+  line-height:1!important;
+  vertical-align:.13em;
+  margin-left:.06em;
+  letter-spacing:0!important;
+  text-shadow:none!important;
+  filter:drop-shadow(0 2px 3px rgba(53,35,26,.15));
+  transform:translateZ(0);
+}
+.title-real-emoji.title-sparkle{font-size:.36em!important;margin-left:.01em;vertical-align:.18em;filter:drop-shadow(0 1px 3px rgba(126,92,45,.18))}
+
+/* Once the envelope is gone, none of its 3D dimensions are allowed to influence the document. */
+body.letter-main-open{overflow-x:hidden!important;width:100%!important;max-width:100%!important}
+body.letter-main-open .site{width:min(960px,100%)!important;max-width:100%!important;margin:0 auto!important}
+body.letter-main-open .letter{width:100%!important;max-width:100%!important;overflow:hidden!important}
+
+@media(max-width:640px){
+  body.letter-main-open .site,
+  body.letter-main-open .letter{width:100%!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important}
+  body.letter-main-open .hero{
+    width:100%!important;
+    max-width:100%!important;
+    min-height:82vh!important;
+    padding:96px 22px 80px!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+  }
+  body.letter-main-open .hero-inner{width:100%!important;max-width:700px!important;margin:0 auto!important;padding:0!important;box-sizing:border-box!important}
+  body.letter-main-open .hero h1{
+    max-width:100%!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+    white-space:normal!important;
+    overflow-wrap:normal!important;
+    word-break:normal!important;
+  }
+  body.letter-main-open .section{
+    width:100%!important;
+    max-width:100%!important;
+    min-height:auto!important;
+    padding:74px 22px!important;
+    box-sizing:border-box!important;
+    overflow:hidden!important;
+  }
+  body.letter-main-open .verse{width:min(680px,100%)!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important;box-sizing:border-box!important}
+  body.letter-main-open .verse-stage{max-width:100%!important;box-sizing:border-box!important}
+  body.letter-main-open img{max-width:100%}
+  body.letter-main-open .title-real-emoji{font-size:.38em!important;vertical-align:.14em}
+  body.letter-main-open .title-real-emoji.title-sparkle{font-size:.33em!important;vertical-align:.18em}
+}
