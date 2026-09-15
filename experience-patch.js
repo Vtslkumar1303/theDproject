@@ -41,11 +41,15 @@
     };
     reconcileFavouriteNote();setTimeout(reconcileFavouriteNote,250);setTimeout(reconcileFavouriteNote,900);
 
-    let video=rail.querySelector('.video-break-card');
-    if(!video){
-      video=document.createElement('section');video.className='video-break-card';
-      video.innerHTML='<h3>A little video break</h3><p>For whenever this letter feels a little too long.</p><div class="video-frame"><iframe src="https://www.youtube-nocookie.com/embed/l6E16JAk_Fs?rel=0" title="A little video break" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div><div class="video-caption">Press play, stay for a song, then come back whenever you want.</div>';
-      rail.appendChild(video);
+    /* A real little reading break, placed between verses so it is useful on desktop and phone. */
+    rail.querySelectorAll('.video-break-card').forEach(el=>el.remove());
+    let readingBreak=wrap.querySelector('.reading-break-card');
+    if(!readingBreak&&cards.length){
+      readingBreak=document.createElement('section');
+      readingBreak.className='reading-break-card';
+      readingBreak.innerHTML='<div class="reading-break-kicker">For when these words get a little too much</div><h3>A tiny pause from the letter</h3><p>Take a minute here if you get bored of reading. The next verse will wait for you.</p><div class="reading-break-frame"><video class="reading-break-video" controls playsinline preload="metadata"><source src="https://the-d-project-media.floot.app/_cdn/static/2cea0587-6529-4f4c-9b73-87048b9f5aa4-reading-break.mp4" type="video/mp4">Your browser could not play this little video break.</video></div><div class="reading-break-caption">Stay here for a while. Come back whenever you feel like reading me again.</div>';
+      const anchor=cards[Math.min(2,cards.length-1)];
+      anchor.insertAdjacentElement('afterend',readingBreak);
     }
 
     const responseKey='theDproject-verse-responses-v2';
