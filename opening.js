@@ -4,6 +4,8 @@
   if(!openScreen||!letterOpened)return;
 
   const originalHero=document.querySelector('main .hero');
+  const originalHeroTitle=originalHero?.querySelector('h1');
+  if(originalHeroTitle) originalHeroTitle.textContent='To, my March';
 
   openScreen.innerHTML=`
     <div class="open-card confession-envelope-card" id="envelopeCard">
@@ -21,6 +23,8 @@
         <div class="envelope-flap-real"></div>
         <div class="envelope-front-real"></div>
         <div class="envelope-pocket-light"></div>
+
+        <div class="envelope-cover-title" aria-hidden="true">To, my March🧿✨</div>
 
         <div id="passwordGate" class="envelope-password-panel" aria-hidden="true">
           <div class="password-tape"></div>
@@ -48,6 +52,8 @@
     clone.classList.add('sheet-original-hero');
     clone.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
     clone.querySelectorAll('[aria-hidden="false"]').forEach(el=>el.removeAttribute('aria-hidden'));
+    const cloneTitle=clone.querySelector('h1');
+    if(cloneTitle) cloneTitle.textContent='To, my March';
     sheetClone.appendChild(clone);
   }else if(sheetClone){
     sheetClone.innerHTML='<section class="hero sheet-original-hero"><div class="hero-inner"><div class="kicker">A letter I probably overthought too much</div><h1>To, my March</h1><p class="subtitle">Some feelings stay quiet for so long that eventually the only kind thing you can do is give them words.</p></div></section>';
