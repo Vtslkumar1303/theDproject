@@ -21,8 +21,14 @@
       globalVolume=Math.max(0,Math.min(1,value));
       knownAudio.forEach(a=>{try{a.volume=globalVolume}catch{}});
       document.querySelectorAll('audio').forEach(a=>{knownAudio.add(a);try{a.volume=globalVolume}catch{}});
-      document.querySelectorAll('.tdp-volume-slider').forEach(sl=>{sl.value=String(Math.round(globalVolume*100))});
-      document.querySelectorAll('.tdp-volume-value').forEach(v=>{v.textContent=Math.round(globalVolume*100)+'%'});
+      document.querySelectorAll('.tdp-volume-slider').forEach(sl=>{
+        const next=String(Math.round(globalVolume*100));
+        if(sl.value!==next)sl.value=next;
+      });
+      document.querySelectorAll('.tdp-volume-value').forEach(v=>{
+        const next=Math.round(globalVolume*100)+'%';
+        if(v.textContent!==next)v.textContent=next;
+      });
     };
     document.querySelectorAll('audio').forEach(a=>knownAudio.add(a));
     applyVolume(DEFAULT_VOLUME);
@@ -119,15 +125,15 @@
     };
     cards.forEach(card=>{if(card.dataset.magicBound)return;card.dataset.magicBound='1';const trigger=card.querySelector('.verse-toggle,.verse-expander');if(trigger)trigger.addEventListener('click',()=>setTimeout(()=>{if(card.classList.contains('open'))burst(card)},80))});
 
-    /* Add volume sliders to every verse player and the main player. All stay synchronized. */
-    document.querySelectorAll('.verse-audio').forEach(p=>addVolumeControl(p,true));
-    addVolumeControl(document.querySelector('.spotify-player'));
-    const volumeObserver=new MutationObserver(()=>{
+    /* Add volume sliders once the base players exist. Avoid observing text/DOM changes, which can create feedback loops. */
+    const wireVolumeControls=()=>{
       document.querySelectorAll('.verse-audio').forEach(p=>addVolumeControl(p,true));
       addVolumeControl(document.querySelector('.spotify-player'));
       applyVolume(globalVolume);
-    });
-    volumeObserver.observe(document.body,{childList:true,subtree:true});
+    };
+    wireVolumeControls();
+    setTimeout(wireVolumeControls,300);
+    setTimeout(wireVolumeControls,900);
 
     const download=document.getElementById('downloadEd');if(download)download.style.display='none';
     const panel=document.querySelector('.editor-panel');if(panel&&!panel.querySelector('.autosave-status')){const s=document.createElement('div');s.className='autosave-status';s.innerHTML='<span class="autosave-dot"></span><span>Auto-save is on</span>';panel.prepend(s)}
