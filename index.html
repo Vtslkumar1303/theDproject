@@ -6,7 +6,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>To, my March</title>
+<title>To, my March 🧿✨</title>
 <style>html,body{margin:0;min-height:100%;background:#efe0c2;font-family:"Segoe Print","Bradley Hand","Comic Sans MS",cursive}#boot{min-height:100vh;display:grid;place-items:center;color:#4f2f24}</style>
 </head>
 <body>
@@ -14,13 +14,13 @@
 <script>
 (async()=>{
   try{
-    const source='https://raw.githubusercontent.com/Vtslkumar1303/theDproject/22e18ec9c55cd337254e3eee3f129c1c79c76136/index.html?fresh=20260915-exact-letter-2040';
+    const source='https://raw.githubusercontent.com/Vtslkumar1303/theDproject/22e18ec9c55cd337254e3eee3f129c1c79c76136/index.html?fresh=20260915-mobile-title-2039';
     const r=await fetch(source,{cache:'no-store'});
     if(!r.ok) throw new Error('Base experience could not be loaded');
     let h=await r.text();
-    const v='20260915-exact-letter-slide-v6';
+    const v='20260915-mobile-title-fix-v7';
     const oldHead="h=h.replace('</head>','<style>'+css+'</style></head>');";
-    const newHead="h=h.replace('</head>','<style>'+css+'</style><link rel=\"stylesheet\" href=\"opening.css?v="+v+"\"><link rel=\"stylesheet\" href=\"experience-patch.css?v="+v+"\"></head>');";
+    const newHead="h=h.replace('</head>','<style>'+css+'</style><link rel=\"stylesheet\" href=\"opening.css?v="+v+"\"><link rel=\"stylesheet\" href=\"experience-patch.css?v="+v+"\"><link rel=\"stylesheet\" href=\"mobile-title-fix.css?v="+v+"\"></head>');";
     const oldBody="h=h.replace('</body>','<script>'+js+'</scr'+'ipt></body>');";
     const newBody="h=h.replace('</body>','<script>'+js+'</scr'+'ipt><script src=\"opening.js?v="+v+"\"></scr'+'ipt><script src=\"khat-lyrics.js?v="+v+"\"></scr'+'ipt><script src=\"lyric-player.js?v="+v+"\"></scr'+'ipt><script src=\"experience-patch.js?v="+v+"\"></scr'+'ipt><script src=\"gift-section.js?v="+v+"\"></scr'+'ipt></body>');";
     if(!h.includes(oldHead)||!h.includes(oldBody)) throw new Error('Enhancement injection point not found');
