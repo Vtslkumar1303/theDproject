@@ -4,43 +4,6 @@
     const cards=[...document.querySelectorAll('.verse-card')];
     if(!wrap||!cards.length){setTimeout(ready,120);return}
 
-    /* Global music volume: every player starts at 60%, with synchronized volume sliders. */
-    const DEFAULT_VOLUME=.60;
-    let globalVolume=DEFAULT_VOLUME;
-    const knownAudio=new Set();
-    const nativePlay=HTMLMediaElement.prototype.play;
-    if(!HTMLMediaElement.prototype.__tdpVolumePatched){
-      HTMLMediaElement.prototype.__tdpVolumePatched=true;
-      HTMLMediaElement.prototype.play=function(...args){
-        knownAudio.add(this);
-        this.volume=globalVolume;
-        return nativePlay.apply(this,args);
-      };
-    }
-    const applyVolume=value=>{
-      globalVolume=Math.max(0,Math.min(1,value));
-      knownAudio.forEach(a=>{try{a.volume=globalVolume}catch{}});
-      document.querySelectorAll('audio').forEach(a=>{knownAudio.add(a);try{a.volume=globalVolume}catch{}});
-      document.querySelectorAll('.tdp-volume-slider').forEach(sl=>{
-        const next=String(Math.round(globalVolume*100));
-        if(sl.value!==next)sl.value=next;
-      });
-      document.querySelectorAll('.tdp-volume-value').forEach(v=>{
-        const next=Math.round(globalVolume*100)+'%';
-        if(v.textContent!==next)v.textContent=next;
-      });
-    };
-    document.querySelectorAll('audio').forEach(a=>knownAudio.add(a));
-    applyVolume(DEFAULT_VOLUME);
-
-    const addVolumeControl=(host,compact=false)=>{
-      if(!host||host.querySelector('.tdp-volume-control'))return;
-      const c=document.createElement('div');c.className='tdp-volume-control'+(compact?' compact':'');
-      c.innerHTML='<span class="tdp-volume-label">Volume</span><input class="tdp-volume-slider" type="range" min="0" max="100" step="1" value="60" aria-label="Music volume"><span class="tdp-volume-value">60%</span>';
-      c.querySelector('.tdp-volume-slider').addEventListener('input',e=>applyVolume(Number(e.target.value)/100));
-      host.appendChild(c);
-    };
-
     [...document.querySelectorAll('div,section,article,aside')].forEach(el=>{
       const t=(el.textContent||'').replace(/\s+/g,' ').trim();
       if(t.includes('Doctor in the story')&&t.includes('always caring, healing and on call')){
@@ -124,16 +87,6 @@
       card.appendChild(layer);setTimeout(()=>layer.remove(),1150);
     };
     cards.forEach(card=>{if(card.dataset.magicBound)return;card.dataset.magicBound='1';const trigger=card.querySelector('.verse-toggle,.verse-expander');if(trigger)trigger.addEventListener('click',()=>setTimeout(()=>{if(card.classList.contains('open'))burst(card)},80))});
-
-    /* Add volume sliders once the base players exist. Avoid observing text/DOM changes, which can create feedback loops. */
-    const wireVolumeControls=()=>{
-      document.querySelectorAll('.verse-audio').forEach(p=>addVolumeControl(p,true));
-      addVolumeControl(document.querySelector('.spotify-player'));
-      applyVolume(globalVolume);
-    };
-    wireVolumeControls();
-    setTimeout(wireVolumeControls,300);
-    setTimeout(wireVolumeControls,900);
 
     const download=document.getElementById('downloadEd');if(download)download.style.display='none';
     const panel=document.querySelector('.editor-panel');if(panel&&!panel.querySelector('.autosave-status')){const s=document.createElement('div');s.className='autosave-status';s.innerHTML='<span class="autosave-dot"></span><span>Auto-save is on</span>';panel.prepend(s)}
