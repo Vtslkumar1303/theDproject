@@ -15,16 +15,18 @@
     const btn=document.createElement('button');
     btn.type='button';
     btn.className='floating-khat-control';
-    btn.setAttribute('aria-label','Play Khat');
+    btn.setAttribute('aria-label','Play Khat background song');
     btn.setAttribute('title','Play / Pause Khat');
     btn.dataset.state=audio.paused?'paused':'playing';
-    btn.innerHTML='<span class="fk-icon" aria-hidden="true"></span>';
+    btn.innerHTML='<span class="fk-icon" aria-hidden="true"></span><span class="fk-copy"><span class="fk-title">Khat ♫</span><span class="fk-sub">bg song</span></span>';
     document.body.appendChild(btn);
 
     const sync=()=>{
       const playing=!audio.paused&&!audio.ended;
       btn.dataset.state=playing?'playing':'paused';
-      btn.setAttribute('aria-label',playing?'Pause Khat':'Play Khat');
+      btn.setAttribute('aria-label',playing?'Pause Khat background song':'Play Khat background song');
+      const sub=btn.querySelector('.fk-sub');
+      if(sub)sub.textContent=playing?'playing softly':'bg song';
     };
 
     btn.addEventListener('click',async()=>{
@@ -38,7 +40,6 @@
     ['play','pause','ended','loadedmetadata'].forEach(ev=>audio.addEventListener(ev,sync));
     sync();
 
-    // Original editor code may initialize slightly later; keep removing its UI if it appears.
     const observer=new MutationObserver(()=>removeEditorUI());
     observer.observe(document.body,{childList:true,subtree:true});
     setTimeout(()=>observer.disconnect(),5000);
