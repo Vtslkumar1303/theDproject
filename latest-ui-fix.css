@@ -6,6 +6,7 @@ html,body{
   max-width:100%!important;
   min-width:0!important;
   overflow-x:clip!important;
+  -webkit-text-size-adjust:100%;
 }
 body,*{box-sizing:border-box}
 body{position:relative!important}
@@ -102,7 +103,8 @@ body.letter-main-open .verse-list{
   transform:translateX(-50%) translateY(-7px) rotate(-1deg) translateZ(16px);
 }
 
-/* Password card remains physically on the envelope face after the seal tap. */
+/* Password card remains physically on the envelope face after the seal tap.
+   No scale animation here: iOS keeps the same visual viewport before and after focus. */
 .real-envelope{width:min(500px,calc(100% - 24px))!important;max-width:calc(100% - 24px)!important}
 .envelope-password-panel{
   left:50%!important;
@@ -110,11 +112,12 @@ body.letter-main-open .verse-list{
   width:min(330px,72%)!important;
   max-width:72%!important;
   padding:13px 13px 11px!important;
-  transform:translateX(-50%) translateY(10px) rotate(-.4deg) scale(.97)!important;
+  transform:translateX(-50%) translateY(10px) rotate(-.4deg)!important;
+  transform-origin:50% 50%!important;
   z-index:20!important;
 }
 .password-visible .envelope-password-panel{
-  transform:translateX(-50%) translateY(0) rotate(-.4deg) scale(1)!important;
+  transform:translateX(-50%) translateY(0) rotate(-.4deg)!important;
 }
 .envelope-password-panel .password-row{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:7px!important}
 .envelope-password-panel .password-input{width:100%!important;min-width:0!important}
@@ -200,6 +203,10 @@ body.letter-main-open .section.verse-card .verse{
 
 @media(max-width:640px){
   html,body{width:100%!important;max-width:100%!important;overflow-x:clip!important}
+
+  /* iOS Safari zooms focused inputs whose rendered font size is below 16px. */
+  input,textarea,select{font-size:16px!important}
+
   .open-screen{width:100%!important;max-width:100%!important;padding:8px!important;overflow:hidden!important}
   .open-card.confession-envelope-card{
     width:calc(100% - 12px)!important;
@@ -235,15 +242,16 @@ body.letter-main-open .section.verse-card .verse{
   .envelope-password-panel .password-label{font-size:.69rem!important}
   .envelope-password-panel .password-hint{font-size:.58rem!important;margin-bottom:6px!important}
   .envelope-password-panel .password-input{
-    min-height:36px!important;
+    min-height:40px!important;
     padding:8px 8px!important;
-    font-size:13px!important;
-    letter-spacing:.17em!important;
+    font-size:16px!important;
+    line-height:1.2!important;
+    letter-spacing:.14em!important;
   }
   .envelope-password-panel .unlock-btn{
-    min-height:36px!important;
+    min-height:40px!important;
     padding:8px 11px!important;
-    font-size:.62rem!important;
+    font-size:.68rem!important;
   }
   .password-visible .wax-seal-real{
     transform:translateX(-50%) translateY(74px) rotate(-7deg) scale(.82) translateZ(18px)!important;
@@ -279,9 +287,10 @@ body.letter-main-open .section.verse-card .verse{
     overflow-wrap:anywhere!important;
   }
 
+  /* Real outer margins around every verse tab: 16px left + 16px right. */
   .verse-stage{
-    width:calc(100% - 28px)!important;
-    max-width:calc(100% - 28px)!important;
+    width:calc(100% - 32px)!important;
+    max-width:calc(100% - 32px)!important;
     margin:0 auto 54px!important;
     overflow:hidden!important;
   }
@@ -340,7 +349,7 @@ body.letter-main-open .section.verse-card .verse{
   .envelope-password-panel .password-row{grid-template-columns:1fr!important}
   .envelope-password-panel .unlock-btn{width:100%!important}
   .password-visible .wax-seal-real{opacity:.35!important}
-  .verse-stage{width:calc(100% - 22px)!important;max-width:calc(100% - 22px)!important}
+  .verse-stage{width:calc(100% - 24px)!important;max-width:calc(100% - 24px)!important}
   .verse-card .verse-copy{padding-left:15px!important;padding-right:15px!important}
   .verse-card.open .verse-copy{padding:4px 15px 18px!important}
 }
