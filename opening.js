@@ -3,6 +3,14 @@
   const letterOpened=document.getElementById('letterOpened');
   if(!openScreen||!letterOpened)return;
 
+  const originalHero=document.querySelector('main .hero');
+  if(originalHero){
+    const heroTitle=originalHero.querySelector('h1');
+    if(heroTitle){
+      heroTitle.innerHTML='To, my March <span class="title-real-emoji" aria-label="evil eye">🧿</span><span class="title-real-emoji title-sparkle" aria-label="sparkles">✨</span>';
+    }
+  }
+
   openScreen.innerHTML=`
     <div class="open-card confession-envelope-card" id="envelopeCard">
       <div class="confession-kicker">A confession I kept folding into silence</div>
@@ -40,7 +48,6 @@
       </div>
     </div>`;
 
-  const originalHero=document.querySelector('main .hero');
   const sheetClone=document.getElementById('sheetLetterClone');
   if(originalHero&&sheetClone){
     const clone=originalHero.cloneNode(true);
@@ -49,7 +56,7 @@
     clone.querySelectorAll('[aria-hidden="false"]').forEach(el=>el.removeAttribute('aria-hidden'));
     sheetClone.appendChild(clone);
   }else if(sheetClone){
-    sheetClone.innerHTML='<div class="sheet-fallback"><div class="kicker">A letter I probably overthought too much</div><h1>To, my March</h1><p class="subtitle">Some feelings stay quiet for so long that eventually the only kind thing you can do is give them words.</p></div>';
+    sheetClone.innerHTML='<div class="sheet-fallback"><div class="kicker">A letter I probably overthought too much</div><h1>To, my March <span class="title-real-emoji">🧿</span><span class="title-real-emoji title-sparkle">✨</span></h1><p class="subtitle">Some feelings stay quiet for so long that eventually the only kind thing you can do is give them words.</p></div>';
   }
 
   requestAnimationFrame(()=>openScreen.classList.add('tdp-opening-ready'));
@@ -107,8 +114,13 @@
       setTimeout(()=>card.classList.add('sheet-expand'),1880);
       setTimeout(()=>card.classList.add('letter-transition'),2580);
       setTimeout(()=>{
+        document.body.classList.add('letter-main-open');
         letterOpened.checked=true;
         letterOpened.dispatchEvent(new Event('change'));
+        setTimeout(()=>{
+          openScreen.style.display='none';
+          openScreen.setAttribute('aria-hidden','true');
+        },120);
       },3300);
     }else{
       passwordMessage.textContent='Not quite. Think of the date that made March yours.';
