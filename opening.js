@@ -7,6 +7,9 @@
   const originalHeroTitle=originalHero?.querySelector('h1');
   if(originalHeroTitle) originalHeroTitle.textContent='To, my March';
 
+  const coverTitleMarkup=`<span class="cover-word" aria-hidden="true">
+    <span class="cover-letter" style="--i:0">T</span><span class="cover-letter" style="--i:1">o</span><span class="cover-letter cover-space" style="--i:2">&nbsp;</span><span class="cover-letter" style="--i:3">m</span><span class="cover-letter" style="--i:4">y</span><span class="cover-letter cover-space" style="--i:5">&nbsp;</span><span class="cover-letter" style="--i:6">M</span><span class="cover-letter" style="--i:7">a</span><span class="cover-letter" style="--i:8">r</span><span class="cover-letter" style="--i:9">c</span><span class="cover-letter" style="--i:10">h</span></span><span class="cover-emoji cover-nazar" aria-hidden="true">🧿</span><span class="cover-emoji cover-sparkle" aria-hidden="true">✨</span><span class="sr-only">To, my March</span>`;
+
   openScreen.innerHTML=`
     <div class="open-card confession-envelope-card" id="envelopeCard">
       <div class="confession-kicker">A confession I kept folding into silence</div>
@@ -24,16 +27,17 @@
         <div class="envelope-front-real"></div>
         <div class="envelope-pocket-light"></div>
 
-        <div class="envelope-cover-title" aria-hidden="true">To, my March🧿✨</div>
+        <div class="envelope-cover-title" aria-label="To, my March">${coverTitleMarkup}</div>
 
         <div id="passwordGate" class="envelope-password-panel" aria-hidden="true">
+          <div class="password-glow" aria-hidden="true"></div>
           <div class="password-tape"></div>
           <div class="password-heart" aria-hidden="true"></div>
           <label for="letterPassword" class="password-label">One tiny secret</label>
           <div class="password-hint">the day + month, in DDMM</div>
           <div class="password-row">
             <input id="letterPassword" class="password-input" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="DDMM" maxlength="4" aria-describedby="passwordMessage">
-            <button id="unlockBtn" class="unlock-btn" type="button">Unlock</button>
+            <button id="unlockBtn" class="unlock-btn" type="button"><span>Open</span><i aria-hidden="true">♡</i></button>
           </div>
           <div id="passwordMessage" class="password-message" aria-live="polite"></div>
         </div>
@@ -70,14 +74,64 @@
   const confessionSheet=document.getElementById('confessionSheet');
   const expectedHash='bf0a60ee19adc7954e2248d0c4fd7fed44671ea2cff24a6c75127f9ce0183608';
 
+  let openingAudioContext=null;
+  function primeOpeningAudio(){
+    try{
+      const AC=window.AudioContext||window.webkitAudioContext;
+      if(!AC)return null;
+      if(!openingAudioContext)openingAudioContext=new AC();
+      if(openingAudioContext.state==='suspended')openingAudioContext.resume();
+      return openingAudioContext;
+    }catch(e){return null;}
+  }
+
+  function playCuteOpeningSound(){
+    const ctx=primeOpeningAudio();
+    if(!ctx)return;
+    const now=ctx.currentTime+.02;
+    const master=ctx.createGain();
+    master.gain.setValueAtTime(.0001,now);
+    master.gain.exponentialRampToValueAtTime(.18,now+.025);
+    master.gain.exponentialRampToValueAtTime(.0001,now+1.08);
+    master.connect(ctx.destination);
+
+    [[659.25,0,.62],[783.99,.13,.54],[987.77,.27,.62]].forEach(([freq,delay,dur],idx)=>{
+      const osc=ctx.createOscillator();
+      const gain=ctx.createGain();
+      osc.type=idx===2?'sine':'triangle';
+      osc.frequency.setValueAtTime(freq,now+delay);
+      gain.gain.setValueAtTime(.0001,now+delay);
+      gain.gain.exponentialRampToValueAtTime(idx===2?.10:.075,now+delay+.025);
+      gain.gain.exponentialRampToValueAtTime(.0001,now+delay+dur);
+      osc.connect(gain);gain.connect(master);
+      osc.start(now+delay);osc.stop(now+delay+dur+.03);
+    });
+
+    try{
+      const length=Math.floor(ctx.sampleRate*.38);
+      const buffer=ctx.createBuffer(1,length,ctx.sampleRate);
+      const data=buffer.getChannelData(0);
+      for(let i=0;i<length;i++)data[i]=(Math.random()*2-1)*Math.pow(1-i/length,2.4);
+      const noise=ctx.createBufferSource();
+      const filter=ctx.createBiquadFilter();
+      const gain=ctx.createGain();
+      filter.type='bandpass';filter.frequency.value=1150;filter.Q.value=.7;
+      gain.gain.setValueAtTime(.0001,now+.05);
+      gain.gain.exponentialRampToValueAtTime(.028,now+.09);
+      gain.gain.exponentialRampToValueAtTime(.0001,now+.42);
+      noise.buffer=buffer;noise.connect(filter);filter.connect(gain);gain.connect(master);
+      noise.start(now+.05);
+    }catch(e){}
+  }
+
   function revealPassword(){
     if(card.classList.contains('password-visible')||card.classList.contains('is-unlocking'))return;
     card.classList.add('password-visible');
     passwordGate.setAttribute('aria-hidden','false');
-    setTimeout(()=>passwordInput.focus(),320);
+    setTimeout(()=>passwordInput.focus({preventScroll:true}),360);
   }
 
-  sealOpenBtn.addEventListener('click',revealPassword);
+  sealOpenBtn.addEventListener('click',()=>{primeOpeningAudio();revealPassword();});
 
   passwordInput.addEventListener('input',()=>{
     passwordInput.value=passwordInput.value.replace(/\D/g,'').slice(0,4);
@@ -91,10 +145,11 @@
   }
 
   async function unlockLetter(){
+    primeOpeningAudio();
     if(card.classList.contains('is-unlocking'))return;
     if(passwordInput.value.length!==4){
       passwordMessage.textContent='Four digits, in DDMM.';
-      passwordInput.focus();
+      passwordInput.focus({preventScroll:true});
       return;
     }
 
@@ -104,6 +159,7 @@
       unlockBtn.disabled=true;
       passwordInput.readOnly=true;
       sealOpenBtn.disabled=true;
+      playCuteOpeningSound();
 
       setTimeout(()=>card.classList.add('seal-released'),100);
       setTimeout(()=>card.classList.add('envelope-open'),500);
