@@ -15,18 +15,7 @@
         <div class="confession-sheet" id="confessionSheet">
           <span class="sheet-small">CONFESSION LETTER</span>
           <strong>To, my March</strong>
-          <p class="sheet-whisper">One little secret before the rest of these words can reach you.</p>
-
-          <div id="passwordGate" class="password-gate sheet-password">
-            <label for="letterPassword" class="password-label">Enter the date in DDMM</label>
-            <div class="password-row">
-              <input id="letterPassword" class="password-input" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="DDMM" maxlength="4" aria-describedby="passwordMessage">
-              <button id="unlockBtn" class="unlock-btn" type="button">Unlock</button>
-            </div>
-            <div id="passwordMessage" class="password-message" aria-live="polite"></div>
-            <div class="sheet-success">The letter knows you. Opening...</div>
-          </div>
-
+          <p class="sheet-whisper">Some words waited quietly until they were brave enough to become a letter.</p>
           <span class="sheet-line line-one"></span>
           <span class="sheet-line line-two"></span>
           <span class="sheet-line line-three"></span>
@@ -35,7 +24,17 @@
 
         <div class="envelope-flap-real"></div>
         <div class="envelope-front-real"></div>
-        <button class="wax-seal-real" id="sealOpenBtn" type="button" aria-label="Tap to open the confession envelope"><span>tap to open</span></button>
+
+        <div id="passwordGate" class="envelope-password-panel" aria-hidden="true">
+          <label for="letterPassword" class="password-label">Enter the date in DDMM</label>
+          <div class="password-row">
+            <input id="letterPassword" class="password-input" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="DDMM" maxlength="4" aria-describedby="passwordMessage">
+            <button id="unlockBtn" class="unlock-btn" type="button">Unlock</button>
+          </div>
+          <div id="passwordMessage" class="password-message" aria-live="polite"></div>
+        </div>
+
+        <button class="wax-seal-real" id="sealOpenBtn" type="button" aria-label="Open the password field"></button>
 
         <i class="magic-speck sp1"></i><i class="magic-speck sp2"></i><i class="magic-speck sp3"></i>
         <i class="magic-speck sp4"></i><i class="magic-speck sp5"></i><i class="magic-speck sp6"></i>
@@ -47,20 +46,20 @@
 
   const card=document.getElementById('envelopeCard');
   const sealOpenBtn=document.getElementById('sealOpenBtn');
+  const passwordGate=document.getElementById('passwordGate');
   const passwordInput=document.getElementById('letterPassword');
   const unlockBtn=document.getElementById('unlockBtn');
   const passwordMessage=document.getElementById('passwordMessage');
   const expectedHash='bf0a60ee19adc7954e2248d0c4fd7fed44671ea2cff24a6c75127f9ce0183608';
 
-  function openEnvelope(){
-    if(card.classList.contains('envelope-open'))return;
-    card.classList.add('envelope-open','magic-burst');
-    sealOpenBtn.disabled=true;
-    setTimeout(()=>card.classList.remove('magic-burst'),1250);
-    setTimeout(()=>passwordInput.focus(),950);
+  function revealPassword(){
+    if(card.classList.contains('password-visible'))return;
+    card.classList.add('password-visible');
+    passwordGate.setAttribute('aria-hidden','false');
+    setTimeout(()=>passwordInput.focus(),420);
   }
 
-  sealOpenBtn.addEventListener('click',openEnvelope);
+  sealOpenBtn.addEventListener('click',revealPassword);
 
   passwordInput.addEventListener('input',()=>{
     passwordInput.value=passwordInput.value.replace(/\D/g,'').slice(0,4);
@@ -83,16 +82,18 @@
 
     if(await sha256(passwordInput.value)===expectedHash){
       passwordMessage.textContent='';
-      card.classList.add('is-unlocking','is-unlocked','magic-burst-final');
+      card.classList.add('is-unlocking','magic-burst-final');
       unlockBtn.disabled=true;
       passwordInput.readOnly=true;
+      sealOpenBtn.disabled=true;
 
-      setTimeout(()=>card.classList.add('sheet-full'),520);
-      setTimeout(()=>card.classList.add('letter-transition'),1450);
+      setTimeout(()=>card.classList.add('envelope-open'),180);
+      setTimeout(()=>card.classList.add('sheet-rise'),760);
+      setTimeout(()=>card.classList.add('letter-transition'),1550);
       setTimeout(()=>{
         letterOpened.checked=true;
         letterOpened.dispatchEvent(new Event('change'));
-      },2150);
+      },2350);
     }else{
       passwordMessage.textContent='Not quite. Think of the date that made March yours.';
       card.classList.remove('wrong-shake');
