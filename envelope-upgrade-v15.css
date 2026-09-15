@@ -1,0 +1,244 @@
+/* V15 — larger realistic envelope, animated title/password, strong verse labels */
+
+/* Keep the whole opening scene inside the phone width. */
+.open-screen,
+.open-card.confession-envelope-card,
+.real-envelope{box-sizing:border-box!important;max-width:100%!important}
+
+.open-card.confession-envelope-card{
+  width:min(820px,calc(100% - 14px))!important;
+  padding:clamp(20px,3.8vw,34px) clamp(8px,2.7vw,24px) 24px!important;
+  background:
+    radial-gradient(circle at 50% 36%,rgba(255,230,195,.08),transparent 30%),
+    linear-gradient(180deg,rgba(82,51,41,.46),rgba(39,26,22,.66))!important;
+  border:1px solid rgba(255,236,211,.16)!important;
+  box-shadow:0 38px 100px rgba(8,5,4,.5),inset 0 1px 0 rgba(255,255,255,.06)!important;
+}
+
+/* Bigger envelope, but still bounded by viewport. */
+.real-envelope{
+  width:min(590px,calc(100% - 8px))!important;
+  height:390px!important;
+  margin:3px auto 0!important;
+  filter:drop-shadow(0 34px 40px rgba(0,0,0,.38)) drop-shadow(0 8px 14px rgba(45,24,15,.16))!important;
+}
+
+/* Layered paper depth and more realistic folds. */
+.envelope-back{
+  bottom:42px!important;
+  width:94%!important;
+  height:72%!important;
+  border-radius:21px 21px 18px 18px!important;
+  background:
+    linear-gradient(118deg,rgba(255,255,255,.26),transparent 23%,rgba(129,86,52,.08) 55%,transparent 76%),
+    linear-gradient(rgba(249,234,207,.99),rgba(225,191,150,.99)),
+    url("assets/asset-01-de12b7479609.png") center/cover!important;
+  border:1px solid rgba(120,78,49,.38)!important;
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.62),
+    inset 0 -24px 36px rgba(113,72,42,.10),
+    0 2px 4px rgba(65,39,24,.12)!important;
+}
+.envelope-back:before{
+  content:"";position:absolute;inset:8px;border-radius:14px;
+  border:1px solid rgba(130,86,54,.08);pointer-events:none;
+}
+.envelope-flap-real{
+  top:66px!important;
+  width:94%!important;
+  height:49%!important;
+  background:
+    linear-gradient(132deg,rgba(255,255,255,.32),transparent 30%,rgba(117,73,42,.08) 65%,transparent),
+    linear-gradient(rgba(251,238,214,.99),rgba(229,195,153,.99)),
+    url("assets/asset-01-de12b7479609.png") center/cover!important;
+  border-color:rgba(126,82,51,.35)!important;
+  filter:drop-shadow(0 10px 10px rgba(72,43,26,.16))!important;
+}
+.envelope-front-real{
+  bottom:42px!important;
+  width:94%!important;
+  height:52%!important;
+  background:
+    linear-gradient(112deg,rgba(255,255,255,.20),transparent 28%,rgba(119,74,42,.09) 62%,transparent 80%),
+    linear-gradient(rgba(245,222,187,.99),rgba(216,174,125,.99)),
+    url("assets/asset-01-de12b7479609.png") center/cover!important;
+  border-color:rgba(126,82,51,.36)!important;
+  box-shadow:inset 0 -18px 28px rgba(100,62,34,.08),0 -2px 10px rgba(65,39,24,.05)!important;
+}
+.envelope-ground-shadow{bottom:5px!important;width:90%!important;height:48px!important;filter:blur(7px)!important}
+.envelope-pocket-light{bottom:78px!important;opacity:.54!important}
+
+/* More tactile wax seal. */
+.wax-seal-real{
+  top:190px!important;
+  width:88px!important;height:88px!important;
+  background:
+    radial-gradient(circle at 31% 24%,rgba(255,211,196,.58) 0 5%,transparent 7%),
+    radial-gradient(circle at 40% 34%,#c47976 0 8%,#963e49 34%,#6f2434 72%,#4c1422 100%)!important;
+  box-shadow:
+    0 13px 24px rgba(62,18,26,.40),
+    inset 0 0 0 5px rgba(255,225,201,.09),
+    inset 0 0 0 12px rgba(66,12,21,.17),
+    inset -8px -9px 15px rgba(45,7,14,.16)!important;
+}
+.wax-seal-real:after{
+  content:"";position:absolute;inset:15px;border-radius:50%;
+  background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.12),transparent 38%);
+  pointer-events:none;
+}
+
+/* Animated handwritten envelope title. */
+.envelope-cover-title{
+  top:126px!important;
+  width:82%!important;
+  white-space:nowrap!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  perspective:600px;
+  text-shadow:0 1px 0 rgba(255,255,255,.58),0 3px 8px rgba(73,43,27,.10)!important;
+}
+.cover-word{display:inline-flex;align-items:baseline;justify-content:center}
+.cover-letter{
+  display:inline-block;
+  font:800 clamp(1.36rem,4.5vw,2rem)/1 "Segoe Print","Bradley Hand","Comic Sans MS",cursive;
+  color:#654235;
+  transform-origin:50% 80%;
+  animation:coverLetterFloat 3.8s ease-in-out infinite;
+  animation-delay:calc(var(--i) * .055s);
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.45));
+}
+.cover-space{width:.28em}
+.cover-emoji{
+  display:inline-block;
+  font-family:"Apple Color Emoji","Segoe UI Emoji",sans-serif;
+  font-size:clamp(1.2rem,4vw,1.72rem);
+  transform-style:preserve-3d;
+  filter:drop-shadow(0 2px 1px rgba(43,30,24,.22)) drop-shadow(0 5px 8px rgba(43,30,24,.18));
+  text-shadow:0 1px 0 rgba(255,255,255,.32);
+}
+.cover-nazar{animation:nazar3D 4.2s ease-in-out infinite}
+.cover-sparkle{animation:sparkle3D 2.2s ease-in-out infinite}
+@keyframes coverLetterFloat{
+  0%,100%{transform:translateY(0) rotateX(0deg)}
+  48%{transform:translateY(-3px) rotateX(6deg)}
+  62%{transform:translateY(-1px) rotateX(0deg)}
+}
+@keyframes nazar3D{
+  0%,100%{transform:translateY(0) rotateY(-8deg) rotateZ(-4deg)}
+  50%{transform:translateY(-4px) rotateY(13deg) rotateZ(3deg)}
+}
+@keyframes sparkle3D{
+  0%,100%{transform:translateY(0) rotateZ(-8deg) scale(1);filter:drop-shadow(0 2px 1px rgba(43,30,24,.20)) drop-shadow(0 0 2px rgba(255,230,135,.15))}
+  50%{transform:translateY(-5px) rotateZ(9deg) scale(1.13);filter:drop-shadow(0 3px 2px rgba(43,30,24,.18)) drop-shadow(0 0 8px rgba(255,226,119,.58))}
+}
+
+/* Password card: animated without scale so iOS does not zoom/reflow. */
+.envelope-password-panel{
+  top:100px!important;
+  width:min(370px,76%)!important;
+  max-width:76%!important;
+  padding:17px 16px 13px!important;
+  border-radius:22px!important;
+  opacity:0!important;
+  transform:translateX(-50%) translateY(18px) rotate(-.35deg)!important;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.52),transparent 34%),
+    linear-gradient(180deg,rgba(255,250,241,.99),rgba(245,225,198,.99))!important;
+  border:1px solid rgba(115,76,50,.20)!important;
+  box-shadow:0 18px 38px rgba(61,36,22,.24),inset 0 1px 0 rgba(255,255,255,.86)!important;
+  overflow:hidden!important;
+  transition:opacity .34s ease,transform .48s cubic-bezier(.2,.75,.2,1)!important;
+}
+.password-visible .envelope-password-panel{
+  opacity:1!important;
+  transform:translateX(-50%) translateY(0) rotate(-.35deg)!important;
+}
+.password-glow{
+  position:absolute;inset:-40%;pointer-events:none;
+  background:conic-gradient(from 0deg,transparent 0 26%,rgba(255,231,194,.34) 34%,transparent 42% 100%);
+  animation:passwordShimmer 5.5s linear infinite;
+}
+.envelope-password-panel:after{
+  content:"";position:absolute;inset:7px;border-radius:16px;
+  border:1px dashed rgba(131,89,64,.17);pointer-events:none;
+}
+@keyframes passwordShimmer{to{transform:rotate(360deg)}}
+.password-tape{width:58px!important;height:18px!important;top:-7px!important;opacity:.82}
+.password-heart:before{content:"♡"}.password-heart{font-size:0!important;right:15px!important;top:11px!important}.password-heart:before{font:700 1rem/1 Georgia,serif;color:#b87573}
+.envelope-password-panel .password-label{font-size:.82rem!important;letter-spacing:.02em}
+.password-hint{font-size:.66rem!important}
+.envelope-password-panel .password-input{
+  min-height:42px!important;
+  font-size:16px!important;
+  border-radius:14px!important;
+  background:rgba(255,253,248,.98)!important;
+  border:1px solid rgba(104,69,48,.24)!important;
+  box-shadow:inset 0 2px 5px rgba(75,47,30,.06),0 4px 12px rgba(90,55,34,.05)!important;
+  transition:border-color .22s ease,box-shadow .22s ease,background .22s ease!important;
+}
+.envelope-password-panel .password-input:focus{
+  border-color:rgba(151,91,76,.56)!important;
+  box-shadow:0 0 0 4px rgba(190,127,108,.10),inset 0 2px 5px rgba(75,47,30,.05)!important;
+  background:#fffdf9!important;
+}
+.envelope-password-panel .unlock-btn{
+  min-height:42px!important;
+  border-radius:14px!important;
+  padding:9px 14px!important;
+  display:inline-flex!important;align-items:center!important;gap:5px!important;
+  background:linear-gradient(180deg,#d8a092,#b96d64)!important;
+  box-shadow:0 8px 16px rgba(108,57,49,.19),inset 0 1px 0 rgba(255,255,255,.28)!important;
+}
+.envelope-password-panel .unlock-btn i{font-style:normal;font-size:.9rem;animation:tinyHeart 1.8s ease-in-out infinite}
+@keyframes tinyHeart{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.password-visible .wax-seal-real{transform:translateX(-50%) translateY(92px) rotate(-7deg) scale(.84) translateZ(20px)!important}
+
+/* Strong verse tabs: roman numeral/kicker and title are both bold. */
+.verse-card .verse-toggle small,
+.verse-card .verse-toggle strong,
+.verse-card .verse-heading,
+.verse-card .verse-heading *{
+  font-weight:900!important;
+}
+.verse-card .verse-toggle small{opacity:.92!important}
+
+/* Preserve meaningful mobile margins around every verse box. */
+@media(max-width:640px){
+  .open-card.confession-envelope-card{width:calc(100% - 8px)!important;padding-left:4px!important;padding-right:4px!important}
+  .real-envelope{width:calc(100% - 2px)!important;height:342px!important}
+  .envelope-back{bottom:35px!important;width:96%!important;height:72%!important}
+  .envelope-flap-real{top:54px!important;width:96%!important;height:48%!important}
+  .envelope-front-real{bottom:35px!important;width:96%!important;height:52%!important}
+  .envelope-cover-title{top:105px!important;width:84%!important;gap:3px!important}
+  .cover-letter{font-size:clamp(1.16rem,5.4vw,1.52rem)!important}
+  .cover-emoji{font-size:clamp(1.05rem,5vw,1.38rem)!important}
+  .wax-seal-real{top:158px!important;width:76px!important;height:76px!important}
+  .envelope-password-panel{top:80px!important;width:78%!important;max-width:78%!important;padding:13px 11px 10px!important}
+  .password-visible .wax-seal-real{transform:translateX(-50%) translateY(83px) rotate(-7deg) scale(.80) translateZ(20px)!important}
+
+  .verse-stage{
+    width:calc(100% - 32px)!important;
+    max-width:calc(100% - 32px)!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+  .section.verse-card,
+  body.letter-main-open .section.verse-card{
+    width:100%!important;
+    max-width:100%!important;
+    margin-left:auto!important;
+    margin-right:auto!important;
+  }
+}
+
+@media(max-width:380px){
+  .real-envelope{height:326px!important}
+  .envelope-password-panel{width:82%!important;max-width:82%!important}
+  .verse-stage{width:calc(100% - 24px)!important;max-width:calc(100% - 24px)!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .cover-letter,.cover-emoji,.password-glow,.envelope-password-panel .unlock-btn i{animation:none!important}
+}
