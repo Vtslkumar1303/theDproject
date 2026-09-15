@@ -1,0 +1,184 @@
+/* Final hard override: fully closed envelope, attractive unlock card, exact hero slide */
+
+/* Never render the inner letter before a successful unlock. */
+.confession-sheet{
+  display:none!important;
+  opacity:0!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+.sheet-ready .confession-sheet{
+  display:block!important;
+  visibility:visible!important;
+  opacity:0!important;
+  transform:translateX(-50%) translateY(72px) scale(.95) translateZ(2px)!important;
+}
+.sheet-rise .confession-sheet{
+  opacity:1!important;
+  transform:translateX(-50%) translateY(-126px) scale(1.04) rotate(-.35deg) translateZ(24px)!important;
+}
+.sheet-expand .confession-sheet{
+  width:min(650px,91vw)!important;
+  height:330px!important;
+  bottom:14px!important;
+  opacity:1!important;
+  transform:translateX(-50%) translateY(-148px) scale(1.045) rotate(-.18deg) translateZ(28px)!important;
+}
+.letter-transition .confession-sheet{
+  width:min(860px,97vw)!important;
+  height:min(82vh,720px)!important;
+  bottom:-138px!important;
+  opacity:1!important;
+  transform:translateX(-50%) translateY(-228px) scale(1.03) rotate(0deg) translateZ(30px)!important;
+}
+
+/* Make sure the envelope visually covers everything while closed. */
+.real-envelope{overflow:visible!important;}
+.envelope-back{z-index:3!important;}
+.envelope-flap-real{z-index:12!important;}
+.envelope-front-real{z-index:13!important;}
+.envelope-pocket-light{z-index:14!important;}
+.wax-seal-real{z-index:18!important;}
+.envelope-password-panel{z-index:20!important;}
+
+/* Cute but realistic confession-style password card. */
+.envelope-password-panel{
+  width:min(360px,82%)!important;
+  top:74px!important;
+  padding:16px 16px 14px!important;
+  border-radius:18px!important;
+  border:1px solid rgba(112,72,51,.22)!important;
+  background:
+    linear-gradient(rgba(255,250,240,.97),rgba(244,226,199,.98)),
+    url("assets/asset-01-de12b7479609.png") center/cover!important;
+  box-shadow:
+    0 16px 30px rgba(61,38,27,.22),
+    inset 0 1px 0 rgba(255,255,255,.84),
+    inset 0 0 26px rgba(123,82,49,.05)!important;
+}
+.envelope-password-panel:before{
+  content:""!important;
+  position:absolute!important;
+  inset:7px!important;
+  border:1px dashed rgba(128,84,59,.17)!important;
+  border-radius:13px!important;
+  pointer-events:none!important;
+}
+.password-tape{
+  position:absolute!important;
+  left:50%!important;
+  top:-8px!important;
+  width:54px!important;
+  height:16px!important;
+  transform:translateX(-50%) rotate(-2deg)!important;
+  border-radius:3px!important;
+  background:rgba(225,195,157,.88)!important;
+  box-shadow:0 2px 5px rgba(70,44,31,.14)!important;
+}
+.password-heart{
+  position:absolute!important;
+  right:14px!important;
+  top:11px!important;
+  width:18px!important;
+  height:16px!important;
+  transform:rotate(-8deg)!important;
+}
+.password-heart:before,
+.password-heart:after{
+  content:""!important;
+  position:absolute!important;
+  top:0!important;
+  width:9px!important;
+  height:14px!important;
+  border-radius:9px 9px 0 0!important;
+  background:rgba(172,101,95,.40)!important;
+}
+.password-heart:before{left:9px!important;transform:rotate(-45deg);transform-origin:0 100%;}
+.password-heart:after{left:0!important;transform:rotate(45deg);transform-origin:100% 100%;}
+.envelope-password-panel .password-label{
+  display:block!important;
+  margin-bottom:3px!important;
+  color:#5c3b30!important;
+  font:700 .80rem/1.2 "Segoe Print","Bradley Hand","Comic Sans MS",cursive!important;
+}
+.envelope-password-panel .password-hint{
+  margin-bottom:10px!important;
+  color:#8c6758!important;
+  font:italic .66rem/1.35 Georgia,serif!important;
+}
+.envelope-password-panel .password-row{gap:9px!important;}
+.envelope-password-panel .password-input{
+  min-height:42px!important;
+  padding:10px 13px!important;
+  border:1px solid rgba(105,69,48,.24)!important;
+  background:rgba(255,253,248,.98)!important;
+  color:#51372d!important;
+  border-radius:999px!important;
+  text-align:center!important;
+  letter-spacing:.24em!important;
+  font-size:15px!important;
+  box-shadow:inset 0 2px 4px rgba(64,41,29,.05)!important;
+}
+.envelope-password-panel .password-input:focus{
+  border-color:rgba(174,106,94,.58)!important;
+  box-shadow:0 0 0 4px rgba(184,122,108,.10),inset 0 2px 4px rgba(64,41,29,.05)!important;
+}
+.envelope-password-panel .unlock-btn{
+  min-height:42px!important;
+  padding:10px 16px!important;
+  border-radius:999px!important;
+  background:linear-gradient(180deg,#d59689,#bb7168)!important;
+  color:#fffaf6!important;
+  font-weight:700!important;
+  box-shadow:0 8px 16px rgba(116,63,56,.20),inset 0 1px 0 rgba(255,255,255,.25)!important;
+}
+
+/* The sliding sheet is the exact live hero clone, simply scaled to fit paper. */
+.sheet-letter-clone{
+  position:absolute!important;
+  inset:0!important;
+  overflow:hidden!important;
+  border-radius:inherit!important;
+}
+.sheet-original-hero{
+  position:absolute!important;
+  left:50%!important;
+  top:0!important;
+  width:960px!important;
+  min-height:88vh!important;
+  transform:translateX(-50%) scale(.39)!important;
+  transform-origin:top center!important;
+  margin:0!important;
+  pointer-events:none!important;
+}
+.sheet-original-hero .hero-inner{max-width:700px!important;}
+.sheet-original-hero .scroll-hint{display:none!important;}
+
+/* As the paper expands, reveal more of the exact same hero instead of swapping artwork. */
+.sheet-expand .sheet-original-hero{
+  transform:translateX(-50%) scale(.60)!important;
+}
+.letter-transition .sheet-original-hero{
+  transform:translateX(-50%) scale(.88)!important;
+}
+
+@media(max-width:560px){
+  .envelope-password-panel{
+    width:min(315px,84%)!important;
+    top:76px!important;
+    padding:14px 13px 12px!important;
+  }
+  .envelope-password-panel .password-row{gap:7px!important;}
+  .envelope-password-panel .password-input,
+  .envelope-password-panel .unlock-btn{min-height:40px!important;}
+  .sheet-original-hero{
+    width:860px!important;
+    transform:translateX(-50%) scale(.34)!important;
+  }
+  .sheet-expand .sheet-original-hero{
+    transform:translateX(-50%) scale(.52)!important;
+  }
+  .letter-transition .sheet-original-hero{
+    transform:translateX(-50%) scale(.76)!important;
+  }
+}
