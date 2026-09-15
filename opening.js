@@ -4,12 +4,6 @@
   if(!openScreen||!letterOpened)return;
 
   const originalHero=document.querySelector('main .hero');
-  if(originalHero){
-    const heroTitle=originalHero.querySelector('h1');
-    if(heroTitle){
-      heroTitle.innerHTML='To, my March <span class="title-real-emoji" aria-label="evil eye">🧿</span><span class="title-real-emoji title-sparkle" aria-label="sparkles">✨</span>';
-    }
-  }
 
   openScreen.innerHTML=`
     <div class="open-card confession-envelope-card" id="envelopeCard">
@@ -30,7 +24,7 @@
 
         <div id="passwordGate" class="envelope-password-panel" aria-hidden="true">
           <div class="password-tape"></div>
-          <div class="password-heart" aria-hidden="true">♡</div>
+          <div class="password-heart" aria-hidden="true"></div>
           <label for="letterPassword" class="password-label">One tiny secret</label>
           <div class="password-hint">the day + month, in DDMM</div>
           <div class="password-row">
@@ -56,7 +50,7 @@
     clone.querySelectorAll('[aria-hidden="false"]').forEach(el=>el.removeAttribute('aria-hidden'));
     sheetClone.appendChild(clone);
   }else if(sheetClone){
-    sheetClone.innerHTML='<div class="sheet-fallback"><div class="kicker">A letter I probably overthought too much</div><h1>To, my March <span class="title-real-emoji">🧿</span><span class="title-real-emoji title-sparkle">✨</span></h1><p class="subtitle">Some feelings stay quiet for so long that eventually the only kind thing you can do is give them words.</p></div>';
+    sheetClone.innerHTML='<section class="hero sheet-original-hero"><div class="hero-inner"><div class="kicker">A letter I probably overthought too much</div><h1>To, my March</h1><p class="subtitle">Some feelings stay quiet for so long that eventually the only kind thing you can do is give them words.</p></div></section>';
   }
 
   requestAnimationFrame(()=>openScreen.classList.add('tdp-opening-ready'));
@@ -105,14 +99,19 @@
       passwordInput.readOnly=true;
       sealOpenBtn.disabled=true;
 
-      setTimeout(()=>card.classList.add('seal-released'),120);
-      setTimeout(()=>card.classList.add('envelope-open'),520);
+      setTimeout(()=>card.classList.add('seal-released'),100);
+      setTimeout(()=>card.classList.add('envelope-open'),500);
+
       setTimeout(()=>{
         confessionSheet.setAttribute('aria-hidden','false');
-        card.classList.add('sheet-rise','magic-burst-final');
-      },1020);
-      setTimeout(()=>card.classList.add('sheet-expand'),1880);
-      setTimeout(()=>card.classList.add('letter-transition'),2580);
+        card.classList.add('sheet-ready');
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          card.classList.add('sheet-rise','magic-burst-final');
+        }));
+      },980);
+
+      setTimeout(()=>card.classList.add('sheet-expand'),1900);
+      setTimeout(()=>card.classList.add('letter-transition'),2650);
       setTimeout(()=>{
         document.body.classList.add('letter-main-open');
         letterOpened.checked=true;
@@ -121,7 +120,7 @@
           openScreen.style.display='none';
           openScreen.setAttribute('aria-hidden','true');
         },120);
-      },3300);
+      },3380);
     }else{
       passwordMessage.textContent='Not quite. Think of the date that made March yours.';
       card.classList.remove('wrong-shake');
