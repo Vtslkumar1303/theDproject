@@ -14,11 +14,11 @@
 <script>
 (async()=>{
   try{
-    const source='https://raw.githubusercontent.com/Vtslkumar1303/theDproject/22e18ec9c55cd337254e3eee3f129c1c79c76136/index.html?fresh=20260915-no-scroll-centered-v11';
+    const source='https://raw.githubusercontent.com/Vtslkumar1303/theDproject/22e18ec9c55cd337254e3eee3f129c1c79c76136/index.html?fresh=20260915-ios-nozoom-v12';
     const r=await fetch(source,{cache:'no-store'});
     if(!r.ok) throw new Error('Base experience could not be loaded');
     let h=await r.text();
-    const v='20260915-no-scroll-centered-v11';
+    const v='20260915-ios-nozoom-v12';
     const oldHead="h=h.replace('</head>','<style>'+css+'</style></head>');";
     const newHead="h=h.replace('</head>','<style>'+css+'</style><link rel=\"stylesheet\" href=\"opening.css?v="+v+"\"><link rel=\"stylesheet\" href=\"experience-patch.css?v="+v+"\"><link rel=\"stylesheet\" href=\"mobile-title-fix.css?v="+v+"\"><link rel=\"stylesheet\" href=\"opening-final-fix.css?v="+v+"\"><link rel=\"stylesheet\" href=\"latest-ui-fix.css?v="+v+"\"></head>');";
     const oldBody="h=h.replace('</body>','<script>'+js+'</scr'+'ipt></body>');";
