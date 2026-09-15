@@ -13,23 +13,18 @@
 }
 body.live-editing{cursor:auto!important}
 body.live-editing [data-editable=true],
-body.live-editing [data-selected=true]{
-  outline:none!important;
-  cursor:auto!important;
-}
+body.live-editing [data-selected=true]{outline:none!important;cursor:auto!important}
 
-/* Verse tabs/headlines stay strongly readable. */
+/* Verse labels, roman numerals and titles are all bold. */
 .verse-card .verse-toggle small,
 .verse-card .verse-toggle strong,
-.verse-card .verse-heading{
-  font-weight:800!important;
+.verse-card .verse-heading,
+.verse-card .verse-heading *{
+  font-weight:900!important;
 }
 
 /* All actual verse copy is bold and consistently aligned. */
-.verse-card .verse-copy{
-  text-align:left!important;
-  font-weight:700!important;
-}
+.verse-card .verse-copy{ text-align:left!important;font-weight:700!important; }
 .verse-card .verse-copy p,
 .verse-card .verse-copy blockquote,
 .verse-card .verse-copy .quote,
@@ -41,115 +36,86 @@ body.live-editing [data-selected=true]{
   margin-left:auto!important;
   margin-right:auto!important;
 }
-
-/* The first written line of every verse is visually stronger. */
 .verse-card .verse-copy > p:first-of-type,
 .verse-card .verse-copy > blockquote:first-of-type,
-.verse-card .verse-copy > .quote:first-of-type{
-  font-weight:900!important;
-}
+.verse-card .verse-copy > .quote:first-of-type{font-weight:900!important}
 
-/* Keep non-letter UI inside an opened verse at its intended weight/alignment. */
+/* Keep response/audio UI from inheriting the heavy letter treatment. */
 .verse-card .verse-audio,
 .verse-card .verse-response,
-.verse-card .verse-response *{
-  font-weight:inherit;
-}
+.verse-card .verse-response *{font-weight:inherit}
 .verse-card .verse-response,
-.verse-card .verse-response *{
-  text-align:left;
-}
+.verse-card .verse-response *{text-align:left}
 
 /* Floating controller for the SAME #audio element as the main Khat player.
-   It is deliberately tucked partly beyond the LEFT screen edge so it never competes
-   with the top-right Freeze time control or cover the main reading column. */
+   Right-side, slightly tucked outside the viewport, well below Freeze time. */
 .floating-khat-control{
   position:fixed;
-  left:-17px;
-  right:auto;
-  top:58%;
+  right:0;
+  left:auto;
+  top:64%;
   bottom:auto;
-  transform:translateY(-50%);
+  transform:translate(30px,-50%);
   z-index:245;
-  width:52px;
-  height:52px;
+  width:132px;
+  min-height:48px;
   border:1px solid rgba(92,57,41,.18);
-  border-radius:50%;
-  padding:0 0 0 13px;
-  display:grid;
-  place-items:center;
-  background:rgba(250,239,217,.94);
+  border-radius:999px;
+  padding:7px 38px 7px 12px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(250,239,217,.95);
   color:#56382d;
   box-shadow:0 10px 24px rgba(55,35,27,.18),inset 0 1px 0 rgba(255,255,255,.72);
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
   cursor:pointer;
   touch-action:manipulation;
-  transition:opacity .2s ease,left .2s ease,box-shadow .2s ease;
+  transition:opacity .2s ease,transform .22s ease,box-shadow .2s ease;
+  overflow:hidden;
+  white-space:nowrap;
 }
 .floating-khat-control:hover,
 .floating-khat-control:focus-visible{
-  left:-11px;
+  transform:translate(18px,-50%);
   box-shadow:0 13px 28px rgba(55,35,27,.22),inset 0 1px 0 rgba(255,255,255,.78);
 }
-.floating-khat-control:active{left:-9px}
+.floating-khat-control:active{transform:translate(20px,-50%) scale(.98)}
 .floating-khat-control[hidden]{display:none!important}
-.floating-khat-control .fk-icon{
-  position:relative;
-  width:18px;
-  height:18px;
-  display:block;
-}
+.floating-khat-control .fk-icon{position:relative;width:18px;height:18px;display:block;flex:0 0 18px}
+.floating-khat-control .fk-copy{display:flex;flex-direction:column;align-items:flex-start;line-height:1.05;min-width:0}
+.floating-khat-control .fk-title{font:800 .67rem/1 "Segoe Print","Bradley Hand","Comic Sans MS",cursive;letter-spacing:.02em}
+.floating-khat-control .fk-sub{font:600 .49rem/1.2 Georgia,serif;opacity:.68;margin-top:2px}
 .floating-khat-control[data-state="paused"] .fk-icon:before{
-  content:"";
-  position:absolute;
-  left:5px;
-  top:2px;
-  width:0;
-  height:0;
-  border-top:7px solid transparent;
-  border-bottom:7px solid transparent;
-  border-left:11px solid currentColor;
+  content:"";position:absolute;left:5px;top:2px;width:0;height:0;
+  border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:11px solid currentColor;
 }
 .floating-khat-control[data-state="playing"] .fk-icon:before,
 .floating-khat-control[data-state="playing"] .fk-icon:after{
-  content:"";
-  position:absolute;
-  top:2px;
-  width:5px;
-  height:14px;
-  border-radius:2px;
-  background:currentColor;
+  content:"";position:absolute;top:2px;width:5px;height:14px;border-radius:2px;background:currentColor;
 }
 .floating-khat-control[data-state="playing"] .fk-icon:before{left:3px}
 .floating-khat-control[data-state="playing"] .fk-icon:after{right:3px}
-
-/* Hide it while the locked envelope is covering the site. */
-body:not(.letter-main-open) .floating-khat-control{
-  opacity:0!important;
-  pointer-events:none!important;
-}
+body:not(.letter-main-open) .floating-khat-control{opacity:0!important;pointer-events:none!important}
 body.letter-main-open .floating-khat-control{opacity:1}
 
 @media(max-width:640px){
   .verse-card .verse-copy p,
   .verse-card .verse-copy blockquote,
   .verse-card .verse-copy .quote,
-  .verse-card .verse-copy li{
-    text-align:left!important;
-    line-height:1.68!important;
-  }
+  .verse-card .verse-copy li{text-align:left!important;line-height:1.68!important}
   .floating-khat-control{
-    left:-18px;
-    top:62%;
-    width:48px;
-    height:48px;
-    padding-left:14px;
+    top:66%;
+    width:122px;
+    min-height:46px;
+    padding:6px 35px 6px 11px;
+    transform:translate(32px,-50%);
   }
   .floating-khat-control:hover,
-  .floating-khat-control:focus-visible{left:-12px}
+  .floating-khat-control:focus-visible{transform:translate(20px,-50%)}
+  .floating-khat-control .fk-title{font-size:.64rem}
+  .floating-khat-control .fk-sub{font-size:.47rem}
 }
 
-@media(prefers-reduced-motion:reduce){
-  .floating-khat-control{transition:none!important}
-}
+@media(prefers-reduced-motion:reduce){.floating-khat-control{transition:none!important}}
