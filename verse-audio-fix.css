@@ -1,4 +1,22 @@
-/* Bold, neatly aligned verses + non-obstructive floating Khat control */
+/* Bold, neatly aligned verses + tucked floating Khat control */
+
+/* Remove Edit Layout UI completely for now. */
+.live-editor-toggle,
+.editor-panel,
+.sel-ui,
+.move-handle,
+.resize-handle,
+.sel-label{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+body.live-editing{cursor:auto!important}
+body.live-editing [data-editable=true],
+body.live-editing [data-selected=true]{
+  outline:none!important;
+  cursor:auto!important;
+}
 
 /* Verse tabs/headlines stay strongly readable. */
 .verse-card .verse-toggle small,
@@ -42,17 +60,22 @@
   text-align:left;
 }
 
-/* Small floating controller for the SAME #audio element as the main Khat player. */
+/* Floating controller for the SAME #audio element as the main Khat player.
+   It is deliberately tucked partly beyond the LEFT screen edge so it never competes
+   with the top-right Freeze time control or cover the main reading column. */
 .floating-khat-control{
   position:fixed;
-  right:max(14px,env(safe-area-inset-right));
-  bottom:max(18px,calc(env(safe-area-inset-bottom) + 12px));
-  z-index:2147482000;
-  width:50px;
-  height:50px;
+  left:-17px;
+  right:auto;
+  top:58%;
+  bottom:auto;
+  transform:translateY(-50%);
+  z-index:245;
+  width:52px;
+  height:52px;
   border:1px solid rgba(92,57,41,.18);
   border-radius:50%;
-  padding:0;
+  padding:0 0 0 13px;
   display:grid;
   place-items:center;
   background:rgba(250,239,217,.94);
@@ -62,10 +85,14 @@
   -webkit-backdrop-filter:blur(8px);
   cursor:pointer;
   touch-action:manipulation;
-  transition:opacity .2s ease,transform .2s ease,box-shadow .2s ease;
+  transition:opacity .2s ease,left .2s ease,box-shadow .2s ease;
 }
-.floating-khat-control:hover{transform:translateY(-1px);box-shadow:0 13px 28px rgba(55,35,27,.22),inset 0 1px 0 rgba(255,255,255,.78)}
-.floating-khat-control:active{transform:scale(.96)}
+.floating-khat-control:hover,
+.floating-khat-control:focus-visible{
+  left:-11px;
+  box-shadow:0 13px 28px rgba(55,35,27,.22),inset 0 1px 0 rgba(255,255,255,.78);
+}
+.floating-khat-control:active{left:-9px}
 .floating-khat-control[hidden]{display:none!important}
 .floating-khat-control .fk-icon{
   position:relative;
@@ -98,10 +125,12 @@
 .floating-khat-control[data-state="playing"] .fk-icon:after{right:3px}
 
 /* Hide it while the locked envelope is covering the site. */
-body:not(.letter-main-open) .floating-khat-control{opacity:0!important;pointer-events:none!important;transform:translateY(8px)!important}
+body:not(.letter-main-open) .floating-khat-control{
+  opacity:0!important;
+  pointer-events:none!important;
+}
 body.letter-main-open .floating-khat-control{opacity:1}
 
-/* Keep it away from text edges and never make the layout wider. */
 @media(max-width:640px){
   .verse-card .verse-copy p,
   .verse-card .verse-copy blockquote,
@@ -111,11 +140,14 @@ body.letter-main-open .floating-khat-control{opacity:1}
     line-height:1.68!important;
   }
   .floating-khat-control{
-    right:max(12px,env(safe-area-inset-right));
-    bottom:max(14px,calc(env(safe-area-inset-bottom) + 10px));
-    width:46px;
-    height:46px;
+    left:-18px;
+    top:62%;
+    width:48px;
+    height:48px;
+    padding-left:14px;
   }
+  .floating-khat-control:hover,
+  .floating-khat-control:focus-visible{left:-12px}
 }
 
 @media(prefers-reduced-motion:reduce){
