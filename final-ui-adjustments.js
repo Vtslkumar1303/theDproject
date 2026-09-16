@@ -1,16 +1,16 @@
 (()=>{
   const coverMarkup=()=>{
     const chars=['T','o',',',' ','M','y',' ','m','a','r','c','h'];
-    return '<span class="cover-title-text" aria-hidden="true">'+chars.map((ch,i)=>`<span class="cover-letter-v16" style="--i:${i}">${ch}</span>`).join('')+'</span><span class="cover-emoji-v16" aria-hidden="true">🧿</span><span class="cover-emoji-v16 sparkle" aria-hidden="true">✨</span>';
+    return '<span class="cover-title-text" aria-hidden="true">'+chars.map((ch,i)=>`<span class="cover-letter-v16" style="--i:${i}">${ch}</span>`).join('')+'</span><span class="cover-symbol-eye" aria-hidden="true"><i class="eye-white"></i><i class="eye-blue"></i><i class="eye-pupil"></i><i class="eye-glint"></i></span><span class="cover-symbol-sparkle" aria-hidden="true"><i></i><b></b></span>';
   };
 
   const patchOpening=()=>{
     const title=document.querySelector('.envelope-cover-title');
-    if(title&&!title.dataset.singleTitleFixed){
-      title.dataset.singleTitleFixed='1';
-      title.setAttribute('aria-label','To, My march 🧿✨');
+    if(title&&!title.dataset.realisticSymbols){
+      title.dataset.realisticSymbols='1';
+      title.setAttribute('aria-label','To, My march');
       title.innerHTML=coverMarkup();
-      title.querySelectorAll('.sr-only').forEach(el=>el.remove());
+      title.querySelectorAll('.sr-only,.cover-emoji,.cover-emoji-v16').forEach(el=>el.remove());
     }
     document.querySelectorAll('.sheet-original-hero h1').forEach(el=>{
       el.textContent='';
@@ -63,9 +63,11 @@
     });
 
     const video=document.querySelector('.reading-break-card');
-    const message=section.querySelector('.tdp-gift-message');
-    if(video&&message&&video.previousElementSibling!==message){
-      message.insertAdjacentElement('afterend',video);
+    if(video){
+      video.classList.add('tdp-separated-video');
+      if(video.previousElementSibling!==section){
+        section.insertAdjacentElement('afterend',video);
+      }
     }
     return true;
   };
