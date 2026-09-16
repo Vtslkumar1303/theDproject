@@ -454,6 +454,10 @@ body.letter-main-open .hero h1,
   white-space:nowrap!important;
   font-size:clamp(2.55rem,9.2vw,6.4rem)!important;
 }
+/* Keep the confession charm in normal title flow, after March at every width. */
+main .hero h1{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:.12em!important;max-width:100%!important}
+main .hero h1 .confession-title-words{white-space:nowrap}
+main .hero h1 .hero-nazar{position:static!important;inset:auto!important;display:block!important;flex:0 0 auto!important;width:.65em!important;height:.8em!important;object-fit:contain!important;margin:0!important;transform:rotate(7deg)!important;opacity:1!important;pointer-events:none!important}
 main .hero .subtitle,
 body.letter-main-open .hero .subtitle,
 .sheet-original-hero .subtitle{

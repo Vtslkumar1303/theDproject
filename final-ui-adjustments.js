@@ -26,7 +26,17 @@
       el.removeAttribute('aria-hidden');
       el.classList.add('tdp-opening-clone-title');
     });
-    document.querySelectorAll('main .hero h1').forEach(el=>{el.textContent='To, My March'});
+    document.querySelectorAll('main .hero h1').forEach(el=>{
+      if(el.dataset.inlineNazar)return;
+      const charm=el.closest('.hero').querySelector('.hero-nazar');
+      el.textContent='';
+      const words=document.createElement('span');
+      words.className='confession-title-words';
+      words.textContent='To, My March';
+      el.appendChild(words);
+      if(charm){charm.removeAttribute('style');charm.setAttribute('aria-hidden','true');el.appendChild(charm)}
+      el.dataset.inlineNazar='1';
+    });
     document.querySelectorAll('main .hero .subtitle,.sheet-original-hero .subtitle').forEach(el=>{
       el.textContent='Maybe sharing March was only the first coincidence.';
     });
