@@ -106,6 +106,30 @@
         video.before(surround);
         surround.appendChild(video);
       }
+      if(!surround.dataset.viewportEdges){
+        surround.dataset.viewportEdges='1';
+        const alignEdges=()=>{
+          const viewport=document.documentElement.clientWidth;
+          if(!viewport)return;
+          const shift=parseFloat(getComputedStyle(surround).left)||0;
+          const columnLeft=surround.getBoundingClientRect().left-shift;
+          surround.style.setProperty('--edge-viewport',viewport+'px');
+          surround.style.setProperty('--edge-offset',-columnLeft+'px');
+        };
+        let frame=0;
+        const schedule=()=>{
+          cancelAnimationFrame(frame);
+          frame=requestAnimationFrame(alignEdges);
+        };
+        window.addEventListener('resize',schedule,{passive:true});
+        const observer=new ResizeObserver(schedule);
+        observer.observe(document.documentElement);
+        if(surround.parentElement)observer.observe(surround.parentElement);
+        // Opening the password envelope reveals previously hidden layout.
+        const revealObserver=new MutationObserver(schedule);
+        revealObserver.observe(document.body,{attributes:true,attributeFilter:['class']});
+        schedule();
+      }
       if(surround.previousElementSibling!==section){
         section.insertAdjacentElement('afterend',surround);
       }
