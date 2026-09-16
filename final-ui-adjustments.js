@@ -183,26 +183,66 @@
     const audio=document.getElementById('audio');
     const player=document.querySelector('.spotify-player');
     if(!audio||!player||player.querySelector('.khat-volume-control'))return;
-    if(!audio.dataset.defaultVolumeSet){
-      audio.volume=.6;
-      audio.dataset.defaultVolumeSet='1';
+
+    // Keep the requested level independent of HTMLMediaElement.volume:
+    // Safari on iOS can ignore that property's setter and always report 1.
+    let level=.6,context=null,gain=null,source=null;
+    const AudioContext=window.AudioContext||window.webkitAudioContext;
+    if(AudioContext){
+      try{
+        context=new AudioContext();
+        gain=context.createGain();
+        gain.gain.setValueAtTime(level,context.currentTime);
+        source=context.createMediaElementSource(audio);
+        source.connect(gain);
+        gain.connect(context.destination);
+        audio.volume=1; // Gain is the single volume control; avoid double attenuation.
+      }catch(error){
+        console.error('Web Audio volume control could not initialize',error);
+        if(context)context.close().catch(()=>{});
+        context=null;gain=null;
+        audio.volume=level;
+      }
+    }else{
+      audio.volume=level;
     }
+
+    const resumeAudio=()=>{
+      if(context&&context.state==='suspended')context.resume().catch(()=>{});
+    };
+    // Resume inside the gesture, before existing play handlers run.
+    ['pointerdown','click','keydown'].forEach(event=>{
+      document.addEventListener(event,resumeAudio,{capture:true,passive:true});
+    });
+    audio.addEventListener('play',resumeAudio);
+    document.addEventListener('visibilitychange',()=>{
+      if(!document.hidden&&!audio.paused)resumeAudio();
+    });
+
     const control=document.createElement('label');
     control.className='khat-volume-control';
     control.innerHTML='<span>Volume</span><input type="range" min="0" max="100" step="1" value="60" aria-label="Khat volume"><output>60%</output>';
     const slider=control.querySelector('input');
     const output=control.querySelector('output');
     const sync=()=>{
-      const volume=audio.muted?0:Math.round(audio.volume*100);
-      slider.value=String(volume);output.textContent=volume+'%';
-      slider.setAttribute('aria-valuetext',volume+' percent');
+      const percent=Math.round(level*100);
+      slider.value=String(percent);
+      output.textContent=percent+'%';
+      slider.setAttribute('aria-valuetext',percent+' percent');
     };
-    slider.addEventListener('input',()=>{
-      audio.volume=Number(slider.value)/100;
-      audio.muted=Number(slider.value)===0;
+    const applyVolume=()=>{
+      level=Math.max(0,Math.min(1,Number(slider.value)/100));
+      if(gain){
+        gain.gain.setTargetAtTime(level,context.currentTime,.015);
+      }else{
+        audio.volume=level;
+      }
+      audio.muted=level===0;
+      resumeAudio();
       sync();
-    });
-    audio.addEventListener('volumechange',sync);
+    };
+    slider.addEventListener('input',applyVolume);
+    slider.addEventListener('change',applyVolume);
     const controls=player.querySelector('.spotify-controls');
     if(controls)controls.insertAdjacentElement('afterend',control);
     else player.appendChild(control);
