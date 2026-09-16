@@ -108,9 +108,9 @@
   letter-spacing:.02em!important;
   transform:none!important;
 }
-.envelope-crafted-note{position:absolute;left:50%;bottom:30px;width:80%;max-width:46ch;margin:0;transform:translateX(-50%) translateZ(21px);z-index:19;pointer-events:none;text-align:center;font:italic .65rem/1.5 Georgia,serif;color:#806052;transition:opacity .25s ease}
+.envelope-crafted-note{position:absolute;left:50%;bottom:30px;width:86%;max-width:none;white-space:nowrap;margin:0;transform:translateX(-50%) translateZ(21px);z-index:19;pointer-events:none;text-align:center;font:italic clamp(.36rem,1.2vw,.5rem)/1.5 Georgia,serif;color:#806052;transition:opacity .25s ease}
 .password-visible .envelope-crafted-note,.is-unlocking .envelope-crafted-note{opacity:0;visibility:hidden}
-@media(max-width:640px){.envelope-crafted-note{bottom:27px;font-size:.57rem;width:79%}}
+@media(max-width:640px){.envelope-crafted-note{bottom:27px;font-size:clamp(.32rem,1.5vw,.46rem);width:86%}}
 .tdp-gift-section.open .tdp-gift-photo-stack{pointer-events:auto!important}
 .tdp-gift-section.open .tdp-gift-photo-card{
   pointer-events:auto!important;
@@ -130,8 +130,8 @@
 
 /* Reading-break video is a fully separate sibling section after the gift card. */
 .reading-break-card.tdp-separated-video{
-  width:min(760px,calc(100% - 28px))!important;
-  max-width:760px!important;
+  width:min(1100px,calc(100% - 28px))!important;
+  max-width:1100px!important;
   margin:26px auto 46px!important;
   position:relative!important;
   z-index:20!important;
@@ -142,6 +142,10 @@
   padding:18px!important;
 }
 
+.video-portrait-surround{position:relative;isolation:isolate;display:grid;grid-template-columns:24% 52% 24%;align-items:center;aspect-ratio:2/1;overflow:hidden;border-radius:18px;background:#efe2cb}
+.video-portrait-art{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;z-index:-1;pointer-events:none}
+.video-portrait-surround .reading-break-frame{grid-column:2;position:relative;z-index:1;width:100%;margin:0;aspect-ratio:16/9;box-sizing:border-box;border:2px solid rgba(112,75,57,.3);border-radius:12px}
+@media(max-width:640px){.video-portrait-surround{border-radius:12px}.video-portrait-surround .reading-break-frame{border-width:1px;border-radius:6px}}
 /* Floating shortcut: Play/Pause icon + song name only, draggable anywhere. */
 .floating-khat-control{
   right:10px!important;

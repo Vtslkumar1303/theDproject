@@ -91,6 +91,18 @@
     const video=document.querySelector('.reading-break-card');
     if(video){
       video.classList.add('tdp-separated-video');
+      const frame=video.querySelector('.reading-break-frame');
+      if(frame&&!video.querySelector('.video-portrait-surround')){
+        const surround=document.createElement('div');
+        surround.className='video-portrait-surround';
+        const portraits=document.createElement('img');
+        portraits.className='video-portrait-art';
+        portraits.src='assets/video-portrait-glasses-v31.png';
+        portraits.alt='Illustrated girl wearing black cat-eye glasses on the left and boy wearing grey square glasses on the right';
+        frame.before(surround);
+        surround.appendChild(portraits);
+        surround.appendChild(frame);
+      }
       if(video.previousElementSibling!==section){
         section.insertAdjacentElement('afterend',video);
       }

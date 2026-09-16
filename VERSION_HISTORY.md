@@ -12,6 +12,7 @@ Each completed change request receives a permanent checkpoint branch. Version nu
 | v28 | Place confession-page nazar after March in responsive title flow, without overlapping letters | Branch resolves to final commit | `checkpoints/prompt-v28-nazar-after-march` |
 | v29 | No date hints; letter hidden until unlock; thread-tap gift opening; crafted closing credit | Branch resolves to final commit | `checkpoints/prompt-v29-private-gate-thread-gift` |
 | v30 | Move crafted credit to password-envelope cover, below seal near bottom; remove ending credit | Branch resolves to final commit | `checkpoints/prompt-v30-envelope-crafted-note` |
+| v31 | Smaller single-line envelope credit; reference face artwork with black cat-eye/grey square glasses flanking video; no heart | Branch resolves to final commit | `checkpoints/prompt-v31-video-portrait-glasses` |
 
 Say “rollback to v25”, “rollback one prompt”, or describe the earlier prompt. Clarify ambiguous descriptions. Restore the selected checkpoint as a new commit on main, preserve later checkpoints, and refresh asset cache keys. Never force-push or erase history. A rollback can also be limited to a specified feature.
 
