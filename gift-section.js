@@ -82,7 +82,7 @@
             <figure class="tdp-gift-photo-card tdp-photo-1"><img src="${PHOTO_1}" alt="The name plate gift, first view" loading="eager"><figcaption>a proud little moment</figcaption></figure>
             <figure class="tdp-gift-photo-card tdp-photo-2"><img src="${PHOTO_2}" alt="The name plate gift, second view" loading="eager"><figcaption>meant for your desk</figcaption></figure>
           </div>
-          <div class="tdp-envelope-front"></div><div class="tdp-envelope-flap"></div><div class="tdp-envelope-thread" aria-hidden="true"><span class="tdp-thread-horizontal"></span><span class="tdp-thread-vertical"></span><span class="tdp-thread-bow"></span><span class="tdp-thread-heart"></span></div><div class="tdp-envelope-seal"></div>
+          <div class="tdp-envelope-front"></div><div class="tdp-envelope-flap"></div><div class="tdp-envelope-thread" aria-hidden="true"><span class="tdp-thread-horizontal"></span><span class="tdp-thread-vertical"></span><span class="tdp-thread-bow"></span></div>
         </div>
         <i class="tdp-gift-spark s1"></i><i class="tdp-gift-spark s2"></i><i class="tdp-gift-spark s3"></i><i class="tdp-gift-spark s4"></i>
       </div></div>
@@ -93,19 +93,39 @@
     (stage||wrap).insertAdjacentElement('afterend',section);
     const box=section.querySelector('#tdpGiftBox');
     box.setAttribute('aria-label','Untie the threads to open the gift');
-    const untie=()=>{
-      if(section.classList.contains('open')||section.classList.contains('untying'))return;
+    let openTimer=0,scrollTimer=0;
+    const syncGiftState=()=>{
+      const open=section.classList.contains('open');
+      box.setAttribute('aria-expanded',String(open));
+      box.setAttribute('aria-label',open?'Tap to close the gift':'Untie the threads to open the gift');
+      box.setAttribute('role','button');box.tabIndex=0;
+      section.querySelector('.tdp-gift-photo-stack').setAttribute('aria-hidden',String(!open));
+      const panel=section.querySelector('#tdpGiftPanel');
+      panel.setAttribute('aria-hidden',String(!open));panel.inert=!open;
+      section.querySelectorAll('.tdp-gift-photo-card').forEach(card=>{
+        card.tabIndex=open?0:-1;
+        if(!open)card.classList.remove('tdp-photo-focus');
+      });
+    };
+    const toggleGift=()=>{
+      if(section.classList.contains('open')||section.classList.contains('untying')){
+        clearTimeout(openTimer);clearTimeout(scrollTimer);
+        section.classList.remove('open','untying');
+        syncGiftState();return;
+      }
       section.classList.add('untying');
-      setTimeout(()=>{
+      openTimer=setTimeout(()=>{
+        section.classList.remove('untying');
         section.classList.add('open');
-        box.setAttribute('aria-expanded','true');
-        box.removeAttribute('role');box.tabIndex=-1;
-        section.querySelector('.tdp-gift-photo-stack').setAttribute('aria-hidden','false');
-        section.querySelectorAll('.tdp-gift-photo-card').forEach(card=>{card.tabIndex=0});
-        setTimeout(()=>section.scrollIntoView({behavior:'smooth',block:'center'}),180);
+        syncGiftState();
+        scrollTimer=setTimeout(()=>section.scrollIntoView({behavior:'smooth',block:'center'}),180);
       },650);
     };
-    box.addEventListener('click',untie);box.addEventListener('keydown',e=>{if(e.target===box&&(e.key==='Enter'||e.key===' ')){e.preventDefault();untie()}});
+    syncGiftState();
+    box.addEventListener('click',toggleGift);
+    box.addEventListener('keydown',e=>{
+      if(e.target===box&&(e.key==='Enter'||e.key===' ')){e.preventDefault();toggleGift();}
+    });
   }
   mount();
 })();

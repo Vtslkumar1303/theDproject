@@ -104,7 +104,7 @@
     const cards=[...section.querySelectorAll('.tdp-gift-photo-card')];
 
     const syncGiftLabel=()=>{
-      if(box)box.setAttribute('aria-label',section.classList.contains('open')?'Opened gift':'Untie the threads to open the gift');
+      if(box)box.setAttribute('aria-label',section.classList.contains('open')?'Tap to close the gift':'Untie the threads to open the gift');
     };
     syncGiftLabel();
 
@@ -178,11 +178,43 @@
     return true;
   };
 
+
+  const patchVolume=()=>{
+    const audio=document.getElementById('audio');
+    const player=document.querySelector('.spotify-player');
+    if(!audio||!player||player.querySelector('.khat-volume-control'))return;
+    if(!audio.dataset.defaultVolumeSet){
+      audio.volume=.6;
+      audio.dataset.defaultVolumeSet='1';
+    }
+    const control=document.createElement('label');
+    control.className='khat-volume-control';
+    control.innerHTML='<span>Volume</span><input type="range" min="0" max="100" step="1" value="60" aria-label="Khat volume"><output>60%</output>';
+    const slider=control.querySelector('input');
+    const output=control.querySelector('output');
+    const sync=()=>{
+      const volume=audio.muted?0:Math.round(audio.volume*100);
+      slider.value=String(volume);output.textContent=volume+'%';
+      slider.setAttribute('aria-valuetext',volume+' percent');
+    };
+    slider.addEventListener('input',()=>{
+      audio.volume=Number(slider.value)/100;
+      audio.muted=Number(slider.value)===0;
+      sync();
+    });
+    audio.addEventListener('volumechange',sync);
+    const controls=player.querySelector('.spotify-controls');
+    if(controls)controls.insertAdjacentElement('afterend',control);
+    else player.appendChild(control);
+    sync();
+  };
+
   const run=()=>{
     document.title='To, My March';
     patchOpening();
     patchFloatingKhat();
     patchGift();
+    patchVolume();
   };
 
   run();

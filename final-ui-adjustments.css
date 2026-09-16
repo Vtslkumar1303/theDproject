@@ -511,3 +511,15 @@ body.letter-main-open .hero .subtitle,
 /* V37: larger smiling halves, with enough responsive space beside the video. */
 .video-background-surround{--face-rail:clamp(40px,14vw,240px)}
 .video-background-face{width:clamp(72px,24vw,480px)}
+
+/* Gift opens and closes on the same paper envelope; only the tied threads decorate it. */
+.tdp-envelope-seal,.tdp-thread-heart{display:none!important}
+.tdp-gift-section.open .tdp-envelope{cursor:pointer}
+.khat-volume-control{
+  display:grid;grid-template-columns:auto minmax(0,1fr) 3.2em;align-items:center;
+  gap:10px;margin:12px 0 3px;color:#fff3e4;font:600 .7rem/1.4 Arial,sans-serif;
+}
+.khat-volume-control input{
+  width:100%;min-width:0;min-height:28px;margin:0;accent-color:#d79a8d;cursor:pointer;
+}
+.khat-volume-control output{text-align:right;font-variant-numeric:tabular-nums}
