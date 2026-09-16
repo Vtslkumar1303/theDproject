@@ -1,0 +1,117 @@
+/* Final requested UI adjustments — gift, cover title, floating Khat shortcut, video placement */
+
+/* Only one cover title should be visible on the closed envelope. */
+.envelope-cover-title{
+  width:82%!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+.envelope-cover-title .cover-title-text{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:.01em!important;
+}
+.envelope-cover-title .cover-letter-v16{
+  display:inline-block!important;
+  animation:tdpCoverLetterFloat 3.4s ease-in-out infinite!important;
+  animation-delay:calc(var(--i) * 70ms)!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.6),0 5px 10px rgba(73,44,31,.14)!important;
+}
+.envelope-cover-title .cover-emoji-v16{
+  display:inline-block!important;
+  margin-left:.12em!important;
+  transform-origin:center!important;
+  filter:drop-shadow(0 2px 1px rgba(255,255,255,.38)) drop-shadow(0 5px 6px rgba(54,34,25,.24))!important;
+  text-shadow:0 2px 0 rgba(255,255,255,.2)!important;
+  animation:tdpEmoji3D 2.7s ease-in-out infinite!important;
+}
+.envelope-cover-title .cover-emoji-v16.sparkle{animation-delay:.34s!important}
+@keyframes tdpCoverLetterFloat{
+  0%,100%{transform:translateY(0) rotateX(0deg)}
+  50%{transform:translateY(-2px) rotateX(5deg)}
+}
+@keyframes tdpEmoji3D{
+  0%,100%{transform:translateY(0) rotate(-2deg) scale(1)}
+  50%{transform:translateY(-4px) rotate(3deg) scale(1.08)}
+}
+
+/* Never expose the cloned hero title while it is tucked inside/sliding from the envelope. */
+.sheet-original-hero .tdp-opening-clone-title{visibility:hidden!important;opacity:0!important}
+
+/* Gift envelope: remove "For you" and make the two-photo reveal explicitly interactive. */
+.tdp-envelope-seal:before{
+  content:"Open it"!important;
+  font:800 .72rem/1 Arial,sans-serif!important;
+  letter-spacing:.02em!important;
+  transform:none!important;
+}
+.tdp-gift-open-btn{
+  min-width:112px!important;
+  font-size:.78rem!important;
+}
+.tdp-gift-section.open .tdp-gift-photo-stack{pointer-events:auto!important}
+.tdp-gift-section.open .tdp-gift-photo-card{
+  pointer-events:auto!important;
+  cursor:pointer!important;
+  transition:transform .35s ease,box-shadow .35s ease,opacity .35s ease!important;
+}
+.tdp-gift-photo-card.tdp-photo-focus{
+  z-index:30!important;
+  box-shadow:0 30px 54px rgba(51,30,19,.3)!important;
+}
+.tdp-gift-section.open .tdp-photo-1.tdp-photo-focus{
+  transform:translate(-48px,-206px) rotate(-2deg) scale(1.08)!important;
+}
+.tdp-gift-section.open .tdp-photo-2.tdp-photo-focus{
+  transform:translate(48px,-214px) rotate(2deg) scale(1.08)!important;
+}
+
+/* Existing reading-break video lives directly below the interactive gift envelope. */
+.tdp-gift-section .reading-break-card{
+  width:min(760px,100%)!important;
+  max-width:100%!important;
+  margin:16px auto 14px!important;
+  position:relative!important;
+  z-index:20!important;
+}
+
+/* Floating shortcut: Play/Pause icon + song name only. */
+.floating-khat-control{
+  right:10px!important;
+  top:64%!important;
+  width:auto!important;
+  min-width:94px!important;
+  max-width:118px!important;
+  min-height:46px!important;
+  padding:7px 12px!important;
+  transform:translateY(-50%)!important;
+  gap:8px!important;
+  overflow:visible!important;
+}
+.floating-khat-control:hover,
+.floating-khat-control:focus-visible{transform:translateY(-50%) translateX(-2px)!important}
+.floating-khat-control:active{transform:translateY(-50%) scale(.98)!important}
+.floating-khat-control .fk-copy{display:block!important;line-height:1!important}
+.floating-khat-control .fk-title{font:800 .72rem/1 "Segoe Print","Bradley Hand","Comic Sans MS",cursive!important}
+.floating-khat-control .fk-sub{display:none!important}
+
+@media(max-width:640px){
+  .envelope-cover-title{width:88%!important;font-size:clamp(1.02rem,5vw,1.35rem)!important}
+  .floating-khat-control{
+    right:8px!important;
+    top:66%!important;
+    min-width:88px!important;
+    max-width:108px!important;
+    min-height:44px!important;
+    padding:6px 10px!important;
+  }
+  .tdp-gift-section.open .tdp-photo-1.tdp-photo-focus{transform:translate(-16px,-166px) rotate(-2deg) scale(1.06)!important}
+  .tdp-gift-section.open .tdp-photo-2.tdp-photo-focus{transform:translate(16px,-172px) rotate(2deg) scale(1.06)!important}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .envelope-cover-title .cover-letter-v16,
+  .envelope-cover-title .cover-emoji-v16{animation:none!important}
+}
