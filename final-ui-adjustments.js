@@ -1,4 +1,44 @@
 (()=>{
+  // Composite completed head artwork as a transparent PNG for the page.
+  // Large neutral backdrop regions are removed; small eye/glasses highlights remain.
+  const renderCompletedFace=face=>{
+    face.style.opacity='0';
+    face.addEventListener('load',()=>{
+      if(face.dataset.completedCutout)return;
+      face.dataset.completedCutout='1';
+      try{
+        const canvas=document.createElement('canvas');
+        const scale=Math.min(1,512/face.naturalWidth);
+        canvas.width=Math.round(face.naturalWidth*scale);
+        canvas.height=Math.round(face.naturalHeight*scale);
+        const context=canvas.getContext('2d',{willReadFrequently:true});
+        context.drawImage(face,0,0,canvas.width,canvas.height);
+        const pixels=context.getImageData(0,0,canvas.width,canvas.height);
+        const data=pixels.data,w=canvas.width,h=canvas.height,n=w*h;
+        const candidate=new Uint8Array(n),seen=new Uint8Array(n);
+        const queue=new Int32Array(n);
+        for(let i=0;i<n;i++){
+          const p=i*4,lo=Math.min(data[p],data[p+1],data[p+2]);
+          const hi=Math.max(data[p],data[p+1],data[p+2]);
+          if(lo>180&&hi-lo<18)candidate[i]=1;
+        }
+        for(let start=0;start<n;start++){
+          if(!candidate[start]||seen[start])continue;
+          let head=0,tail=1;queue[0]=start;seen[start]=1;
+          while(head<tail){
+            const i=queue[head++],x=i%w;
+            const add=j=>{if(j>=0&&j<n&&candidate[j]&&!seen[j]){seen[j]=1;queue[tail++]=j;}};
+            if(x>0)add(i-1);if(x<w-1)add(i+1);add(i-w);add(i+w);
+          }
+          if(tail>64)for(let j=0;j<tail;j++)data[queue[j]*4+3]=0;
+        }
+        context.putImageData(pixels,0,0);
+        face.src=canvas.toDataURL('image/png');
+        face.style.opacity='1';
+      }catch(error){face.style.opacity='0';console.error('Face cutout could not be rendered',error);}
+    });
+  };
+
   const coverMarkup=()=>{
     const chars=['T','o',',',' ','M','y',' ','M','a','r','c','h'];
     return '<span class="cover-title-text" aria-hidden="true">'+chars.map((ch,i)=>`<span class="cover-letter-v16" style="--i:${i}">${ch}</span>`).join('')+'</span><span class="cover-native-eye" aria-hidden="true">🧿</span><span class="cover-symbol-sparkle" aria-hidden="true"><i></i><b></b></span>';
@@ -98,7 +138,8 @@
         ['girl','boy'].forEach(person=>{
           const face=document.createElement('img');
           face.className='video-background-face '+person;
-          face.src='assets/video-'+person+'-transparent-v33.png';
+          renderCompletedFace(face);
+          face.src='assets/video-'+person+'-complete-v35.webp';
           face.alt='';
           face.setAttribute('aria-hidden','true');
           surround.appendChild(face);
