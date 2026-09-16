@@ -20,6 +20,12 @@
       thread.innerHTML='<span class="confession-thread-border"></span><span class="confession-thread-loop loop-left"></span><span class="confession-thread-loop loop-right"></span><span class="confession-thread-knot"></span>';
       envelope.appendChild(thread);
     }
+    if(envelope&&!envelope.querySelector('.envelope-crafted-note')){
+      const note=document.createElement('p');
+      note.className='envelope-crafted-note';
+      note.textContent='Crafted somewhere between thoughts, feelings, and too many drafts.';
+      envelope.appendChild(note);
+    }
     document.querySelectorAll('.sheet-original-hero h1').forEach(el=>{
       el.textContent='To, My March';
       el.style.removeProperty('display');
@@ -97,13 +103,6 @@
     patchOpening();
     patchFloatingKhat();
     patchGift();
-    const ending=document.querySelector('main .ending');
-    if(ending&&!ending.querySelector('.crafted-note')){
-      const note=document.createElement('p');
-      note.className='crafted-note';
-      note.textContent='Crafted somewhere between thoughts, feelings, and too many drafts.';
-      ending.appendChild(note);
-    }
   };
 
   run();

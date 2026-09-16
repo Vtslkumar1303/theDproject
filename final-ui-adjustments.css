@@ -108,7 +108,9 @@
   letter-spacing:.02em!important;
   transform:none!important;
 }
-.crafted-note{margin:30px auto 0!important;max-width:48ch;font:italic .8rem/1.7 Georgia,serif!important;color:#8d6858}
+.envelope-crafted-note{position:absolute;left:50%;bottom:30px;width:80%;max-width:46ch;margin:0;transform:translateX(-50%) translateZ(21px);z-index:19;pointer-events:none;text-align:center;font:italic .65rem/1.5 Georgia,serif;color:#806052;transition:opacity .25s ease}
+.password-visible .envelope-crafted-note,.is-unlocking .envelope-crafted-note{opacity:0;visibility:hidden}
+@media(max-width:640px){.envelope-crafted-note{bottom:27px;font-size:.57rem;width:79%}}
 .tdp-gift-section.open .tdp-gift-photo-stack{pointer-events:auto!important}
 .tdp-gift-section.open .tdp-gift-photo-card{
   pointer-events:auto!important;
