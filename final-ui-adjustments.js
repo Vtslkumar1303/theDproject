@@ -63,10 +63,9 @@
     });
 
     const video=document.querySelector('.reading-break-card');
-    if(video&&video.parentElement!==section){
-      const openBtn=section.querySelector('#tdpGiftOpenBtn');
-      if(openBtn)openBtn.insertAdjacentElement('afterend',video);
-      else section.appendChild(video);
+    const message=section.querySelector('.tdp-gift-message');
+    if(video&&message&&video.previousElementSibling!==message){
+      message.insertAdjacentElement('afterend',video);
     }
     return true;
   };
