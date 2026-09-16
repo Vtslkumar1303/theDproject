@@ -2,6 +2,8 @@
   const openScreen=document.getElementById('openScreen');
   const letterOpened=document.getElementById('letterOpened');
   if(!openScreen||!letterOpened)return;
+  const mainLetter=document.querySelector('main');
+  if(mainLetter){mainLetter.inert=true;mainLetter.setAttribute('aria-hidden','true')}
 
   const originalHero=document.querySelector('main .hero');
   const originalHeroTitle=originalHero?.querySelector('h1');
@@ -36,9 +38,9 @@
           <div class="password-tape"></div>
           <div class="password-heart" aria-hidden="true"></div>
           <label for="letterPassword" class="password-label">One tiny secret</label>
-          <div class="password-hint">the day + month, in DDMM</div>
+          <div class="password-hint">You already know the password</div>
           <div class="password-row">
-            <input id="letterPassword" class="password-input" type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" placeholder="DDMM" maxlength="4" aria-describedby="passwordMessage">
+            <input id="letterPassword" class="password-input" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="4" aria-describedby="passwordMessage">
             <button id="unlockBtn" class="unlock-btn" type="button"><span>Open</span><i aria-hidden="true">♡</i></button>
           </div>
           <div id="passwordMessage" class="password-message" aria-live="polite"></div>
@@ -178,7 +180,7 @@
     primeOpeningAudio();
     if(card.classList.contains('is-unlocking')||validating)return;
     if(passwordInput.value.length!==4){
-      passwordMessage.textContent='Four digits, in DDMM.';
+      passwordMessage.textContent='Please enter the password.';
       passwordInput.focus({preventScroll:true});
       return;
     }
@@ -230,6 +232,7 @@
       },2650);
       setTimeout(()=>{
         document.body.classList.add('letter-main-open');
+        if(mainLetter){mainLetter.inert=false;mainLetter.setAttribute('aria-hidden','false')}
         letterOpened.checked=true;
         letterOpened.dispatchEvent(new Event('change'));
         setTimeout(()=>{
@@ -240,7 +243,7 @@
         },120);
       },3380);
     }else{
-      passwordMessage.textContent='Not quite. Think of the date that made March yours.';
+      passwordMessage.textContent='Not quite. Please try again.';
       card.classList.remove('wrong-shake');
       void card.offsetWidth;
       card.classList.add('wrong-shake');

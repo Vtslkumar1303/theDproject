@@ -51,6 +51,12 @@
   .tdp-gift-date{display:inline-block;margin-bottom:9px;padding:6px 11px;border-radius:999px;background:#f0dcc0;color:#765144;font:700 .69rem/1 Arial,sans-serif;letter-spacing:.05em}
   .tdp-gift-ending{margin:17px auto 2px;font:italic .7rem/1.5 Georgia,serif;color:#8d6858}
   .tdp-gift-spark{position:absolute;z-index:12;width:9px;height:9px;border-radius:50%;background:#fff1cb;box-shadow:0 0 12px rgba(255,228,173,.8);opacity:0;pointer-events:none}.tdp-gift-section.open .tdp-gift-spark{animation:tdpGiftSpark 1.25s ease-out forwards}.tdp-gift-spark.s1{left:18%;top:24%;animation-delay:.03s!important}.tdp-gift-spark.s2{right:17%;top:28%;animation-delay:.12s!important}.tdp-gift-spark.s3{left:27%;bottom:24%;animation-delay:.2s!important}.tdp-gift-spark.s4{right:27%;bottom:22%;animation-delay:.28s!important}
+  .tdp-gift-section.untying .tdp-thread-horizontal{transform:translateX(120%) rotate(4deg);opacity:0}
+  .tdp-gift-section.untying .tdp-thread-vertical{transform:translate(-50%,-120%) rotate(-4deg);opacity:0}
+  .tdp-gift-section.untying .tdp-thread-bow,.tdp-gift-section.untying .tdp-thread-heart{opacity:0;transform:translate(-50%,-50%) scale(.35) rotate(-18deg)}
+  .tdp-gift-section.open .tdp-envelope-thread{visibility:hidden;opacity:0}
+  .tdp-gift-section.open .tdp-envelope{cursor:default}
+  .tdp-envelope:focus-visible{outline:2px solid #a85e6c;outline-offset:8px}
   @keyframes tdpGiftSpark{0%{opacity:0;transform:translateY(12px) scale(.25)}28%{opacity:1}100%{opacity:0;transform:translateY(-42px) scale(1.6)}}
   @keyframes tdpEnvelopeSettle{0%{transform:translateX(-50%) translateY(0)}45%{transform:translateX(-50%) translateY(5px)}100%{transform:translateX(-50%) translateY(2px)}}
   @media(max-width:680px){.tdp-gift-section{width:calc(100% - 20px);padding:24px 13px 24px;margin-top:28px}.tdp-gift-stage{min-height:390px}.tdp-envelope-scene{height:365px}.tdp-envelope{width:min(360px,88vw);height:222px}.tdp-gift-photo-stack{width:min(390px,92vw);height:285px}.tdp-gift-photo-card{width:47%;padding:8px 8px 28px}.tdp-gift-photo-card figcaption{bottom:7px;font-size:.52rem}.tdp-photo-1{left:7%;transform:translate(18px,116px) rotate(-7deg) scale(.66)}.tdp-photo-2{right:7%;transform:translate(-18px,121px) rotate(7deg) scale(.66)}.tdp-thread-bow{width:54px;transform:translate(-50%,-50%) scale(.9)}.tdp-thread-heart{width:22px;height:22px}.tdp-gift-section.open .tdp-photo-1{transform:translate(-24px,-148px) rotate(-8deg) scale(1)}.tdp-gift-section.open .tdp-photo-2{transform:translate(24px,-154px) rotate(8deg) scale(1)}.tdp-gift-message{font-size:.81rem;padding:17px 14px}}
@@ -80,22 +86,26 @@
         </div>
         <i class="tdp-gift-spark s1"></i><i class="tdp-gift-spark s2"></i><i class="tdp-gift-spark s3"></i><i class="tdp-gift-spark s4"></i>
       </div></div>
-      <button class="tdp-gift-open-btn" id="tdpGiftOpenBtn" type="button">Open it</button>
       <div class="tdp-gift-panel" id="tdpGiftPanel"><div class="tdp-gift-panel-inner">
         <div class="tdp-gift-message"><span class="tdp-gift-date">26 November, 2025</span><div>You told me that you got joining in UHC and that too almost beside your home and my office. I was so so so excited to share your happy moment with you. In that excitement I’ve ordered this name plate for you. You sitting in chair in that uhc and I am putting your name plate on the desk is all I could imagine but never get that courage to give you actually. It was so so proud moment for your hardwork.</div></div>
         <div class="tdp-gift-ending">A little gift, opened late — but still carrying the same proud moment.</div>
       </div></div>`;
     (stage||wrap).insertAdjacentElement('afterend',section);
-    const box=section.querySelector('#tdpGiftBox'),btn=section.querySelector('#tdpGiftOpenBtn');
-    const toggle=()=>{
-      const open=section.classList.toggle('open');
-      box.setAttribute('aria-expanded',String(open));
-      btn.textContent=open?'Close it':'Open it';
-      section.querySelector('.tdp-gift-photo-stack').setAttribute('aria-hidden',String(!open));
-      section.querySelectorAll('.tdp-gift-photo-card').forEach(card=>{card.tabIndex=open?0:-1;if(!open)card.classList.remove('tdp-photo-focus')});
-      if(open)setTimeout(()=>section.scrollIntoView({behavior:'smooth',block:'center'}),180);
+    const box=section.querySelector('#tdpGiftBox');
+    box.setAttribute('aria-label','Untie the threads to open the gift');
+    const untie=()=>{
+      if(section.classList.contains('open')||section.classList.contains('untying'))return;
+      section.classList.add('untying');
+      setTimeout(()=>{
+        section.classList.add('open');
+        box.setAttribute('aria-expanded','true');
+        box.removeAttribute('role');box.tabIndex=-1;
+        section.querySelector('.tdp-gift-photo-stack').setAttribute('aria-hidden','false');
+        section.querySelectorAll('.tdp-gift-photo-card').forEach(card=>{card.tabIndex=0});
+        setTimeout(()=>section.scrollIntoView({behavior:'smooth',block:'center'}),180);
+      },650);
     };
-    box.addEventListener('click',toggle);btn.addEventListener('click',toggle);box.addEventListener('keydown',e=>{if(e.target===box&&(e.key==='Enter'||e.key===' ')){e.preventDefault();toggle()}});
+    box.addEventListener('click',untie);box.addEventListener('keydown',e=>{if(e.target===box&&(e.key==='Enter'||e.key===' ')){e.preventDefault();untie()}});
   }
   mount();
 })();

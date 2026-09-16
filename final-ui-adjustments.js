@@ -54,13 +54,11 @@
   const patchGift=()=>{
     const section=document.getElementById('tdpGiftSection');
     if(!section)return false;
-    const btn=section.querySelector('#tdpGiftOpenBtn');
     const box=section.querySelector('#tdpGiftBox');
     const cards=[...section.querySelectorAll('.tdp-gift-photo-card')];
 
     const syncGiftLabel=()=>{
-      if(btn)btn.textContent=section.classList.contains('open')?'Close it':'Open it';
-      if(box)box.setAttribute('aria-label',section.classList.contains('open')?'Close the gift':'Open the gift');
+      if(box)box.setAttribute('aria-label',section.classList.contains('open')?'Opened gift':'Untie the threads to open the gift');
     };
     syncGiftLabel();
 
@@ -99,6 +97,13 @@
     patchOpening();
     patchFloatingKhat();
     patchGift();
+    const ending=document.querySelector('main .ending');
+    if(ending&&!ending.querySelector('.crafted-note')){
+      const note=document.createElement('p');
+      note.className='crafted-note';
+      note.textContent='Crafted somewhere between thoughts, feelings, and too many drafts.';
+      ending.appendChild(note);
+    }
   };
 
   run();
