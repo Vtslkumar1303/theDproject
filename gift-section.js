@@ -80,20 +80,24 @@
         </div>
         <i class="tdp-gift-spark s1"></i><i class="tdp-gift-spark s2"></i><i class="tdp-gift-spark s3"></i><i class="tdp-gift-spark s4"></i>
       </div></div>
-      <button class="tdp-gift-open-btn" id="tdpGiftOpenBtn" type="button">Unseal this little gift</button>
+      <div class="tdp-gift-controls" role="group" aria-label="Gift envelope controls"><button class="tdp-gift-open-btn" id="tdpGiftOpenBtn" type="button" aria-controls="tdpGiftPanel">Open</button><button class="tdp-gift-open-btn" id="tdpGiftCloseBtn" type="button" aria-controls="tdpGiftPanel" disabled>Close</button></div>
       <div class="tdp-gift-panel" id="tdpGiftPanel"><div class="tdp-gift-panel-inner">
         <div class="tdp-gift-message"><span class="tdp-gift-date">26 November, 2025</span><div>You told me that you got joining in UHC and that too almost beside your home and my office. I was so so so excited to share your happy moment with you. In that excitement I’ve ordered this name plate for you. You sitting in chair in that uhc and I am putting your name plate on the desk is all I could imagine but never get that courage to give you actually. It was so so proud moment for your hardwork.</div></div>
         <div class="tdp-gift-ending">A little gift, opened late — but still carrying the same proud moment.</div>
       </div></div>`;
     (stage||wrap).insertAdjacentElement('afterend',section);
-    const box=section.querySelector('#tdpGiftBox'),btn=section.querySelector('#tdpGiftOpenBtn');
-    const toggle=()=>{
-      const open=section.classList.toggle('open');
+    const box=section.querySelector('#tdpGiftBox'),btn=section.querySelector('#tdpGiftOpenBtn'),closeBtn=section.querySelector('#tdpGiftCloseBtn');
+    const setOpen=(open)=>{
+      section.classList.toggle('open',open);
       box.setAttribute('aria-expanded',String(open));
-      btn.textContent=open?'Close this little memory':'Unseal this little gift';
+      btn.disabled=open;
+      closeBtn.disabled=!open;
+      section.querySelector('.tdp-gift-photo-stack').setAttribute('aria-hidden',String(!open));
+      section.querySelectorAll('.tdp-gift-photo-card').forEach(card=>{card.tabIndex=open?0:-1;if(!open)card.classList.remove('tdp-photo-focus')});
       if(open)setTimeout(()=>section.scrollIntoView({behavior:'smooth',block:'center'}),180);
     };
-    box.addEventListener('click',toggle);btn.addEventListener('click',toggle);box.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle()}});
+    const toggle=()=>setOpen(!section.classList.contains('open'));
+    box.addEventListener('click',toggle);btn.addEventListener('click',()=>setOpen(true));closeBtn.addEventListener('click',()=>setOpen(false));box.addEventListener('keydown',e=>{if(e.target===box&&(e.key==='Enter'||e.key===' ')){e.preventDefault();toggle()}});
   }
   mount();
 })();

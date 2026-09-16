@@ -1,7 +1,7 @@
 (()=>{
   const coverMarkup=()=>{
     const chars=['T','o',',',' ','M','y',' ','M','a','r','c','h'];
-    return '<span class="cover-title-text" aria-hidden="true">'+chars.map((ch,i)=>`<span class="cover-letter-v16" style="--i:${i}">${ch}</span>`).join('')+'</span><span class="cover-charm-thread" aria-hidden="true"></span><span class="cover-symbol-eye" aria-hidden="true"><i class="eye-white"></i><i class="eye-blue"></i><i class="eye-pupil"></i><i class="eye-glint"></i></span><span class="cover-symbol-sparkle" aria-hidden="true"><i></i><b></b></span>';
+    return '<span class="cover-title-text" aria-hidden="true">'+chars.map((ch,i)=>`<span class="cover-letter-v16" style="--i:${i}">${ch}</span>`).join('')+'</span><span class="cover-native-eye" aria-hidden="true">🧿</span><span class="cover-symbol-sparkle" aria-hidden="true"><i></i><b></b></span>';
   };
 
   const patchOpening=()=>{
@@ -45,11 +45,13 @@
     const section=document.getElementById('tdpGiftSection');
     if(!section)return false;
     const btn=section.querySelector('#tdpGiftOpenBtn');
+    const closeBtn=section.querySelector('#tdpGiftCloseBtn');
     const box=section.querySelector('#tdpGiftBox');
     const cards=[...section.querySelectorAll('.tdp-gift-photo-card')];
 
     const syncGiftLabel=()=>{
-      if(btn)btn.textContent=section.classList.contains('open')?'Close it':'Open it';
+      if(btn)btn.disabled=section.classList.contains('open');
+      if(closeBtn)closeBtn.disabled=!section.classList.contains('open');
       if(box)box.setAttribute('aria-label',section.classList.contains('open')?'Close the gift':'Open the gift');
     };
     syncGiftLabel();
@@ -63,7 +65,7 @@
     cards.forEach(card=>{
       if(card.dataset.v16Interactive)return;
       card.dataset.v16Interactive='1';
-      card.tabIndex=0;
+      card.tabIndex=section.classList.contains('open')?0:-1;
       card.setAttribute('role','button');
       card.setAttribute('aria-label','View this gift photo');
       const focus=()=>{

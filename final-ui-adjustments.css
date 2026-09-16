@@ -314,6 +314,11 @@ body.letter-expanding .confession-whisper{
 }
 
 /* V24: physical envelope details, no cover subtitle, and a single-line confession title. */
+.tdp-gift-controls{display:flex;justify-content:center;gap:10px}
+.tdp-gift-open-btn:disabled{opacity:.42;cursor:default;box-shadow:none!important}
+.cover-native-eye{position:absolute;right:1.7%;top:19px;font:30px/1 "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;animation:tdpEnamelEye 3.4s ease-in-out infinite}
+@media(max-width:640px){.cover-native-eye{right:-1%;top:18px;font-size:27px}}
+@media(prefers-reduced-motion:reduce){.cover-native-eye{animation:none}}
 .envelope-cover-title{
   top:122px!important;
   width:72%!important;
