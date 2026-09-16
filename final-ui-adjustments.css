@@ -490,3 +490,20 @@ body.letter-main-open .hero .subtitle,
 }
 .video-background-face{box-sizing:border-box;display:block}
 .video-background-surround .reading-break-card.tdp-separated-video{box-sizing:border-box}
+
+/* V36: a smiling vertical half-face peeks in from each viewport edge. */
+.video-background-surround{overflow:hidden}
+.video-background-face{
+  width:clamp(40px,14vw,280px);
+  max-height:none;
+}
+.video-background-face.girl{
+  left:0;
+  clip-path:inset(0 0 0 57%);
+  transform:translate(-57%,-50%);
+}
+.video-background-face.boy{
+  right:0;
+  clip-path:inset(0 46.7% 0 0);
+  transform:translate(46.7%,-50%);
+}

@@ -139,7 +139,7 @@
           const face=document.createElement('img');
           face.className='video-background-face '+person;
           renderCompletedFace(face);
-          face.src='assets/video-'+person+'-complete-v35.webp';
+          face.src='assets/video-'+person+'-smile-v36.webp';
           face.alt='';
           face.setAttribute('aria-hidden','true');
           surround.appendChild(face);
