@@ -101,7 +101,7 @@
 /* Never expose the cloned hero title while it is tucked inside/sliding from the envelope. */
 .sheet-original-hero .tdp-opening-clone-title{display:none!important;visibility:hidden!important;opacity:0!important}
 
-/* Gift envelope: remove "For you" and make the two-photo reveal explicitly interactive. */
+/* Gift envelope reveal remains interactive after it is opened. */
 .tdp-envelope-seal:before{
   content:"Open it"!important;
   font:800 .72rem/1 Arial,sans-serif!important;
@@ -198,30 +198,6 @@
   .cover-symbol-sparkle{animation:none!important}
 }
 
-/* V22: title + meaning are a compact two-line lockup; the title itself never wraps. */
-.envelope-cover-title{
-  flex-direction:column!important;
-  gap:.28rem!important;
-  line-height:1!important;
-}
-.cover-main-line{
-  display:flex!important;
-  align-items:center!important;
-  justify-content:center!important;
-  gap:.12em!important;
-  width:100%!important;
-  white-space:nowrap!important;
-}
-.cover-title-meaning{
-  display:block!important;
-  width:100%!important;
-  color:#806052!important;
-  font:italic 600 clamp(.58rem,1.7vw,.72rem)/1.35 Georgia,serif!important;
-  letter-spacing:.015em!important;
-  text-shadow:0 1px 0 rgba(255,255,255,.56)!important;
-  white-space:normal!important;
-}
-
 /* Reveal the exact title lockup as the sheet grows into the real first page. */
 .sheet-expand .sheet-original-hero .tdp-opening-clone-title,
 .letter-transition .sheet-original-hero .tdp-opening-clone-title{
@@ -298,7 +274,7 @@ body.letter-expanding .sheet-original-hero{
   padding:clamp(70px,11vh,120px) 24px 48px!important;
   margin:0!important;
   transform:none!important;
-  overflow:hidden!important;
+  overflow:visible!important;
 }
 body.letter-expanding .sheet-original-hero .hero-inner{
   width:min(760px,100%)!important;
@@ -333,8 +309,159 @@ body.letter-expanding .confession-whisper{
 
 @media(max-width:640px){
   .envelope-cover-title{top:86px!important;width:90%!important;max-width:90%!important}
-  .cover-main-line{gap:.09em!important}
-  .cover-title-meaning{max-width:34ch!important;font-size:clamp(.53rem,2.65vw,.64rem)!important}
   body.letter-expanding .sheet-original-hero{padding:clamp(58px,9vh,86px) 18px 36px!important}
   body.letter-expanding .sheet-original-hero h1{font-size:clamp(2.6rem,14vw,5rem)!important}
+}
+
+/* V24: physical envelope details, no cover subtitle, and a single-line confession title. */
+.envelope-cover-title{
+  top:122px!important;
+  width:72%!important;
+  min-height:62px!important;
+  display:block!important;
+  overflow:visible!important;
+  white-space:nowrap!important;
+}
+.envelope-cover-title .cover-title-text{
+  display:inline-flex!important;
+  white-space:nowrap!important;
+  align-items:baseline!important;
+  justify-content:center!important;
+}
+.envelope-cover-title .cover-title-meaning,
+.cover-title-meaning{display:none!important}
+
+/* Small enamel charms, suspended from a fine thread instead of emoji-like glyphs. */
+.cover-charm-thread{
+  position:absolute!important;
+  right:5.8%!important;
+  top:-21px!important;
+  width:1px!important;
+  height:44px!important;
+  background:linear-gradient(#9a735f,rgba(154,115,95,.25))!important;
+  box-shadow:1px 0 rgba(255,255,255,.34)!important;
+  transform:rotate(5deg)!important;
+}
+.cover-symbol-eye{
+  position:absolute!important;
+  right:1.7%!important;
+  top:19px!important;
+  width:36px!important;
+  height:26px!important;
+  display:block!important;
+  border:2px solid #c7b498!important;
+  border-radius:58% 42% 58% 42%!important;
+  background:linear-gradient(145deg,#f4e7cf,#b99b75 48%,#806345)!important;
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.75),inset 0 -3px 5px rgba(75,51,31,.26),0 5px 7px rgba(66,41,27,.22)!important;
+  overflow:hidden!important;
+  animation:tdpEnamelEye 3.4s ease-in-out infinite!important;
+}
+.cover-symbol-eye:before{
+  content:""!important;
+  position:absolute!important;
+  left:50%!important;
+  top:-8px!important;
+  width:8px!important;
+  height:8px!important;
+  border:2px solid #9b7b58!important;
+  border-bottom:0!important;
+  border-radius:50% 50% 0 0!important;
+  transform:translateX(-50%)!important;
+}
+.cover-symbol-eye .eye-white{inset:4px 6px!important;background:linear-gradient(145deg,#fffef8,#e8f5f7)!important;border-radius:58% 42% 58% 42%!important;box-shadow:inset 0 1px 2px rgba(46,75,91,.22)!important}
+.cover-symbol-eye .eye-blue{inset:6px 11px!important;background:radial-gradient(circle at 38% 30%,#70d5f3 0 18%,#168cc0 42%,#07527f 76%,#073452 100%)!important;box-shadow:inset 0 1px 2px rgba(255,255,255,.42)!important}
+.cover-symbol-eye .eye-pupil{inset:9px 14px!important;background:radial-gradient(circle at 38% 34%,#3a4b54 0 18%,#071119 40% 100%)!important}
+.cover-symbol-eye .eye-glint{width:4px!important;height:4px!important;left:15px!important;top:8px!important;background:#fff!important;box-shadow:0 0 3px #fff!important}
+.cover-symbol-sparkle{
+  position:absolute!important;
+  right:-3.5%!important;
+  top:4px!important;
+  width:24px!important;
+  height:24px!important;
+  display:block!important;
+  clip-path:polygon(50% 0,61% 38%,100% 50%,61% 62%,50% 100%,39% 62%,0 50%,39% 38%)!important;
+  background:linear-gradient(135deg,#fff5b3 0 18%,#d79d22 42%,#fff0a1 58%,#a86b12 100%)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  filter:drop-shadow(0 3px 3px rgba(105,67,14,.27))!important;
+  animation:tdpMetalCharm 3s ease-in-out infinite!important;
+}
+.cover-symbol-sparkle:before,.cover-symbol-sparkle:after,.cover-symbol-sparkle i:before,.cover-symbol-sparkle i:after,.cover-symbol-sparkle b{display:none!important}
+@keyframes tdpEnamelEye{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(4deg) translateY(2px)}}
+@keyframes tdpMetalCharm{0%,100%{transform:rotate(-7deg) scale(.96)}50%{transform:rotate(7deg) scale(1.04)}}
+
+/* Rounded, layered paper with visible stitched-thread detailing. */
+.real-envelope{transform-style:preserve-3d!important;perspective:1100px!important}
+.envelope-back{
+  border-radius:31px 31px 27px 27px!important;
+  box-shadow:inset 0 3px 1px rgba(255,255,255,.68),inset 0 -28px 38px rgba(113,72,42,.12),0 7px 8px rgba(65,39,24,.13)!important;
+}
+.envelope-back:before{border:1px dashed rgba(171,104,111,.26)!important;border-radius:23px!important}
+.envelope-flap-real{border-radius:31px 31px 12px 12px!important}
+.envelope-front-real{border-bottom-left-radius:27px!important;border-bottom-right-radius:27px!important}
+.confession-envelope-thread{
+  position:absolute!important;
+  left:3.8%!important;
+  right:3.8%!important;
+  bottom:42px!important;
+  height:71%!important;
+  z-index:16!important;
+  pointer-events:none!important;
+  opacity:.92!important;
+  transition:opacity .35s ease,transform .55s ease!important;
+}
+.confession-thread-border{
+  position:absolute!important;
+  inset:7px!important;
+  border:2px dashed rgba(175,100,110,.48)!important;
+  border-top-color:rgba(175,100,110,.25)!important;
+  border-radius:25px!important;
+  filter:drop-shadow(0 1px 0 rgba(255,255,255,.38))!important;
+}
+.confession-thread-loop{
+  position:absolute!important;
+  right:13%!important;
+  bottom:9%!important;
+  width:25px!important;
+  height:16px!important;
+  border:3px solid #b96f7b!important;
+  border-radius:65% 42% 62% 40%!important;
+  filter:drop-shadow(0 2px 2px rgba(70,34,39,.18))!important;
+}
+.confession-thread-loop.loop-left{transform:translateX(-17px) rotate(12deg)!important}
+.confession-thread-loop.loop-right{transform:translateX(6px) scaleX(-1) rotate(12deg)!important}
+.confession-thread-knot{
+  position:absolute!important;
+  right:13%!important;
+  bottom:10.7%!important;
+  width:11px!important;
+  height:11px!important;
+  border-radius:50%!important;
+  background:radial-gradient(circle at 35% 28%,#f0bbc0,#af6470 62%,#7a3d49)!important;
+  box-shadow:0 3px 4px rgba(73,35,40,.24)!important;
+}
+.password-visible .confession-envelope-thread,.is-unlocking .confession-envelope-thread{opacity:0!important;transform:scale(.98)!important}
+
+main .hero h1,
+body.letter-main-open .hero h1,
+.sheet-expand .sheet-original-hero h1,
+.letter-transition .sheet-original-hero h1{
+  white-space:nowrap!important;
+  font-size:clamp(2.55rem,9.2vw,6.4rem)!important;
+}
+main .hero .subtitle,
+body.letter-main-open .hero .subtitle,
+.sheet-original-hero .subtitle{
+  display:block!important;
+}
+
+@media(max-width:640px){
+  .envelope-cover-title{top:100px!important;width:77%!important;max-width:77%!important;min-height:52px!important}
+  .envelope-cover-title .cover-letter-v16{font-size:clamp(1rem,5.1vw,1.34rem)!important}
+  .cover-symbol-eye{right:-1%!important;top:18px!important;width:31px!important;height:23px!important}
+  .cover-symbol-eye .eye-blue{inset:5px 9px!important}.cover-symbol-eye .eye-pupil{inset:8px 12px!important}.cover-symbol-eye .eye-glint{left:13px!important;top:7px!important}
+  .cover-symbol-sparkle{right:-8%!important;width:20px!important;height:20px!important}
+  .cover-charm-thread{right:3%!important;height:40px!important}
+  main .hero h1,body.letter-main-open .hero h1,.sheet-expand .sheet-original-hero h1,.letter-transition .sheet-original-hero h1{font-size:clamp(2.35rem,11.4vw,4.2rem)!important}
+  .confession-thread-loop,.confession-thread-knot{right:11%!important}
 }

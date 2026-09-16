@@ -1,16 +1,24 @@
 (()=>{
   const coverMarkup=()=>{
     const chars=['T','o',',',' ','M','y',' ','M','a','r','c','h'];
-    return '<span class="cover-main-line"><span class="cover-title-text" aria-hidden="true">'+chars.map((ch,i)=>`<span class="cover-letter-v16" style="--i:${i}">${ch}</span>`).join('')+'</span><span class="cover-symbol-eye" aria-hidden="true"><i class="eye-white"></i><i class="eye-blue"></i><i class="eye-pupil"></i><i class="eye-glint"></i></span><span class="cover-symbol-sparkle" aria-hidden="true"><i></i><b></b></span></span><span class="cover-title-meaning">Maybe sharing March was only the first coincidence.</span>';
+    return '<span class="cover-title-text" aria-hidden="true">'+chars.map((ch,i)=>`<span class="cover-letter-v16" style="--i:${i}">${ch}</span>`).join('')+'</span><span class="cover-charm-thread" aria-hidden="true"></span><span class="cover-symbol-eye" aria-hidden="true"><i class="eye-white"></i><i class="eye-blue"></i><i class="eye-pupil"></i><i class="eye-glint"></i></span><span class="cover-symbol-sparkle" aria-hidden="true"><i></i><b></b></span>';
   };
 
   const patchOpening=()=>{
     const title=document.querySelector('.envelope-cover-title');
     if(title&&!title.dataset.realisticSymbols){
       title.dataset.realisticSymbols='1';
-      title.setAttribute('aria-label','To, My March. Maybe sharing March was only the first coincidence.');
+      title.setAttribute('aria-label','To, My March');
       title.innerHTML=coverMarkup();
       title.querySelectorAll('.sr-only,.cover-emoji,.cover-emoji-v16').forEach(el=>el.remove());
+    }
+    const envelope=document.querySelector('.real-envelope');
+    if(envelope&&!envelope.querySelector('.confession-envelope-thread')){
+      const thread=document.createElement('div');
+      thread.className='confession-envelope-thread';
+      thread.setAttribute('aria-hidden','true');
+      thread.innerHTML='<span class="confession-thread-border"></span><span class="confession-thread-loop loop-left"></span><span class="confession-thread-loop loop-right"></span><span class="confession-thread-knot"></span>';
+      envelope.appendChild(thread);
     }
     document.querySelectorAll('.sheet-original-hero h1').forEach(el=>{
       el.textContent='To, My March';
@@ -42,7 +50,7 @@
 
     const syncGiftLabel=()=>{
       if(btn)btn.textContent=section.classList.contains('open')?'Close it':'Open it';
-      if(box)box.setAttribute('aria-label',section.classList.contains('open')?'Close the two-photo gift':'Open the two-photo gift');
+      if(box)box.setAttribute('aria-label',section.classList.contains('open')?'Close the gift':'Open the gift');
     };
     syncGiftLabel();
 
