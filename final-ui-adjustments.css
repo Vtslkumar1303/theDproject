@@ -142,11 +142,11 @@
   padding:18px!important;
 }
 
-.video-background-surround{position:relative;isolation:isolate;width:min(1240px,100%);margin:0 auto;display:flow-root}
-.video-background-face{position:absolute;top:50%;transform:translateY(-50%);width:clamp(90px,14vw,170px);height:255px;background-image:url('assets/video-portrait-glasses-v31.png');background-size:300% 100%;background-repeat:no-repeat;pointer-events:none;z-index:0;opacity:.9;mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 85%,transparent)}
-.video-background-face.girl{left:18px;background-position:left center;border-radius:24px 65px 65px 24px}
-.video-background-face.boy{right:18px;background-position:right center;border-radius:65px 24px 24px 65px}
-@media(max-width:900px){.video-background-surround{padding-top:45px}.video-background-face{top:40px;width:65px;height:95px}.video-background-face.girl{left:18px}.video-background-face.boy{right:18px}}
+.video-background-surround{--face-rail:clamp(24px,8vw,160px);position:relative;isolation:isolate;width:100%;max-width:none;margin:0 auto;display:flow-root}
+.video-background-face{position:absolute;top:50%;transform:translateY(-50%);width:clamp(20px,7vw,140px);height:auto;max-height:230px;object-fit:contain;pointer-events:none;z-index:0;background:none;border:0;border-radius:0;opacity:1}
+.video-background-face.girl{left:0}
+.video-background-face.boy{right:0}
+.video-background-surround .reading-break-card.tdp-separated-video{width:min(760px,calc(100% - var(--face-rail) - var(--face-rail) - 16px))!important}
 /* Floating shortcut: Play/Pause icon + song name only, draggable anywhere. */
 .floating-khat-control{
   right:10px!important;

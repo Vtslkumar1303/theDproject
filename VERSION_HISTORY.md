@@ -14,6 +14,7 @@ Each completed change request receives a permanent checkpoint branch. Version nu
 | v30 | Move crafted credit to password-envelope cover, below seal near bottom; remove ending credit | Branch resolves to final commit | `checkpoints/prompt-v30-envelope-crafted-note` |
 | v31 | Smaller single-line envelope credit; reference face artwork with black cat-eye/grey square glasses flanking video; no heart | Branch resolves to final commit | `checkpoints/prompt-v31-video-portrait-glasses` |
 | v32 | Restore original video panel; smaller girl/boy faces outside panel in page background | Branch resolves to final commit | `checkpoints/prompt-v32-outside-video-faces` |
+| v33 | True transparent face PNGs at far page sidelines; responsive sizes and side rails; no white paper backgrounds | Branch resolves to final commit | `checkpoints/prompt-v33-transparent-edge-faces` |
 
 Say “rollback to v25”, “rollback one prompt”, or describe the earlier prompt. Clarify ambiguous descriptions. Restore the selected checkpoint as a new commit on main, preserve later checkpoints, and refresh asset cache keys. Never force-push or erase history. A rollback can also be limited to a specified feature.
 

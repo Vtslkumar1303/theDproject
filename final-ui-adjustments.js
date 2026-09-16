@@ -96,8 +96,10 @@
         surround=document.createElement('div');
         surround.className='video-background-surround';
         ['girl','boy'].forEach(person=>{
-          const face=document.createElement('div');
+          const face=document.createElement('img');
           face.className='video-background-face '+person;
+          face.src='assets/video-'+person+'-transparent-v33.png';
+          face.alt='';
           face.setAttribute('aria-hidden','true');
           surround.appendChild(face);
         });
