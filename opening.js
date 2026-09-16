@@ -5,7 +5,9 @@
 
   const originalHero=document.querySelector('main .hero');
   const originalHeroTitle=originalHero?.querySelector('h1');
-  if(originalHeroTitle) originalHeroTitle.textContent='To, my March';
+  if(originalHeroTitle) originalHeroTitle.textContent='To, My March';
+  const originalHeroSubtitle=originalHero?.querySelector('.subtitle');
+  if(originalHeroSubtitle) originalHeroSubtitle.textContent='Maybe sharing March was only the first coincidence.';
 
   const coverTitleMarkup=`<span class="cover-word" aria-hidden="true">
     <span class="cover-letter" style="--i:0">T</span><span class="cover-letter" style="--i:1">o</span><span class="cover-letter" style="--i:2">,</span><span class="cover-letter cover-space" style="--i:3">&nbsp;</span><span class="cover-letter" style="--i:4">M</span><span class="cover-letter" style="--i:5">y</span><span class="cover-letter cover-space" style="--i:6">&nbsp;</span><span class="cover-letter" style="--i:7">m</span><span class="cover-letter" style="--i:8">a</span><span class="cover-letter" style="--i:9">r</span><span class="cover-letter" style="--i:10">c</span><span class="cover-letter" style="--i:11">h</span></span><span class="cover-emoji cover-nazar" aria-hidden="true">🧿</span><span class="cover-emoji cover-sparkle" aria-hidden="true">✨</span><span class="sr-only">To, My march 🧿✨</span>`;
@@ -58,9 +60,8 @@
     clone.querySelectorAll('[aria-hidden="false"]').forEach(el=>el.removeAttribute('aria-hidden'));
     const cloneTitle=clone.querySelector('h1');
     if(cloneTitle){
-      cloneTitle.textContent='';
-      cloneTitle.setAttribute('aria-hidden','true');
-      cloneTitle.style.display='none';
+      cloneTitle.textContent='To, My March';
+      cloneTitle.classList.add('tdp-opening-clone-title');
     }
     sheetClone.appendChild(clone);
   }else if(sheetClone){
@@ -177,7 +178,17 @@
       },980);
 
       setTimeout(()=>card.classList.add('sheet-expand'),1900);
-      setTimeout(()=>card.classList.add('letter-transition'),2650);
+      setTimeout(()=>{
+        const sheetRect=confessionSheet.getBoundingClientRect();
+        const root=document.documentElement;
+        root.style.setProperty('--sheet-start-top',`${sheetRect.top}px`);
+        root.style.setProperty('--sheet-start-left',`${sheetRect.left}px`);
+        root.style.setProperty('--sheet-start-width',`${sheetRect.width}px`);
+        root.style.setProperty('--sheet-start-height',`${sheetRect.height}px`);
+        document.body.classList.add('letter-expanding');
+        card.classList.add('letter-transition');
+        requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('page-fill')));
+      },2650);
       setTimeout(()=>{
         document.body.classList.add('letter-main-open');
         letterOpened.checked=true;
@@ -185,6 +196,8 @@
         setTimeout(()=>{
           openScreen.style.display='none';
           openScreen.setAttribute('aria-hidden','true');
+          document.body.classList.remove('letter-expanding');
+          ['--sheet-start-top','--sheet-start-left','--sheet-start-width','--sheet-start-height'].forEach(name=>document.documentElement.style.removeProperty(name));
         },120);
       },3380);
     }else{

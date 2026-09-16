@@ -18,11 +18,16 @@
   .tdp-envelope-seal{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:74px;height:74px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f7dde1 0 18%,#c77280 22% 67%,#7b3c46 71% 100%);box-shadow:0 8px 20px rgba(82,39,44,.28),inset 0 2px 3px rgba(255,255,255,.25);display:grid;place-items:center;color:#fff8f8;z-index:11;transition:opacity .42s ease,transform .7s ease}
   .tdp-envelope-seal:before{content:"For you";font:700 .8rem/1 Georgia,serif;transform:rotate(-7deg)}
   .tdp-envelope-seal:after{content:"";position:absolute;inset:9px;border:1px dashed rgba(255,255,255,.35);border-radius:50%}
-  .tdp-gift-photo-stack{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);width:min(500px,92vw);height:330px;pointer-events:none;z-index:5}
-  .tdp-gift-photo-card{position:absolute;width:45%;max-width:220px;padding:10px 10px 34px;background:#fffaf3;border-radius:11px;box-shadow:0 18px 34px rgba(51,30,19,.22);opacity:0;transform-origin:center bottom;transition:transform 1.12s cubic-bezier(.16,.84,.22,1),opacity .45s ease,box-shadow .45s ease}
+  .tdp-gift-photo-stack{position:absolute;left:50%;bottom:30px;transform:translateX(-50%);width:min(500px,92vw);height:330px;pointer-events:none;z-index:7}
+  .tdp-gift-photo-card{position:absolute;width:45%;max-width:220px;padding:10px 10px 34px;background:#fffaf3;border:1px solid rgba(94,66,48,.11);border-radius:11px;box-shadow:0 18px 34px rgba(51,30,19,.22);opacity:1;transform-origin:center bottom;transition:transform 1.12s cubic-bezier(.16,.84,.22,1),opacity .45s ease,box-shadow .45s ease}
   .tdp-gift-photo-card img{display:block;width:100%;aspect-ratio:1.08/1;object-fit:cover;border-radius:7px;box-shadow:0 8px 18px rgba(33,18,11,.14)}
-  .tdp-photo-1{left:12%;bottom:4px;transform:translateY(142px) rotate(-5deg) scale(.72)}
-  .tdp-photo-2{right:12%;bottom:0;transform:translateY(150px) rotate(5deg) scale(.72)}
+  .tdp-gift-photo-card figcaption{position:absolute;left:10px;right:10px;bottom:9px;color:#79594b;font:italic .58rem/1.3 Georgia,serif;text-align:center;white-space:nowrap}
+  .tdp-photo-1{left:12%;bottom:4px;transform:translate(25px,-35px) rotate(-7deg) scale(.74)}
+  .tdp-photo-2{right:12%;bottom:0;transform:translate(-25px,-29px) rotate(7deg) scale(.74)}
+  .tdp-envelope-label{position:absolute;left:50%;bottom:30px;z-index:12;transform:translateX(-50%) rotate(-1.5deg);width:58%;padding:11px 12px 10px;border:1px solid rgba(118,77,49,.16);border-radius:9px;background:rgba(255,248,232,.82);box-shadow:0 6px 14px rgba(72,44,28,.1);color:#765142;text-align:center;pointer-events:none;transition:opacity .35s ease,transform .55s ease}
+  .tdp-envelope-label small{display:block;font:700 .53rem/1 Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#a47864}
+  .tdp-envelope-label strong{display:block;margin-top:4px;font:italic 700 .88rem/1.2 Georgia,serif}
+  .tdp-envelope-photo-count{position:absolute;right:7%;bottom:24px;z-index:13;width:48px;height:48px;border:1px dashed rgba(121,76,50,.38);border-radius:50%;display:grid;place-items:center;background:rgba(245,218,180,.72);color:#885d49;font:800 .58rem/1.12 Arial,sans-serif;text-align:center;transform:rotate(9deg);pointer-events:none}
   .tdp-envelope-glow{position:absolute;left:50%;bottom:82px;transform:translateX(-50%);width:330px;height:160px;background:radial-gradient(circle,rgba(255,247,218,.72),rgba(255,245,214,.18) 48%,transparent 74%);opacity:0;transition:opacity .65s ease;z-index:2}
   .tdp-gift-open-btn{position:relative;margin-top:2px;border:1px solid rgba(112,70,53,.08);border-radius:999px;padding:11px 19px;background:linear-gradient(#8a5b49,#704536);color:#fff9ef;cursor:pointer;font:700 .74rem/1 Arial,sans-serif;box-shadow:0 10px 22px rgba(81,48,34,.18);transition:transform .2s ease,box-shadow .2s ease}
   .tdp-gift-open-btn:hover{transform:translateY(-1px);box-shadow:0 14px 26px rgba(81,48,34,.23)}
@@ -30,6 +35,8 @@
   .tdp-gift-panel-inner{overflow:hidden}.tdp-gift-section.open .tdp-gift-panel{grid-template-rows:1fr;opacity:1}
   .tdp-gift-section.open .tdp-envelope-flap{transform:rotateX(178deg)}
   .tdp-gift-section.open .tdp-envelope-seal{opacity:0;transform:translate(-50%,-82%) scale(.56) rotate(-12deg)}
+  .tdp-gift-section.open .tdp-envelope-label{opacity:0;transform:translateX(-50%) translateY(16px) rotate(-4deg) scale(.92)}
+  .tdp-gift-section.open .tdp-envelope-photo-count{opacity:0;transition:opacity .3s ease}
   .tdp-gift-section.open .tdp-envelope-glow{opacity:1}
   .tdp-gift-section.open .tdp-gift-photo-card{opacity:1;box-shadow:0 24px 44px rgba(51,30,19,.24)}
   .tdp-gift-section.open .tdp-photo-1{transform:translate(-72px,-186px) rotate(-9deg) scale(1)}
@@ -41,7 +48,7 @@
   .tdp-gift-spark{position:absolute;z-index:12;width:9px;height:9px;border-radius:50%;background:#fff1cb;box-shadow:0 0 12px rgba(255,228,173,.8);opacity:0;pointer-events:none}.tdp-gift-section.open .tdp-gift-spark{animation:tdpGiftSpark 1.25s ease-out forwards}.tdp-gift-spark.s1{left:18%;top:24%;animation-delay:.03s!important}.tdp-gift-spark.s2{right:17%;top:28%;animation-delay:.12s!important}.tdp-gift-spark.s3{left:27%;bottom:24%;animation-delay:.2s!important}.tdp-gift-spark.s4{right:27%;bottom:22%;animation-delay:.28s!important}
   @keyframes tdpGiftSpark{0%{opacity:0;transform:translateY(12px) scale(.25)}28%{opacity:1}100%{opacity:0;transform:translateY(-42px) scale(1.6)}}
   @keyframes tdpEnvelopeSettle{0%{transform:translateX(-50%) translateY(0)}45%{transform:translateX(-50%) translateY(5px)}100%{transform:translateX(-50%) translateY(2px)}}
-  @media(max-width:680px){.tdp-gift-section{width:calc(100% - 20px);padding:24px 13px 24px;margin-top:28px}.tdp-gift-stage{min-height:390px}.tdp-envelope-scene{height:365px}.tdp-envelope{width:min(360px,88vw);height:222px}.tdp-gift-photo-stack{width:min(390px,92vw);height:285px}.tdp-gift-photo-card{width:47%;padding:8px 8px 28px}.tdp-photo-1{left:7%}.tdp-photo-2{right:7%}.tdp-gift-section.open .tdp-photo-1{transform:translate(-24px,-148px) rotate(-8deg) scale(1)}.tdp-gift-section.open .tdp-photo-2{transform:translate(24px,-154px) rotate(8deg) scale(1)}.tdp-gift-message{font-size:.81rem;padding:17px 14px}}
+  @media(max-width:680px){.tdp-gift-section{width:calc(100% - 20px);padding:24px 13px 24px;margin-top:28px}.tdp-gift-stage{min-height:390px}.tdp-envelope-scene{height:365px}.tdp-envelope{width:min(360px,88vw);height:222px}.tdp-gift-photo-stack{width:min(390px,92vw);height:285px}.tdp-gift-photo-card{width:47%;padding:8px 8px 28px}.tdp-gift-photo-card figcaption{bottom:7px;font-size:.52rem}.tdp-photo-1{left:7%;transform:translate(18px,-2px) rotate(-7deg) scale(.72)}.tdp-photo-2{right:7%;transform:translate(-18px,2px) rotate(7deg) scale(.72)}.tdp-envelope-label{bottom:25px;width:61%;padding:9px 8px}.tdp-envelope-label strong{font-size:.76rem}.tdp-envelope-photo-count{width:42px;height:42px;right:5%;bottom:18px;font-size:.52rem}.tdp-gift-section.open .tdp-photo-1{transform:translate(-24px,-148px) rotate(-8deg) scale(1)}.tdp-gift-section.open .tdp-photo-2{transform:translate(24px,-154px) rotate(8deg) scale(1)}.tdp-gift-message{font-size:.81rem;padding:17px 14px}}
   `;
 
   function mount(){
@@ -58,12 +65,13 @@
       <p class="tdp-gift-intro">There is one small thing waiting here from a day when I felt ridiculously proud and happy for you.</p>
       <div class="tdp-gift-stage"><div class="tdp-envelope-scene">
         <div class="tdp-envelope-glow"></div>
-        <div class="tdp-gift-photo-stack" aria-hidden="true">
-          <figure class="tdp-gift-photo-card tdp-photo-1"><img src="${PHOTO_1}" alt="The name plate gift, first view" loading="eager"></figure>
-          <figure class="tdp-gift-photo-card tdp-photo-2"><img src="${PHOTO_2}" alt="The name plate gift, second view" loading="eager"></figure>
-        </div>
         <div class="tdp-envelope" id="tdpGiftBox" role="button" tabindex="0" aria-expanded="false" aria-controls="tdpGiftPanel" aria-label="Open the envelope gift">
-          <div class="tdp-envelope-body"></div><div class="tdp-envelope-front"></div><div class="tdp-envelope-flap"></div><div class="tdp-envelope-seal"></div>
+          <div class="tdp-envelope-body"></div>
+          <div class="tdp-gift-photo-stack" aria-hidden="true">
+            <figure class="tdp-gift-photo-card tdp-photo-1"><img src="${PHOTO_1}" alt="The name plate gift, first view" loading="eager"><figcaption>a proud little moment</figcaption></figure>
+            <figure class="tdp-gift-photo-card tdp-photo-2"><img src="${PHOTO_2}" alt="The name plate gift, second view" loading="eager"><figcaption>meant for your desk</figcaption></figure>
+          </div>
+          <div class="tdp-envelope-front"></div><div class="tdp-envelope-label"><small>photo memories</small><strong>kept for you</strong></div><div class="tdp-envelope-photo-count">2<br>PHOTOS</div><div class="tdp-envelope-flap"></div><div class="tdp-envelope-seal"></div>
         </div>
         <i class="tdp-gift-spark s1"></i><i class="tdp-gift-spark s2"></i><i class="tdp-gift-spark s3"></i><i class="tdp-gift-spark s4"></i>
       </div></div>

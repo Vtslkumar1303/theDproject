@@ -197,3 +197,144 @@
   .cover-symbol-eye,
   .cover-symbol-sparkle{animation:none!important}
 }
+
+/* V22: title + meaning are a compact two-line lockup; the title itself never wraps. */
+.envelope-cover-title{
+  flex-direction:column!important;
+  gap:.28rem!important;
+  line-height:1!important;
+}
+.cover-main-line{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:.12em!important;
+  width:100%!important;
+  white-space:nowrap!important;
+}
+.cover-title-meaning{
+  display:block!important;
+  width:100%!important;
+  color:#806052!important;
+  font:italic 600 clamp(.58rem,1.7vw,.72rem)/1.35 Georgia,serif!important;
+  letter-spacing:.015em!important;
+  text-shadow:0 1px 0 rgba(255,255,255,.56)!important;
+  white-space:normal!important;
+}
+
+/* Reveal the exact title lockup as the sheet grows into the real first page. */
+.sheet-expand .sheet-original-hero .tdp-opening-clone-title,
+.letter-transition .sheet-original-hero .tdp-opening-clone-title{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+}
+
+/* The final opening phase is now a genuine page expansion, not a large card. */
+body.letter-expanding{overflow:hidden!important}
+body.letter-expanding .open-screen{
+  perspective:none!important;
+  padding:0!important;
+}
+body.letter-expanding .open-card.confession-envelope-card{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  max-width:none!important;
+  padding:0!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  overflow:visible!important;
+  z-index:1000!important;
+}
+body.letter-expanding .real-envelope{
+  position:fixed!important;
+  inset:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  max-width:none!important;
+  margin:0!important;
+  filter:none!important;
+  transform:none!important;
+}
+body.letter-expanding .confession-sheet{
+  position:fixed!important;
+  top:var(--sheet-start-top)!important;
+  left:var(--sheet-start-left)!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:var(--sheet-start-width)!important;
+  height:var(--sheet-start-height)!important;
+  max-width:none!important;
+  transform:none!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  transition:top .72s cubic-bezier(.18,.86,.22,1),left .72s cubic-bezier(.18,.86,.22,1),width .72s cubic-bezier(.18,.86,.22,1),height .72s cubic-bezier(.18,.86,.22,1),border-radius .6s ease,transform .72s cubic-bezier(.18,.86,.22,1)!important;
+  z-index:1002!important;
+}
+body.letter-expanding .letter-transition.page-fill .confession-sheet{
+  top:0!important;
+  left:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+}
+body.letter-expanding .sheet-letter-clone{
+  width:100%!important;
+  height:100%!important;
+  border-radius:0!important;
+}
+body.letter-expanding .sheet-original-hero{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  min-height:100dvh!important;
+  height:100dvh!important;
+  padding:clamp(70px,11vh,120px) 24px 48px!important;
+  margin:0!important;
+  transform:none!important;
+  overflow:hidden!important;
+}
+body.letter-expanding .sheet-original-hero .hero-inner{
+  width:min(760px,100%)!important;
+  max-width:760px!important;
+  margin:0 auto!important;
+}
+body.letter-expanding .sheet-original-hero h1{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  font-size:clamp(3rem,11vw,7rem)!important;
+  white-space:nowrap!important;
+}
+body.letter-expanding .sheet-original-hero .subtitle{
+  font-size:clamp(.9rem,2.5vw,1.25rem)!important;
+  max-width:42ch!important;
+}
+body.letter-expanding .envelope-back,
+body.letter-expanding .envelope-flap-real,
+body.letter-expanding .envelope-front-real,
+body.letter-expanding .envelope-pocket-light,
+body.letter-expanding .envelope-ground-shadow,
+body.letter-expanding .wax-seal-real,
+body.letter-expanding .magic-speck,
+body.letter-expanding .envelope-cover-title,
+body.letter-expanding .envelope-password-panel,
+body.letter-expanding .confession-kicker,
+body.letter-expanding .confession-whisper{
+  opacity:0!important;
+  pointer-events:none!important;
+}
+
+@media(max-width:640px){
+  .envelope-cover-title{top:86px!important;width:90%!important;max-width:90%!important}
+  .cover-main-line{gap:.09em!important}
+  .cover-title-meaning{max-width:34ch!important;font-size:clamp(.53rem,2.65vw,.64rem)!important}
+  body.letter-expanding .sheet-original-hero{padding:clamp(58px,9vh,86px) 18px 36px!important}
+  body.letter-expanding .sheet-original-hero h1{font-size:clamp(2.6rem,14vw,5rem)!important}
+}

@@ -1,22 +1,26 @@
 (()=>{
   const coverMarkup=()=>{
-    const chars=['T','o',',',' ','M','y',' ','m','a','r','c','h'];
-    return '<span class="cover-title-text" aria-hidden="true">'+chars.map((ch,i)=>`<span class="cover-letter-v16" style="--i:${i}">${ch}</span>`).join('')+'</span><span class="cover-symbol-eye" aria-hidden="true"><i class="eye-white"></i><i class="eye-blue"></i><i class="eye-pupil"></i><i class="eye-glint"></i></span><span class="cover-symbol-sparkle" aria-hidden="true"><i></i><b></b></span>';
+    const chars=['T','o',',',' ','M','y',' ','M','a','r','c','h'];
+    return '<span class="cover-main-line"><span class="cover-title-text" aria-hidden="true">'+chars.map((ch,i)=>`<span class="cover-letter-v16" style="--i:${i}">${ch}</span>`).join('')+'</span><span class="cover-symbol-eye" aria-hidden="true"><i class="eye-white"></i><i class="eye-blue"></i><i class="eye-pupil"></i><i class="eye-glint"></i></span><span class="cover-symbol-sparkle" aria-hidden="true"><i></i><b></b></span></span><span class="cover-title-meaning">Maybe sharing March was only the first coincidence.</span>';
   };
 
   const patchOpening=()=>{
     const title=document.querySelector('.envelope-cover-title');
     if(title&&!title.dataset.realisticSymbols){
       title.dataset.realisticSymbols='1';
-      title.setAttribute('aria-label','To, My march');
+      title.setAttribute('aria-label','To, My March. Maybe sharing March was only the first coincidence.');
       title.innerHTML=coverMarkup();
       title.querySelectorAll('.sr-only,.cover-emoji,.cover-emoji-v16').forEach(el=>el.remove());
     }
     document.querySelectorAll('.sheet-original-hero h1').forEach(el=>{
-      el.textContent='';
-      el.style.display='none';
-      el.setAttribute('aria-hidden','true');
+      el.textContent='To, My March';
+      el.style.removeProperty('display');
+      el.removeAttribute('aria-hidden');
       el.classList.add('tdp-opening-clone-title');
+    });
+    document.querySelectorAll('main .hero h1').forEach(el=>{el.textContent='To, My March'});
+    document.querySelectorAll('main .hero .subtitle,.sheet-original-hero .subtitle').forEach(el=>{
+      el.textContent='Maybe sharing March was only the first coincidence.';
     });
   };
 
