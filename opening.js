@@ -8,7 +8,7 @@
   if(originalHeroTitle) originalHeroTitle.textContent='To, my March';
 
   const coverTitleMarkup=`<span class="cover-word" aria-hidden="true">
-    <span class="cover-letter" style="--i:0">T</span><span class="cover-letter" style="--i:1">o</span><span class="cover-letter cover-space" style="--i:2">&nbsp;</span><span class="cover-letter" style="--i:3">m</span><span class="cover-letter" style="--i:4">y</span><span class="cover-letter cover-space" style="--i:5">&nbsp;</span><span class="cover-letter" style="--i:6">M</span><span class="cover-letter" style="--i:7">a</span><span class="cover-letter" style="--i:8">r</span><span class="cover-letter" style="--i:9">c</span><span class="cover-letter" style="--i:10">h</span></span><span class="cover-emoji cover-nazar" aria-hidden="true">🧿</span><span class="cover-emoji cover-sparkle" aria-hidden="true">✨</span><span class="sr-only">To, my March</span>`;
+    <span class="cover-letter" style="--i:0">T</span><span class="cover-letter" style="--i:1">o</span><span class="cover-letter" style="--i:2">,</span><span class="cover-letter cover-space" style="--i:3">&nbsp;</span><span class="cover-letter" style="--i:4">M</span><span class="cover-letter" style="--i:5">y</span><span class="cover-letter cover-space" style="--i:6">&nbsp;</span><span class="cover-letter" style="--i:7">m</span><span class="cover-letter" style="--i:8">a</span><span class="cover-letter" style="--i:9">r</span><span class="cover-letter" style="--i:10">c</span><span class="cover-letter" style="--i:11">h</span></span><span class="cover-emoji cover-nazar" aria-hidden="true">🧿</span><span class="cover-emoji cover-sparkle" aria-hidden="true">✨</span><span class="sr-only">To, My march 🧿✨</span>`;
 
   openScreen.innerHTML=`
     <div class="open-card confession-envelope-card" id="envelopeCard">
@@ -27,7 +27,7 @@
         <div class="envelope-front-real"></div>
         <div class="envelope-pocket-light"></div>
 
-        <div class="envelope-cover-title" aria-label="To, my March">${coverTitleMarkup}</div>
+        <div class="envelope-cover-title" aria-label="To, My march 🧿✨">${coverTitleMarkup}</div>
 
         <div id="passwordGate" class="envelope-password-panel" aria-hidden="true">
           <div class="password-glow" aria-hidden="true"></div>
@@ -57,10 +57,14 @@
     clone.querySelectorAll('[id]').forEach(el=>el.removeAttribute('id'));
     clone.querySelectorAll('[aria-hidden="false"]').forEach(el=>el.removeAttribute('aria-hidden'));
     const cloneTitle=clone.querySelector('h1');
-    if(cloneTitle) cloneTitle.textContent='To, my March';
+    if(cloneTitle){
+      cloneTitle.textContent='';
+      cloneTitle.setAttribute('aria-hidden','true');
+      cloneTitle.style.display='none';
+    }
     sheetClone.appendChild(clone);
   }else if(sheetClone){
-    sheetClone.innerHTML='<section class="hero sheet-original-hero"><div class="hero-inner"><div class="kicker">A letter I probably overthought too much</div><h1>To, my March</h1><p class="subtitle">Some feelings stay quiet for so long that eventually the only kind thing you can do is give them words.</p></div></section>';
+    sheetClone.innerHTML='<section class="hero sheet-original-hero"><div class="hero-inner"><div class="kicker">A letter I probably overthought too much</div><p class="subtitle">Some feelings stay quiet for so long that eventually the only kind thing you can do is give them words.</p></div></section>';
   }
 
   requestAnimationFrame(()=>openScreen.classList.add('tdp-opening-ready'));
