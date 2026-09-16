@@ -130,8 +130,8 @@
 
 /* Reading-break video is a fully separate sibling section after the gift card. */
 .reading-break-card.tdp-separated-video{
-  width:min(1100px,calc(100% - 28px))!important;
-  max-width:1100px!important;
+  width:min(760px,calc(100% - 28px))!important;
+  max-width:760px!important;
   margin:26px auto 46px!important;
   position:relative!important;
   z-index:20!important;
@@ -142,10 +142,11 @@
   padding:18px!important;
 }
 
-.video-portrait-surround{position:relative;isolation:isolate;display:grid;grid-template-columns:24% 52% 24%;align-items:center;aspect-ratio:2/1;overflow:hidden;border-radius:18px;background:#efe2cb}
-.video-portrait-art{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;z-index:-1;pointer-events:none}
-.video-portrait-surround .reading-break-frame{grid-column:2;position:relative;z-index:1;width:100%;margin:0;aspect-ratio:16/9;box-sizing:border-box;border:2px solid rgba(112,75,57,.3);border-radius:12px}
-@media(max-width:640px){.video-portrait-surround{border-radius:12px}.video-portrait-surround .reading-break-frame{border-width:1px;border-radius:6px}}
+.video-background-surround{position:relative;isolation:isolate;width:min(1240px,100%);margin:0 auto;display:flow-root}
+.video-background-face{position:absolute;top:50%;transform:translateY(-50%);width:clamp(90px,14vw,170px);height:255px;background-image:url('assets/video-portrait-glasses-v31.png');background-size:300% 100%;background-repeat:no-repeat;pointer-events:none;z-index:0;opacity:.9;mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 85%,transparent)}
+.video-background-face.girl{left:18px;background-position:left center;border-radius:24px 65px 65px 24px}
+.video-background-face.boy{right:18px;background-position:right center;border-radius:65px 24px 24px 65px}
+@media(max-width:900px){.video-background-surround{padding-top:45px}.video-background-face{top:40px;width:65px;height:95px}.video-background-face.girl{left:18px}.video-background-face.boy{right:18px}}
 /* Floating shortcut: Play/Pause icon + song name only, draggable anywhere. */
 .floating-khat-control{
   right:10px!important;

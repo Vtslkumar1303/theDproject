@@ -91,20 +91,21 @@
     const video=document.querySelector('.reading-break-card');
     if(video){
       video.classList.add('tdp-separated-video');
-      const frame=video.querySelector('.reading-break-frame');
-      if(frame&&!video.querySelector('.video-portrait-surround')){
-        const surround=document.createElement('div');
-        surround.className='video-portrait-surround';
-        const portraits=document.createElement('img');
-        portraits.className='video-portrait-art';
-        portraits.src='assets/video-portrait-glasses-v31.png';
-        portraits.alt='Illustrated girl wearing black cat-eye glasses on the left and boy wearing grey square glasses on the right';
-        frame.before(surround);
-        surround.appendChild(portraits);
-        surround.appendChild(frame);
+      let surround=video.closest('.video-background-surround');
+      if(!surround){
+        surround=document.createElement('div');
+        surround.className='video-background-surround';
+        ['girl','boy'].forEach(person=>{
+          const face=document.createElement('div');
+          face.className='video-background-face '+person;
+          face.setAttribute('aria-hidden','true');
+          surround.appendChild(face);
+        });
+        video.before(surround);
+        surround.appendChild(video);
       }
-      if(video.previousElementSibling!==section){
-        section.insertAdjacentElement('afterend',video);
+      if(surround.previousElementSibling!==section){
+        section.insertAdjacentElement('afterend',surround);
       }
     }
     return true;
