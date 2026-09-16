@@ -507,3 +507,7 @@ body.letter-main-open .hero .subtitle,
   clip-path:inset(0 46.7% 0 0);
   transform:translate(46.7%,-50%);
 }
+
+/* V37: larger smiling halves, with enough responsive space beside the video. */
+.video-background-surround{--face-rail:clamp(40px,14vw,240px)}
+.video-background-face{width:clamp(72px,24vw,480px)}
