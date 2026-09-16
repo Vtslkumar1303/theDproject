@@ -45,13 +45,11 @@
     const section=document.getElementById('tdpGiftSection');
     if(!section)return false;
     const btn=section.querySelector('#tdpGiftOpenBtn');
-    const closeBtn=section.querySelector('#tdpGiftCloseBtn');
     const box=section.querySelector('#tdpGiftBox');
     const cards=[...section.querySelectorAll('.tdp-gift-photo-card')];
 
     const syncGiftLabel=()=>{
-      if(btn)btn.disabled=section.classList.contains('open');
-      if(closeBtn)closeBtn.disabled=!section.classList.contains('open');
+      if(btn)btn.textContent=section.classList.contains('open')?'Close it':'Open it';
       if(box)box.setAttribute('aria-label',section.classList.contains('open')?'Close the gift':'Open the gift');
     };
     syncGiftLabel();

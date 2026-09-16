@@ -31,7 +31,7 @@
 
         <div class="envelope-cover-title" aria-label="To, My march 🧿✨">${coverTitleMarkup}</div>
 
-        <div id="passwordGate" class="envelope-password-panel" aria-hidden="true">
+        <div id="passwordGate" class="envelope-password-panel" aria-hidden="true" inert>
           <div class="password-glow" aria-hidden="true"></div>
           <div class="password-tape"></div>
           <div class="password-heart" aria-hidden="true"></div>
@@ -42,6 +42,7 @@
             <button id="unlockBtn" class="unlock-btn" type="button"><span>Open</span><i aria-hidden="true">♡</i></button>
           </div>
           <div id="passwordMessage" class="password-message" aria-live="polite"></div>
+          <button id="closePasswordEnvelopeBtn" class="close-password-envelope-btn" type="button">Close envelope</button>
         </div>
 
         <button class="wax-seal-real" id="sealOpenBtn" type="button" aria-label="Reveal password"></button>
@@ -77,6 +78,10 @@
   const unlockBtn=document.getElementById('unlockBtn');
   const passwordMessage=document.getElementById('passwordMessage');
   const confessionSheet=document.getElementById('confessionSheet');
+  const closeEnvelopeBtn=document.getElementById('closePasswordEnvelopeBtn');
+  let focusTimer=null;
+  let validationAttempt=0;
+  let validating=false;
   const expectedHash='bf0a60ee19adc7954e2248d0c4fd7fed44671ea2cff24a6c75127f9ce0183608';
 
   let openingAudioContext=null;
@@ -132,11 +137,31 @@
   function revealPassword(){
     if(card.classList.contains('password-visible')||card.classList.contains('is-unlocking'))return;
     card.classList.add('password-visible');
+    passwordGate.inert=false;
     passwordGate.setAttribute('aria-hidden','false');
-    setTimeout(()=>passwordInput.focus({preventScroll:true}),360);
+    sealOpenBtn.setAttribute('aria-label','Close envelope');
+    focusTimer=setTimeout(()=>{if(card.classList.contains('password-visible')&&!card.classList.contains('is-unlocking'))passwordInput.focus({preventScroll:true})},360);
   }
 
-  sealOpenBtn.addEventListener('click',()=>{primeOpeningAudio();revealPassword();});
+  function closePasswordEnvelope(){
+    if(card.classList.contains('is-unlocking'))return;
+    clearTimeout(focusTimer);
+    validationAttempt++;
+    validating=false;
+    card.classList.remove('password-visible','wrong-shake');
+    passwordGate.inert=true;
+    passwordGate.setAttribute('aria-hidden','true');
+    passwordInput.value='';
+    passwordMessage.textContent='';
+    sealOpenBtn.setAttribute('aria-label','Reveal password');
+    sealOpenBtn.focus({preventScroll:true});
+  }
+  sealOpenBtn.addEventListener('click',()=>{primeOpeningAudio();card.classList.contains('password-visible')?closePasswordEnvelope():revealPassword()});
+  closeEnvelopeBtn.addEventListener('click',closePasswordEnvelope);
+  document.getElementById('realEnvelope').addEventListener('click',e=>{
+    if(card.classList.contains('password-visible')&&!e.target.closest('#passwordGate,#sealOpenBtn'))closePasswordEnvelope();
+  });
+  passwordGate.addEventListener('keydown',e=>{if(e.key==='Escape'){e.preventDefault();closePasswordEnvelope()}});
 
   passwordInput.addEventListener('input',()=>{
     passwordInput.value=passwordInput.value.replace(/\D/g,'').slice(0,4);
@@ -151,16 +176,30 @@
 
   async function unlockLetter(){
     primeOpeningAudio();
-    if(card.classList.contains('is-unlocking'))return;
+    if(card.classList.contains('is-unlocking')||validating)return;
     if(passwordInput.value.length!==4){
       passwordMessage.textContent='Four digits, in DDMM.';
       passwordInput.focus({preventScroll:true});
       return;
     }
 
-    if(await sha256(passwordInput.value)===expectedHash){
+    validating=true;
+    const attempt=++validationAttempt;
+    let valid;
+    try{valid=await sha256(passwordInput.value)===expectedHash}catch(e){if(attempt!==validationAttempt)return;validating=false;passwordMessage.textContent='Please try opening the letter again.';return}
+    if(attempt!==validationAttempt)return;
+    validating=false;
+    if(valid){
       passwordMessage.textContent='';
       card.classList.add('is-unlocking');
+      card.classList.remove('password-visible');
+      clearTimeout(focusTimer);
+      passwordInput.blur();
+      passwordGate.inert=true;
+      passwordGate.hidden=true;
+      passwordGate.setAttribute('aria-hidden','true');
+      passwordGate.style.setProperty('display','none','important');
+      closeEnvelopeBtn.disabled=true;
       unlockBtn.disabled=true;
       passwordInput.readOnly=true;
       sealOpenBtn.disabled=true;
