@@ -18,6 +18,10 @@
   white-space:nowrap!important;
   overflow:visible!important;
   text-overflow:clip!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:.12em!important;
 }
 .envelope-cover-title .cover-title-text{
   display:inline-flex!important;
@@ -31,22 +35,67 @@
   animation-delay:calc(var(--i) * 70ms)!important;
   text-shadow:0 1px 0 rgba(255,255,255,.6),0 5px 10px rgba(73,44,31,.14)!important;
 }
-.envelope-cover-title .cover-emoji-v16{
+
+/* Realistic CSS-drawn evil-eye symbol: no device emoji border. */
+.cover-symbol-eye{
+  position:relative!important;
+  width:1.55em!important;
+  height:1.55em!important;
+  flex:0 0 1.55em!important;
   display:inline-block!important;
-  margin-left:.12em!important;
-  transform-origin:center!important;
-  filter:drop-shadow(0 2px 1px rgba(255,255,255,.38)) drop-shadow(0 5px 6px rgba(54,34,25,.24))!important;
-  text-shadow:0 2px 0 rgba(255,255,255,.2)!important;
-  animation:tdpEmoji3D 2.7s ease-in-out infinite!important;
+  border-radius:50%!important;
+  background:radial-gradient(circle at 38% 30%,#8bd8ff 0 12%,#2d9ce7 13% 34%,#075fae 35% 58%,#063b75 59% 72%,#e8fbff 73% 86%,#1684d6 87% 100%)!important;
+  box-shadow:inset 0 2px 3px rgba(255,255,255,.7),inset 0 -4px 7px rgba(0,44,93,.24),0 4px 10px rgba(51,33,24,.18)!important;
+  animation:tdpEyeFloat 2.9s ease-in-out infinite!important;
 }
-.envelope-cover-title .cover-emoji-v16.sparkle{animation-delay:.34s!important}
+.cover-symbol-eye .eye-white{
+  position:absolute;inset:24%!important;border-radius:50%!important;background:rgba(241,253,255,.96)!important;box-shadow:inset 0 1px 2px rgba(18,76,118,.14)!important;
+}
+.cover-symbol-eye .eye-blue{
+  position:absolute;inset:34%!important;border-radius:50%!important;background:radial-gradient(circle at 35% 30%,#42c2ff,#0a6bb7 62%,#03457e 100%)!important;
+}
+.cover-symbol-eye .eye-pupil{
+  position:absolute;inset:43%!important;border-radius:50%!important;background:radial-gradient(circle,#111 0 58%,#020202 59% 100%)!important;
+}
+.cover-symbol-eye .eye-glint{
+  position:absolute;width:18%!important;height:18%!important;left:31%!important;top:27%!important;border-radius:50%!important;background:rgba(255,255,255,.96)!important;filter:blur(.2px)!important;
+}
+
+/* Realistic metallic sparkle built from shapes instead of emoji. */
+.cover-symbol-sparkle{
+  position:relative!important;
+  width:1.55em!important;
+  height:1.55em!important;
+  flex:0 0 1.55em!important;
+  display:inline-block!important;
+  animation:tdpSparkleFloat 2.6s ease-in-out infinite!important;
+  filter:drop-shadow(0 3px 5px rgba(133,88,15,.18))!important;
+}
+.cover-symbol-sparkle:before,
+.cover-symbol-sparkle:after,
+.cover-symbol-sparkle i:before,
+.cover-symbol-sparkle i:after{
+  content:"";position:absolute!important;left:50%!important;top:50%!important;transform:translate(-50%,-50%)!important;background:linear-gradient(180deg,#fff8bf,#ffd454 45%,#f2a917 100%)!important;border-radius:999px!important;box-shadow:0 0 7px rgba(255,205,72,.65)!important;
+}
+.cover-symbol-sparkle:before{width:17%!important;height:96%!important}
+.cover-symbol-sparkle:after{width:96%!important;height:17%!important}
+.cover-symbol-sparkle i:before{width:14%!important;height:64%!important;transform:translate(-50%,-50%) rotate(45deg)!important}
+.cover-symbol-sparkle i:after{width:64%!important;height:14%!important;transform:translate(-50%,-50%) rotate(45deg)!important}
+.cover-symbol-sparkle b{
+  position:absolute!important;width:32%!important;height:32%!important;right:-8%!important;top:-5%!important;background:radial-gradient(circle,#fffef0 0 30%,#ffd966 31% 68%,transparent 69%)!important;border-radius:50%!important;box-shadow:0 0 8px rgba(255,220,102,.72)!important;
+}
+
 @keyframes tdpCoverLetterFloat{
   0%,100%{transform:translateY(0) rotateX(0deg)}
   50%{transform:translateY(-2px) rotateX(5deg)}
 }
-@keyframes tdpEmoji3D{
+@keyframes tdpEyeFloat{
   0%,100%{transform:translateY(0) rotate(-2deg) scale(1)}
-  50%{transform:translateY(-4px) rotate(3deg) scale(1.08)}
+  50%{transform:translateY(-3px) rotate(2deg) scale(1.05)}
+}
+@keyframes tdpSparkleFloat{
+  0%,100%{transform:translateY(0) rotate(-4deg) scale(1);opacity:.92}
+  50%{transform:translateY(-4px) rotate(6deg) scale(1.09);opacity:1}
 }
 
 /* Never expose the cloned hero title while it is tucked inside/sliding from the envelope. */
@@ -80,13 +129,18 @@
   transform:translate(48px,-214px) rotate(2deg) scale(1.08)!important;
 }
 
-/* Existing reading-break video lives directly below the interactive gift envelope. */
-.tdp-gift-section .reading-break-card{
-  width:min(760px,100%)!important;
-  max-width:100%!important;
-  margin:16px auto 14px!important;
+/* Reading-break video is a fully separate sibling section after the gift card. */
+.reading-break-card.tdp-separated-video{
+  width:min(760px,calc(100% - 28px))!important;
+  max-width:760px!important;
+  margin:26px auto 46px!important;
   position:relative!important;
   z-index:20!important;
+  border:1px solid rgba(101,69,49,.15)!important;
+  border-radius:24px!important;
+  background:linear-gradient(rgba(250,240,220,.96),rgba(244,226,196,.96))!important;
+  box-shadow:0 18px 42px rgba(75,46,31,.11)!important;
+  padding:18px!important;
 }
 
 /* Floating shortcut: Play/Pause icon + song name only, draggable anywhere. */
@@ -123,7 +177,8 @@
 .floating-khat-control .fk-sub{display:none!important}
 
 @media(max-width:640px){
-  .envelope-cover-title{width:88%!important;font-size:clamp(1.02rem,5vw,1.35rem)!important}
+  .envelope-cover-title{width:88%!important;font-size:clamp(1.02rem,5vw,1.35rem)!important;gap:.1em!important}
+  .cover-symbol-eye,.cover-symbol-sparkle{width:1.38em!important;height:1.38em!important;flex-basis:1.38em!important}
   .floating-khat-control{
     right:8px!important;
     top:66%!important;
@@ -134,9 +189,11 @@
   }
   .tdp-gift-section.open .tdp-photo-1.tdp-photo-focus{transform:translate(-16px,-166px) rotate(-2deg) scale(1.06)!important}
   .tdp-gift-section.open .tdp-photo-2.tdp-photo-focus{transform:translate(16px,-172px) rotate(2deg) scale(1.06)!important}
+  .reading-break-card.tdp-separated-video{width:calc(100% - 20px)!important;margin:22px auto 36px!important;padding:12px!important;border-radius:20px!important}
 }
 
 @media(prefers-reduced-motion:reduce){
   .envelope-cover-title .cover-letter-v16,
-  .envelope-cover-title .cover-emoji-v16{animation:none!important}
+  .cover-symbol-eye,
+  .cover-symbol-sparkle{animation:none!important}
 }
