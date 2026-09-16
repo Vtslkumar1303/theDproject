@@ -77,6 +77,7 @@
   };
 
   const run=()=>{
+    document.title='To, My March';
     patchOpening();
     patchFloatingKhat();
     patchGift();
