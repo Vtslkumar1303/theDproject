@@ -478,3 +478,15 @@ body.letter-main-open .hero .subtitle,
   main .hero h1,body.letter-main-open .hero h1,.sheet-expand .sheet-original-hero h1,.letter-transition .sheet-original-hero h1{font-size:clamp(2.35rem,11.4vw,4.2rem)!important}
   .confession-thread-loop,.confession-thread-knot{right:11%!important}
 }
+
+/* V34: face cutouts follow the browser edges, even inside a narrow letter column. */
+.video-background-surround{
+  width:var(--edge-viewport,100vw)!important;
+  max-width:none!important;
+  left:var(--edge-offset,0px);
+  margin-left:0!important;
+  margin-right:0!important;
+  box-sizing:border-box;
+}
+.video-background-face{box-sizing:border-box;display:block}
+.video-background-surround .reading-break-card.tdp-separated-video{box-sizing:border-box}
