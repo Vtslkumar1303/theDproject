@@ -1,4 +1,6 @@
 (()=>{
+  const POS_KEY='tdp-khat-floating-position-v1';
+
   const removeEditorUI=()=>{
     document.body?.classList.remove('live-editing');
     document.querySelectorAll('.live-editor-toggle,.editor-panel,.sel-ui,.move-handle,.resize-handle,.sel-label').forEach(el=>el.remove());
@@ -15,27 +17,96 @@
     const btn=document.createElement('button');
     btn.type='button';
     btn.className='floating-khat-control';
-    btn.setAttribute('aria-label','Play Khat background song');
-    btn.setAttribute('title','Play / Pause Khat');
+    btn.setAttribute('aria-label','Play Khat');
+    btn.setAttribute('title','Play / Pause Khat — drag to move');
     btn.dataset.state=audio.paused?'paused':'playing';
-    btn.innerHTML='<span class="fk-icon" aria-hidden="true"></span><span class="fk-copy"><span class="fk-title">Khat ♫</span><span class="fk-sub">bg song</span></span>';
+    btn.innerHTML='<span class="fk-icon" aria-hidden="true"></span><span class="fk-copy"><span class="fk-title">Khat</span></span>';
     document.body.appendChild(btn);
 
     const sync=()=>{
       const playing=!audio.paused&&!audio.ended;
       btn.dataset.state=playing?'playing':'paused';
-      btn.setAttribute('aria-label',playing?'Pause Khat background song':'Play Khat background song');
-      const sub=btn.querySelector('.fk-sub');
-      if(sub)sub.textContent=playing?'playing softly':'bg song';
+      btn.setAttribute('aria-label',playing?'Pause Khat':'Play Khat');
     };
 
-    btn.addEventListener('click',async()=>{
+    const clamp=(v,min,max)=>Math.min(Math.max(v,min),max);
+    const applyPosition=(x,y)=>{
+      const margin=6;
+      const maxX=Math.max(margin,window.innerWidth-btn.offsetWidth-margin);
+      const maxY=Math.max(margin,window.innerHeight-btn.offsetHeight-margin);
+      const nx=clamp(x,margin,maxX);
+      const ny=clamp(y,margin,maxY);
+      btn.classList.add('fk-dragged');
+      btn.style.setProperty('left',nx+'px','important');
+      btn.style.setProperty('top',ny+'px','important');
+      btn.style.setProperty('right','auto','important');
+      btn.style.setProperty('bottom','auto','important');
+      btn.style.setProperty('transform','none','important');
+      return {x:nx,y:ny};
+    };
+
+    let drag=null;
+    let dragged=false;
+    let suppressClick=false;
+
+    btn.addEventListener('pointerdown',e=>{
+      if(e.button!==undefined&&e.button!==0)return;
+      const r=btn.getBoundingClientRect();
+      drag={id:e.pointerId,startX:e.clientX,startY:e.clientY,left:r.left,top:r.top};
+      dragged=false;
+      try{btn.setPointerCapture(e.pointerId);}catch(err){}
+    });
+
+    btn.addEventListener('pointermove',e=>{
+      if(!drag||e.pointerId!==drag.id)return;
+      const dx=e.clientX-drag.startX;
+      const dy=e.clientY-drag.startY;
+      if(!dragged&&Math.hypot(dx,dy)<5)return;
+      dragged=true;
+      btn.classList.add('fk-dragging');
+      applyPosition(drag.left+dx,drag.top+dy);
+      e.preventDefault();
+    });
+
+    const finishDrag=e=>{
+      if(!drag||e.pointerId!==drag.id)return;
+      if(dragged){
+        const r=btn.getBoundingClientRect();
+        const p=applyPosition(r.left,r.top);
+        try{localStorage.setItem(POS_KEY,JSON.stringify(p));}catch(err){}
+        suppressClick=true;
+        setTimeout(()=>{suppressClick=false;},0);
+      }
+      btn.classList.remove('fk-dragging');
+      try{btn.releasePointerCapture(e.pointerId);}catch(err){}
+      drag=null;
+    };
+
+    btn.addEventListener('pointerup',finishDrag);
+    btn.addEventListener('pointercancel',finishDrag);
+
+    btn.addEventListener('click',async e=>{
+      if(suppressClick){e.preventDefault();e.stopPropagation();return;}
       try{
         if(audio.paused||audio.ended){await audio.play();}
         else{audio.pause();}
-      }catch(e){}
+      }catch(err){}
       sync();
     });
+
+    try{
+      const saved=JSON.parse(localStorage.getItem(POS_KEY)||'null');
+      if(saved&&Number.isFinite(saved.x)&&Number.isFinite(saved.y)){
+        requestAnimationFrame(()=>applyPosition(saved.x,saved.y));
+      }
+    }catch(err){}
+
+    window.addEventListener('resize',()=>{
+      if(!btn.classList.contains('fk-dragged'))return;
+      const r=btn.getBoundingClientRect();
+      const p=applyPosition(r.left,r.top);
+      try{localStorage.setItem(POS_KEY,JSON.stringify(p));}catch(err){}
+    },{passive:true});
 
     ['play','pause','ended','loadedmetadata'].forEach(ev=>audio.addEventListener(ev,sync));
     sync();
