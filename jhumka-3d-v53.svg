@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 420" role="img" aria-label="Decorative golden jhumka">
+<defs>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#fff0a8"/>
+    <stop offset=".18" stop-color="#e6b548"/>
+    <stop offset=".48" stop-color="#9f6720"/>
+    <stop offset=".68" stop-color="#f2ce6b"/>
+    <stop offset="1" stop-color="#7b4616"/>
+  </linearGradient>
+  <radialGradient id="pearl" cx="35%" cy="30%" r="70%">
+    <stop offset="0" stop-color="#fffdf5"/>
+    <stop offset=".5" stop-color="#eadfc4"/>
+    <stop offset="1" stop-color="#a99573"/>
+  </radialGradient>
+  <radialGradient id="ruby" cx="38%" cy="30%" r="70%">
+    <stop offset="0" stop-color="#ffd1cc"/>
+    <stop offset=".42" stop-color="#a43835"/>
+    <stop offset="1" stop-color="#552020"/>
+  </radialGradient>
+  <filter id="shadow" x="-35%" y="-25%" width="180%" height="180%">
+    <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#5b3518" flood-opacity=".34"/>
+  </filter>
+  <filter id="soft" x="-40%" y="-40%" width="180%" height="180%">
+    <feGaussianBlur stdDeviation="2.2"/>
+  </filter>
+</defs>
+<g filter="url(#shadow)">
+  <ellipse cx="130" cy="28" rx="20" ry="17" fill="url(#ruby)" stroke="#8b5a1d" stroke-width="8"/>
+  <circle cx="130" cy="28" r="5" fill="#fff4d0" opacity=".9"/>
+  <path d="M130 44 C118 61 118 75 130 88 C142 75 142 61 130 44Z" fill="url(#gold)"/>
+  <circle cx="130" cy="88" r="12" fill="url(#pearl)" stroke="#8f6429" stroke-width="5"/>
+  <path d="M108 103 C115 92 145 92 152 103 L165 157 L95 157Z" fill="url(#gold)" stroke="#8a551b" stroke-width="5"/>
+  <path d="M102 121 C119 112 142 112 158 121" fill="none" stroke="#fff0a4" stroke-width="5" opacity=".7"/>
+  <path d="M104 139 C121 131 139 131 156 139" fill="none" stroke="#7e4816" stroke-width="4" opacity=".8"/>
+  <g>
+    <circle cx="111" cy="127" r="7" fill="url(#ruby)" stroke="#f2d06f" stroke-width="3"/>
+    <circle cx="130" cy="123" r="7" fill="url(#ruby)" stroke="#f2d06f" stroke-width="3"/>
+    <circle cx="149" cy="127" r="7" fill="url(#ruby)" stroke="#f2d06f" stroke-width="3"/>
+  </g>
+  <path d="M85 157 C85 210 103 242 130 252 C157 242 175 210 175 157Z" fill="url(#gold)" stroke="#7c4716" stroke-width="6"/>
+  <path d="M95 172 C108 189 151 189 165 172" fill="none" stroke="#ffe999" stroke-width="5" opacity=".75"/>
+  <path d="M100 196 C119 208 141 208 160 196" fill="none" stroke="#8a521b" stroke-width="5" opacity=".8"/>
+  <g fill="url(#ruby)" stroke="#efcf70" stroke-width="3">
+    <circle cx="107" cy="214" r="7"/>
+    <circle cx="130" cy="219" r="7"/>
+    <circle cx="153" cy="214" r="7"/>
+  </g>
+  <g stroke="#a46d28" stroke-width="4" stroke-linecap="round">
+    <path d="M93 239 L83 287"/>
+    <path d="M111 247 L106 301"/>
+    <path d="M130 252 L130 309"/>
+    <path d="M149 247 L154 301"/>
+    <path d="M167 239 L177 287"/>
+  </g>
+  <g>
+    <circle cx="83" cy="294" r="12" fill="url(#pearl)" stroke="#8d642e" stroke-width="4"/>
+    <circle cx="106" cy="309" r="12" fill="url(#pearl)" stroke="#8d642e" stroke-width="4"/>
+    <circle cx="130" cy="317" r="14" fill="url(#pearl)" stroke="#8d642e" stroke-width="4"/>
+    <circle cx="154" cy="309" r="12" fill="url(#pearl)" stroke="#8d642e" stroke-width="4"/>
+    <circle cx="177" cy="294" r="12" fill="url(#pearl)" stroke="#8d642e" stroke-width="4"/>
+  </g>
+  <path d="M72 327 Q130 354 188 327" fill="none" stroke="url(#gold)" stroke-width="9" stroke-linecap="round"/>
+  <g stroke="#a36c27" stroke-width="4">
+    <path d="M86 333 L79 371"/>
+    <path d="M108 339 L104 382"/>
+    <path d="M130 344 L130 389"/>
+    <path d="M152 339 L156 382"/>
+    <path d="M174 333 L181 371"/>
+  </g>
+  <g fill="url(#pearl)" stroke="#8d642e" stroke-width="4">
+    <circle cx="79" cy="379" r="10"/>
+    <circle cx="104" cy="390" r="10"/>
+    <circle cx="130" cy="397" r="11"/>
+    <circle cx="156" cy="390" r="10"/>
+    <circle cx="181" cy="379" r="10"/>
+  </g>
+  <path d="M108 164 C118 154 141 154 152 164" fill="none" stroke="#fff7c8" stroke-width="4" opacity=".7"/>
+  <ellipse cx="118" cy="177" rx="12" ry="28" fill="#fff4b4" opacity=".16" transform="rotate(16 118 177)"/>
+</g>
+<ellipse cx="130" cy="405" rx="60" ry="7" fill="#5e361b" opacity=".16" filter="url(#soft)"/>
+</svg>
