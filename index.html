@@ -18,7 +18,7 @@
     const r=await fetch(source,{cache:'no-store'});
     if(!r.ok) throw new Error('Base experience could not be loaded');
     let h=await r.text();
-    const v='20260917-full-beard-centered-romantic-v41';
+    const v='20260917-crafted-note-on-paper-v42';
     const lockedStyle='<style>body:not(.letter-main-open) main{display:none!important;visibility:hidden!important;pointer-events:none!important}body:not(.letter-main-open){overflow:hidden!important}</style>';
     const oldHead="h=h.replace('</head>','<style>'+css+'</style></head>');";
     const newHead="h=h.replace('</head>','<style>'+css+'</style><link rel=\"stylesheet\" href=\"opening.css?v="+v+"\"><link rel=\"stylesheet\" href=\"experience-patch.css?v="+v+"\"><link rel=\"stylesheet\" href=\"mobile-title-fix.css?v="+v+"\"><link rel=\"stylesheet\" href=\"opening-final-fix.css?v="+v+"\"><link rel=\"stylesheet\" href=\"latest-ui-fix.css?v="+v+"\"><link rel=\"stylesheet\" href=\"verse-audio-fix.css?v="+v+"\"><link rel=\"stylesheet\" href=\"envelope-upgrade-v15.css?v="+v+"\"><link rel=\"stylesheet\" href=\"final-ui-adjustments.css?v="+v+"\"></head>');";
