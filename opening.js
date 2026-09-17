@@ -181,7 +181,7 @@
     primeOpeningAudio();
     if(card.classList.contains('is-unlocking')||validating)return;
     if(passwordInput.value.length!==4){
-      passwordMessage.textContent='Please enter the password.';
+      passwordMessage.textContent='A little date you already know… and my heart remembers 🤍';
       passwordInput.focus({preventScroll:true});
       return;
     }
@@ -259,8 +259,8 @@
     }else{
       wrongPasswordAttempts++;
       passwordMessage.textContent=wrongPasswordAttempts%2
-        ? "Not quite. Hint: it’s your favourite day on Earth 🤍"
-        : 'Not quite. Hint: a date you already know 🤍';
+        ? "The day Earth got a little luckier… because you arrived 🤍"
+        : 'A date you already know… and my heart won’t forget 🫶';
       card.classList.remove('wrong-shake');
       void card.offsetWidth;
       card.classList.add('wrong-shake');

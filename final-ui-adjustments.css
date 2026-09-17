@@ -557,3 +557,31 @@ body.letter-expanding .real-envelope{transition:none!important;filter:none!impor
 @media(prefers-reduced-motion:reduce){
   body.letter-expanding .confession-sheet{transition:transform .001s linear!important}
 }
+
+/* V41: center the note on the paper itself with no translated text layer. */
+.real-envelope .envelope-crafted-note{
+  left:0!important;right:0!important;width:100%!important;max-width:none!important;
+  margin:0!important;padding:0 10px!important;box-sizing:border-box!important;
+  transform:none!important;translate:none!important;rotate:none!important;
+  text-align:center!important;text-indent:0!important;
+}
+.spotify-player #tt{
+  font-family:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif!important;
+  font-size:clamp(1.12rem,2.4vw,1.48rem)!important;font-weight:500!important;
+  font-style:italic;line-height:1.3;letter-spacing:.025em;
+}
+.spotify-player #ar{
+  font-family:Georgia,"Times New Roman",serif!important;font-size:.75rem!important;
+  line-height:1.5;letter-spacing:.06em;color:#e5c8b3;opacity:.88;
+}
+.spotify-player .khat-live-lyric{
+  font-family:Georgia,"Times New Roman",serif!important;font-size:.84rem!important;
+  font-weight:400!important;font-style:italic;line-height:1.55;letter-spacing:.01em;
+}
+.spotify-player .khat-volume-control,
+.spotify-player .spotify-time,
+.spotify-player .spotify-controls button{
+  font-family:Georgia,"Times New Roman",serif!important;
+  letter-spacing:.035em;
+}
+#petals.petals{z-index:500!important;pointer-events:none!important}

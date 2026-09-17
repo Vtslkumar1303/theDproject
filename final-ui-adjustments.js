@@ -139,7 +139,7 @@
           const face=document.createElement('img');
           face.className='video-background-face '+person;
           if(person==='girl')renderCompletedFace(face);
-          face.src=person==='boy'?'assets/video-boy-french-v40.webp':'assets/video-girl-smile-v36.webp';
+          face.src=person==='boy'?'assets/video-boy-full-french-v41.webp':'assets/video-girl-smile-v36.webp';
           face.alt='';
           face.setAttribute('aria-hidden','true');
           surround.appendChild(face);
@@ -283,6 +283,8 @@
     patchGift();
     patchVolume();
     patchMediaLabels();
+    const petals=document.getElementById('petals');
+    if(petals&&petals.parentElement!==document.body)document.body.appendChild(petals);
   };
 
   run();

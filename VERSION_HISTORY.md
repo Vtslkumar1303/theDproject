@@ -6,3 +6,5 @@ Each update is saved in Git history. Cache-busting URL parameters refresh assets
 - v40: French-cut beard, 30% Web Audio volume, Khat - by an atheist title, icon playback button, no playlist label, clearer envelope note, failed-password hints, transform-based page expansion. Preserved at `rollback/v40-refinements` after publishing.
 
 For rollback, restore the selected version's tree in a new commit on main, preserving later history and refreshing the asset version token. Earlier revisions remain in Git history.
+
+- v41: French-cut combined with full cheek/jaw beard, centered note, romantic hint-only password messages, serif player typography, petals above the player. Preserved at `rollback/v41-style-refinements`.
