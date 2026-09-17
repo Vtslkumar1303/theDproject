@@ -1,0 +1,36 @@
+(()=>{
+  const STORE='tdpLocalAnalyticsV1';
+  const READY='tdpAnalyticsCollectorReadyV51';
+  const BC='tdp-analytics-live';
+  const now=()=>new Date().toISOString();
+  const safeUUID=()=>crypto?.randomUUID?.()||Math.random().toString(36).slice(2)+Date.now().toString(36);
+  const visitorId=localStorage.tdpVisitorId||(localStorage.tdpVisitorId='v_'+safeUUID());
+  const sessionId=sessionStorage.tdpSessionId||(sessionStorage.tdpSessionId='s_'+safeUUID());
+  const start=performance.now();
+  const share=new URLSearchParams(location.search).get('share')||new URLSearchParams(location.search).get('from')||null;
+  const baseMeta={ua:navigator.userAgent,lang:navigator.language,screen:`${screen.width}x${screen.height}`,viewport:`${innerWidth}x${innerHeight}`,referrer:document.referrer||'direct',share};
+  let bc=null; try{bc='BroadcastChannel' in window?new BroadcastChannel(BC):null}catch(e){}
+  const read=()=>{try{return JSON.parse(localStorage.getItem(STORE)||'[]')}catch(e){return[]}};
+  const write=(rows)=>{try{localStorage.setItem(STORE,JSON.stringify(rows.slice(-2000)));localStorage.setItem(READY,JSON.stringify({at:now(),visitorId,sessionId,version:'v51'}))}catch(e){}};
+  function track(event_name,data={}){
+    const rows=read();
+    const row={id:safeUUID(),created_at:now(),visitor_id:visitorId,session_id:sessionId,event_name,event_value:data.event_value??null,section:data.section??null,path:location.pathname+location.search,meta:{...baseMeta,...(data.meta||{})}};
+    rows.push(row);write(rows);
+    try{window.dispatchEvent(new CustomEvent('tdp-analytics',{detail:row}))}catch(e){}
+    try{bc?.postMessage(row)}catch(e){}
+  }
+  window.tdpTrack=track;
+  track('site_opened',{meta:{first_visit:!localStorage.tdpSeenBefore,collector_version:'v51'}}); localStorage.tdpSeenBefore='1';
+  const scrollMarks=new Set();
+  addEventListener('scroll',()=>{const max=document.documentElement.scrollHeight-innerHeight;if(max<=0)return;const pct=Math.round(scrollY/max*100);[25,50,75,100].forEach(n=>{if(pct>=n&&!scrollMarks.has(n)){scrollMarks.add(n);track('scroll_depth',{event_value:String(n)})}})},{passive:true});
+  addEventListener('visibilitychange',()=>track(document.hidden?'page_hidden':'page_visible'));
+  addEventListener('pagehide',()=>track('session_end',{meta:{duration_ms:Math.round(performance.now()-start)}}));
+  document.addEventListener('click',e=>{const el=e.target.closest('button,a,[role="button"]');if(!el)return;const text=(el.getAttribute('aria-label')||el.textContent||el.id||'control').trim().replace(/\s+/g,' ').slice(0,80);track('button_click',{event_value:text,meta:{id:el.id||null,classes:typeof el.className==='string'?el.className:null}})},true);
+  const sections=[['gift','.tdp-gift-section'],['dreamboard','.tdp-dreamboard-shell'],['tickets','.tdp-tickets'],['polaroids','.tdp-polaroids'],['postcards','.tdp-postcards'],['passport','.tdp-passport'],['sunset_film','.tdp-film-wrap']];
+  const active=new Map();
+  const io='IntersectionObserver'in window?new IntersectionObserver(entries=>entries.forEach(entry=>{const section=entry.target.dataset.tdpAnalyticsSection;if(!section)return;if(entry.isIntersecting&&entry.intersectionRatio>=.35){if(!active.has(section)){active.set(section,performance.now());track('section_enter',{section})}}else if(active.has(section)){const ms=Math.round(performance.now()-active.get(section));active.delete(section);track('section_exit',{section,meta:{dwell_ms:ms}})}}),{threshold:[0,.35,.7]}):null;
+  const register=()=>sections.forEach(([name,sel])=>document.querySelectorAll(sel).forEach(el=>{if(el.dataset.tdpAnalyticsSection)return;el.dataset.tdpAnalyticsSection=name;io?.observe(el)}));
+  register();new MutationObserver(register).observe(document.documentElement,{subtree:true,childList:true});
+  const classSeen=new WeakMap();
+  new MutationObserver(ms=>ms.forEach(m=>{const el=m.target;if(!(el instanceof HTMLElement))return;const old=classSeen.get(el)||'';const cur=typeof el.className==='string'?el.className:'';classSeen.set(el,cur);if(el.matches('.tdp-gift-section')){if(!old.includes('open')&&cur.includes('open'))track('gift_opened');if(old.includes('open')&&!cur.includes('open'))track('gift_closed')}if(el.matches('.tdp-dreamboard-shell')){if(!old.includes('is-open')&&cur.includes('is-open'))track('dreamboard_opened');if(old.includes('is-open')&&!cur.includes('is-open'))track('dreamboard_closed')}if(el.id==='envelopeCard'){if(!old.includes('is-unlocking')&&cur.includes('is-unlocking'))track('password_correct');if(!old.includes('wrong-shake')&&cur.includes('wrong-shake'))track('password_wrong');if(!old.includes('password-visible')&&cur.includes('password-visible'))track('password_panel_opened')}})).observe(document.documentElement,{subtree:true,attributes:true,attributeFilter:['class']});
+})();
