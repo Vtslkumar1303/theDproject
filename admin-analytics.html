@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <title>Local Analytics — The D Project</title>
 <style>
-:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#101318;color:#eef2f6;font:14px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}.wrap{max-width:1180px;margin:auto;padding:24px}.top{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}.muted{color:#98a2b3}.notice{padding:14px 16px;border:1px solid #394150;background:#171b23;border-radius:14px;margin:18px 0}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.card{background:#171b23;border:1px solid #2a3240;border-radius:16px;padding:16px}.num{font-size:28px;font-weight:700;margin-top:4px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}button{border:1px solid #3a4555;background:#202632;color:#fff;padding:9px 12px;border-radius:10px;cursor:pointer}button:hover{background:#293140}.danger{border-color:#6d3a3a}.cols{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.tablewrap{overflow:auto;max-height:560px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid #2a3240;vertical-align:top}th{position:sticky;top:0;background:#171b23;color:#b7c0cc}.bar{height:8px;border-radius:99px;background:#2d3542;overflow:hidden;margin-top:5px}.bar i{display:block;height:100%;background:#9aa7b7}.sectionrow{margin:11px 0}.pill{display:inline-block;padding:2px 7px;border:1px solid #3a4555;border-radius:999px;color:#c9d1db;font-size:11px}.good{color:#9ce6b5}.bad{color:#ffadad}@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.cols{grid-template-columns:1fr}}@media(max-width:520px){.grid{grid-template-columns:1fr}}
+:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#101318;color:#eef2f6;font:14px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}.wrap{max-width:1180px;margin:auto;padding:24px}.top{display:flex;gap:16px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}.muted{color:#98a2b3}.notice,.diag{padding:14px 16px;border:1px solid #394150;background:#171b23;border-radius:14px;margin:18px 0}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.card{background:#171b23;border:1px solid #2a3240;border-radius:16px;padding:16px}.num{font-size:28px;font-weight:700;margin-top:4px}.toolbar,.diag-actions{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}button{border:1px solid #3a4555;background:#202632;color:#fff;padding:9px 12px;border-radius:10px;cursor:pointer}button:hover{background:#293140}.primary{background:#2b67f6;border-color:#3b73ff}.primary:hover{background:#3a73ff}.danger{border-color:#6d3a3a}.cols{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.tablewrap{overflow:auto;max-height:560px}table{width:100%;border-collapse:collapse;font-size:12px}th,td{text-align:left;padding:9px 8px;border-bottom:1px solid #2a3240;vertical-align:top}th{position:sticky;top:0;background:#171b23;color:#b7c0cc}.bar{height:8px;border-radius:99px;background:#2d3542;overflow:hidden;margin-top:5px}.bar i{display:block;height:100%;background:#9aa7b7}.sectionrow{margin:11px 0}.pill{display:inline-block;padding:2px 7px;border:1px solid #3a4555;border-radius:999px;color:#c9d1db;font-size:11px}.good{color:#9ce6b5}.bad{color:#ffadad}@media(max-width:850px){.grid{grid-template-columns:repeat(2,1fr)}.cols{grid-template-columns:1fr}}@media(max-width:520px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body><main class="wrap">
-<div class="top"><div><h1 style="margin:0">Local Analytics</h1><div class="muted">The D Project · same-browser dashboard</div></div><div class="pill" id="live">Auto refresh: 1s</div></div>
-<div class="notice"><strong>Important:</strong> this no-backend version only shows analytics stored in <em>this browser</em>. It cannot collect or aggregate activity from other people’s phones/computers because GitHub Pages has no database. No actual password text is stored.</div>
+<div class="top"><div><h1 style="margin:0">Local Analytics</h1><div class="muted">The D Project · same-browser dashboard</div></div><div class="pill">Auto refresh: 1s</div></div>
+<div class="diag"><div id="collectorStatus">Checking collector…</div><div class="diag-actions"><button id="openTracked" class="primary">Open tracked site</button><button id="test">Run test event</button></div></div>
+<div class="notice"><strong>Note:</strong> this dashboard reads analytics stored by the website in this browser. Activity that happened before analytics was enabled cannot be reconstructed.</div>
 <div class="grid">
 <div class="card"><div class="muted">Site opens</div><div class="num" id="opens">0</div></div>
 <div class="card"><div class="muted">Correct passwords</div><div class="num good" id="correct">0</div></div>
@@ -21,26 +23,8 @@
 <div class="card"><div class="muted">Latest scroll depth</div><div class="num" id="scroll">0%</div></div>
 </div>
 <div class="toolbar"><button id="refresh">Refresh</button><button id="export">Export JSON</button><button id="clear" class="danger">Clear local data</button></div>
-<div class="cols">
-<section class="card"><h2 style="margin-top:0">Section dwell time</h2><div id="dwell"></div></section>
-<section class="card"><h2 style="margin-top:0">Current browser</h2><div id="browser" class="muted"></div></section>
-</div>
+<div class="cols"><section class="card"><h2 style="margin-top:0">Section dwell time</h2><div id="dwell"></div></section><section class="card"><h2 style="margin-top:0">Current browser</h2><div id="browser" class="muted"></div></section></div>
 <section class="card" style="margin-top:14px"><h2 style="margin-top:0">Event timeline</h2><div class="tablewrap"><table><thead><tr><th>Time</th><th>Event</th><th>Section / value</th><th>Session</th><th>Details</th></tr></thead><tbody id="rows"></tbody></table></div></section>
 </main>
-<script>
-const STORE='tdpLocalAnalyticsV1';
-const read=()=>{try{return JSON.parse(localStorage.getItem(STORE)||'[]')}catch(e){return[]}};
-const count=(a,n)=>a.filter(x=>x.event_name===n).length;
-function render(){
- const a=read();
- opens.textContent=count(a,'site_opened');correct.textContent=count(a,'password_correct');wrong.textContent=count(a,'password_wrong');clicks.textContent=count(a,'button_click');gift.textContent=count(a,'gift_opened');dream.textContent=count(a,'dreamboard_opened');
- sessions.textContent=new Set(a.map(x=>x.session_id)).size;
- const sd=a.filter(x=>x.event_name==='scroll_depth').at(-1);scroll.textContent=(sd?.event_value||0)+'%';
- const sums={};a.filter(x=>x.event_name==='section_exit'&&x.section).forEach(x=>sums[x.section]=(sums[x.section]||0)+(x.meta?.dwell_ms||0));
- const max=Math.max(1,...Object.values(sums));dwell.innerHTML=Object.entries(sums).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="sectionrow"><div><strong>${k}</strong> <span class="muted">${(v/1000).toFixed(1)}s</span></div><div class="bar"><i style="width:${v/max*100}%"></i></div></div>`).join('')||'<div class="muted">No dwell data yet.</div>';
- const latest=a.at(-1)?.meta||{};browser.innerHTML=`<div><strong>Language:</strong> ${latest.lang||navigator.language}</div><div><strong>Screen:</strong> ${latest.screen||screen.width+'x'+screen.height}</div><div><strong>Viewport:</strong> ${latest.viewport||innerWidth+'x'+innerHeight}</div><div><strong>Referrer:</strong> ${latest.referrer||'direct'}</div><div><strong>Share tag:</strong> ${latest.share||'—'}</div><div style="margin-top:8px;word-break:break-word"><strong>User agent:</strong> ${latest.ua||navigator.userAgent}</div>`;
- rows.innerHTML=a.slice().reverse().slice(0,500).map(x=>`<tr><td>${new Date(x.created_at).toLocaleString()}</td><td>${x.event_name}</td><td>${x.section||x.event_value||'—'}</td><td>${(x.session_id||'').slice(0,14)}</td><td>${x.meta?.dwell_ms?Math.round(x.meta.dwell_ms/1000)+'s':''}</td></tr>`).join('');
-}
-refresh.onclick=render;export.onclick=()=>{const blob=new Blob([JSON.stringify(read(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='tdp-local-analytics.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};clear.onclick=()=>{if(confirm('Clear analytics stored in this browser?')){localStorage.removeItem(STORE);render()}};
-render();setInterval(render,1000);
-</script></body></html>
+<script src="admin-analytics-v51.js?v=20260917-analytics-diagnostic-v51"></script>
+</body></html>
