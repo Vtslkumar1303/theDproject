@@ -16,22 +16,28 @@
         <h3 class="tdp-dream-block-title">Tickets I’d save for us</h3>
         <div class="tdp-tickets">
           <article class="tdp-ticket">
-            <div class="tdp-ticket-band"><span>concert keepsake</span><span>01</span></div>
+            <span class="tdp-ticket-paper"></span><span class="tdp-ticket-fold"></span><span class="tdp-ticket-stubmark">admit two</span>
+            <div class="tdp-ticket-band"><span>live concert · keepsake</span><span>NO. 013</span></div>
             <h4 class="tdp-ticket-name">Arijit Singh</h4>
             <p class="tdp-ticket-note">for a night full of lyrics, lights, and feelings</p>
             <div class="tdp-ticket-meta"><span><b>Seat</b>Beside You</span><span><b>Entry</b>Us</span><span><b>Date</b>Someday</span></div>
+            <div class="tdp-ticket-printline"><span>GATE 02 · ROW A7<br>REF: OUR-SONGS-001</span><i class="tdp-ticket-barcode"></i></div>
           </article>
           <article class="tdp-ticket">
-            <div class="tdp-ticket-band"><span>concert keepsake</span><span>02</span></div>
+            <span class="tdp-ticket-paper"></span><span class="tdp-ticket-fold"></span><span class="tdp-ticket-stubmark">entry pass</span>
+            <div class="tdp-ticket-band"><span>live concert · keepsake</span><span>NO. 027</span></div>
             <h4 class="tdp-ticket-name">Darshan Raval</h4>
             <p class="tdp-ticket-note">loud songs, soft hearts, one memory saved</p>
             <div class="tdp-ticket-meta"><span><b>Seat</b>Beside You</span><span><b>Entry</b>Us</span><span><b>Date</b>Someday</span></div>
+            <div class="tdp-ticket-printline"><span>GATE 04 · ROW D3<br>REF: BLUE-NIGHT-002</span><i class="tdp-ticket-barcode"></i></div>
           </article>
           <article class="tdp-ticket">
-            <div class="tdp-ticket-band"><span>purple hour</span><span>07 ✦</span></div>
+            <span class="tdp-ticket-paper"></span><span class="tdp-ticket-fold"></span><span class="tdp-ticket-stubmark">purple hour</span>
+            <div class="tdp-ticket-band"><span>purple hour · keepsake</span><span>07 ✦</span></div>
             <h4 class="tdp-ticket-name">For My Favourite ARMY</h4>
             <p class="tdp-ticket-note">a tiny purple dream, saved quietly for someday</p>
             <div class="tdp-ticket-meta"><span><b>Seat</b>Right Next To Me</span><span><b>Entry</b>Us</span><span><b>Date</b>Someday</span></div>
+            <div class="tdp-ticket-printline"><span>ADMIT TWO · SEAT SIDE BY SIDE<br>REF: PURPLE-HOUR-007</span><i class="tdp-ticket-barcode"></i></div>
           </article>
         </div>
       </div>
@@ -39,13 +45,28 @@
       <div class="tdp-dream-block">
         <h3 class="tdp-dream-block-title">Future snapshots I’d keep</h3>
         <div class="tdp-polaroids">
-          <figure class="tdp-polaroid"><div class="tdp-polaroid-scene scene-sunset"></div><figcaption class="tdp-polaroid-caption">our sunset playlist</figcaption></figure>
-          <figure class="tdp-polaroid"><div class="tdp-polaroid-scene scene-beach"></div><figcaption class="tdp-polaroid-caption">one beach trip with you</figcaption></figure>
-          <figure class="tdp-polaroid"><div class="tdp-polaroid-scene scene-mountain"></div><figcaption class="tdp-polaroid-caption">cold winds, warm company</figcaption></figure>
-          <figure class="tdp-polaroid"><div class="tdp-polaroid-scene scene-navratri"></div><figcaption class="tdp-polaroid-caption">midnight after garba</figcaption></figure>
-          <figure class="tdp-polaroid"><div class="tdp-polaroid-scene scene-midnight"></div><figcaption class="tdp-polaroid-caption">roads, music &amp; you</figcaption></figure>
-          <figure class="tdp-polaroid"><div class="tdp-polaroid-scene scene-rain"></div><figcaption class="tdp-polaroid-caption">chai + rain window</figcaption></figure>
-          <figure class="tdp-polaroid"><div class="tdp-polaroid-scene scene-stars"></div><figcaption class="tdp-polaroid-caption">one quiet starry night</figcaption></figure>
+          <figure class="tdp-polaroid"><div class="tdp-polaroid-scene scene-sunset"><span class="tdp-photo-grain"></span></div><figcaption class="tdp-polaroid-caption">our sunset playlist</figcaption><span class="tdp-polaroid-date">someday · 18:42</span></figure>
+          <figure class="tdp-polaroid"><div class="tdp-polaroid-scene scene-beach"><span class="tdp-photo-grain"></span></div><figcaption class="tdp-polaroid-caption">one beach trip with you</figcaption><span class="tdp-polaroid-date">coastline · someday</span></figure>
+          <figure class="tdp-polaroid"><div class="tdp-polaroid-scene scene-mountain"><span class="tdp-photo-grain"></span></div><figcaption class="tdp-polaroid-caption">cold winds, warm company</figcaption><span class="tdp-polaroid-date">mountains · 07:16</span></figure>
+          <figure class="tdp-polaroid"><div class="tdp-polaroid-scene scene-navratri"><span class="tdp-photo-grain"></span></div><figcaption class="tdp-polaroid-caption">midnight after garba</figcaption><span class="tdp-polaroid-date">navratri · 00:47</span></figure>
+          <figure class="tdp-polaroid"><div class="tdp-polaroid-scene scene-midnight"><span class="tdp-photo-grain"></span></div><figcaption class="tdp-polaroid-caption">roads, music &amp; you</figcaption><span class="tdp-polaroid-date">city lights · 01:23</span></figure>
+          <figure class="tdp-polaroid"><div class="tdp-polaroid-scene scene-rain"><span class="tdp-photo-grain"></span></div><figcaption class="tdp-polaroid-caption">chai + rain window</figcaption><span class="tdp-polaroid-date">monsoon · 17:08</span></figure>
+          <figure class="tdp-polaroid"><div class="tdp-polaroid-scene scene-stars"><span class="tdp-photo-grain"></span></div><figcaption class="tdp-polaroid-caption">one quiet starry night</figcaption><span class="tdp-polaroid-date">terrace · 23:58</span></figure>
+        </div>
+
+        <div class="tdp-postcards" aria-label="future travel postcards">
+          <article class="tdp-postcard">
+            <span class="tdp-postcard-stamp">POST<br>♡</span><span class="tdp-postmark">SOMEDAY</span><span class="tdp-postcard-lines"></span>
+            <h4>From somewhere by the sea</h4>
+            <p>Salt in the air, our songs somewhere in the background, and one photo I’d probably keep forever.</p>
+            <span class="tdp-postcard-label">future postcard · beach escape</span>
+          </article>
+          <article class="tdp-postcard">
+            <span class="tdp-postcard-stamp">AIR<br>MAIL</span><span class="tdp-postmark">MOUNTAINS</span><span class="tdp-postcard-lines"></span>
+            <h4>From a road somewhere in the hills</h4>
+            <p>Cold wind, warm chai, an unnecessary roadside stop, and nowhere important to rush to.</p>
+            <span class="tdp-postcard-label">future postcard · mountain morning</span>
+          </article>
         </div>
       </div>
 
