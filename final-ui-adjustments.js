@@ -67,7 +67,7 @@
       envelope.appendChild(note);
     }
     document.querySelectorAll('.sheet-original-hero h1').forEach(el=>{
-      el.textContent='To, My March';
+      if(el.textContent!=='To, My March')el.textContent='To, My March';
       el.style.removeProperty('display');
       el.removeAttribute('aria-hidden');
       el.classList.add('tdp-opening-clone-title');
@@ -84,7 +84,7 @@
       el.dataset.inlineNazar='1';
     });
     document.querySelectorAll('main .hero .subtitle,.sheet-original-hero .subtitle').forEach(el=>{
-      el.textContent='Maybe sharing March was only the first coincidence.';
+      if(el.textContent!=='Maybe sharing March was only the first coincidence.')el.textContent='Maybe sharing March was only the first coincidence.';
     });
   };
 
@@ -138,8 +138,8 @@
         ['girl','boy'].forEach(person=>{
           const face=document.createElement('img');
           face.className='video-background-face '+person;
-          renderCompletedFace(face);
-          face.src='assets/video-'+person+'-smile-v36.webp';
+          if(person==='girl')renderCompletedFace(face);
+          face.src=person==='boy'?'assets/video-boy-french-v40.webp':'assets/video-girl-smile-v36.webp';
           face.alt='';
           face.setAttribute('aria-hidden','true');
           surround.appendChild(face);
@@ -186,7 +186,7 @@
 
     // Keep the requested level independent of HTMLMediaElement.volume:
     // Safari on iOS can ignore that property's setter and always report 1.
-    let level=.6,context=null,gain=null,source=null;
+    let level=.3,context=null,gain=null,source=null;
     const AudioContext=window.AudioContext||window.webkitAudioContext;
     if(AudioContext){
       try{
@@ -221,7 +221,7 @@
 
     const control=document.createElement('label');
     control.className='khat-volume-control';
-    control.innerHTML='<span>Volume</span><input type="range" min="0" max="100" step="1" value="60" aria-label="Khat volume"><output>60%</output>';
+    control.innerHTML='<span>Volume</span><input type="range" min="0" max="100" step="1" value="30" aria-label="Khat volume"><output>30%</output>';
     const slider=control.querySelector('input');
     const output=control.querySelector('output');
     const sync=()=>{
@@ -249,12 +249,40 @@
     sync();
   };
 
+
+  const patchMediaLabels=()=>{
+    const player=document.querySelector('.spotify-player');
+    const audio=document.getElementById('audio');
+    if(!player||!audio||player.dataset.v40Labels)return;
+    player.dataset.v40Labels='1';
+    player.querySelector('#plistBtn')?.remove();
+    const title=player.querySelector('#tt');
+    const button=player.querySelector('#play');
+    const sync=()=>{
+      if(title&&title.textContent!=='Khat - by an atheist')title.textContent='Khat - by an atheist';
+      if(!button)return;
+      const playing=!audio.paused&&!audio.ended;
+      button.dataset.state=playing?'playing':'paused';
+      button.setAttribute('aria-label',playing?'Pause Khat':'Play Khat');
+      button.setAttribute('title',playing?'Pause Khat':'Play Khat');
+      if(!button.querySelector('svg')){
+        button.innerHTML='<svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path class="khat-play-glyph" d="M8 5v14l11-7z" fill="currentColor"/><path class="khat-pause-glyph" d="M6 5h4v14H6zm8 0h4v14h-4z" fill="currentColor"/></svg>';
+      }
+    };
+    const observer=new MutationObserver(sync);
+    if(title)observer.observe(title,{childList:true});
+    if(button)observer.observe(button,{childList:true});
+    ['play','pause','ended'].forEach(event=>audio.addEventListener(event,sync));
+    sync();
+  };
+
   const run=()=>{
     document.title='To, My March';
     patchOpening();
     patchFloatingKhat();
     patchGift();
     patchVolume();
+    patchMediaLabels();
   };
 
   run();

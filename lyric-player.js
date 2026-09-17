@@ -42,7 +42,7 @@
     }
 
     function sync(){
-      const isKhat=(title.textContent||'').trim().toLowerCase()==='khat';
+      const isKhat=(title.textContent||'').trim().toLowerCase().startsWith('khat');
       const trackKey=(title.textContent||'').trim();
       if(trackKey!==lastTrack){
         lastTrack=trackKey;

@@ -523,3 +523,37 @@ body.letter-main-open .hero .subtitle,
   width:100%;min-width:0;min-height:28px;margin:0;accent-color:#d79a8d;cursor:pointer;
 }
 .khat-volume-control output{text-align:right;font-variant-numeric:tabular-nums}
+
+/* V40: crisp, single-line note and icon-based bottom playback control. */
+.envelope-crafted-note{
+  font:500 clamp(.46rem,1.8vw,.62rem)/1.5 Georgia,serif!important;
+  color:#573729!important;opacity:1;text-shadow:none!important;
+  filter:none!important;transform:translateX(-50%)!important;
+  -webkit-font-smoothing:auto;backface-visibility:hidden;
+}
+.spotify-player #plistBtn,.spotify-player #drawer{display:none!important}
+.spotify-player #play{display:grid;place-items:center;min-width:46px;min-height:46px;padding:8px}
+.spotify-player #play .khat-pause-glyph{display:none}
+.spotify-player #play[data-state="playing"] .khat-play-glyph{display:none}
+.spotify-player #play[data-state="playing"] .khat-pause-glyph{display:block}
+.spotify-title-lyric-row #tt{white-space:normal!important}
+.password-message{font-size:.72rem!important;line-height:1.5!important;color:#813a41!important}
+
+/* Lay out the final sheet once; only its transform changes during expansion. */
+body.letter-expanding .confession-sheet{
+  top:0!important;left:0!important;
+  width:100vw!important;height:100dvh!important;
+  transform-origin:0 0!important;
+  transform:translate3d(var(--sheet-start-left),var(--sheet-start-top),0)
+    scale(var(--sheet-start-scale-x),var(--sheet-start-scale-y))!important;
+  transition:transform .85s cubic-bezier(.22,.72,.22,1)!important;
+  will-change:transform;backface-visibility:hidden;
+}
+body.letter-expanding .letter-transition.page-fill .confession-sheet{
+  transform:translate3d(0,0,0) scale(1,1)!important;
+}
+body.letter-expanding .open-card.confession-envelope-card,
+body.letter-expanding .real-envelope{transition:none!important;filter:none!important;backdrop-filter:none!important}
+@media(prefers-reduced-motion:reduce){
+  body.letter-expanding .confession-sheet{transition:transform .001s linear!important}
+}

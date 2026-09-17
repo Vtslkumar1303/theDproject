@@ -176,6 +176,7 @@
     return [...new Uint8Array(digest)].map(b=>b.toString(16).padStart(2,'0')).join('');
   }
 
+  let wrongPasswordAttempts=0;
   async function unlockLetter(){
     primeOpeningAudio();
     if(card.classList.contains('is-unlocking')||validating)return;
@@ -218,32 +219,48 @@
         }));
       },980);
 
-      setTimeout(()=>card.classList.add('sheet-expand'),1900);
       setTimeout(()=>{
         const sheetRect=confessionSheet.getBoundingClientRect();
         const root=document.documentElement;
-        root.style.setProperty('--sheet-start-top',`${sheetRect.top}px`);
-        root.style.setProperty('--sheet-start-left',`${sheetRect.left}px`);
-        root.style.setProperty('--sheet-start-width',`${sheetRect.width}px`);
-        root.style.setProperty('--sheet-start-height',`${sheetRect.height}px`);
+        const viewportWidth=root.clientWidth;
+        const viewportHeight=window.innerHeight;
+        root.style.setProperty('--sheet-start-top',sheetRect.top+'px');
+        root.style.setProperty('--sheet-start-left',sheetRect.left+'px');
+        root.style.setProperty('--sheet-start-scale-x',String(sheetRect.width/viewportWidth));
+        root.style.setProperty('--sheet-start-scale-y',String(sheetRect.height/viewportHeight));
+        let finished=false,fallbackTimer=0;
+        const finishExpansion=()=>{
+          if(finished)return;
+          finished=true;clearTimeout(fallbackTimer);
+          confessionSheet.removeEventListener('transitionend',onExpansionEnd);
+          document.body.classList.add('letter-main-open');
+          if(mainLetter){mainLetter.inert=false;mainLetter.setAttribute('aria-hidden','false')}
+          letterOpened.checked=true;
+          letterOpened.dispatchEvent(new Event('change'));
+          setTimeout(()=>{
+            openScreen.style.display='none';
+            openScreen.setAttribute('aria-hidden','true');
+            document.body.classList.remove('letter-expanding');
+            ['--sheet-start-top','--sheet-start-left','--sheet-start-scale-x','--sheet-start-scale-y'].forEach(name=>root.style.removeProperty(name));
+          },120);
+        };
+        const onExpansionEnd=e=>{
+          if(e.target===confessionSheet&&e.propertyName==='transform')finishExpansion();
+        };
+        confessionSheet.addEventListener('transitionend',onExpansionEnd);
         document.body.classList.add('letter-expanding');
         card.classList.add('letter-transition');
-        requestAnimationFrame(()=>requestAnimationFrame(()=>card.classList.add('page-fill')));
-      },2650);
-      setTimeout(()=>{
-        document.body.classList.add('letter-main-open');
-        if(mainLetter){mainLetter.inert=false;mainLetter.setAttribute('aria-hidden','false')}
-        letterOpened.checked=true;
-        letterOpened.dispatchEvent(new Event('change'));
-        setTimeout(()=>{
-          openScreen.style.display='none';
-          openScreen.setAttribute('aria-hidden','true');
-          document.body.classList.remove('letter-expanding');
-          ['--sheet-start-top','--sheet-start-left','--sheet-start-width','--sheet-start-height'].forEach(name=>document.documentElement.style.removeProperty(name));
-        },120);
-      },3380);
+        requestAnimationFrame(()=>requestAnimationFrame(()=>{
+          card.classList.add('page-fill');
+          const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          fallbackTimer=setTimeout(finishExpansion,reduced?30:1100);
+        }));
+      },1900);
     }else{
-      passwordMessage.textContent='Not quite. Please try again.';
+      wrongPasswordAttempts++;
+      passwordMessage.textContent=wrongPasswordAttempts%2
+        ? "Not quite. Hint: it’s your favourite day on Earth 🤍"
+        : 'Not quite. Hint: a date you already know 🤍';
       card.classList.remove('wrong-shake');
       void card.offsetWidth;
       card.classList.add('wrong-shake');
