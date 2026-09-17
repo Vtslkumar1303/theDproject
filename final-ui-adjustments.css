@@ -585,3 +585,13 @@ body.letter-expanding .real-envelope{transition:none!important;filter:none!impor
   letter-spacing:.035em;
 }
 #petals.petals{z-index:500!important;pointer-events:none!important}
+
+/* V42: the paper ends 38px above the scene bottom; keep the note on its front. */
+.real-envelope .envelope-crafted-note{
+  bottom:58px!important;
+  left:0!important;right:0!important;
+  width:100%!important;
+  transform:translateZ(21px)!important;
+  text-align:center!important;
+  color:#573729!important;
+}
