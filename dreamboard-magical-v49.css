@@ -1,0 +1,29 @@
+/* v49: smoother magical open/close interaction for the 3D keepsake cover. */
+.tdp-memory-cover{pointer-events:auto!important;transition:opacity .72s ease,visibility .72s,transform 1.05s cubic-bezier(.2,.9,.18,1),box-shadow .7s ease,filter .7s ease!important;will-change:transform,opacity,filter}
+.tdp-dreamboard-stage{transition:transform 1.2s cubic-bezier(.16,.88,.2,1),opacity .82s ease,filter .82s ease!important;will-change:transform,opacity,filter}
+.tdp-dreamboard-shell.is-open .tdp-memory-cover{pointer-events:auto!important;opacity:.34!important;transform:translateY(-48px) rotateX(69deg) rotateZ(-.35deg) scale(.925)!important;filter:saturate(.9) brightness(1.03)}
+.tdp-dreamboard-shell.is-open .tdp-memory-cover:hover{opacity:.44!important;transform:translateY(-51px) rotateX(66deg) rotateZ(-.2deg) scale(.93)!important}
+.tdp-dreamboard-shell.is-open .tdp-dreamboard-stage{opacity:1;filter:blur(0);transform:rotateX(0deg) translateY(-22px) scale(1)!important}
+.tdp-dreamboard-shell.is-closing .tdp-dreamboard-stage{opacity:0!important;filter:blur(5px);transform:rotateX(-58deg) translateY(-62px) scale(.965)!important;transition-duration:.74s!important}
+.tdp-dreamboard-shell.is-closing .tdp-memory-cover{opacity:1!important;filter:none;transform:translateY(0) rotateX(4deg) rotateZ(-.9deg) scale(1)!important;transition-delay:.08s!important}
+.tdp-dreamboard-shell.is-opening .tdp-memory-cover{box-shadow:0 48px 80px rgba(72,44,30,.34),0 0 42px rgba(240,201,138,.19),inset 0 1px rgba(255,255,255,.76)!important}
+.tdp-cover-tap{transition:opacity .35s ease,letter-spacing .35s ease,color .35s ease}.tdp-memory-cover:hover .tdp-cover-tap{letter-spacing:.21em;color:#7d5f50}
+
+/* subtle magical glow and particles */
+.tdp-dreamboard-shell:before,.tdp-dreamboard-shell:after{content:"✦";position:absolute;left:50%;top:120px;z-index:30;pointer-events:none;opacity:0;color:#f2d7a4;text-shadow:0 0 12px rgba(244,211,153,.72);font:700 1rem/1 Georgia,serif;transform:translate(-50%,0) scale(.4)}
+.tdp-dreamboard-shell:after{content:"·  ✦  ·  ✧  ·";font-size:.72rem;letter-spacing:.55em;color:#d7b4cf}
+.tdp-dreamboard-shell.magic-burst:before{animation:tdpMagicOne 1.05s ease-out both}.tdp-dreamboard-shell.magic-burst:after{animation:tdpMagicTwo 1.2s .08s ease-out both}
+@keyframes tdpMagicOne{0%{opacity:0;transform:translate(-50%,16px) scale(.25)}28%{opacity:1}100%{opacity:0;transform:translate(-50%,-92px) scale(1.35)}}
+@keyframes tdpMagicTwo{0%{opacity:0;transform:translate(-50%,10px) scale(.45)}30%{opacity:.9}100%{opacity:0;transform:translate(-50%,-62px) scale(1.12)}}
+
+.tdp-memory-cover .tdp-cover-seal{transition:transform .65s cubic-bezier(.2,.9,.2,1),box-shadow .65s ease}.tdp-dreamboard-shell.is-opening .tdp-cover-seal{transform:translateZ(16px) rotate(8deg) scale(1.08);box-shadow:0 10px 18px rgba(76,38,34,.35),0 0 26px rgba(207,142,137,.18),inset 0 2px 4px rgba(255,255,255,.22)}
+.tdp-dreamboard-shell.is-closing .tdp-cover-seal{transform:translateZ(8px) rotate(-7deg) scale(1)}
+
+/* gentler object settle when reopening */
+.tdp-dreamboard-shell.is-revealed .tdp-ticket{animation:tdpObjectSettleV49 .95s cubic-bezier(.16,.9,.2,1) both,tdpTicketFloat 6.5s ease-in-out 1.15s infinite!important}
+@keyframes tdpObjectSettleV49{0%{opacity:0;transform:translate3d(0,-28px,58px) rotateX(12deg) rotate(var(--tilt)) scale(.95)}72%{opacity:1;transform:translate3d(0,3px,22px) rotateX(-1.5deg) rotate(var(--tilt)) scale(1.008)}100%{opacity:1;transform:translate3d(0,0,18px) rotateX(0) rotate(var(--tilt)) scale(1)}}
+.tdp-dreamboard-shell.is-revealed .tdp-polaroid{animation:tdpPhotoDropV49 .9s cubic-bezier(.16,.88,.2,1) both!important}
+@keyframes tdpPhotoDropV49{0%{opacity:0;transform:translate3d(0,-32px,72px) rotateX(11deg) rotate(var(--rot)) scale(.94)}72%{opacity:1;transform:translate3d(0,4px,24px) rotateX(-1deg) rotate(var(--rot)) scale(1.008)}100%{opacity:1;transform:translate3d(0,0,16px) rotateX(0) rotate(var(--rot)) scale(1)}}
+
+@media(max-width:700px){.tdp-dreamboard-shell.is-open .tdp-memory-cover{transform:translateY(-31px) rotateX(66deg) scale(.95)!important}.tdp-dreamboard-shell.is-closing .tdp-dreamboard-stage{transform:rotateX(-50deg) translateY(-42px) scale(.975)!important}}
+@media(prefers-reduced-motion:reduce){.tdp-dreamboard-shell:before,.tdp-dreamboard-shell:after{display:none}.tdp-memory-cover,.tdp-dreamboard-stage{transition:none!important}}
