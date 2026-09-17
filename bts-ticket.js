@@ -1,8 +1,6 @@
 (()=>{
-  const makeTicket=()=>{
-    if(document.querySelector('.tdp-bts-keepsake')) return;
-    const gift=document.querySelector('.tdp-gift-section');
-    if(!gift) return;
+  const buildTicket=(gift)=>{
+    if(!gift || document.querySelector('.tdp-bts-keepsake')) return false;
 
     const wrap=document.createElement('section');
     wrap.className='tdp-bts-keepsake';
@@ -34,13 +32,37 @@
     const reveal=()=>requestAnimationFrame(()=>requestAnimationFrame(()=>wrap.classList.add('is-visible')));
     if(gift.classList.contains('open')) reveal();
     else {
-      const observer=new MutationObserver(()=>{
-        if(gift.classList.contains('open')){ reveal(); observer.disconnect(); }
+      const openObserver=new MutationObserver(()=>{
+        if(gift.classList.contains('open')){
+          reveal();
+          openObserver.disconnect();
+        }
       });
-      observer.observe(gift,{attributes:true,attributeFilter:['class']});
+      openObserver.observe(gift,{attributes:true,attributeFilter:['class']});
     }
+    return true;
   };
 
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',()=>setTimeout(makeTicket,350));
-  else setTimeout(makeTicket,350);
+  const tryMount=()=>buildTicket(document.querySelector('.tdp-gift-section'));
+
+  const start=()=>{
+    if(tryMount()) return;
+
+    const domObserver=new MutationObserver(()=>{
+      if(tryMount()) domObserver.disconnect();
+    });
+    domObserver.observe(document.documentElement,{childList:true,subtree:true});
+
+    let attempts=0;
+    const retry=setInterval(()=>{
+      attempts++;
+      if(tryMount() || attempts>=40){
+        clearInterval(retry);
+        if(document.querySelector('.tdp-bts-keepsake')) domObserver.disconnect();
+      }
+    },250);
+  };
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',start,{once:true});
+  else start();
 })();
