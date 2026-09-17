@@ -8,3 +8,5 @@ Each update is saved in Git history. Cache-busting URL parameters refresh assets
 For rollback, restore the selected version's tree in a new commit on main, preserving later history and refreshing the asset version token. Earlier revisions remain in Git history.
 
 - v41: French-cut combined with full cheek/jaw beard, centered note, romantic hint-only password messages, serif player typography, petals above the player. Preserved at `rollback/v41-style-refinements`.
+
+- v43: verified the user-supplied Khat timestamps from 00:41.6 through 04:51.6; kept opening cues unchanged and refreshed asset URLs to reload the matching timeline. Preserved at `rollback/v43-khat-timeline`.
