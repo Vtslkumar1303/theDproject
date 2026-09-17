@@ -1,0 +1,19 @@
+/* BTS-inspired keepsake ticket: intentionally subtle and logo-free. */
+.tdp-bts-keepsake{position:relative;width:min(620px,calc(100% - 28px));margin:26px auto 8px;z-index:14;opacity:0;transform:translateY(16px) rotate(-1deg);transition:opacity .75s ease,transform .85s cubic-bezier(.2,.8,.2,1)}
+.tdp-bts-keepsake.is-visible{opacity:1;transform:translateY(0) rotate(-1deg)}
+.tdp-bts-ticket{position:relative;display:grid;grid-template-columns:1fr 118px;min-height:178px;overflow:hidden;border:1px solid rgba(91,62,107,.24);border-radius:18px;background:linear-gradient(128deg,rgba(255,253,247,.98),rgba(243,233,244,.95));box-shadow:0 18px 38px rgba(69,43,72,.13),inset 0 1px rgba(255,255,255,.8);color:#513f50}
+.tdp-bts-ticket:before,.tdp-bts-ticket:after{content:"";position:absolute;right:107px;width:22px;height:22px;border-radius:50%;background:#efe0c2;z-index:4}.tdp-bts-ticket:before{top:-11px}.tdp-bts-ticket:after{bottom:-11px}
+.tdp-bts-ticket-main{position:relative;padding:24px 28px 22px;text-align:left;background:radial-gradient(circle at 84% 12%,rgba(138,98,164,.12),transparent 25%)}
+.tdp-bts-ticket-main:after{content:"✦   ✦   ✦   ✦   ✦   ✦   ✦";position:absolute;right:20px;bottom:12px;font:700 .52rem/1 Georgia,serif;letter-spacing:.16em;color:rgba(107,76,132,.37)}
+.tdp-bts-ticket-kicker{margin:0 0 8px;font:700 .58rem/1.2 Arial,sans-serif;letter-spacing:.24em;text-transform:uppercase;color:#8a6a98}
+.tdp-bts-ticket-title{margin:0;font:700 clamp(1.25rem,3.8vw,2rem)/1.15 "Segoe Print","Bradley Hand","Comic Sans MS",cursive;color:#59405d}
+.tdp-bts-ticket-sub{margin:8px 0 0;font:italic .74rem/1.55 Georgia,serif;color:#7c657c}
+.tdp-bts-ticket-meta{display:flex;flex-wrap:wrap;gap:7px 15px;margin-top:16px;font:700 .56rem/1.25 Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#715b72}
+.tdp-bts-ticket-meta span{display:inline-flex;gap:5px;align-items:center}.tdp-bts-ticket-meta b{font-weight:700;color:#9b77a6}
+.tdp-bts-ticket-stub{position:relative;display:grid;place-items:center;padding:15px 10px;border-left:1px dashed rgba(107,75,122,.3);background:linear-gradient(180deg,rgba(127,88,151,.12),rgba(109,76,133,.05))}
+.tdp-bts-ticket-stub-inner{transform:rotate(-90deg);white-space:nowrap;text-align:center}.tdp-bts-ticket-stub strong{display:block;font:700 .7rem/1 Arial,sans-serif;letter-spacing:.23em;color:#765687}.tdp-bts-ticket-stub small{display:block;margin-top:7px;font:italic .56rem/1 Georgia,serif;letter-spacing:.07em;color:#947c98}
+.tdp-bts-ticket-note{margin:9px auto 0;font:italic .58rem/1.5 Georgia,serif;color:#927b8f;text-align:center}
+.tdp-bts-ticket-heart{display:inline-block;margin-left:3px;color:#7f5a91;animation:tdpPurplePulse 2.8s ease-in-out infinite}
+@keyframes tdpPurplePulse{0%,100%{transform:scale(1);opacity:.72}50%{transform:scale(1.14);opacity:1}}
+@media(max-width:560px){.tdp-bts-keepsake{width:calc(100% - 18px);margin-top:20px}.tdp-bts-ticket{grid-template-columns:1fr 72px;min-height:158px;border-radius:15px}.tdp-bts-ticket:before,.tdp-bts-ticket:after{right:61px;width:18px;height:18px}.tdp-bts-ticket:before{top:-9px}.tdp-bts-ticket:after{bottom:-9px}.tdp-bts-ticket-main{padding:19px 18px 18px}.tdp-bts-ticket-title{font-size:1.15rem}.tdp-bts-ticket-sub{font-size:.66rem}.tdp-bts-ticket-meta{gap:6px 10px;font-size:.49rem;margin-top:13px}.tdp-bts-ticket-main:after{font-size:.42rem;right:9px}.tdp-bts-ticket-stub{padding:8px 4px}.tdp-bts-ticket-stub strong{font-size:.57rem}.tdp-bts-ticket-stub small{font-size:.47rem}}
+@media(prefers-reduced-motion:reduce){.tdp-bts-keepsake,.tdp-bts-ticket-heart{transition:none!important;animation:none!important}}
