@@ -1,0 +1,43 @@
+/* v57 — independent openable hidden dream notes replacing the old dreamboard cover */
+.tdp-dreamboard-shell.tdp-dreamnotes-replaced{display:none!important}
+.tdp-hidden-dream-notes{position:relative;width:min(920px,calc(100% - 24px));margin:34px auto 76px;padding:clamp(24px,5vw,54px);border-radius:28px;background:linear-gradient(rgba(248,236,211,.96),rgba(239,218,183,.96)),url('assets/asset-01-de12b7479609.png') center/cover;border:1px solid rgba(96,62,42,.14);box-shadow:0 24px 55px rgba(66,40,25,.13);overflow:hidden;isolation:isolate}
+.tdp-hidden-dream-notes:before{content:"";position:absolute;inset:12px;border:1px dashed rgba(111,76,53,.10);border-radius:22px;pointer-events:none}
+.tdp-dreamnotes-head{position:relative;z-index:2;text-align:center;max-width:620px;margin:0 auto 34px}
+.tdp-dreamnotes-kicker{font:700 .66rem/1.2 Georgia,serif;letter-spacing:.19em;text-transform:uppercase;color:#a06f5e}
+.tdp-dreamnotes-head h3{margin:10px 0 8px;font:700 clamp(1.7rem,5vw,3rem)/1.1 "Segoe Print","Bradley Hand","Comic Sans MS",cursive;color:#604135}
+.tdp-dreamnotes-head p{margin:0;font:italic clamp(.88rem,2vw,1rem)/1.7 Georgia,serif;color:#8a6656}
+.tdp-dreamnotes-stack{position:relative;z-index:2;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.tdp-dreamnote{position:relative;min-height:232px;perspective:1100px}
+.tdp-dreamnote button{font:inherit}
+.tdp-dreamnote-toggle{position:relative;width:100%;min-height:232px;border:0;padding:0;background:none;cursor:pointer;text-align:left;border-radius:20px;transform-style:preserve-3d;transition:transform .35s ease}
+.tdp-dreamnote-toggle:focus-visible{outline:2px solid rgba(122,74,58,.55);outline-offset:5px}
+.tdp-dreamnote-toggle:hover{transform:translateY(-3px) rotateZ(var(--tilt,0deg))}
+.tdp-note-folded{position:absolute;inset:0;border-radius:20px;overflow:hidden;background:linear-gradient(145deg,#f8ecd6 0 58%,#ead5af 59% 100%);border:1px solid rgba(103,68,47,.15);box-shadow:0 13px 24px rgba(73,46,30,.12),inset 0 1px rgba(255,255,255,.75);transition:opacity .45s ease,transform .55s cubic-bezier(.2,.8,.2,1)}
+.tdp-note-folded:before{content:"";position:absolute;inset:0;background:linear-gradient(35deg,transparent 48%,rgba(115,79,56,.10) 49% 50%,transparent 51%),linear-gradient(-35deg,transparent 48%,rgba(115,79,56,.08) 49% 50%,transparent 51%);opacity:.65}
+.tdp-note-folded:after{content:"";position:absolute;left:50%;top:50%;width:58px;height:58px;border-radius:50%;transform:translate(-50%,-38%);background:radial-gradient(circle at 35% 28%,#b95a62,#843746 72%,#652630);box-shadow:0 6px 12px rgba(75,33,33,.24),inset 0 2px 3px rgba(255,255,255,.25)}
+.tdp-note-label{position:absolute;left:18px;top:17px;right:18px;z-index:2;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;color:#68473a}
+.tdp-note-label strong{font:700 clamp(1.02rem,2.8vw,1.35rem)/1.25 "Segoe Print","Bradley Hand",cursive}
+.tdp-note-label span{font:700 .62rem/1 Georgia,serif;letter-spacing:.12em;text-transform:uppercase;color:#a27663;white-space:nowrap}
+.tdp-note-hint{position:absolute;left:0;right:0;bottom:18px;z-index:2;text-align:center;font:italic .72rem/1.4 Georgia,serif;color:#8c6758}
+.tdp-note-reveal{position:absolute;inset:0;border-radius:20px;padding:24px 22px 22px;background:linear-gradient(rgba(255,250,240,.98),rgba(245,230,202,.98));border:1px solid rgba(109,73,51,.14);box-shadow:0 18px 32px rgba(76,48,31,.16);opacity:0;transform:rotateX(-82deg) translateY(-12px);transform-origin:top center;pointer-events:none;transition:opacity .35s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+.tdp-note-reveal .tdp-note-art{height:92px;margin-bottom:14px;position:relative;display:grid;place-items:center}
+.tdp-note-reveal h4{margin:0 0 8px;text-align:center;font:700 1.08rem/1.3 "Segoe Print","Bradley Hand",cursive;color:#70493d}
+.tdp-note-reveal p{margin:0;text-align:center;font:italic .82rem/1.6 Georgia,serif;color:#826151}
+.tdp-dreamnote.is-open .tdp-note-folded{opacity:0;transform:rotateX(82deg) translateY(-14px);pointer-events:none}
+.tdp-dreamnote.is-open .tdp-note-reveal{opacity:1;transform:none;pointer-events:auto}
+.tdp-dreamnote.is-open .tdp-dreamnote-toggle:hover{transform:none}
+/* ticket art */
+.tdp-art-ticket:before{content:"";width:150px;height:58px;border:1px solid rgba(91,56,45,.18);border-radius:9px;background:linear-gradient(90deg,#7a4966 0 28%,#efe0bf 29% 100%);box-shadow:0 8px 15px rgba(67,43,29,.12);transform:rotate(-3deg)}
+.tdp-art-ticket:after{content:"MUSIC • SOMEDAY";position:absolute;font:700 .55rem/1 Georgia,serif;letter-spacing:.08em;color:#6f4e42;transform:translate(22px,0) rotate(-3deg)}
+/* sunset polaroid */
+.tdp-art-sunset:before{content:"";width:112px;height:82px;background:linear-gradient(#f5e8cf 0 72%,#fff8e9 73% 100%);border:1px solid rgba(92,62,43,.15);box-shadow:0 8px 15px rgba(63,39,24,.12);transform:rotate(4deg)}
+.tdp-art-sunset:after{content:"";position:absolute;width:92px;height:56px;top:7px;background:radial-gradient(circle at 70% 34%,#ffd592 0 9%,transparent 10%),linear-gradient(#efaf83 0 46%,#9f6f79 47% 60%,#4c5361 61% 100%);transform:rotate(4deg)}
+/* postcard */
+.tdp-art-postcard:before{content:"";width:148px;height:82px;border-radius:6px;background:linear-gradient(135deg,#d8c494,#f5e4c7);border:1px solid rgba(86,55,38,.16);box-shadow:0 8px 14px rgba(62,39,24,.12);transform:rotate(-2deg)}
+.tdp-art-postcard:after{content:"BEACH  •  MOUNTAINS";position:absolute;font:700 .54rem/1 Georgia,serif;letter-spacing:.08em;color:#6e5445;transform:rotate(-2deg)}
+/* navratri pass */
+.tdp-art-navratri:before{content:"";width:132px;height:74px;border-radius:10px;background:linear-gradient(120deg,#cf6f58,#8a3556 52%,#463067);box-shadow:0 8px 15px rgba(62,35,36,.16);transform:rotate(3deg)}
+.tdp-art-navratri:after{content:"GARBA • PASS";position:absolute;color:#fff2db;font:700 .58rem/1 Georgia,serif;letter-spacing:.11em;transform:rotate(3deg)}
+.tdp-dreamnotes-footer{position:relative;z-index:2;margin:28px auto 0;text-align:center;font:italic .72rem/1.6 Georgia,serif;color:#9a7565}
+@media(max-width:700px){.tdp-hidden-dream-notes{width:calc(100% - 14px);padding:24px 14px 28px;border-radius:20px;margin-top:24px}.tdp-dreamnotes-stack{grid-template-columns:1fr;gap:14px}.tdp-dreamnote,.tdp-dreamnote-toggle{min-height:218px}.tdp-note-reveal{padding:20px 16px}.tdp-note-reveal .tdp-note-art{height:86px}.tdp-dreamnotes-head{margin-bottom:24px}.tdp-note-label strong{font-size:1.05rem}}
+@media(prefers-reduced-motion:reduce){.tdp-dreamnote-toggle,.tdp-note-folded,.tdp-note-reveal{transition:none!important}}
