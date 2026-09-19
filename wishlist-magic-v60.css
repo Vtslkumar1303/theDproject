@@ -1,0 +1,26 @@
+/* v60 — whole wishlist magical open/close wrapper */
+.tdp-hidden-dream-notes.tdp-wishlist-magic{position:relative;overflow:visible;perspective:1600px;transform-style:preserve-3d;padding-top:96px}
+.tdp-wishlist-master-toggle{position:absolute;top:24px;left:50%;transform:translateX(-50%);z-index:15;width:min(520px,calc(100% - 34px));border:1px solid rgba(99,63,44,.18);border-radius:999px;padding:15px 22px;background:linear-gradient(180deg,#f8edd7,#ecd7b2);color:#624235;box-shadow:0 14px 30px rgba(70,43,28,.14),inset 0 1px rgba(255,255,255,.8);font:700 .9rem/1.3 "Segoe Print","Bradley Hand","Comic Sans MS",cursive;cursor:pointer;transition:transform .35s ease,box-shadow .35s ease,background .35s ease}
+.tdp-wishlist-master-toggle:hover{transform:translateX(-50%) translateY(-2px);box-shadow:0 18px 34px rgba(70,43,28,.19),inset 0 1px rgba(255,255,255,.85)}
+.tdp-wishlist-master-toggle:focus-visible{outline:2px solid rgba(122,74,58,.55);outline-offset:4px}
+.tdp-wishlist-master-toggle .tdp-toggle-sub{display:block;margin-top:3px;font:italic .7rem/1.35 Georgia,serif;font-weight:400;color:#8a6858}
+.tdp-wishlist-magic-shell{display:grid;grid-template-rows:0fr;opacity:0;transform:rotateX(-8deg) translateY(-18px) scale(.985);transform-origin:top center;filter:blur(1.2px);transition:grid-template-rows .85s cubic-bezier(.2,.8,.2,1),opacity .48s ease,transform .85s cubic-bezier(.2,.8,.2,1),filter .5s ease}
+.tdp-wishlist-magic-shell>.tdp-wishlist-magic-inner{min-height:0;overflow:hidden}
+.tdp-hidden-dream-notes.tdp-wishlist-magic.is-wishlist-open .tdp-wishlist-magic-shell{grid-template-rows:1fr;opacity:1;transform:none;filter:none}
+.tdp-hidden-dream-notes.tdp-wishlist-magic.is-wishlist-open .tdp-wishlist-master-toggle{background:linear-gradient(180deg,#fff5e6,#efddbf)}
+.tdp-wishlist-sparkles{position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:12}
+.tdp-wishlist-sparkles i{position:absolute;left:50%;top:68px;width:7px;height:7px;border-radius:50%;background:radial-gradient(circle,#fff 0 28%,#e8cba3 31% 58%,transparent 62%);opacity:0;transform:translate(-50%,0) scale(.2)}
+.tdp-hidden-dream-notes.tdp-wishlist-magic.is-wishlist-open .tdp-wishlist-sparkles i:nth-child(1){animation:tdpMagicSpark 1.2s .05s ease-out both;--x:-150px;--y:90px}
+.tdp-hidden-dream-notes.tdp-wishlist-magic.is-wishlist-open .tdp-wishlist-sparkles i:nth-child(2){animation:tdpMagicSpark 1.35s .1s ease-out both;--x:140px;--y:80px}
+.tdp-hidden-dream-notes.tdp-wishlist-magic.is-wishlist-open .tdp-wishlist-sparkles i:nth-child(3){animation:tdpMagicSpark 1.25s .18s ease-out both;--x:-85px;--y:155px}
+.tdp-hidden-dream-notes.tdp-wishlist-magic.is-wishlist-open .tdp-wishlist-sparkles i:nth-child(4){animation:tdpMagicSpark 1.4s .16s ease-out both;--x:95px;--y:150px}
+.tdp-hidden-dream-notes.tdp-wishlist-magic.is-wishlist-open .tdp-wishlist-sparkles i:nth-child(5){animation:tdpMagicSpark 1.3s .25s ease-out both;--x:-15px;--y:190px}
+@keyframes tdpMagicSpark{0%{opacity:0;transform:translate(-50%,0) scale(.2)}18%{opacity:.95}100%{opacity:0;transform:translate(calc(-50% + var(--x)),var(--y)) scale(1.35)}}
+.tdp-hidden-dream-notes.tdp-wishlist-magic:not(.is-wishlist-open) .tdp-dreamnotes-head,
+.tdp-hidden-dream-notes.tdp-wishlist-magic:not(.is-wishlist-open) .tdp-dreamnotes-stack,
+.tdp-hidden-dream-notes.tdp-wishlist-magic:not(.is-wishlist-open) .tdp-dreamnotes-footer{pointer-events:none}
+.tdp-hidden-dream-notes.tdp-wishlist-magic.is-wishlist-open .tdp-dreamnote{animation:tdpWishlistSettle .75s both}
+.tdp-hidden-dream-notes.tdp-wishlist-magic.is-wishlist-open .tdp-dreamnote:nth-child(2){animation-delay:.08s}.tdp-hidden-dream-notes.tdp-wishlist-magic.is-wishlist-open .tdp-dreamnote:nth-child(3){animation-delay:.14s}.tdp-hidden-dream-notes.tdp-wishlist-magic.is-wishlist-open .tdp-dreamnote:nth-child(4){animation-delay:.2s}
+@keyframes tdpWishlistSettle{0%{opacity:0;transform:translateY(16px) rotateX(-5deg) scale(.97)}100%{opacity:1;transform:none}}
+@media(max-width:700px){.tdp-hidden-dream-notes.tdp-wishlist-magic{padding-top:90px}.tdp-wishlist-master-toggle{top:20px;padding:13px 16px;font-size:.82rem}.tdp-wishlist-master-toggle .tdp-toggle-sub{font-size:.66rem}}
+@media(prefers-reduced-motion:reduce){.tdp-wishlist-master-toggle,.tdp-wishlist-magic-shell,.tdp-hidden-dream-notes.tdp-wishlist-magic.is-wishlist-open .tdp-dreamnote,.tdp-wishlist-sparkles i{transition:none!important;animation:none!important}}
