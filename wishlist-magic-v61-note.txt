@@ -1,0 +1,1 @@
+v61 switches the wishlist master toggle to the earlier v49-style magical open/close behavior.
