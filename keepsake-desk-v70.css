@@ -1,0 +1,159 @@
+/* v70 — small/medium keepsake desk replacing envelope-style little futures */
+.tdp-hidden-dream-notes.tdp-keepsake-replaced-v70{display:none!important}
+
+.tdp-keepsake-desk-v70{
+  position:relative;
+  width:min(980px,calc(100% - 24px));
+  margin:34px auto 78px;
+  padding:clamp(24px,4vw,42px);
+  border-radius:28px;
+  background:
+    linear-gradient(rgba(246,232,205,.96),rgba(233,208,173,.96)),
+    url('assets/asset-01-de12b7479609.png') center/cover;
+  border:1px solid rgba(99,64,44,.14);
+  box-shadow:0 24px 58px rgba(67,41,26,.14);
+  overflow:hidden;
+  isolation:isolate;
+}
+.tdp-keepsake-desk-v70:before{
+  content:"";
+  position:absolute;inset:12px;border-radius:22px;
+  border:1px dashed rgba(112,77,53,.10);pointer-events:none
+}
+.tdp-kd-head{position:relative;z-index:3;text-align:center;max-width:650px;margin:0 auto 30px}
+.tdp-kd-kicker{font:700 .64rem/1.2 Georgia,serif;letter-spacing:.2em;text-transform:uppercase;color:#9e6e5a}
+.tdp-kd-head h3{margin:10px 0 7px;font:700 clamp(1.7rem,5vw,2.9rem)/1.1 "Segoe Print","Bradley Hand","Comic Sans MS",cursive;color:#604136}
+.tdp-kd-head p{margin:0;font:italic .92rem/1.6 Georgia,serif;color:#896756}
+
+.tdp-kd-surface{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+  padding:18px;
+  border-radius:22px;
+  background:linear-gradient(135deg,rgba(157,112,74,.12),rgba(255,248,229,.28));
+  box-shadow:inset 0 1px rgba(255,255,255,.62),inset 0 -18px 36px rgba(109,73,48,.05)
+}
+.tdp-kd-grain{position:absolute;inset:0;pointer-events:none;opacity:.35;background-image:
+  radial-gradient(circle at 10% 20%,rgba(96,63,43,.08) 0 1px,transparent 1.4px),
+  radial-gradient(circle at 70% 55%,rgba(96,63,43,.06) 0 1px,transparent 1.4px);
+  background-size:31px 31px,43px 43px
+}
+.tdp-kd-item{position:relative;min-height:246px;perspective:1200px}
+.tdp-kd-trigger{
+  position:relative;width:100%;min-height:246px;padding:18px 16px 16px;
+  border:1px solid rgba(101,67,47,.12);border-radius:20px;
+  background:rgba(255,249,237,.45);cursor:pointer;
+  box-shadow:0 10px 22px rgba(77,47,30,.07);
+  color:#67473a;text-align:center;overflow:hidden;
+  transition:transform .35s ease,box-shadow .35s ease,background .35s ease
+}
+.tdp-kd-trigger:hover{transform:translateY(-3px);box-shadow:0 15px 28px rgba(77,47,30,.11);background:rgba(255,249,237,.62)}
+.tdp-kd-trigger:focus-visible{outline:2px solid rgba(128,82,62,.52);outline-offset:4px}
+.tdp-kd-label{
+  display:block;position:relative;z-index:5;margin-bottom:15px;
+  font:700 clamp(.86rem,2vw,1rem)/1.35 "Segoe Print","Bradley Hand",cursive;color:#6a493c
+}
+.tdp-kd-hint{
+  position:absolute;left:0;right:0;bottom:14px;
+  font:italic .66rem/1.35 Georgia,serif;letter-spacing:.06em;color:#9b7766
+}
+.tdp-kd-reveal-copy{
+  position:absolute;left:18px;right:18px;bottom:39px;
+  opacity:0;transform:translateY(7px);
+  font:italic .72rem/1.45 Georgia,serif;color:#7d5c4e;
+  transition:opacity .4s ease,transform .4s ease
+}
+.tdp-kd-item.is-open .tdp-kd-reveal-copy{opacity:1;transform:none}
+
+/* Concert ticket stack: intentionally small-to-medium */
+.tdp-ticket-stack{
+  position:relative;display:block;width:min(250px,86%);height:132px;margin:4px auto 0;
+  transform-style:preserve-3d
+}
+.tdp-ticket{
+  position:absolute;left:50%;top:50%;width:214px;height:78px;
+  border-radius:10px;overflow:hidden;border:1px solid rgba(80,52,40,.16);
+  display:grid;grid-template-columns:52px 1fr 42px;align-items:stretch;
+  box-shadow:0 10px 18px rgba(61,39,27,.13);
+  transform-origin:center;
+  transition:transform .72s cubic-bezier(.16,.86,.2,1),filter .45s ease,opacity .45s ease;
+  color:#4f392f
+}
+.tdp-ticket:before,.tdp-ticket:after{content:"";position:absolute;right:41px;width:12px;height:12px;border-radius:50%;background:#f4e5cb;z-index:4}
+.tdp-ticket:before{top:-6px}.tdp-ticket:after{bottom:-6px}
+.tdp-ticket-stub{display:grid;place-items:center;font:800 .72rem/1 Georgia,serif;letter-spacing:.06em;border-right:1px dashed rgba(82,54,42,.28)}
+.tdp-ticket-main{display:flex;flex-direction:column;justify-content:center;gap:4px;padding:0 10px;text-align:left}
+.tdp-ticket-main b{font:800 .72rem/1 Georgia,serif;letter-spacing:.07em}
+.tdp-ticket-main small{font:700 .48rem/1.15 Georgia,serif;letter-spacing:.06em;opacity:.76}
+.tdp-ticket-main i{font:italic .54rem/1.15 Georgia,serif;opacity:.76}
+.tdp-ticket-code{display:grid;place-items:center;padding:4px;font:700 .43rem/1.2 monospace;writing-mode:vertical-rl;letter-spacing:.08em;background:rgba(255,255,255,.3)}
+.tdp-ticket-bts{background:linear-gradient(110deg,#d8c4e8,#f5e9d0 44%,#dfc9ef);transform:translate(-50%,-50%) rotate(-5deg) translateY(10px)}
+.tdp-ticket-arijit{background:linear-gradient(110deg,#d5b98c,#f6e9cf 42%,#d6c2a0);transform:translate(-50%,-50%) rotate(1deg) translateY(0)}
+.tdp-ticket-darshan{background:linear-gradient(110deg,#b8cce5,#eef1e8 42%,#c6d8ec);transform:translate(-50%,-50%) rotate(5deg) translateY(-9px)}
+.tdp-kd-concerts.is-open .tdp-ticket-bts{transform:translate(-50%,-50%) translate(-24px,34px) rotate(-8deg)}
+.tdp-kd-concerts.is-open .tdp-ticket-arijit{transform:translate(-50%,-50%) translate(0,-3px) rotate(0deg)}
+.tdp-kd-concerts.is-open .tdp-ticket-darshan{transform:translate(-50%,-50%) translate(24px,-40px) rotate(8deg)}
+
+/* Polaroid */
+.tdp-polaroid-stack{position:relative;display:block;width:178px;height:132px;margin:0 auto}
+.tdp-polaroid{position:absolute;left:50%;top:50%;width:118px;height:138px;padding:8px 8px 28px;background:#fff9ec;border:1px solid rgba(84,60,44,.14);box-shadow:0 10px 18px rgba(63,42,28,.13);transition:transform .68s cubic-bezier(.16,.86,.2,1),filter .5s ease}
+.tdp-polaroid-back{transform:translate(-50%,-50%) rotate(-7deg) translate(-14px,7px);background:linear-gradient(#f9efdb 0 72%,#fffaf0 73%)}
+.tdp-polaroid-front{transform:translate(-50%,-50%) rotate(4deg)}
+.tdp-polaroid-photo{display:block;width:100%;height:92px;background:
+  radial-gradient(circle at 73% 36%,#ffd78f 0 8%,transparent 9%),
+  linear-gradient(#efaf83 0 46%,#b67979 47% 60%,#525765 61% 100%)}
+.tdp-polaroid-note{display:block;margin-top:8px;font:italic .58rem/1.2 "Segoe Print","Bradley Hand",cursive;color:#75594d}
+.tdp-kd-sunset.is-open .tdp-polaroid-front{transform:translate(-50%,-56%) rotate(1deg) scale(1.06);filter:saturate(1.08)}
+.tdp-kd-sunset.is-open .tdp-polaroid-back{transform:translate(-50%,-50%) rotate(-11deg) translate(-28px,11px)}
+
+/* travel tag */
+.tdp-travel-tag{position:relative;display:block;width:190px;height:124px;margin:4px auto 0;transform-style:preserve-3d;transition:transform .72s cubic-bezier(.16,.86,.2,1)}
+.tdp-travel-string{position:absolute;left:18px;top:-18px;width:42px;height:32px;border-left:2px solid #9c775b;border-top:2px solid #9c775b;border-radius:22px 0 0 0;transform:rotate(-10deg)}
+.tdp-travel-face{position:absolute;inset:0;border-radius:13px;background:linear-gradient(145deg,#ead3a9,#f8ead0);border:1px solid rgba(94,61,42,.16);box-shadow:0 10px 18px rgba(61,39,27,.13);padding:15px}
+.tdp-travel-title{display:block;font:800 .62rem/1 Georgia,serif;letter-spacing:.08em;margin-bottom:10px}
+.tdp-travel-mini{position:absolute;top:42px;width:72px;height:48px;border:5px solid #fff7e8;box-shadow:0 4px 9px rgba(70,45,29,.10)}
+.tdp-travel-beach{left:15px;transform:rotate(-4deg);background:linear-gradient(#9fd8df 0 47%,#ead18a 48% 100%)}
+.tdp-travel-mountain{right:15px;transform:rotate(4deg);background:
+ linear-gradient(145deg,transparent 0 37%,#758278 38% 60%,transparent 61%),
+ linear-gradient(35deg,transparent 0 37%,#586a61 38% 60%,transparent 61%),
+ linear-gradient(#b7d3dd 0 52%,#80937c 53%)}
+.tdp-travel-caption{position:absolute;left:0;right:0;bottom:11px;font:italic .55rem/1 Georgia,serif;color:#806455}
+.tdp-kd-travel.is-open .tdp-travel-tag{transform:rotateY(12deg) rotateZ(-2deg) translateY(-7px) scale(1.04)}
+
+/* Navratri pass */
+.tdp-garba-pass{position:relative;display:block;width:188px;height:108px;margin:9px auto 0;border-radius:14px;background:
+  radial-gradient(circle at 18% 20%,rgba(255,224,143,.2) 0 2px,transparent 3px),
+  linear-gradient(120deg,#c66c54,#843a58 50%,#4c356b);
+  border:1px solid rgba(69,42,50,.18);box-shadow:0 10px 18px rgba(61,35,38,.16);
+  color:#fff4df;overflow:hidden;transform:rotate(2deg);transition:transform .68s cubic-bezier(.16,.86,.2,1),box-shadow .5s ease
+}
+.tdp-garba-hole{position:absolute;left:10px;top:50%;width:10px;height:10px;border-radius:50%;background:#f1dcc0;transform:translateY(-50%);box-shadow:168px 0 #f1dcc0}
+.tdp-garba-title{position:absolute;left:0;right:0;top:24px;font:800 .78rem/1 Georgia,serif;letter-spacing:.12em}
+.tdp-garba-sub{position:absolute;left:0;right:0;top:45px;font:700 .48rem/1 Georgia,serif;letter-spacing:.08em;opacity:.86}
+.tdp-garba-dancers{position:absolute;left:0;right:0;bottom:15px;font:700 .75rem/1 Georgia,serif;letter-spacing:.35em;animation:tdpGarbaPulse 2.2s ease-in-out infinite}
+.tdp-garba-lights{position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,#ffe6a2 0 2px,transparent 3px),radial-gradient(circle at 45% 13%,#ffd5df 0 2px,transparent 3px),radial-gradient(circle at 70% 18%,#fff1ac 0 2px,transparent 3px),radial-gradient(circle at 88% 11%,#d7c9ff 0 2px,transparent 3px);opacity:.9}
+.tdp-kd-navratri.is-open .tdp-garba-pass{transform:rotate(-2deg) translateY(-8px) scale(1.05);box-shadow:0 17px 28px rgba(61,35,38,.2),0 0 22px rgba(255,215,153,.12)}
+@keyframes tdpGarbaPulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+
+.tdp-kd-footer{position:relative;z-index:3;margin-top:24px;text-align:center;font:italic .7rem/1.6 Georgia,serif;color:#997565}
+
+@media(max-width:700px){
+  .tdp-keepsake-desk-v70{width:calc(100% - 14px);padding:22px 12px 26px;border-radius:20px}
+  .tdp-kd-surface{grid-template-columns:1fr;gap:14px;padding:12px}
+  .tdp-kd-item,.tdp-kd-trigger{min-height:228px}
+  .tdp-ticket-stack{width:238px;max-width:92%;height:128px}
+  .tdp-ticket{width:202px;height:74px;grid-template-columns:48px 1fr 38px}
+  .tdp-kd-concerts.is-open .tdp-ticket-bts{transform:translate(-50%,-50%) translate(-18px,31px) rotate(-7deg)}
+  .tdp-kd-concerts.is-open .tdp-ticket-darshan{transform:translate(-50%,-50%) translate(18px,-35px) rotate(7deg)}
+}
+@media(max-width:420px){
+  .tdp-ticket-stack{width:220px}
+  .tdp-ticket{width:188px;height:70px;grid-template-columns:44px 1fr 34px}
+  .tdp-ticket-main b{font-size:.66rem}.tdp-ticket-main small{font-size:.44rem}.tdp-ticket-main i{font-size:.49rem}
+  .tdp-polaroid-stack{transform:scale(.94)}
+  .tdp-travel-tag,.tdp-garba-pass{transform-origin:center}
+}
+@media(prefers-reduced-motion:reduce){
+  .tdp-ticket,.tdp-polaroid,.tdp-travel-tag,.tdp-garba-pass,.tdp-garba-dancers,.tdp-kd-trigger{transition:none!important;animation:none!important}
+}
