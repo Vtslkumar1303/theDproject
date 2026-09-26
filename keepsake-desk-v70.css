@@ -221,3 +221,105 @@
 .tdp-ticket-stub,.tdp-ticket-main,.tdp-ticket-code{
   display:none!important;
 }
+
+
+/* v73 — keep Little Futures text clear of physical keepsake artwork */
+.tdp-kd-trigger{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:0!important;
+  padding:18px 16px 16px!important;
+  overflow:visible!important;
+}
+
+.tdp-kd-label{
+  width:100%;
+  margin:0 0 16px!important;
+  position:relative!important;
+  z-index:8!important;
+  flex:0 0 auto;
+}
+
+.tdp-ticket-stack,
+.tdp-polaroid-stack,
+.tdp-travel-tag,
+.tdp-garba-pass{
+  flex:0 0 auto!important;
+  position:relative!important;
+  z-index:4!important;
+}
+
+.tdp-kd-reveal-copy{
+  position:static!important;
+  left:auto!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:min(92%,320px);
+  min-height:2.8em;
+  margin:14px auto 4px!important;
+  display:flex!important;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  z-index:6!important;
+  pointer-events:none;
+}
+
+.tdp-kd-hint{
+  position:static!important;
+  left:auto!important;
+  right:auto!important;
+  bottom:auto!important;
+  width:100%;
+  margin-top:auto!important;
+  padding-top:10px;
+  display:block!important;
+  flex:0 0 auto;
+  z-index:7!important;
+}
+
+.tdp-kd-concerts .tdp-kd-hint{
+  margin-top:10px!important;
+}
+
+.tdp-kd-concerts.is-open .tdp-kd-hint{
+  margin-top:12px!important;
+}
+
+.tdp-kd-sunset .tdp-polaroid-stack{
+  margin-bottom:2px!important;
+}
+
+.tdp-kd-travel .tdp-travel-tag,
+.tdp-kd-navratri .tdp-garba-pass{
+  margin-bottom:2px!important;
+}
+
+.tdp-kd-item:not(.tdp-kd-concerts),
+.tdp-kd-item:not(.tdp-kd-concerts) .tdp-kd-trigger{
+  min-height:276px!important;
+}
+
+.tdp-kd-concerts,
+.tdp-kd-concerts .tdp-kd-trigger{
+  min-height:270px!important;
+}
+
+.tdp-kd-concerts.is-open,
+.tdp-kd-concerts.is-open .tdp-kd-trigger{
+  min-height:350px!important;
+}
+
+@media(max-width:700px){
+  .tdp-kd-trigger{padding:16px 12px 14px!important}
+  .tdp-kd-label{margin-bottom:14px!important}
+  .tdp-kd-reveal-copy{width:min(94%,300px);margin-top:12px!important}
+  .tdp-kd-item:not(.tdp-kd-concerts),
+  .tdp-kd-item:not(.tdp-kd-concerts) .tdp-kd-trigger{min-height:268px!important}
+  .tdp-kd-concerts,
+  .tdp-kd-concerts .tdp-kd-trigger{min-height:260px!important}
+  .tdp-kd-concerts.is-open,
+  .tdp-kd-concerts.is-open .tdp-kd-trigger{min-height:338px!important}
+}
