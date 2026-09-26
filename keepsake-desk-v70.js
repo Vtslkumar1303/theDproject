@@ -105,13 +105,72 @@
 
     old.insertAdjacentElement('afterend',section);
 
+    const surface=section.querySelector('.tdp-kd-surface');
+    const footer=section.querySelector('.tdp-kd-footer');
+    const master=document.createElement('button');
+    master.type='button';
+    master.className='tdp-kd-master-toggle';
+    master.setAttribute('aria-expanded','false');
+    master.innerHTML='<span class="tdp-kd-master-icon">✦</span><span class="tdp-kd-master-copy"><b>Little Futures</b><small>tap to unfold the keepsakes</small></span><span class="tdp-kd-master-arrow">⌄</span>';
+
+    const content=document.createElement('div');
+    content.className='tdp-kd-content';
+    const contentInner=document.createElement('div');
+    contentInner.className='tdp-kd-content-inner';
+    content.appendChild(contentInner);
+    contentInner.appendChild(surface);
+    contentInner.appendChild(footer);
+    section.querySelector('.tdp-kd-head').insertAdjacentElement('afterend',master);
+    master.insertAdjacentElement('afterend',content);
+
+    const covers=[
+      ['concerts','Concert night','three songs waiting to happen','♫'],
+      ['sunset','Golden hour','a tiny sky kept for later','☼'],
+      ['travel','Somewhere someday','one place, then another','⌁'],
+      ['navratri','Navratri night','music, lights, and tired feet','✦']
+    ];
+    section.querySelectorAll('.tdp-kd-item').forEach((item,index)=>{
+      const btn=item.querySelector('.tdp-kd-trigger');
+      const cover=document.createElement('span');
+      cover.className='tdp-kd-unbox-cover';
+      cover.innerHTML='<span class="tdp-kd-unbox-symbol">'+covers[index][3]+'</span><b>'+covers[index][1]+'</b><small>'+covers[index][2]+'</small><em>tap to reveal</em>';
+      btn.insertBefore(cover,btn.firstChild);
+    });
+
+    const resetKeepsakes=()=>{
+      section.querySelectorAll('.tdp-kd-item').forEach((item)=>{
+        item.classList.remove('is-open');
+        const btn=item.querySelector('.tdp-kd-trigger');
+        if(btn) btn.setAttribute('aria-expanded','false');
+      });
+      const concertHint=section.querySelector('.tdp-kd-concerts .tdp-kd-hint');
+      const polaroidHint=section.querySelector('.tdp-kd-sunset .tdp-kd-hint');
+      const travelHint=section.querySelector('.tdp-kd-travel .tdp-kd-hint');
+      const navHint=section.querySelector('.tdp-kd-navratri .tdp-kd-hint');
+      if(concertHint) concertHint.textContent='tap the tickets';
+      if(polaroidHint) polaroidHint.textContent='tap the polaroids';
+      if(travelHint) travelHint.textContent='tap the travel tag';
+      if(navHint) navHint.textContent='tap the pass';
+    };
+
+    master.addEventListener('click',()=>{
+      const open=section.classList.toggle('is-section-open');
+      master.setAttribute('aria-expanded',open?'true':'false');
+      const small=master.querySelector('small');
+      if(small) small.textContent=open?'tap to fold the keepsakes away':'tap to unfold the keepsakes';
+      if(!open) resetKeepsakes();
+      if(window.tdpTrack){
+        window.tdpTrack(open?'little_futures_open':'little_futures_close',{section:'keepsake_desk'});
+      }
+    });
+
     const concertBtn=section.querySelector('.tdp-kd-concerts .tdp-kd-trigger');
     const toggleConcert=()=>{
       const item=section.querySelector('.tdp-kd-concerts');
       const open=item.classList.toggle('is-open');
       concertBtn.setAttribute('aria-expanded',open?'true':'false');
       const hint=concertBtn.querySelector('.tdp-kd-hint');
-      if(hint) hint.textContent=open?'tap again to stack them':'tap the tickets';
+      if(hint) hint.textContent=open?'tap again to hide them':'tap the tickets';
       if(window.tdpTrack){
         window.tdpTrack(open?'keepsake_open':'keepsake_close',{keepsake:1,type:'concert_tickets'});
       }
@@ -124,7 +183,7 @@
       const open=item.classList.toggle('is-open');
       polaroidBtn.setAttribute('aria-expanded',open?'true':'false');
       const hint=polaroidBtn.querySelector('.tdp-kd-hint');
-      if(hint) hint.textContent=open?'tap again to stack them':'tap the polaroids';
+      if(hint) hint.textContent=open?'tap again to hide them':'tap the polaroids';
       if(window.tdpTrack){
         window.tdpTrack(open?'keepsake_open':'keepsake_close',{keepsake:2,type:'sunset_polaroids'});
       }
@@ -136,6 +195,11 @@
         const item=btn.closest('.tdp-kd-item');
         const open=item.classList.toggle('is-open');
         btn.setAttribute('aria-expanded',open?'true':'false');
+        const hint=btn.querySelector('.tdp-kd-hint');
+        if(hint){
+          const isTravel=item.classList.contains('tdp-kd-travel');
+          hint.textContent=open?'tap again to hide it':(isTravel?'tap the travel tag':'tap the pass');
+        }
         if(window.tdpTrack){
           window.tdpTrack(open?'keepsake_open':'keepsake_close',{keepsake:index+3});
         }
