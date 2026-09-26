@@ -60,63 +60,67 @@ button,a.btn{border:1px solid rgba(95,61,45,.16);background:rgba(255,250,239,.84
 
   <section id="logs" class="logs"></section>
 
-  <p class="note">These logs are stored in this browser’s local storage. GitHub Pages cannot receive and centrally store responses from another device without a backend/database.</p>
+  <p class="note">This page reads the shared response history from the central response service, so submissions from different devices appear together here.</p>
 </main>
 <script>
 (()=>{
-  const KEY='theDproject-verse-response-logs-v1';
-  const VERSE_MAP_KEY='theDproject-verse-text-map-v1';
+  const API='https://the-d-project-responses.floot.app/_api/responses';
   const logsEl=document.getElementById('logs');
   const totalEl=document.getElementById('total');
   const verseCountEl=document.getElementById('verseCount');
   const latestEl=document.getElementById('latest');
+  let currentLogs=[];
 
   const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-  const read=()=>{try{const x=JSON.parse(localStorage.getItem(KEY)||'[]');return Array.isArray(x)?x:[]}catch(e){return[]}};
-  const fmt=iso=>{
-    try{return new Intl.DateTimeFormat(undefined,{dateStyle:'medium',timeStyle:'short'}).format(new Date(iso))}catch(e){return iso||'—'}
-  };
+  const fmt=iso=>{try{return new Intl.DateTimeFormat(undefined,{dateStyle:'medium',timeStyle:'short'}).format(new Date(iso))}catch(e){return iso||'—'}};
 
-  function render(){
-    let verseMap={};try{verseMap=JSON.parse(localStorage.getItem(VERSE_MAP_KEY)||'{}')||{}}catch(e){}
-    const logs=read().slice().sort((a,b)=>new Date(b.submitted_at)-new Date(a.submitted_at));
-    totalEl.textContent=logs.length;
-    verseCountEl.textContent=new Set(logs.map(x=>x.verse_title||x.verse_index)).size;
-    latestEl.textContent=logs.length?fmt(logs[0].submitted_at):'—';
-    if(!logs.length){
-      logsEl.innerHTML='<div class="empty">No submitted verse responses are stored on this browser yet.</div>';
+  function draw(logs){
+    currentLogs=logs.slice().sort((a,b)=>new Date(b.submittedAt||b.submitted_at)-new Date(a.submittedAt||a.submitted_at));
+    totalEl.textContent=currentLogs.length;
+    verseCountEl.textContent=new Set(currentLogs.map(x=>x.verseTitle||x.verse_title||x.verseIndex||x.verse_index)).size;
+    latestEl.textContent=currentLogs.length?fmt(currentLogs[0].submittedAt||currentLogs[0].submitted_at):'—';
+    if(!currentLogs.length){
+      logsEl.innerHTML='<div class="empty">No verse responses have been submitted yet.</div>';
       return;
     }
-    logsEl.innerHTML=logs.map((x,idx)=>`
-      <article class="entry">
-        <div class="entry-head">
-          <div class="verse">Verse ${esc(x.verse_index||'')} · ${esc(x.verse_title||'Untitled')}</div>
-          <div class="time">${esc(fmt(x.submitted_at))}</div>
-        </div>
-        <div class="verse-full">
-          <span class="verse-full-label">The verse</span>
-          <div class="verse-full-text">${esc(x.verse_text||(verseMap[x.verse_index]&&verseMap[x.verse_index].text)||'Open the main letter once on this browser to restore the full verse text for this older entry.')}</div>
-        </div>
-        <div class="response-wrap">
-          <span class="response-label">The response</span>
-          <div class="response">${esc(x.response||'')}</div>
-        </div>
-        <div class="meta">Entry #${logs.length-idx} · ${esc(x.id||'')}</div>
-      </article>`
+    logsEl.innerHTML=currentLogs.map((x,idx)=>
+      '<article class="entry">' +
+      '<div class="entry-head">' +
+      '<div class="verse">Verse '+esc(x.verseIndex??x.verse_index??'')+' · '+esc(x.verseTitle||x.verse_title||'Untitled')+'</div>' +
+      '<div class="time">'+esc(fmt(x.submittedAt||x.submitted_at))+'</div>' +
+      '</div>' +
+      '<div class="verse-full"><span class="verse-full-label">The verse</span><div class="verse-full-text">'+esc(x.verseText||x.verse_text||'')+'</div></div>' +
+      '<div class="response-wrap"><span class="response-label">The response</span><div class="response">'+esc(x.response||'')+'</div></div>' +
+      '<div class="meta">Entry #'+(currentLogs.length-idx)+' · '+esc(x.id||'')+'</div>' +
+      '</article>'
     ).join('');
   }
 
-  document.getElementById('refreshBtn').addEventListener('click',render);
+  async function load(){
+    logsEl.innerHTML='<div class="empty">Opening the response pages…</div>';
+    try{
+      const r=await fetch(API,{cache:'no-store'});
+      if(!r.ok)throw new Error('Could not load responses');
+      const raw=await r.json();
+      const payload=raw&&raw.json?raw.json:raw;
+      const logs=Array.isArray(payload&&payload.responses)?payload.responses:[];
+      draw(logs);
+    }catch(e){
+      totalEl.textContent='—';verseCountEl.textContent='—';latestEl.textContent='—';
+      logsEl.innerHTML='<div class="empty">The response page could not reach its shared archive right now. Please refresh once.</div>';
+    }
+  }
+
+  document.getElementById('refreshBtn').addEventListener('click',load);
   document.getElementById('exportBtn').addEventListener('click',()=>{
-    const blob=new Blob([JSON.stringify(read(),null,2)],{type:'application/json'});
+    const blob=new Blob([JSON.stringify(currentLogs,null,2)],{type:'application/json'});
     const a=document.createElement('a');
     a.href=URL.createObjectURL(blob);
     a.download='verse-response-logs.json';
     a.click();
     setTimeout(()=>URL.revokeObjectURL(a.href),1000);
   });
-  addEventListener('storage',e=>{if(e.key===KEY)render()});
-  render();
+  load();
 })();
 </script>
 </body>
