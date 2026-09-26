@@ -70,6 +70,8 @@ button,a.btn{border:1px solid rgba(95,61,45,.16);background:rgba(255,250,239,.84
   const verseCountEl=document.getElementById('verseCount');
   const latestEl=document.getElementById('latest');
   let currentLogs=[];
+  const LOCAL_LOG_KEY='theDproject-verse-response-logs-v1';
+  const VERSE_MAP_KEY='theDproject-verse-text-map-v1';
 
   const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
   const fmt=iso=>{try{return new Intl.DateTimeFormat(undefined,{dateStyle:'medium',timeStyle:'short'}).format(new Date(iso))}catch(e){return iso||'—'}};
@@ -96,9 +98,31 @@ button,a.btn{border:1px solid rgba(95,61,45,.16);background:rgba(255,250,239,.84
     ).join('');
   }
 
+  async function migrateLocalResponses(){
+    let localLogs=[];let verseMap={};
+    try{localLogs=JSON.parse(localStorage.getItem(LOCAL_LOG_KEY)||'[]');if(!Array.isArray(localLogs))localLogs=[]}catch(e){localLogs=[]}
+    try{verseMap=JSON.parse(localStorage.getItem(VERSE_MAP_KEY)||'{}')||{}}catch(e){verseMap={}}
+    for(const x of localLogs){
+      const verseIndex=Number(x.verseIndex??x.verse_index??0);
+      const verseText=String(x.verseText??x.verse_text??(verseMap[verseIndex]&&verseMap[verseIndex].text)??'');
+      const payload={
+        id:x.id||('legacy_'+Date.now()+'_'+Math.random().toString(36).slice(2)),
+        verseIndex,
+        verseTitle:String(x.verseTitle??x.verse_title??(verseMap[verseIndex]&&verseMap[verseIndex].title)??'Untitled'),
+        verseText,
+        response:String(x.response??'')
+      };
+      if(!payload.verseIndex||!payload.verseText||!payload.response)continue;
+      try{
+        await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(payload)});
+      }catch(e){}
+    }
+  }
+
   async function load(){
     logsEl.innerHTML='<div class="empty">Opening the response pages…</div>';
     try{
+      await migrateLocalResponses();
       const r=await fetch(API,{cache:'no-store'});
       if(!r.ok)throw new Error('Could not load responses');
       const raw=await r.json();
