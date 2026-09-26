@@ -24,19 +24,19 @@
             <div class="tdp-ticket-stack" aria-hidden="true">
               <div class="tdp-ticket tdp-ticket-bts">
                 <div class="tdp-ticket-side">BTS<small>ARMY</small></div>
-                <div class="tdp-ticket-body"><b>PURPLE HOUR</b><small>ADMIT TWO · SOMEDAY</small><i>Seat: Beside You</i></div>
+                <div class="tdp-ticket-body"><b>PURPLE HOUR</b><small>ADMIT TWO · SOMEDAY</small><i>Seat: Side by Side</i></div>
                 <div class="tdp-ticket-portrait tdp-ticket-portrait-bts"><span></span><span></span><span></span></div>
                 <div class="tdp-ticket-barcode"></div>
               </div>
               <div class="tdp-ticket tdp-ticket-arijit">
                 <div class="tdp-ticket-side">AS<small>LIVE</small></div>
-                <div class="tdp-ticket-body"><b>ARIJIT SINGH</b><small>ONE EVENING · LIVE</small><i>Row: Favourite Songs</i></div>
+                <div class="tdp-ticket-body"><b>ARIJIT SINGH</b><small>ONE EVENING · LIVE</small><i>Row: Favourite Chorus</i></div>
                 <div class="tdp-ticket-portrait tdp-ticket-portrait-solo"><span></span></div>
                 <div class="tdp-ticket-barcode"></div>
               </div>
               <div class="tdp-ticket tdp-ticket-darshan">
                 <div class="tdp-ticket-side">DR<small>LIVE</small></div>
-                <div class="tdp-ticket-body"><b>DARSHAN RAVAL</b><small>BLUE LIGHTS · SOMEDAY</small><i>Gate: Two Hearts</i></div>
+                <div class="tdp-ticket-body"><b>DARSHAN RAVAL</b><small>BLUE LIGHTS · SOMEDAY</small><i>Gate: One More Song</i></div>
                 <div class="tdp-ticket-portrait tdp-ticket-portrait-solo"><span></span></div>
                 <div class="tdp-ticket-barcode"></div>
               </div>
@@ -63,7 +63,7 @@
               </div>
             </div>
             <span class="tdp-kd-reveal-copy">Some sunsets are meant to be shared.</span>
-            <span class="tdp-kd-hint">tap the polaroid</span>
+            <span class="tdp-kd-hint">tap the polaroids</span>
           </button>
         </article>
 
@@ -118,13 +118,26 @@
     };
     concertBtn.addEventListener('click',toggleConcert);
 
-    section.querySelectorAll('.tdp-kd-item:not(.tdp-kd-concerts) .tdp-kd-trigger').forEach((btn,index)=>{
+    const polaroidBtn=section.querySelector('.tdp-kd-sunset .tdp-kd-trigger');
+    const togglePolaroid=()=>{
+      const item=section.querySelector('.tdp-kd-sunset');
+      const open=item.classList.toggle('is-open');
+      polaroidBtn.setAttribute('aria-expanded',open?'true':'false');
+      const hint=polaroidBtn.querySelector('.tdp-kd-hint');
+      if(hint) hint.textContent=open?'tap again to stack them':'tap the polaroids';
+      if(window.tdpTrack){
+        window.tdpTrack(open?'keepsake_open':'keepsake_close',{keepsake:2,type:'sunset_polaroids'});
+      }
+    };
+    polaroidBtn.addEventListener('click',togglePolaroid);
+
+    section.querySelectorAll('.tdp-kd-item:not(.tdp-kd-concerts):not(.tdp-kd-sunset) .tdp-kd-trigger').forEach((btn,index)=>{
       btn.addEventListener('click',()=>{
         const item=btn.closest('.tdp-kd-item');
         const open=item.classList.toggle('is-open');
         btn.setAttribute('aria-expanded',open?'true':'false');
         if(window.tdpTrack){
-          window.tdpTrack(open?'keepsake_open':'keepsake_close',{keepsake:index+2});
+          window.tdpTrack(open?'keepsake_open':'keepsake_close',{keepsake:index+3});
         }
       });
     });
