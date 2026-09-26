@@ -58,8 +58,15 @@
       if(card.querySelector('.verse-response'))return;
       const target=card.querySelector('.verse-copy,.verse-body,.verse-content')||card;
       const title=(card.querySelector('h2')?.textContent||('Verse '+(i+1))).trim();
+      const verseText=(target.innerText||target.textContent||'').replace(/\n{3,}/g,'\n\n').trim();
+      const verseTextMapKey='theDproject-verse-text-map-v1';
+      try{
+        const verseMap=JSON.parse(localStorage.getItem(verseTextMapKey)||'{}')||{};
+        verseMap[i+1]={title,text:verseText};
+        localStorage.setItem(verseTextMapKey,JSON.stringify(verseMap));
+      }catch(e){}
       const box=document.createElement('div');box.className='verse-response';
-      box.innerHTML='<button class="verse-response-toggle" type="button"><span class="response-toggle-kicker">A tiny corner that belongs to you</span><span class="response-toggle-main">Leave a little piece of your heart here</span><span class="response-toggle-hint">Open softly</span></button><div class="verse-response-box"><div class="verse-response-inner"><label class="verse-response-label">If this verse made you pause, smile, overthink, or feel anything at all, leave a tiny thought here. It can be sweet, shy, silly, honest — just yours.</label><textarea maxlength="1500" placeholder="Tell me the thought you almost kept to yourself..."></textarea><div class="verse-response-actions"><div class="verse-response-meta"><span>Every submitted note is kept in the response log.</span><span class="response-saved">Saved</span><span class="verse-submit-state"></span></div><button class="verse-submit" type="button">Save this little note</button></div></div></div>';
+      box.innerHTML='<button class="verse-response-toggle" type="button"><span class="response-toggle-kicker">A tiny corner that belongs to you</span><span class="response-toggle-main">Leave a little piece of your heart here</span><span class="response-toggle-hint">Open softly</span></button><div class="verse-response-box"><div class="verse-response-inner"><label class="verse-response-label">If this verse made you pause, smile, overthink, or feel anything at all, leave a tiny thought here. It can be sweet, shy, silly, honest — just yours.</label><textarea maxlength="1500" placeholder="Tell me the thought you almost kept to yourself..."></textarea><div class="verse-response-actions"><div class="verse-response-meta"><span>Take your time — this little corner is yours.</span><span class="response-saved">Still here ✨</span><span class="verse-submit-state"></span></div><button class="verse-submit" type="button">Leave this little note</button></div></div></div>';
       const toggle=box.querySelector('.verse-response-toggle'),ta=box.querySelector('textarea'),submit=box.querySelector('.verse-submit'),state=box.querySelector('.verse-submit-state'),savedTag=box.querySelector('.response-saved');
       ta.value=saved[i]||'';
       const setToggle=open=>{
@@ -73,7 +80,7 @@
       submit.addEventListener('click',()=>{
         const value=ta.value.trim();if(!value){state.textContent='Leave me at least one tiny thought first.';ta.focus();return}
         submit.disabled=true;
-        state.textContent='Saving this little note...';
+        state.textContent='Just a second… ✨';
         try{
           const logKey='theDproject-verse-response-logs-v1';
           let logs=[];try{logs=JSON.parse(localStorage.getItem(logKey)||'[]');if(!Array.isArray(logs))logs=[]}catch(e){logs=[]}
@@ -81,6 +88,7 @@
             id:(crypto?.randomUUID?.()||('resp_'+Date.now()+'_'+Math.random().toString(36).slice(2))),
             verse_index:i+1,
             verse_title:title,
+            verse_text:verseText,
             response:value,
             submitted_at:new Date().toISOString()
           };
@@ -89,11 +97,11 @@
           saved[i]=value;
           localStorage.setItem(responseKey,JSON.stringify(saved));
           savedTag.classList.add('show');
-          state.textContent='Saved to the response log.';
+          state.textContent='And just like that… your little thought found its quiet corner. ✨';
           if(window.tdpTrack)window.tdpTrack('verse_response_submitted',{section:'verse_response',event_value:title,meta:{verse_index:i+1,response_id:entry.id}});
           setTimeout(()=>savedTag.classList.remove('show'),1800);
         }catch(e){
-          state.textContent='Could not save this note. Please try once more.';
+          state.textContent='This little note slipped away for a second — try once more.';
         }finally{
           submit.disabled=false;
         }
