@@ -5,7 +5,7 @@
 }
 
 .open-screen.tdp-opening-ready .confession-envelope-card:not(.is-unlocking) #realEnvelope{
-  animation:tdpEnvelopeFloatV68 4.8s ease-in-out infinite!important;
+  animation:tdpEnvelopeFloatV68 3.8s ease-in-out infinite!important;
   will-change:transform,filter!important;
   transform-origin:50% 52%!important;
 }
@@ -30,7 +30,7 @@
       transparent 78%);
   filter:blur(17px);
   opacity:.78;
-  animation:tdpEnvelopeHaloV68 3.6s ease-in-out infinite!important;
+  animation:tdpEnvelopeHaloV68 3.2s ease-in-out infinite!important;
 }
 
 .open-screen.tdp-opening-ready .confession-envelope-card:not(.is-unlocking)::after{
@@ -57,11 +57,11 @@
       transparent 308deg 360deg);
   filter:blur(9px);
   opacity:.55;
-  animation:tdpEnvelopeFocusV68 5.5s ease-in-out infinite!important;
+  animation:tdpEnvelopeFocusV68 4.4s ease-in-out infinite!important;
 }
 
 .open-screen.tdp-opening-ready .confession-envelope-card:not(.is-unlocking) .envelope-ground-shadow{
-  animation:tdpEnvelopeShadowV68 4.8s ease-in-out infinite!important;
+  animation:tdpEnvelopeShadowV68 3.8s ease-in-out infinite!important;
 }
 
 @keyframes tdpEnvelopeFloatV68{
@@ -100,7 +100,7 @@
 
 @media(max-width:640px){
   .open-screen.tdp-opening-ready .confession-envelope-card:not(.is-unlocking) #realEnvelope{
-    animation-duration:5.2s!important;
+    animation-duration:4.2s!important;
   }
   .open-screen.tdp-opening-ready .confession-envelope-card:not(.is-unlocking) #realEnvelope::before{
     width:116%;
