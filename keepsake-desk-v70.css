@@ -193,3 +193,31 @@
   .tdp-kd-concerts.is-open .tdp-ticket-bts{transform:translate(-50%,-50%) translate(-15px,61px) rotate(-6deg)!important}
   .tdp-kd-concerts.is-open .tdp-ticket-darshan{transform:translate(-50%,-50%) translate(15px,-57px) rotate(6deg)!important}
 }
+
+
+/* v72 — self-contained inline artwork so tickets/Polaroids cannot render blank */
+.tdp-ticket{
+  display:block!important;
+  padding:0!important;
+  background:#f2e6cf!important;
+}
+.tdp-ticket>svg{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  overflow:visible;
+}
+.tdp-polaroid{
+  display:block!important;
+  padding:0!important;
+  background:#fff9ee!important;
+}
+.tdp-polaroid>svg{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+}
+.tdp-polaroid-photo,.tdp-polaroid-note,
+.tdp-ticket-stub,.tdp-ticket-main,.tdp-ticket-code{
+  display:none!important;
+}
