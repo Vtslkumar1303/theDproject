@@ -75,6 +75,8 @@
       'Maybe I can be one of the most honest, understanding, and reliable people for you to open up to. I’ll always try to listen carefully and give you the most honest and thoughtful perspective I can.',
       'As you know, “Bolne wale toh bahot hote hai duniya mein, par sunne wala mushkil se milta hai.”',
       'And honestly, I’d be more than happy to be your “sunne wala” — for as long as life allows me to. ✨',
+      'I just want you to know that whenever you’re feeling a little sad, unnoticed, or unvalued, please remember that there are people like us who genuinely see how special you are and appreciate your worth more than you probably realise. 🤍',
+      'So on the days when you forget your own value, just know that someone out here is quietly reminding you of it. ✨',
       'And even if this doesn’t lead any further, I will always keep you as my favourite incomplete wish.'
     ],
     'Thank You, March':[
