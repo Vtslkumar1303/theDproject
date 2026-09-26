@@ -107,13 +107,26 @@
 
     old.insertAdjacentElement('afterend',section);
 
-    section.querySelectorAll('.tdp-kd-trigger').forEach((btn,index)=>{
+    const concertBtn=section.querySelector('.tdp-kd-concerts .tdp-kd-trigger');
+    const toggleConcert=()=>{
+      const item=section.querySelector('.tdp-kd-concerts');
+      const open=item.classList.toggle('is-open');
+      concertBtn.setAttribute('aria-expanded',open?'true':'false');
+      const hint=concertBtn.querySelector('.tdp-kd-hint');
+      if(hint) hint.textContent=open?'tap again to stack them':'tap the tickets';
+      if(window.tdpTrack){
+        window.tdpTrack(open?'keepsake_open':'keepsake_close',{keepsake:1,type:'concert_tickets'});
+      }
+    };
+    concertBtn.addEventListener('click',toggleConcert);
+
+    section.querySelectorAll('.tdp-kd-item:not(.tdp-kd-concerts) .tdp-kd-trigger').forEach((btn,index)=>{
       btn.addEventListener('click',()=>{
         const item=btn.closest('.tdp-kd-item');
         const open=item.classList.toggle('is-open');
         btn.setAttribute('aria-expanded',open?'true':'false');
         if(window.tdpTrack){
-          window.tdpTrack(open?'keepsake_open':'keepsake_close',{keepsake:index+1});
+          window.tdpTrack(open?'keepsake_open':'keepsake_close',{keepsake:index+2});
         }
       });
     });
