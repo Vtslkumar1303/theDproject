@@ -7,18 +7,68 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>To, My March 🧿✨</title>
-<style>html,body{margin:0;min-height:100%;background:#efe0c2;font-family:"Segoe Print","Bradley Hand","Comic Sans MS",cursive}#boot{min-height:100vh;display:grid;place-items:center;color:#4f2f24}</style>
+<style>
+html,body{margin:0;min-height:100%;background:#efe0c2;font-family:"Segoe Print","Bradley Hand","Comic Sans MS",cursive}
+#boot{min-height:100vh;display:grid;place-items:center;color:#4f2f24;overflow:hidden;position:relative;background:
+radial-gradient(circle at 50% 42%,rgba(255,249,232,.95) 0 14%,rgba(245,225,190,.88) 35%,rgba(239,216,180,.94) 64%,#ead4ad 100%)}
+#boot::before,#boot::after{content:"";position:absolute;inset:-15%;pointer-events:none}
+#boot::before{background:
+radial-gradient(circle at 28% 32%,rgba(255,255,255,.55) 0 2px,transparent 3px),
+radial-gradient(circle at 72% 28%,rgba(255,255,255,.42) 0 1.6px,transparent 2.6px),
+radial-gradient(circle at 38% 70%,rgba(255,245,219,.58) 0 2px,transparent 3px),
+radial-gradient(circle at 68% 66%,rgba(255,255,255,.36) 0 1.5px,transparent 2.5px);
+background-size:180px 180px,220px 220px,240px 240px,200px 200px;animation:bootSparkle 10s linear infinite;opacity:.72}
+#boot::after{background:radial-gradient(ellipse at center,rgba(255,247,225,.44),transparent 58%);filter:blur(18px);animation:bootGlow 4.8s ease-in-out infinite}
+.boot-card{position:relative;z-index:2;width:min(520px,calc(100% - 38px));padding:34px 28px 30px;text-align:center;border:1px solid rgba(116,80,58,.16);border-radius:28px;background:rgba(255,248,233,.68);box-shadow:0 22px 60px rgba(85,52,35,.14),inset 0 1px rgba(255,255,255,.78);backdrop-filter:blur(7px)}
+.boot-envelope{width:82px;height:58px;margin:0 auto 18px;position:relative;filter:drop-shadow(0 10px 16px rgba(87,53,36,.14));animation:bootFloat 3.8s ease-in-out infinite}
+.boot-envelope::before{content:"";position:absolute;inset:0;border-radius:10px;background:linear-gradient(145deg,#f7e5c6,#e9c89b);border:1px solid rgba(123,83,53,.16)}
+.boot-envelope::after{content:"";position:absolute;left:50%;top:5px;width:56px;height:40px;transform:translateX(-50%) rotate(45deg);border-left:1px solid rgba(123,83,53,.16);border-top:1px solid rgba(123,83,53,.16);background:linear-gradient(145deg,#f4dbb6,#e7c18f);clip-path:polygon(0 0,100% 0,0 100%)}
+.boot-kicker{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:#9d6d59;margin-bottom:8px}
+.boot-title{font:600 clamp(1.5rem,4.6vw,2.25rem) Georgia,serif;color:#5b3428;margin:0 0 8px}
+.boot-line{font-size:.93rem;line-height:1.6;color:#765447;min-height:1.6em;opacity:.9;transition:opacity .35s ease,transform .35s ease}
+.boot-line.swap{opacity:0;transform:translateY(5px)}
+.boot-dots{display:flex;justify-content:center;gap:6px;margin-top:17px}
+.boot-dots span{width:7px;height:7px;border-radius:50%;background:rgba(124,31,42,.45);animation:bootDot 1.4s ease-in-out infinite}
+.boot-dots span:nth-child(2){animation-delay:.16s}.boot-dots span:nth-child(3){animation-delay:.32s}
+@keyframes bootFloat{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-9px) rotate(1deg)}}
+@keyframes bootDot{0%,80%,100%{transform:scale(.7);opacity:.35}40%{transform:scale(1.15);opacity:1}}
+@keyframes bootGlow{0%,100%{opacity:.55;transform:scale(.97)}50%{opacity:.88;transform:scale(1.04)}}
+@keyframes bootSparkle{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,-28px,0)}}
+@media(max-width:520px){.boot-card{padding:30px 20px 26px;border-radius:24px}.boot-envelope{width:74px;height:52px}.boot-title{font-size:1.55rem}.boot-line{font-size:.88rem}}
+@media(prefers-reduced-motion:reduce){#boot::before,#boot::after,.boot-envelope,.boot-dots span{animation:none!important}}
+</style>
 </head>
 <body>
-<div id="boot">Opening the letter...</div>
+<div id="boot">
+  <div class="boot-card" aria-live="polite">
+    <div class="boot-envelope" aria-hidden="true"></div>
+    <div class="boot-kicker">a little something from March</div>
+    <h1 class="boot-title">Opening your letter…</h1>
+    <div id="bootLine" class="boot-line">Some feelings take a little longer to unfold.</div>
+    <div class="boot-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+  </div>
+</div>
 <script>
 (async()=>{
   try{
+    const bootLines=[
+      'Some feelings take a little longer to unfold.',
+      'A few thoughts, a few memories, and one honest heart.',
+      'Maybe March was never just a month after all.',
+      'Almost there… this one was written slowly.'
+    ];
+    let bootIx=0;
+    const bootLine=document.getElementById('bootLine');
+    const bootTimer=setInterval(()=>{
+      if(!bootLine)return;
+      bootLine.classList.add('swap');
+      setTimeout(()=>{bootIx=(bootIx+1)%bootLines.length;bootLine.textContent=bootLines[bootIx];bootLine.classList.remove('swap')},260);
+    },2300);
     const source='https://raw.githubusercontent.com/Vtslkumar1303/theDproject/22e18ec9c55cd337254e3eee3f129c1c79c76136/index.html?fresh=20260916-envelope-crafted-note-v30';
     const r=await fetch(source,{cache:'no-store'});
     if(!r.ok) throw new Error('Base experience could not be loaded');
     let h=await r.text();
-    const v='20260926-safe-envelope-loop-v68';
+    const v='20260926-romantic-loader-v69';
     const lockedStyle='<style>body:not(.letter-main-open) main{display:none!important;visibility:hidden!important;pointer-events:none!important}body:not(.letter-main-open){overflow:hidden!important}</style>';
     const oldHead="h=h.replace('</head>','<style>'+css+'</style></head>');";
     const newHead="h=h.replace('</head>','<style>'+css+'</style><link rel=\"stylesheet\" href=\"opening.css?v="+v+"\"><link rel=\"stylesheet\" href=\"experience-patch.css?v="+v+"\"><link rel=\"stylesheet\" href=\"mobile-title-fix.css?v="+v+"\"><link rel=\"stylesheet\" href=\"opening-final-fix.css?v="+v+"\"><link rel=\"stylesheet\" href=\"latest-ui-fix.css?v="+v+"\"><link rel=\"stylesheet\" href=\"verse-audio-fix.css?v="+v+"\"><link rel=\"stylesheet\" href=\"envelope-upgrade-v15.css?v="+v+"\"><link rel=\"stylesheet\" href=\"final-ui-adjustments.css?v="+v+"\"><link rel=\"stylesheet\" href=\"dreamboard-section.css?v="+v+"\"><link rel=\"stylesheet\" href=\"realistic-dreamboard-v47.css?v="+v+"\"><link rel=\"stylesheet\" href=\"dreamboard-3d-v48.css?v="+v+"\"><link rel=\"stylesheet\" href=\"dreamboard-magical-v49.css?v="+v+"\"><link rel=\"stylesheet\" href=\"jhumka-v54.css?v="+v+"\"><link rel=\"stylesheet\" href=\"hidden-dream-notes-v57.css?v="+v+"\"><link rel=\"stylesheet\" href=\"confession-content-v58.css?v="+v+"\"><link rel=\"stylesheet\" href=\"wishlist-v49-style-v61.css?v="+v+"\"><link rel=\"stylesheet\" href=\"verse-emphasis-v63.css?v="+v+"\"><link rel=\"stylesheet\" href=\"opening-envelope-magic-v64.css?v="+v+"\"></head>');";
@@ -26,7 +76,7 @@
     const newBody="h=h.replace('</body>','<script>'+js+'</scr'+'ipt><script src=\"analytics-diag-v51.js?v="+v+"\"></scr'+'ipt><script src=\"opening.js?v="+v+"\"></scr'+'ipt><script src=\"khat-lyrics.js?v="+v+"\"></scr'+'ipt><script src=\"lyric-player.js?v="+v+"\"></scr'+'ipt><script src=\"experience-patch.js?v="+v+"\"></scr'+'ipt><script src=\"gift-section.js?v="+v+"\"></scr'+'ipt><script src=\"floating-khat.js?v="+v+"\"></scr'+'ipt><script src=\"final-ui-adjustments.js?v="+v+"\"></scr'+'ipt><script src=\"dreamboard-section.js?v="+v+"\"></scr'+'ipt><script src=\"dreamboard-toggle-v49.js?v="+v+"\"></scr'+'ipt><script src=\"dreamboard-independent-v52.js?v="+v+"\"></scr'+'ipt><script src=\"jhumka-v54.js?v="+v+"\"></scr'+'ipt><script src=\"hidden-dream-notes-v57.js?v="+v+"\"></scr'+'ipt><script src=\"confession-content-v58.js?v="+v+"\"></scr'+'ipt><script src=\"wishlist-v49-style-v61.js?v="+v+"\"></scr'+'ipt><script src=\"verse-emphasis-v63.js?v="+v+"\"></scr'+'ipt></body>');";
     if(!h.includes(oldHead)||!h.includes(oldBody)) throw new Error('Enhancement injection point not found');
     h=h.replace(oldHead,newHead.replace('<link rel=',lockedStyle+'<link rel=')).replace(oldBody,newBody);
-    document.open();document.write(h);document.close();
+    clearInterval(bootTimer);document.open();document.write(h);document.close();
   }catch(e){
     document.getElementById('boot').textContent='The letter could not be loaded. Please refresh once.';
     console.error(e);
