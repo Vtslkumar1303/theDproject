@@ -77,28 +77,30 @@
       };
       toggle.addEventListener('click',()=>{const open=box.classList.toggle('open');setToggle(open);if(open)setTimeout(()=>ta.focus(),220)});
       ta.addEventListener('input',()=>{saved[i]=ta.value;localStorage.setItem(responseKey,JSON.stringify(saved));savedTag.classList.add('show');clearTimeout(ta.__savedTimer);ta.__savedTimer=setTimeout(()=>savedTag.classList.remove('show'),1100)});
-      submit.addEventListener('click',()=>{
+      submit.addEventListener('click',async()=>{
         const value=ta.value.trim();if(!value){state.textContent='Leave me at least one tiny thought first.';ta.focus();return}
         submit.disabled=true;
         state.textContent='Just a second… ✨';
         try{
-          const logKey='theDproject-verse-response-logs-v1';
-          let logs=[];try{logs=JSON.parse(localStorage.getItem(logKey)||'[]');if(!Array.isArray(logs))logs=[]}catch(e){logs=[]}
           const entry={
             id:(crypto?.randomUUID?.()||('resp_'+Date.now()+'_'+Math.random().toString(36).slice(2))),
-            verse_index:i+1,
-            verse_title:title,
-            verse_text:verseText,
-            response:value,
-            submitted_at:new Date().toISOString()
+            verseIndex:i+1,
+            verseTitle:title,
+            verseText:verseText,
+            response:value
           };
-          logs.push(entry);
-          localStorage.setItem(logKey,JSON.stringify(logs));
+          const r=await fetch('https://the-d-project-responses.floot.app/_api/responses',{
+            method:'POST',
+            headers:{'Content-Type':'text/plain;charset=UTF-8'},
+            body:JSON.stringify(entry)
+          });
+          if(!r.ok)throw new Error('central save failed');
+
           saved[i]=value;
           localStorage.setItem(responseKey,JSON.stringify(saved));
           savedTag.classList.add('show');
           state.textContent='And just like that… your little thought found its quiet corner. ✨';
-          if(window.tdpTrack)window.tdpTrack('verse_response_submitted',{section:'verse_response',event_value:title,meta:{verse_index:i+1,response_id:entry.id}});
+          if(window.tdpTrack)window.tdpTrack('verse_response_submitted',{section:'verse_response',event_value:title,meta:{verse_index:i+1,response_id:entry.id,storage:'central'}});
           setTimeout(()=>savedTag.classList.remove('show'),1800);
         }catch(e){
           state.textContent='This little note slipped away for a second — try once more.';
