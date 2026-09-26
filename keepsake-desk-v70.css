@@ -157,3 +157,39 @@
 @media(prefers-reduced-motion:reduce){
   .tdp-ticket,.tdp-polaroid,.tdp-travel-tag,.tdp-garba-pass,.tdp-garba-dancers,.tdp-kd-trigger{transition:none!important;animation:none!important}
 }
+
+/* v71 — clearer concert ticket open state */
+.tdp-kd-concerts,
+.tdp-kd-concerts .tdp-kd-trigger{
+  transition:min-height .5s ease,transform .35s ease,box-shadow .35s ease,background .35s ease!important;
+}
+.tdp-kd-concerts.is-open,
+.tdp-kd-concerts.is-open .tdp-kd-trigger{
+  min-height:320px!important;
+}
+.tdp-kd-concerts.is-open .tdp-ticket-stack{
+  height:205px;
+}
+.tdp-kd-concerts.is-open .tdp-ticket-bts{
+  transform:translate(-50%,-50%) translate(-20px,66px) rotate(-7deg)!important;
+}
+.tdp-kd-concerts.is-open .tdp-ticket-arijit{
+  transform:translate(-50%,-50%) translate(0,2px) rotate(0deg)!important;
+}
+.tdp-kd-concerts.is-open .tdp-ticket-darshan{
+  transform:translate(-50%,-50%) translate(20px,-62px) rotate(7deg)!important;
+}
+.tdp-kd-concerts.is-open .tdp-ticket{
+  box-shadow:0 14px 24px rgba(61,39,27,.18);
+}
+.tdp-kd-concerts.is-open .tdp-kd-hint{
+  color:#7c5547;
+  font-weight:700;
+}
+@media(max-width:700px){
+  .tdp-kd-concerts.is-open,
+  .tdp-kd-concerts.is-open .tdp-kd-trigger{min-height:305px!important}
+  .tdp-kd-concerts.is-open .tdp-ticket-stack{height:194px}
+  .tdp-kd-concerts.is-open .tdp-ticket-bts{transform:translate(-50%,-50%) translate(-15px,61px) rotate(-6deg)!important}
+  .tdp-kd-concerts.is-open .tdp-ticket-darshan{transform:translate(-50%,-50%) translate(15px,-57px) rotate(6deg)!important}
+}
