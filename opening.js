@@ -226,6 +226,8 @@
         const viewportHeight=window.innerHeight;
         root.style.setProperty('--sheet-start-top',sheetRect.top+'px');
         root.style.setProperty('--sheet-start-left',sheetRect.left+'px');
+        root.style.setProperty('--sheet-start-width',sheetRect.width+'px');
+        root.style.setProperty('--sheet-start-height',sheetRect.height+'px');
         root.style.setProperty('--sheet-start-scale-x',String(sheetRect.width/viewportWidth));
         root.style.setProperty('--sheet-start-scale-y',String(sheetRect.height/viewportHeight));
         let finished=false,fallbackTimer=0;
@@ -241,11 +243,11 @@
             openScreen.style.display='none';
             openScreen.setAttribute('aria-hidden','true');
             document.body.classList.remove('letter-expanding');
-            ['--sheet-start-top','--sheet-start-left','--sheet-start-scale-x','--sheet-start-scale-y'].forEach(name=>root.style.removeProperty(name));
+            ['--sheet-start-top','--sheet-start-left','--sheet-start-width','--sheet-start-height','--sheet-start-scale-x','--sheet-start-scale-y'].forEach(name=>root.style.removeProperty(name));
           },120);
         };
         const onExpansionEnd=e=>{
-          if(e.target===confessionSheet&&e.propertyName==='transform')finishExpansion();
+          if(e.target===confessionSheet&&(e.propertyName==='width'||e.propertyName==='height'||e.propertyName==='top'))finishExpansion();
         };
         confessionSheet.addEventListener('transitionend',onExpansionEnd);
         document.body.classList.add('letter-expanding');
