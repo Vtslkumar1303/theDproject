@@ -595,3 +595,42 @@ body.letter-expanding .real-envelope{transition:none!important;filter:none!impor
   text-align:center!important;
   color:#573729!important;
 }
+
+
+/* v77 — stabilize and smooth the final envelope-to-page expansion on mobile/Safari */
+body.letter-expanding .confession-sheet{
+  will-change:top,left,width,height!important;
+  backface-visibility:hidden!important;
+  -webkit-backface-visibility:hidden!important;
+  transform:translateZ(0)!important;
+  transform-origin:50% 50%!important;
+  transition:
+    top .84s cubic-bezier(.2,.78,.18,1),
+    left .84s cubic-bezier(.2,.78,.18,1),
+    width .84s cubic-bezier(.2,.78,.18,1),
+    height .84s cubic-bezier(.2,.78,.18,1),
+    border-radius .7s ease!important;
+  contain:layout paint!important;
+}
+body.letter-expanding .letter-transition.page-fill .confession-sheet{
+  top:0!important;
+  left:0!important;
+  width:100vw!important;
+  height:100dvh!important;
+  transform:translateZ(0)!important;
+}
+body.letter-expanding .sheet-letter-clone,
+body.letter-expanding .sheet-original-hero{
+  backface-visibility:hidden!important;
+  -webkit-backface-visibility:hidden!important;
+  transform:translateZ(0)!important;
+}
+@media(max-width:640px){
+  body.letter-expanding .confession-sheet{
+    transition:
+      top .78s cubic-bezier(.2,.78,.18,1),
+      left .78s cubic-bezier(.2,.78,.18,1),
+      width .78s cubic-bezier(.2,.78,.18,1),
+      height .78s cubic-bezier(.2,.78,.18,1)!important;
+  }
+}
