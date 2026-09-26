@@ -124,16 +124,22 @@
     master.insertAdjacentElement('afterend',content);
 
     const covers=[
-      ['concerts','Concert night','three songs waiting to happen','♫'],
-      ['sunset','Golden hour','a tiny sky kept for later','☼'],
-      ['travel','Somewhere someday','one place, then another','⌁'],
-      ['navratri','Navratri night','music, lights, and tired feet','✦']
+      ['concerts','Concerts','hoping you’d save me a spot beside you'],
+      ['sunset','Golden hour','one quiet sky and a playlist worth pausing for'],
+      ['travel','Somewhere someday','a place to discover, a story to bring back'],
+      ['navratri','Navratri night','music, lights, garba, and one memorable evening']
     ];
     section.querySelectorAll('.tdp-kd-item').forEach((item,index)=>{
       const btn=item.querySelector('.tdp-kd-trigger');
       const cover=document.createElement('span');
-      cover.className='tdp-kd-unbox-cover';
-      cover.innerHTML='<span class="tdp-kd-unbox-symbol">'+covers[index][3]+'</span><b>'+covers[index][1]+'</b><small>'+covers[index][2]+'</small><em>tap to reveal</em>';
+      cover.className='tdp-kd-unbox-cover tdp-kd-unbox-'+covers[index][0];
+      cover.innerHTML=
+        '<span class="tdp-kd-3d-object tdp-kd-3d-'+covers[index][0]+'" aria-hidden="true">'+
+          '<span class="tdp-kd-3d-face"></span><span class="tdp-kd-3d-detail"></span><span class="tdp-kd-3d-shadow"></span>'+
+        '</span>'+
+        '<b>'+covers[index][1]+'</b>'+
+        '<small>'+covers[index][2]+'</small>'+
+        '<em>tap to reveal</em>';
       btn.insertBefore(cover,btn.firstChild);
     });
 
