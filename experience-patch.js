@@ -53,7 +53,28 @@
     }
 
     const responseKey='theDproject-verse-responses-v2';
+    const submittedLogKey='theDproject-verse-response-logs-v1';
+    const centralApi='https://the-d-project-responses.floot.app/_api/responses';
     let saved={};try{saved=JSON.parse(localStorage.getItem(responseKey)||'{}')}catch{}
+
+    const syncSubmittedLogs=async()=>{
+      let logs=[];try{logs=JSON.parse(localStorage.getItem(submittedLogKey)||'[]');if(!Array.isArray(logs))logs=[]}catch(e){logs=[]}
+      for(const x of logs){
+        const payload={
+          id:x.id||('legacy_'+Date.now()+'_'+Math.random().toString(36).slice(2)),
+          verseIndex:Number(x.verseIndex??x.verse_index??0),
+          verseTitle:String(x.verseTitle??x.verse_title??'Untitled'),
+          verseText:String(x.verseText??x.verse_text??''),
+          response:String(x.response??'')
+        };
+        if(!payload.verseIndex||!payload.verseText||!payload.response)continue;
+        try{
+          await fetch(centralApi,{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(payload)});
+        }catch(e){}
+      }
+    };
+    syncSubmittedLogs();
+
     cards.forEach((card,i)=>{
       if(card.querySelector('.verse-response'))return;
       const target=card.querySelector('.verse-copy,.verse-body,.verse-content')||card;
@@ -87,9 +108,14 @@
             verseIndex:i+1,
             verseTitle:title,
             verseText:verseText,
-            response:value
+            response:value,
+            submitted_at:new Date().toISOString()
           };
-          const r=await fetch('https://the-d-project-responses.floot.app/_api/responses',{
+          let localLogs=[];try{localLogs=JSON.parse(localStorage.getItem(submittedLogKey)||'[]');if(!Array.isArray(localLogs))localLogs=[]}catch(e){localLogs=[]}
+          localLogs.push(entry);
+          localStorage.setItem(submittedLogKey,JSON.stringify(localLogs));
+
+          const r=await fetch(centralApi,{
             method:'POST',
             headers:{'Content-Type':'text/plain;charset=UTF-8'},
             body:JSON.stringify(entry)
