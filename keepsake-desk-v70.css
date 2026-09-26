@@ -323,3 +323,134 @@
   .tdp-kd-concerts.is-open,
   .tdp-kd-concerts.is-open .tdp-kd-trigger{min-height:338px!important}
 }
+
+
+/* v74 — Safari-safe, hard-visible HTML keepsake artwork */
+.tdp-ticket-stack{
+  display:block!important;
+  position:relative!important;
+  width:min(250px,88%)!important;
+  height:136px!important;
+  margin:6px auto 0!important;
+  opacity:1!important;
+  visibility:visible!important;
+  z-index:10!important;
+}
+.tdp-ticket{
+  display:block!important;
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:214px!important;
+  height:78px!important;
+  border-radius:10px!important;
+  overflow:hidden!important;
+  opacity:1!important;
+  visibility:visible!important;
+  box-shadow:0 11px 20px rgba(61,39,27,.16)!important;
+  border:1px solid rgba(74,52,41,.24)!important;
+  color:#46352e!important;
+}
+.tdp-ticket-bts{background:linear-gradient(105deg,#b69acb 0 25%,#eadcf4 25% 100%)!important}
+.tdp-ticket-arijit{background:linear-gradient(105deg,#c4a06c 0 25%,#f1e2c8 25% 100%)!important}
+.tdp-ticket-darshan{background:linear-gradient(105deg,#93b2ca 0 25%,#dce8f2 25% 100%)!important}
+.tdp-ticket-side{
+  position:absolute!important;left:0!important;top:0!important;bottom:0!important;width:52px!important;
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  gap:5px!important;font:800 12px/1 Georgia,serif!important;color:#42342f!important;
+  border-right:1px dashed rgba(70,50,42,.34)!important
+}
+.tdp-ticket-side small{display:block!important;font:700 5px/1 Georgia,serif!important;letter-spacing:.08em!important}
+.tdp-ticket-body{
+  position:absolute!important;left:64px!important;top:15px!important;width:96px!important;
+  display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:5px!important;
+  text-align:left!important;color:#4e3c34!important
+}
+.tdp-ticket-body b{display:block!important;font:800 10px/1 Georgia,serif!important;letter-spacing:.04em!important;white-space:nowrap!important}
+.tdp-ticket-body small{display:block!important;font:700 5.3px/1.1 Georgia,serif!important;letter-spacing:.05em!important;white-space:nowrap!important}
+.tdp-ticket-body i{display:block!important;font:italic 5.8px/1.1 Georgia,serif!important;white-space:nowrap!important}
+.tdp-ticket-portrait{
+  position:absolute!important;right:25px!important;top:17px!important;width:30px!important;height:34px!important;
+  display:flex!important;align-items:flex-end!important;justify-content:center!important;gap:1px!important
+}
+.tdp-ticket-portrait span{
+  display:block!important;position:relative!important;width:9px!important;height:14px!important;border:1.3px solid rgba(66,52,47,.7)!important;
+  border-radius:50% 50% 44% 44%!important;background:transparent!important
+}
+.tdp-ticket-portrait span:after{
+  content:""!important;position:absolute!important;left:50%!important;top:12px!important;transform:translateX(-50%)!important;
+  width:13px!important;height:13px!important;border:1.3px solid rgba(66,52,47,.6)!important;border-top:0!important;border-radius:0 0 8px 8px!important
+}
+.tdp-ticket-portrait-solo span{width:14px!important;height:17px!important}
+.tdp-ticket-portrait-solo span:after{width:19px!important;height:14px!important;top:15px!important}
+.tdp-ticket-barcode{
+  position:absolute!important;right:7px!important;top:12px!important;width:10px!important;height:54px!important;
+  display:block!important;background:repeating-linear-gradient(90deg,#4a403a 0 1px,transparent 1px 2px,#4a403a 2px 3px,transparent 3px 5px)!important;
+  opacity:.75!important
+}
+
+/* reset old inline-SVG expectations */
+.tdp-ticket>svg{display:none!important}
+
+.tdp-polaroid-stack{
+  display:block!important;
+  position:relative!important;
+  width:178px!important;
+  height:142px!important;
+  margin:2px auto 0!important;
+  opacity:1!important;
+  visibility:visible!important;
+  z-index:10!important;
+}
+.tdp-polaroid{
+  display:block!important;
+  position:absolute!important;
+  left:50%!important;
+  top:50%!important;
+  width:118px!important;
+  height:138px!important;
+  padding:8px 8px 27px!important;
+  background:#fff9ee!important;
+  border:1px solid rgba(84,60,44,.22)!important;
+  box-shadow:0 10px 18px rgba(63,42,28,.16)!important;
+  opacity:1!important;
+  visibility:visible!important;
+  overflow:hidden!important;
+}
+.tdp-polaroid>svg{display:none!important}
+.tdp-polaroid-backscene{
+  display:block!important;width:100%!important;height:92px!important;
+  background:
+    linear-gradient(145deg,transparent 0 38%,#7f9792 39% 59%,transparent 60%),
+    linear-gradient(#c8d6d6 0 55%,#9aa79e 56% 100%)!important
+}
+.tdp-polaroid-sunset{
+  display:block!important;position:relative!important;width:100%!important;height:92px!important;overflow:hidden!important;
+  background:linear-gradient(#f2b48a 0 42%,#d98278 43% 61%,#7b6470 62% 74%,#505861 75% 100%)!important
+}
+.tdp-polaroid-sun{
+  display:block!important;position:absolute!important;right:16px!important;top:18px!important;width:20px!important;height:20px!important;
+  border-radius:50%!important;background:#ffd790!important;box-shadow:0 0 12px rgba(255,216,144,.55)!important
+}
+.tdp-polaroid-hill{
+  display:block!important;position:absolute!important;left:-8px!important;right:-8px!important;bottom:20px!important;height:28px!important;
+  background:#565d63!important;clip-path:polygon(0 70%,18% 45%,33% 68%,50% 35%,65% 62%,82% 38%,100% 55%,100% 100%,0 100%)!important
+}
+.tdp-polaroid-water{
+  display:block!important;position:absolute!important;left:0!important;right:0!important;bottom:0!important;height:24px!important;
+  background:linear-gradient(rgba(246,193,139,.45),rgba(72,82,90,.8))!important
+}
+.tdp-polaroid-caption{
+  display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+  min-height:26px!important;margin-top:7px!important;color:#75594d!important;font:italic 7px/1.25 Georgia,serif!important
+}
+.tdp-polaroid-caption b{display:block!important;font-weight:400!important}
+.tdp-polaroid-caption small{display:block!important;margin-top:2px!important;font-size:5.4px!important;font-style:normal!important;color:#9d7866!important}
+
+@media(max-width:420px){
+  .tdp-ticket{width:188px!important;height:70px!important}
+  .tdp-ticket-side{width:46px!important}
+  .tdp-ticket-body{left:56px!important;top:13px!important}
+  .tdp-ticket-portrait{right:22px!important;transform:scale(.9)!important}
+  .tdp-ticket-barcode{right:6px!important;height:48px!important}
+}
