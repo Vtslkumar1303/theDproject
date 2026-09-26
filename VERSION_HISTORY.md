@@ -50,3 +50,5 @@ For rollback, restore the selected version's tree in a new commit on main, prese
 - v65: fixed the v64 loader so the magical opening-envelope stylesheet is actually included on the live page. This activates the intended floating password envelope, animated ground shadow, warm backlight halo, and focused magical glow without altering the unlock flow. Pre-edit checkpoint: `backup-before-envelope-magic-fix-v65-20260926`.
 
 - v66: replaced the opening-envelope float with a direct Web Animations API loop on the actual `#realEnvelope`, so the hover now runs continuously while the password screen is waiting. Added a dedicated animated halo, soft light rays, and synchronized shadow breathing behind the envelope; all stop cleanly once unlock begins. Pre-edit checkpoint: `backup-before-envelope-loop-v66-20260926`.
+
+- v67: fixed the malformed closing script fragment introduced while loading the v66 envelope-loop asset. The browser loader now parses correctly again, so the site can open and the continuous envelope float/backlight assets can run. Pre-edit checkpoint: `backup-before-v66-loader-syntax-fix-20260926`.
