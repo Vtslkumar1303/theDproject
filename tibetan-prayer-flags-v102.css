@@ -1,0 +1,111 @@
+/* v102 — Himalayan/Tibetan prayer flags at top-left of main letter */
+#letter,.letter,.letter-sheet,.letter-paper,.letter-main{
+  position:relative!important;
+  overflow:visible!important;
+}
+.tibetan-prayer-flags-v102{
+  position:absolute;
+  top:-28px;
+  left:-10px;
+  width:136px;
+  height:76px;
+  z-index:34;
+  pointer-events:none;
+  filter:drop-shadow(0 8px 14px rgba(67,43,29,.14));
+}
+.tibetan-prayer-flags-v102 .rope{
+  position:absolute;
+  top:12px;
+  left:0;
+  width:128px;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#8d6a50,#c39e79,#785842);
+  transform:rotate(7deg);
+  transform-origin:left center;
+}
+.tibetan-prayer-flags-v102 .flag{
+  position:absolute;
+  top:13px;
+  width:19px;
+  height:26px;
+  transform-origin:50% 0;
+  clip-path:polygon(0 0,100% 0,100% 87%,84% 100%,67% 88%,50% 100%,33% 88%,16% 100%,0 87%);
+  box-shadow:0 2px 6px rgba(55,34,24,.12);
+  animation:prayerFlagWaveV102 2.7s ease-in-out infinite;
+  will-change:transform;
+}
+.tibetan-prayer-flags-v102 .flag::before{
+  content:"";
+  position:absolute;
+  inset:3px 3px 7px;
+  border-radius:1px;
+  background:
+    linear-gradient(rgba(255,255,255,.20),rgba(255,255,255,0)),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.08) 0 1px,transparent 1px 4px);
+  opacity:.55;
+}
+.tibetan-prayer-flags-v102 .f1{left:10px;background:#3f73b7;animation-delay:0s}
+.tibetan-prayer-flags-v102 .f2{left:34px;background:#f4f0e4;animation-delay:.17s}
+.tibetan-prayer-flags-v102 .f3{left:58px;background:#c7514d;animation-delay:.34s}
+.tibetan-prayer-flags-v102 .f4{left:82px;background:#4f8f5e;animation-delay:.51s}
+.tibetan-prayer-flags-v102 .f5{left:106px;background:#d7b34b;animation-delay:.68s}
+.tibetan-prayer-flags-v102 .pin-left,
+.tibetan-prayer-flags-v102 .pin-right{
+  position:absolute;
+  top:5px;
+  width:12px;
+  height:12px;
+  border-radius:50%;
+  z-index:3;
+  background:radial-gradient(circle at 35% 30%,#fff4d9,#d4ac78 68%,#96623c 100%);
+  box-shadow:0 3px 6px rgba(67,43,29,.18);
+}
+.tibetan-prayer-flags-v102 .pin-left{left:-2px}
+.tibetan-prayer-flags-v102 .pin-right{right:5px}
+.tibetan-prayer-flags-v102 .travel-tag{
+  position:absolute;
+  top:46px;
+  left:28px;
+  padding:4px 8px;
+  border-radius:999px;
+  background:rgba(247,237,219,.95);
+  border:1px solid rgba(111,78,56,.14);
+  color:#7b5645;
+  font:600 8px/1 "Segoe Print","Bradley Hand","Comic Sans MS",cursive;
+  transform:rotate(-4deg);
+  white-space:nowrap;
+  box-shadow:0 4px 10px rgba(69,43,29,.08);
+}
+@keyframes prayerFlagWaveV102{
+  0%,100%{transform:perspective(300px) rotateY(0deg) rotate(-2deg) translateY(0)}
+  20%{transform:perspective(300px) rotateY(-18deg) rotate(2deg) translateY(-1px)}
+  42%{transform:perspective(300px) rotateY(9deg) rotate(-1deg) translateY(1px)}
+  64%{transform:perspective(300px) rotateY(-12deg) rotate(3deg) translateY(-1px)}
+  82%{transform:perspective(300px) rotateY(5deg) rotate(0deg) translateY(0)}
+}
+@media(max-width:700px){
+  .tibetan-prayer-flags-v102{width:122px;top:-22px;left:-7px}
+  .tibetan-prayer-flags-v102 .rope{width:114px}
+  .tibetan-prayer-flags-v102 .flag{width:17px;height:24px}
+  .tibetan-prayer-flags-v102 .f1{left:9px}
+  .tibetan-prayer-flags-v102 .f2{left:30px}
+  .tibetan-prayer-flags-v102 .f3{left:51px}
+  .tibetan-prayer-flags-v102 .f4{left:72px}
+  .tibetan-prayer-flags-v102 .f5{left:93px}
+  .tibetan-prayer-flags-v102 .travel-tag{top:42px;left:20px;font-size:7px}
+}
+@media(max-width:520px){
+  .tibetan-prayer-flags-v102{width:112px;top:-20px;left:-5px}
+  .tibetan-prayer-flags-v102 .rope{width:104px}
+  .tibetan-prayer-flags-v102 .flag{width:16px;height:22px}
+  .tibetan-prayer-flags-v102 .f1{left:8px}
+  .tibetan-prayer-flags-v102 .f2{left:27px}
+  .tibetan-prayer-flags-v102 .f3{left:46px}
+  .tibetan-prayer-flags-v102 .f4{left:65px}
+  .tibetan-prayer-flags-v102 .f5{left:84px}
+  .tibetan-prayer-flags-v102 .travel-tag{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .tibetan-prayer-flags-v102 .flag{animation:none!important}
+}
