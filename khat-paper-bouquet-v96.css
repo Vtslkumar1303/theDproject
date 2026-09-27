@@ -1,0 +1,69 @@
+/* v96 — small handmade paper bouquet for the Khat player */
+.spotify-player{overflow:visible!important}
+.khat-paper-bouquet-v96{
+  position:absolute;
+  top:-20px;
+  right:-10px;
+  width:92px;
+  height:92px;
+  z-index:24;
+  pointer-events:none;
+  transform:rotate(7deg);
+  filter:drop-shadow(0 8px 13px rgba(65,39,29,.16));
+  transform-origin:72% 82%;
+  animation:khatBouquetBreezeV96 5.6s ease-in-out infinite;
+}
+.khat-paper-bouquet-v96 .wrap{
+  position:absolute;right:9px;bottom:3px;width:44px;height:48px;
+  background:linear-gradient(145deg,#ead8bd,#cfad8d);
+  clip-path:polygon(13% 0,100% 14%,73% 100%,0 84%);
+  border:1px solid rgba(101,69,50,.17);
+  box-shadow:inset 0 1px rgba(255,255,255,.55);
+}
+.khat-paper-bouquet-v96 .wrap:after{
+  content:"";position:absolute;left:8px;top:18px;width:27px;height:6px;border-radius:999px;
+  background:#b37d72;transform:rotate(-7deg);opacity:.88
+}
+.khat-paper-bouquet-v96 .stem{
+  position:absolute;width:2px;border-radius:3px;background:#8e956f;transform-origin:bottom center
+}
+.khat-paper-bouquet-v96 .s1{height:35px;right:43px;bottom:29px;transform:rotate(-15deg)}
+.khat-paper-bouquet-v96 .s2{height:40px;right:31px;bottom:28px;transform:rotate(1deg)}
+.khat-paper-bouquet-v96 .s3{height:34px;right:19px;bottom:29px;transform:rotate(17deg)}
+.khat-paper-bouquet-v96 .flower{
+  position:absolute;width:27px;height:27px;border-radius:50%;
+  background:
+    radial-gradient(circle at center,#d2a98d 0 20%,transparent 21%),
+    conic-gradient(from 0deg,#f7ead9 0 12.5%,#e6c8aa 12.5% 25%,#fbf2e5 25% 37.5%,#e9cfb4 37.5% 50%,#f8ecdc 50% 62.5%,#e3c3a5 62.5% 75%,#fbf3e8 75% 87.5%,#e7c9ad 87.5% 100%);
+  box-shadow:inset 0 1px rgba(255,255,255,.7),0 2px 5px rgba(92,62,44,.12)
+}
+.khat-paper-bouquet-v96 .f1{right:47px;top:16px;transform:rotate(-10deg)}
+.khat-paper-bouquet-v96 .f2{right:27px;top:5px;transform:rotate(8deg)}
+.khat-paper-bouquet-v96 .f3{right:7px;top:18px;transform:rotate(-4deg)}
+.khat-paper-bouquet-v96 .leaf{
+  position:absolute;width:11px;height:18px;border-radius:90% 0 90% 0;
+  background:linear-gradient(145deg,#b6bd96,#87956f);box-shadow:inset 0 1px rgba(255,255,255,.28)
+}
+.khat-paper-bouquet-v96 .l1{right:48px;top:40px;transform:rotate(-28deg)}
+.khat-paper-bouquet-v96 .l2{right:18px;top:42px;transform:rotate(31deg)}
+.khat-paper-bouquet-v96 .tag{
+  position:absolute;right:48px;bottom:5px;padding:3px 5px;
+  background:#f4e6ce;border:1px solid rgba(105,73,51,.12);
+  box-shadow:0 3px 7px rgba(70,42,29,.08);
+  font:600 8px/1.1 "Segoe Print","Bradley Hand","Comic Sans MS",cursive;
+  color:#956358;transform:rotate(-8deg);white-space:nowrap
+}
+@keyframes khatBouquetBreezeV96{
+  0%,100%{transform:rotate(7deg) translateY(0)}
+  50%{transform:rotate(10deg) translateY(-2px)}
+}
+@media(max-width:700px){
+  .khat-paper-bouquet-v96{width:76px;height:76px;top:-17px;right:-5px;transform:rotate(7deg) scale(.86)}
+}
+@media(max-width:520px){
+  .khat-paper-bouquet-v96{width:68px;height:68px;top:-14px;right:-2px;transform:rotate(6deg) scale(.76)}
+  .khat-paper-bouquet-v96 .tag{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .khat-paper-bouquet-v96{animation:none!important}
+}
