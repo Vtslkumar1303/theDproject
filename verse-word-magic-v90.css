@@ -1,0 +1,42 @@
+/* v90 — safe magical word-by-word verse reveal */
+.verse-card .tdp-magic-word-v90{
+  display:inline;
+  opacity:1;
+  filter:none;
+  transform:none;
+  text-shadow:inherit;
+}
+.verse-card.tdp-word-magic-v90-running .tdp-magic-word-v90{
+  display:inline-block;
+  opacity:0;
+  filter:blur(3px);
+  transform:translateY(8px) scale(.985);
+  animation:tdpWordRevealV90 .8s cubic-bezier(.18,.72,.2,1) forwards;
+  animation-delay:calc(var(--tdp-word-index) * var(--tdp-word-step,34ms));
+  will-change:opacity,transform,filter,text-shadow;
+}
+@keyframes tdpWordRevealV90{
+  0%{opacity:0;filter:blur(3px);transform:translateY(8px) scale(.985);text-shadow:0 0 0 rgba(168,96,84,0)}
+  48%{opacity:.97;filter:blur(.2px);transform:translateY(0) scale(1.012);text-shadow:0 0 10px rgba(168,96,84,.28),0 0 18px rgba(222,178,110,.18)}
+  100%{opacity:1;filter:none;transform:none;text-shadow:inherit}
+}
+.verse-card.tdp-word-magic-v90-running .tdp-emphasis.tdp-magic-word-v90,
+.verse-card.tdp-word-magic-v90-running .tdp-emphasis .tdp-magic-word-v90{
+  animation-name:tdpWordRevealEmV90;
+}
+@keyframes tdpWordRevealEmV90{
+  0%{opacity:0;filter:blur(3px);transform:translateY(8px) scale(.98)}
+  55%{opacity:1;filter:none;transform:translateY(0) scale(1.018);text-shadow:0 0 12px rgba(130,55,64,.34),0 0 22px rgba(221,171,105,.22)}
+  100%{opacity:1;filter:none;transform:none}
+}
+@media(max-width:700px){
+  .verse-card.tdp-word-magic-v90-running .tdp-magic-word-v90{animation-duration:.7s}
+}
+@media(prefers-reduced-motion:reduce){
+  .verse-card .tdp-magic-word-v90{
+    opacity:1!important;
+    filter:none!important;
+    transform:none!important;
+    animation:none!important;
+  }
+}
