@@ -1,0 +1,28 @@
+/* v97 — realistic bouquet image on Khat player */
+.spotify-player,#musicCard.spotify-player{position:relative!important;overflow:visible!important}
+.khat-real-bouquet-v97{
+  position:absolute;
+  top:-24px;
+  right:-12px;
+  width:82px;
+  height:auto;
+  z-index:26;
+  pointer-events:none;
+  transform:rotate(7deg);
+  transform-origin:78% 82%;
+  filter:drop-shadow(0 8px 14px rgba(72,44,34,.18));
+  animation:khatRealBouquetFloatV97 6s ease-in-out infinite;
+}
+@keyframes khatRealBouquetFloatV97{
+  0%,100%{transform:rotate(7deg) translateY(0)}
+  50%{transform:rotate(9deg) translateY(-2px)}
+}
+@media(max-width:700px){
+  .khat-real-bouquet-v97{width:68px;top:-18px;right:-7px}
+}
+@media(max-width:520px){
+  .khat-real-bouquet-v97{width:58px;top:-14px;right:-3px}
+}
+@media(prefers-reduced-motion:reduce){
+  .khat-real-bouquet-v97{animation:none!important}
+}
