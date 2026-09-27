@@ -1,0 +1,87 @@
+/* v92 — slow handwritten-letter style reveal */
+.verse-card .tdp-letter-word-v92{
+  display:inline-block;
+  opacity:1;
+  filter:none;
+  transform:none;
+  text-shadow:inherit;
+}
+
+.verse-card.tdp-letter-reveal-v92-running .tdp-letter-word-v92{
+  opacity:0;
+  filter:blur(1.7px);
+  transform:none;
+  color:rgba(79,52,42,.15);
+  animation:tdpLetterInkV92 1.9s cubic-bezier(.22,.61,.24,1) forwards;
+  animation-delay:calc(var(--tdp-letter-line-index) * var(--tdp-letter-line-delay,900ms));
+  will-change:opacity,filter,color,text-shadow;
+}
+
+@keyframes tdpLetterInkV92{
+  0%{
+    opacity:0;
+    filter:blur(1.7px);
+    color:rgba(79,52,42,.12);
+    text-shadow:0 0 8px rgba(115,76,55,.06);
+  }
+  38%{
+    opacity:.34;
+    filter:blur(1px);
+    color:rgba(79,52,42,.38);
+    text-shadow:0 0 7px rgba(115,76,55,.08);
+  }
+  72%{
+    opacity:.78;
+    filter:blur(.35px);
+    color:rgba(79,52,42,.82);
+    text-shadow:0 0 5px rgba(115,76,55,.08);
+  }
+  100%{
+    opacity:1;
+    filter:none;
+    color:inherit;
+    text-shadow:inherit;
+  }
+}
+
+.verse-card.tdp-letter-reveal-v92-running .tdp-emphasis.tdp-letter-word-v92,
+.verse-card.tdp-letter-reveal-v92-running .tdp-emphasis .tdp-letter-word-v92{
+  animation-name:tdpLetterInkEmV92;
+}
+
+@keyframes tdpLetterInkEmV92{
+  0%{
+    opacity:0;
+    filter:blur(1.8px);
+    color:rgba(105,51,58,.12);
+    text-shadow:0 0 10px rgba(130,55,64,.03);
+  }
+  70%{
+    opacity:.8;
+    filter:blur(.35px);
+    color:rgba(105,51,58,.82);
+    text-shadow:0 0 8px rgba(130,55,64,.12),0 0 14px rgba(221,171,105,.08);
+  }
+  100%{
+    opacity:1;
+    filter:none;
+    color:inherit;
+    text-shadow:inherit;
+  }
+}
+
+@media(max-width:700px){
+  .verse-card.tdp-letter-reveal-v92-running .tdp-letter-word-v92{
+    animation-duration:1.75s;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .verse-card .tdp-letter-word-v92{
+    opacity:1!important;
+    filter:none!important;
+    color:inherit!important;
+    transform:none!important;
+    animation:none!important;
+  }
+}
