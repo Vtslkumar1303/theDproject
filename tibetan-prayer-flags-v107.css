@@ -1,0 +1,139 @@
+/* v107 — one detailed Himalayan prayer-flag strand exactly across the top-left corner */
+#letter,.letter,.letter-sheet,.letter-paper,.letter-main{
+  position:relative!important;
+  overflow:visible!important;
+}
+.tibetan-prayer-flags-v107{
+  position:absolute;
+  inset:0 auto auto 0;
+  width:190px;
+  height:150px;
+  z-index:34;
+  pointer-events:none;
+  filter:drop-shadow(0 10px 16px rgba(67,43,29,.15));
+}
+.tibetan-prayer-flags-v107 .strand{
+  position:absolute;
+  left:-2px;
+  top:134px;
+  width:190px;
+  height:72px;
+  transform:rotate(-45deg);
+  transform-origin:0 0;
+}
+.tibetan-prayer-flags-v107 .rope{
+  position:absolute;
+  top:0;
+  left:0;
+  width:190px;
+  height:2px;
+  border-radius:999px;
+  background:linear-gradient(90deg,#8c6a50,#c59f77,#7a5942);
+  box-shadow:0 1px 2px rgba(0,0,0,.08);
+}
+.tibetan-prayer-flags-v107 .flag{
+  position:absolute;
+  top:3px;
+  width:28px;
+  height:40px;
+  transform-origin:50% 0;
+  overflow:hidden;
+  clip-path:polygon(0 0,100% 0,100% 87%,84% 100%,67% 88%,50% 100%,33% 88%,16% 100%,0 87%);
+  border:1px solid rgba(82,54,37,.10);
+  box-shadow:0 3px 8px rgba(55,34,24,.13),inset 0 1px rgba(255,255,255,.12);
+  animation:prayerFlagWaveV107 3.1s ease-in-out infinite;
+  will-change:transform;
+}
+.tibetan-prayer-flags-v107 .f1{left:8px;background:#3e71b4;animation-delay:0s}
+.tibetan-prayer-flags-v107 .f2{left:43px;background:#f0ebdd;animation-delay:.18s}
+.tibetan-prayer-flags-v107 .f3{left:78px;background:#c34c49;animation-delay:.36s}
+.tibetan-prayer-flags-v107 .f4{left:113px;background:#4e8c5c;animation-delay:.54s}
+.tibetan-prayer-flags-v107 .f5{left:148px;background:#d6b047;animation-delay:.72s}
+.tibetan-prayer-flags-v107 .flag:before{
+  content:"";
+  position:absolute;
+  left:0;right:0;top:0;height:5px;
+  background:rgba(255,255,255,.14);
+  border-bottom:1px solid rgba(80,56,36,.10);
+}
+.tibetan-prayer-flags-v107 .flag:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.10) 0%,rgba(255,255,255,.03) 18%,rgba(0,0,0,.04) 48%,rgba(255,255,255,.06) 72%,rgba(0,0,0,.05) 100%),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 5px);
+  mix-blend-mode:multiply;
+  opacity:.95;
+}
+.tibetan-prayer-flags-v107 .detail{
+  position:absolute;
+  inset:6px 4px 8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:rgba(72,52,40,.34);
+  font-size:7px;
+  line-height:1.02;
+  font-family:"Noto Serif Tibetan","Times New Roman",serif;
+  white-space:pre-line;
+  letter-spacing:.01em;
+  transform:scale(.95);
+  z-index:1;
+}
+.tibetan-prayer-flags-v107 .seal{
+  position:absolute;
+  left:50%;
+  top:13px;
+  transform:translateX(-50%);
+  width:12px;height:12px;border-radius:50%;
+  border:1px solid rgba(82,56,39,.16);
+  background:
+    radial-gradient(circle at 50% 50%,rgba(90,66,46,.20) 0 22%,transparent 23%),
+    radial-gradient(circle at 35% 35%,rgba(90,66,46,.09),rgba(90,66,46,.02));
+  opacity:.65;
+  z-index:1;
+}
+.tibetan-prayer-flags-v107 .fray{
+  position:absolute;
+  bottom:1px;left:0;right:0;height:6px;
+  background:
+    radial-gradient(circle at 12% 100%,rgba(255,255,255,.06) 0 24%,transparent 25%),
+    radial-gradient(circle at 38% 100%,rgba(255,255,255,.05) 0 24%,transparent 25%),
+    radial-gradient(circle at 62% 100%,rgba(255,255,255,.05) 0 24%,transparent 25%),
+    radial-gradient(circle at 86% 100%,rgba(255,255,255,.06) 0 24%,transparent 25%);
+  opacity:.7;
+}
+@keyframes prayerFlagWaveV107{
+  0%,100%{transform:perspective(340px) rotateY(0deg) rotate(-1deg) translateY(0)}
+  18%{transform:perspective(340px) rotateY(-20deg) rotate(2deg) translateY(-1px)}
+  40%{transform:perspective(340px) rotateY(10deg) rotate(-2deg) translateY(1px)}
+  68%{transform:perspective(340px) rotateY(-13deg) rotate(3deg) translateY(-1px)}
+  84%{transform:perspective(340px) rotateY(5deg) rotate(0deg) translateY(0)}
+}
+@media(max-width:700px){
+  .tibetan-prayer-flags-v107{width:180px;height:142px}
+  .tibetan-prayer-flags-v107 .strand{top:127px;width:180px}
+  .tibetan-prayer-flags-v107 .rope{width:180px}
+  .tibetan-prayer-flags-v107 .flag{width:25px;height:36px}
+  .tibetan-prayer-flags-v107 .f1{left:8px}
+  .tibetan-prayer-flags-v107 .f2{left:41px}
+  .tibetan-prayer-flags-v107 .f3{left:74px}
+  .tibetan-prayer-flags-v107 .f4{left:107px}
+  .tibetan-prayer-flags-v107 .f5{left:140px}
+}
+@media(max-width:520px){
+  .tibetan-prayer-flags-v107{width:170px;height:136px}
+  .tibetan-prayer-flags-v107 .strand{top:120px;width:170px}
+  .tibetan-prayer-flags-v107 .rope{width:170px}
+  .tibetan-prayer-flags-v107 .flag{width:23px;height:33px}
+  .tibetan-prayer-flags-v107 .f1{left:7px}
+  .tibetan-prayer-flags-v107 .f2{left:38px}
+  .tibetan-prayer-flags-v107 .f3{left:69px}
+  .tibetan-prayer-flags-v107 .f4{left:100px}
+  .tibetan-prayer-flags-v107 .f5{left:131px}
+}
+@media(prefers-reduced-motion:reduce){
+  .tibetan-prayer-flags-v107 .flag{animation:none!important}
+}
