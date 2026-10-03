@@ -128,3 +128,5 @@ For rollback, restore the selected version's tree in a new commit on main, prese
 - v106: repositioned the single Himalayan/Tibetan prayer-flag strand to match the user-marked diagonal in the screenshot: one `/`-style line at 45°, starting on the left edge and ending on the top edge of the letter. Detailed cloth print, shading, frayed edges, and independent waving motion are preserved. Backup: `backup-before-diagonal-corner-flags-v106-20261001`.
 
 - v107: removed the wooden/pin-style elements from the 45° Tibetan/Himalayan prayer-flag strand. The flags now hang purely from a thin thread while preserving the exact diagonal corner placement, detailed cloth print, shading, frayed edges, and waving motion. Backup: `backup-before-thread-only-flags-v107-20261001`.
+
+- v108: corrected the remaining wooden-stick appearance in the 45° prayer-flag strand. The former brown 2px rope is now a thin 1px semi-transparent thread with no wooden gradient or shadow, while preserving the exact corner placement, flag detail, and waving motion. Backup: `backup-before-real-thread-flags-v108-20261003`.
