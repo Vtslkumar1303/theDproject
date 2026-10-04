@@ -10,7 +10,7 @@
     section.setAttribute('aria-label','Little futures keepsake desk');
     section.innerHTML=`
       <div class="tdp-kd-head">
-        <div class="tdp-kd-kicker">little futures, resting like keepsakes</div>
+        <div class="tdp-kd-kicker">little moments I wouldn’t mind finding someday</div>
         <h3>Open whichever one finds you…</h3>
         <p>Some memories are still waiting to happen.</p>
       </div>
@@ -24,13 +24,13 @@
             <div class="tdp-ticket-stack" aria-hidden="true">
               <div class="tdp-ticket tdp-ticket-bts">
                 <div class="tdp-ticket-side">BTS<small>ARMY</small></div>
-                <div class="tdp-ticket-body"><b>PURPLE HOUR</b><small>ADMIT TWO · SOMEDAY</small><i>Seat: Side by Side</i></div>
+                <div class="tdp-ticket-body"><b>PURPLE HOUR</b><small>ADMIT TWO · SOMEDAY</small><i>Seat: Right Beside You</i></div>
                 <div class="tdp-ticket-portrait tdp-ticket-portrait-bts"><span></span><span></span><span></span></div>
                 <div class="tdp-ticket-barcode"></div>
               </div>
               <div class="tdp-ticket tdp-ticket-arijit">
                 <div class="tdp-ticket-side">AS<small>LIVE</small></div>
-                <div class="tdp-ticket-body"><b>ARIJIT SINGH</b><small>ONE EVENING · LIVE</small><i>Row: Favourite Chorus</i></div>
+                <div class="tdp-ticket-body"><b>ARIJIT SINGH</b><small>ONE EVENING · LIVE</small><i>Row: Agar Tum Saath Ho</i></div>
                 <div class="tdp-ticket-portrait tdp-ticket-portrait-solo"><span></span></div>
                 <div class="tdp-ticket-barcode"></div>
               </div>
@@ -62,7 +62,7 @@
                 <div class="tdp-polaroid-caption"><b>one slow golden hour</b><small>our favourite songs</small></div>
               </div>
             </div>
-            <span class="tdp-kd-reveal-copy">Some sunsets are meant to be shared.</span>
+            <span class="tdp-kd-reveal-copy">Maybe someday we’ll watch the sky change colours and pretend we’re not getting sentimental about it.</span>
             <span class="tdp-kd-hint">tap the polaroids</span>
           </button>
         </article>
@@ -86,7 +86,7 @@
 
         <article class="tdp-kd-item tdp-kd-navratri">
           <button class="tdp-kd-trigger" type="button" aria-expanded="false">
-            <span class="tdp-kd-label">for one Navratri night with you</span>
+            <span class="tdp-kd-label">for one night of garba, lights, and maybe us somewhere in between</span>
             <span class="tdp-garba-pass" aria-hidden="true">
               <span class="tdp-garba-hole"></span>
               <span class="tdp-garba-lights"></span>
@@ -94,7 +94,7 @@
               <span class="tdp-garba-sub">ADMIT TWO · SOMEDAY</span>
               <span class="tdp-garba-dancers">◜ ◝ ◜ ◝</span>
             </span>
-            <span class="tdp-kd-reveal-copy">Traditional clothes, tired feet, loud music, and one very Gujarat memory.</span>
+            <span class="tdp-kd-reveal-copy">Traditional clothes, tired feet, loud music, and one very Gujarat memory.</span><span class="tdp-kd-gujarati">હું, તું, નવરાત્રી અને એ ઝગમગતી રાત…</span>
             <span class="tdp-kd-hint">tap the pass</span>
           </button>
         </article>
