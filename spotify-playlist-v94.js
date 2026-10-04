@@ -17,12 +17,12 @@
 
     section=document.createElement('section');
     section.className='tdp-spotify-v94';
-    section.setAttribute('aria-label','A Little Soundtrack I Won’t Explain');
+    section.setAttribute('aria-label','Songs That Somehow Started Sounding Like You');
     section.innerHTML=`
       <div class="tdp-sp94-shell">
         <div class="tdp-sp94-head">
           <div class="tdp-sp94-kicker">somewhere between lyrics, overthinking & March</div>
-          <h2>A Little Soundtrack I Won’t Explain 🎧</h2>
+          <h2>Songs That Somehow Started Sounding Like You</h2>
           <p>Some songs just started sounding like you. So I kept them together.</p>
         </div>
 
@@ -53,7 +53,7 @@
         <div class="tdp-sp94-panel" id="tdp-sp94-panel" aria-hidden="true">
           <div class="tdp-sp94-panel-inner">
             <div class="tdp-sp94-note">
-              <p>Maybe there isn’t a hidden meaning in every lyric.</p>
+              <p>Not every lyric means something… but a few definitely made me think of you</p>
               <p>Maybe there’s just a little one in some of them.</p>
             </div>
 
