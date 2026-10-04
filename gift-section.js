@@ -71,7 +71,7 @@
     const style=document.createElement('style');style.id='tdpGiftStyles';style.textContent=styles;document.head.appendChild(style);
     const section=document.createElement('section');section.id='tdpGiftSection';section.className='tdp-gift-section';
     section.innerHTML=`
-      <div class="tdp-gift-kicker">A little unopened memory</div>
+      <div class="tdp-gift-kicker">this was supposed to reach you actually</div>
       <h2>A gift I never gathered the courage to hand you</h2>
       <p class="tdp-gift-intro">There is one small thing waiting here from a day when I felt ridiculously proud and happy for you.</p>
       <div class="tdp-gift-stage"><div class="tdp-envelope-scene">
