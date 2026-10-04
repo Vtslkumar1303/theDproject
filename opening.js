@@ -16,10 +16,7 @@
 
   openScreen.innerHTML=`
     <div class="open-card confession-envelope-card" id="envelopeCard">
-      <div class="confession-kicker">A confession I kept folding into silence</div>
-      <p class="confession-whisper">Maybe sharing March was only the first coincidence.</p>
-
-      <div class="real-envelope" id="realEnvelope">
+<div class="real-envelope" id="realEnvelope">
         <div class="envelope-ground-shadow"></div>
         <div class="envelope-back"></div>
 
@@ -37,8 +34,7 @@
           <div class="password-glow" aria-hidden="true"></div>
           <div class="password-tape"></div>
           <div class="password-heart" aria-hidden="true"></div>
-          <label for="letterPassword" class="password-label">One tiny secret</label>
-          <div class="password-hint">You already know the password</div>
+<div class="password-hint">You already know the password</div>
           <div class="password-row">
             <input id="letterPassword" class="password-input" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="4" aria-label="Password" aria-describedby="passwordMessage">
             <button id="unlockBtn" class="unlock-btn" type="button"><span>Open</span><i aria-hidden="true">♡</i></button>
@@ -68,7 +64,7 @@
     }
     sheetClone.appendChild(clone);
   }else if(sheetClone){
-    sheetClone.innerHTML='<section class="hero sheet-original-hero"><div class="hero-inner"><div class="kicker">a little confession I kept rewriting until it felt honest</div><p class="subtitle">Some feelings stay quiet for so long that eventually the only kind thing you can do is give them words.</p></div></section>';
+    sheetClone.innerHTML='<section class="hero sheet-original-hero"><div class="hero-inner"><div class="kicker">a little confession I kept rewriting until it felt honest</div><p class="subtitle">Maybe sharing March was only the first coincidence.</p></div></section>';
   }
 
   requestAnimationFrame(()=>openScreen.classList.add('tdp-opening-ready'));
