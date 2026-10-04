@@ -930,3 +930,7 @@
 @media(max-width:700px){
   .tdp-kd-3d-object{width:76px!important;height:58px!important;transform:scale(.94)!important}
 }
+
+/* v109 Gujarati Navratri keepsake line */
+.tdp-kd-gujarati{display:block;margin-top:8px;font:600 .78rem/1.55 "Noto Sans Gujarati","Nirmala UI","Segoe UI",sans-serif;color:#7b4f43;text-align:center;letter-spacing:.01em}
+@media(max-width:520px){.tdp-kd-gujarati{font-size:.72rem;line-height:1.5}}
