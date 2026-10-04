@@ -17,7 +17,7 @@
   openScreen.innerHTML=`
     <div class="open-card confession-envelope-card" id="envelopeCard">
       <div class="confession-kicker">A confession I kept folding into silence</div>
-      <p class="confession-whisper">Some feelings stay quiet for so long that eventually the only kind thing you can do is give them words.</p>
+      <p class="confession-whisper">Maybe sharing March was only the first coincidence.</p>
 
       <div class="real-envelope" id="realEnvelope">
         <div class="envelope-ground-shadow"></div>
@@ -40,7 +40,7 @@
           <label for="letterPassword" class="password-label">One tiny secret</label>
           <div class="password-hint">You already know the password</div>
           <div class="password-row">
-            <input id="letterPassword" class="password-input" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="4" aria-describedby="passwordMessage">
+            <input id="letterPassword" class="password-input" type="password" inputmode="numeric" pattern="[0-9]*" autocomplete="off" maxlength="4" aria-label="Password" aria-describedby="passwordMessage">
             <button id="unlockBtn" class="unlock-btn" type="button"><span>Open</span><i aria-hidden="true">♡</i></button>
           </div>
           <div id="passwordMessage" class="password-message" aria-live="polite"></div>
@@ -68,7 +68,7 @@
     }
     sheetClone.appendChild(clone);
   }else if(sheetClone){
-    sheetClone.innerHTML='<section class="hero sheet-original-hero"><div class="hero-inner"><div class="kicker">A letter I probably overthought too much</div><p class="subtitle">Some feelings stay quiet for so long that eventually the only kind thing you can do is give them words.</p></div></section>';
+    sheetClone.innerHTML='<section class="hero sheet-original-hero"><div class="hero-inner"><div class="kicker">a little confession I kept rewriting until it felt honest</div><p class="subtitle">Some feelings stay quiet for so long that eventually the only kind thing you can do is give them words.</p></div></section>';
   }
 
   requestAnimationFrame(()=>openScreen.classList.add('tdp-opening-ready'));
@@ -181,7 +181,7 @@
     primeOpeningAudio();
     if(card.classList.contains('is-unlocking')||validating)return;
     if(passwordInput.value.length!==4){
-      passwordMessage.textContent='A little date you already know… and my heart remembers 🤍';
+      passwordMessage.textContent='Think of a date you already know.';
       passwordInput.focus({preventScroll:true});
       return;
     }
@@ -261,8 +261,8 @@
     }else{
       wrongPasswordAttempts++;
       passwordMessage.textContent=wrongPasswordAttempts%2
-        ? "The day Earth got a little luckier… because you arrived 🤍"
-        : 'A date you already know… and my heart won’t forget 🫶';
+        ? "Wrong one. Think of a date you already know."
+        : 'You’re very close. March has the answer.';
       card.classList.remove('wrong-shake');
       void card.offsetWidth;
       card.classList.add('wrong-shake');
