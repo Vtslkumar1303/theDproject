@@ -47,7 +47,7 @@
     if(!readingBreak&&cards.length){
       readingBreak=document.createElement('section');
       readingBreak.className='reading-break-card';
-      readingBreak.innerHTML='<div class="reading-break-kicker">For when these words get a little too much</div><h3>A tiny pause from the letter</h3><p>Take a minute here if you get bored of reading. The next verse will wait for you.</p><div class="reading-break-frame"><video class="reading-break-video" controls playsinline preload="metadata"><source src="https://the-d-project-media.floot.app/_cdn/static/43648f0a-2d6d-44d0-afe1-e7c20249ef5d-reading-break-hq-replacement.mp4" type="video/mp4">Your browser could not play this little video break.</video></div><div class="reading-break-caption">Stay here for a while. Come back whenever you feel like reading me again.</div>';
+      readingBreak.innerHTML='<div class="reading-break-kicker">For when these words get a little too much</div><h3>A little reading break</h3><p>Take a little break if you’re getting bored of reading — I clearly had a lot to say.</p><div class="reading-break-frame"><video class="reading-break-video" controls playsinline preload="metadata"><source src="https://the-d-project-media.floot.app/_cdn/static/43648f0a-2d6d-44d0-afe1-e7c20249ef5d-reading-break-hq-replacement.mp4" type="video/mp4">Your browser could not play this little video break.</video></div><div class="reading-break-caption">Stay here for a while. Come back whenever you feel like reading me again.</div>';
       const anchor=cards[Math.min(2,cards.length-1)];
       anchor.insertAdjacentElement('afterend',readingBreak);
     }
@@ -87,13 +87,13 @@
         localStorage.setItem(verseTextMapKey,JSON.stringify(verseMap));
       }catch(e){}
       const box=document.createElement('div');box.className='verse-response';
-      box.innerHTML='<button class="verse-response-toggle" type="button"><span class="response-toggle-kicker">A tiny corner that belongs to you</span><span class="response-toggle-main">Leave a little piece of your heart here</span><span class="response-toggle-hint">Open softly</span></button><div class="verse-response-box"><div class="verse-response-inner"><label class="verse-response-label">If this verse made you pause, smile, overthink, or feel anything at all, leave a tiny thought here. It can be sweet, shy, silly, honest — just yours.</label><textarea maxlength="1500" placeholder="Tell me the thought you almost kept to yourself..."></textarea><div class="verse-response-actions"><div class="verse-response-meta"><span>Take your time — this little corner is yours.</span><span class="response-saved">Still here ✨</span><span class="verse-submit-state"></span></div><button class="verse-submit" type="button">Leave this little note</button></div></div></div>';
+      box.innerHTML='<button class="verse-response-toggle" type="button"><span class="response-toggle-kicker">Your turn, only if you feel like it</span><span class="response-toggle-main">Say anything — a thought, reaction, rant, or something completely random.</span><span class="response-toggle-hint">Open softly</span></button><div class="verse-response-box"><div class="verse-response-inner"><label class="verse-response-label">If this verse made you pause, smile, overthink, or feel anything at all, leave a tiny thought here. It can be sweet, shy, silly, honest — just yours.</label><textarea maxlength="1500" placeholder="Tell me the thought you almost kept to yourself..."></textarea><div class="verse-response-actions"><div class="verse-response-meta"><span>Take your time — this little corner is yours.</span><span class="response-saved">Still here ✨</span><span class="verse-submit-state"></span></div><button class="verse-submit" type="button">Leave a little piece of your heart here</button></div></div></div>';
       const toggle=box.querySelector('.verse-response-toggle'),ta=box.querySelector('textarea'),submit=box.querySelector('.verse-submit'),state=box.querySelector('.verse-submit-state'),savedTag=box.querySelector('.response-saved');
       ta.value=saved[i]||'';
       const setToggle=open=>{
         toggle.classList.toggle('is-open',open);
-        toggle.querySelector('.response-toggle-kicker').textContent=open?'Your little corner is open':'A tiny corner that belongs to you';
-        toggle.querySelector('.response-toggle-main').textContent=open?'Say the thing your heart almost kept quiet':'Leave a little piece of your heart here';
+        toggle.querySelector('.response-toggle-kicker').textContent=open?'Your little corner is open':'Your turn, only if you feel like it';
+        toggle.querySelector('.response-toggle-main').textContent=open?'Feel free to say whatever’s on your mind — even if it has nothing to do with this letter.':'Say anything — a thought, reaction, rant, or something completely random.';
         toggle.querySelector('.response-toggle-hint').textContent=open?'Close gently':'Open softly';
       };
       toggle.addEventListener('click',()=>{const open=box.classList.toggle('open');setToggle(open);if(open)setTimeout(()=>ta.focus(),220)});
