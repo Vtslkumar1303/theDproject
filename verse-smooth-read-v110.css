@@ -1,0 +1,69 @@
+/* v110 — smooth paragraph-level verse reading */
+.verse-card .tdp-smooth-read-v110{
+  opacity:1;
+  transform:none;
+  filter:none;
+}
+
+.verse-card.open .tdp-smooth-read-v110{
+  animation:tdpSmoothReadV110 .62s cubic-bezier(.22,.75,.24,1) both;
+  animation-delay:calc(var(--tdp-read-index,0) * 115ms);
+  will-change:opacity,transform,filter;
+}
+
+@keyframes tdpSmoothReadV110{
+  0%{
+    opacity:0;
+    transform:translateY(8px);
+    filter:blur(1.6px);
+  }
+  48%{
+    opacity:.72;
+    transform:translateY(2px);
+    filter:blur(.35px);
+  }
+  100%{
+    opacity:1;
+    transform:none;
+    filter:none;
+  }
+}
+
+/* Keep reading comfortable while the verse itself opens. */
+.verse-card.open .verse-copy{
+  scroll-behavior:smooth;
+}
+.verse-card .verse-copy p,
+.verse-card .verse-copy blockquote,
+.verse-card .verse-copy li{
+  text-wrap:pretty;
+}
+
+/* Response boxes, audio controls and utility UI should appear immediately. */
+.verse-card .verse-response,
+.verse-card .verse-audio,
+.verse-card button,
+.verse-card textarea,
+.verse-card input,
+.verse-card select{
+  animation:none!important;
+  opacity:1;
+  filter:none;
+  transform:none;
+}
+
+@media(max-width:700px){
+  .verse-card.open .tdp-smooth-read-v110{
+    animation-duration:.54s;
+    animation-delay:calc(var(--tdp-read-index,0) * 90ms);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .verse-card .tdp-smooth-read-v110{
+    animation:none!important;
+    opacity:1!important;
+    transform:none!important;
+    filter:none!important;
+  }
+}
