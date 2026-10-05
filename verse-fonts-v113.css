@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Kalam:wght@300;400;700&family=Poppins:wght@400;500;600&display=swap');
+
+/* v113 — Caveat headings + lighter Kalam verse body */
+.verse-card .verse-toggle strong,
+.verse-card .verse-heading strong,
+.verse-card .verse-title-editable{
+  font-family:"Caveat","Segoe Print","Bradley Hand",cursive!important;
+  font-weight:600!important;
+  letter-spacing:.01em;
+  line-height:1.05;
+  font-size:clamp(1.45rem,3vw,2rem)!important;
+}
+
+.verse-card .verse-copy,
+.verse-card .verse-copy p,
+.verse-card .verse-copy li,
+.verse-card .verse-copy blockquote,
+.verse-card .verse-copy .quote,
+.verse-card .verse-content,
+.verse-card .verse-body,
+.verse-card .verse-text{
+  font-family:"Kalam","Segoe Print","Bradley Hand",cursive!important;
+  font-weight:300!important;
+  line-height:1.84;
+  letter-spacing:.004em;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+.verse-card .verse-copy p{
+  font-size:clamp(1rem,1.7vw,1.08rem);
+}
+
+/* Preserve only intentional emphasis as bold. */
+.verse-card .verse-copy strong,
+.verse-card .verse-copy b,
+.verse-card .tdp-em-bold,
+.verse-card .tdp-em-highlight,
+.verse-card .tdp-em-glow,
+.verse-card .tdp-em-pull,
+.verse-card .confession-final-stack span{
+  font-weight:700!important;
+}
+
+.verse-card .verse-toggle small,
+.verse-card .verse-label-editable{
+  font-family:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+  font-weight:500!important;
+  letter-spacing:.14em!important;
+}
+
+@media(max-width:700px){
+  .verse-card .verse-toggle strong,
+  .verse-card .verse-heading strong,
+  .verse-card .verse-title-editable{
+    font-size:1.55rem!important;
+  }
+  .verse-card .verse-copy p{
+    font-size:.98rem;
+    line-height:1.78;
+  }
+}
