@@ -144,3 +144,5 @@ For rollback, restore the selected version's tree in a new commit on main, prese
 - v114: softened all verse typography weights. Caveat verse headings now use 500 instead of 600, standard strong/bold text inside verses uses Kalam 400, special emphasis classes use Kalam 500 instead of 700, and verse numbering/labels use Poppins 400. Normal verse body remains Kalam 300. Backup: `backup-before-soft-emphasis-v114-20261005`.
 
 - v115: made verse typography ultra-light. Caveat headings now use 400, all Kalam body text including strong/bold/special emphasis classes uses 300, and emphasis is conveyed through colour/highlight instead of heavier weight. Verse labels remain Poppins 400. Backup: `backup-before-ultralight-verses-v115-20261005`.
+
+- v115: made verse typography visibly lighter. Normal Kalam body and ordinary bold/strong text now use 300, only special highlight/glow/pull emphasis uses 400, Caveat headings use 400, and verse text color was softened slightly for a lighter handwritten-ink appearance. Backup: `backup-before-ultralight-verse-v115-20261005`.
