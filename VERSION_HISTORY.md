@@ -146,3 +146,5 @@ For rollback, restore the selected version's tree in a new commit on main, prese
 - v115: made verse typography ultra-light. Caveat headings now use 400, all Kalam body text including strong/bold/special emphasis classes uses 300, and emphasis is conveyed through colour/highlight instead of heavier weight. Verse labels remain Poppins 400. Backup: `backup-before-ultralight-verses-v115-20261005`.
 
 - v115: made verse typography visibly lighter. Normal Kalam body and ordinary bold/strong text now use 300, only special highlight/glow/pull emphasis uses 400, Caveat headings use 400, and verse text color was softened slightly for a lighter handwritten-ink appearance. Backup: `backup-before-ultralight-verse-v115-20261005`.
+
+- v116: Kalam still rendered visually too heavy even at its lightest weight, so the verse body was switched to Handlee for thinner handwritten strokes and better long-form readability. Caveat headings remain unchanged. All verse-body emphasis is kept at the same light Handlee weight with text shadows removed so no words appear excessively bold. Backup: `backup-before-handlee-verse-v116-20261005`.
