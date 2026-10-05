@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400&family=Kalam:wght@300&family=Poppins:wght@400&display=swap');
+
+/* v115 — ultra-light verse typography */
+.verse-card .verse-toggle strong,
+.verse-card .verse-heading strong,
+.verse-card .verse-title-editable{
+  font-family:"Caveat","Segoe Print","Bradley Hand",cursive!important;
+  font-weight:400!important;
+  letter-spacing:.01em;
+  line-height:1.05;
+  font-size:clamp(1.42rem,3vw,1.95rem)!important;
+}
+
+.verse-card .verse-copy,
+.verse-card .verse-copy p,
+.verse-card .verse-copy li,
+.verse-card .verse-copy blockquote,
+.verse-card .verse-copy .quote,
+.verse-card .verse-content,
+.verse-card .verse-body,
+.verse-card .verse-text,
+.verse-card .verse-copy strong,
+.verse-card .verse-copy b,
+.verse-card .tdp-emphasis,
+.verse-card .tdp-em-bold,
+.verse-card .tdp-em-highlight,
+.verse-card .tdp-em-glow,
+.verse-card .tdp-em-pull,
+.verse-card .confession-final-stack span{
+  font-family:"Kalam","Segoe Print","Bradley Hand",cursive!important;
+  font-weight:300!important;
+  line-height:1.84;
+  letter-spacing:.003em;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+.verse-card .verse-copy p{
+  font-size:clamp(.98rem,1.65vw,1.06rem);
+}
+
+/* Keep emphasis through colour/highlight only, never thickness. */
+.verse-card .tdp-em-bold{color:#5b3c31!important}
+.verse-card .tdp-em-highlight{
+  background:linear-gradient(180deg,transparent 54%,rgba(221,171,105,.27) 54%,rgba(234,190,126,.34) 90%,transparent 90%)!important;
+}
+.verse-card .tdp-em-glow,
+.verse-card .tdp-em-pull{color:#70434a!important}
+.verse-card .confession-final-stack span{letter-spacing:.012em!important}
+
+.verse-card .verse-toggle small,
+.verse-card .verse-label-editable{
+  font-family:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+  font-weight:400!important;
+  letter-spacing:.13em!important;
+}
+
+@media(max-width:700px){
+  .verse-card .verse-toggle strong,
+  .verse-card .verse-heading strong,
+  .verse-card .verse-title-editable{
+    font-size:1.5rem!important;
+  }
+  .verse-card .verse-copy p{
+    font-size:.96rem;
+    line-height:1.78;
+  }
+}
