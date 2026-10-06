@@ -1,299 +1,269 @@
 @import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
 
-/* v129 — optional folded-paper end credits after the Khat player */
+/* v132 — round paper bundle with thread, tap open / tap close */
 .tdp-end-credits{
-  width:min(500px,calc(100% - 24px));
-  margin:20px auto 28px;
+  width:min(500px,calc(100% - 20px));
+  margin:18px auto 0!important;
   position:relative;
   z-index:88;
   text-align:center;
   color:#5b3d32;
 }
 
-.tdp-credits-fold{
+.tdp-credits-bundle{
   position:relative;
+  width:108px;
+  height:108px;
   display:block;
-  width:min(180px,64%);
+  margin:0 auto;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  background:none;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  filter:drop-shadow(0 9px 9px rgba(77,48,34,.13));
+  transition:transform .25s ease,filter .25s ease,opacity .26s ease;
+}
+.tdp-credits-bundle:hover{
+  transform:translateY(-2px) rotate(-1deg);
+  filter:drop-shadow(0 12px 12px rgba(77,48,34,.16));
+}
+.tdp-credits-bundle:active{transform:scale(.97)}
+.tdp-end-credits.is-open .tdp-credits-bundle{
+  opacity:0;
+  transform:scale(.74) rotate(8deg);
+  pointer-events:none;
+  height:0;
+  margin:0 auto;
+}
+
+.tdp-bundle-paper{
+  position:absolute;
+  inset:8px;
+  border-radius:50%;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 34% 24%,rgba(255,255,255,.7),transparent 24%),
+    repeating-linear-gradient(18deg,rgba(117,81,59,.025) 0 1px,transparent 1px 5px),
+    linear-gradient(145deg,#fff9ee 0%,#f2dfc8 65%,#e7c9ab 100%);
+  border:1px solid rgba(110,73,52,.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.85),
+    inset -5px -7px 12px rgba(105,67,46,.06),
+    0 2px 4px rgba(83,51,35,.08);
+}
+
+.tdp-bundle-fold{
+  position:absolute;
+  background:rgba(120,82,59,.11);
+  transform-origin:center;
+}
+.tdp-bundle-fold.f1{
+  width:112%;height:1px;left:-6%;top:39%;transform:rotate(18deg)
+}
+.tdp-bundle-fold.f2{
+  width:112%;height:1px;left:-6%;top:61%;transform:rotate(-17deg)
+}
+.tdp-bundle-fold.f3{
+  width:1px;height:112%;left:50%;top:-6%;transform:rotate(7deg)
+}
+
+.tdp-bundle-thread{
+  position:absolute;
+  z-index:4;
+  display:block;
+  border-radius:999px;
+  background:linear-gradient(90deg,#8e674d,#b28768 48%,#805c45);
+  box-shadow:0 1px 1px rgba(69,43,29,.2);
+  pointer-events:none;
+}
+.tdp-bundle-thread.thread-h{
+  left:2px;right:2px;top:52%;
+  height:2px;
+  transform:rotate(-7deg);
+}
+.tdp-bundle-thread.thread-v{
+  top:2px;bottom:2px;left:50%;
+  width:2px;
+  transform:rotate(8deg);
+}
+
+.tdp-bundle-knot{
+  position:absolute;
+  z-index:6;
+  left:50%;top:52%;
+  width:15px;height:12px;
+  border:2px solid #875f47;
+  border-radius:50%;
+  transform:translate(-50%,-50%) rotate(-7deg);
+  background:#ab7d5e;
+  box-shadow:0 2px 3px rgba(69,43,29,.2);
+}
+
+.tdp-bundle-pin{
+  position:absolute;
+  z-index:5;
+  width:12px;height:12px;
+  left:50%;top:10px;
+  transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(circle at 34% 30%,#ffc6bc 0 20%,#c8756d 43%,#874b46 76%,#663934);
+  box-shadow:0 2px 3px rgba(72,43,35,.25),inset 0 1px 1px rgba(255,255,255,.45);
+}
+
+.tdp-bundle-copy{
+  position:absolute;
+  z-index:7;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  transform:rotate(-2deg);
+}
+.tdp-bundle-copy strong{
+  font:400 1rem/1 "Caveat","Segoe Print","Bradley Hand",cursive;
+  color:#624136;
+  text-shadow:0 1px rgba(255,255,255,.5);
+}
+.tdp-bundle-copy small{
+  margin-top:5px;
+  max-width:72px;
+  font:500 .42rem/1.35 "Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:#957060;
+}
+
+/* Unfolded note */
+.tdp-credits-note{
+  appearance:none;
+  -webkit-appearance:none;
+  width:min(450px,100%);
   margin:0 auto;
   padding:0;
   border:0;
   background:none;
   cursor:pointer;
-  -webkit-tap-highlight-color:transparent;
-  perspective:900px;
-}
-
-.tdp-credits-paper{
-  min-height:62px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:5px;
-  padding:14px 18px 12px;
-  border-radius:5px 5px 9px 9px;
-  background:
-    linear-gradient(180deg,rgba(255,255,255,.58),rgba(255,255,255,0) 26%),
-    linear-gradient(150deg,#fff8ec,#f4e3cf 66%,#e8ceb7);
-  border:1px solid rgba(112,77,58,.19);
-  box-shadow:
-    0 12px 22px rgba(74,47,33,.11),
-    inset 0 1px 0 rgba(255,255,255,.8),
-    inset 0 -5px 10px rgba(110,72,52,.05);
-  transform:rotateX(7deg) rotateZ(-.55deg);
-  transform-origin:center bottom;
-  transition:transform .38s ease,box-shadow .38s ease;
-  position:relative;
-  overflow:hidden;
-}
-
-.tdp-credits-paper::before{
-  content:"";
-  position:absolute;
-  left:0;right:0;top:48%;
-  height:1px;
-  background:rgba(116,80,60,.13);
-  box-shadow:0 2px 0 rgba(255,255,255,.24);
-}
-
-.tdp-credits-paper::after{
-  content:"";
-  position:absolute;
-  top:-1px;left:50%;
-  width:1px;height:102%;
-  background:rgba(116,80,60,.08);
-}
-
-
-.tdp-credits-fold::before{
-  content:"";
-  position:absolute;
-  z-index:7;
-  top:-8px;
-  left:50%;
-  width:14px;
-  height:14px;
-  border-radius:50%;
-  transform:translateX(-50%);
-  background:
-    radial-gradient(circle at 35% 30%,#f7b8b0 0 18%,#c36f68 42%,#8f4f4a 72%,#6d3d39 100%);
-  box-shadow:
-    0 2px 4px rgba(72,43,35,.25),
-    inset 0 1px 1px rgba(255,255,255,.45);
-}
-
-.tdp-credits-fold::after{
-  content:"";
-  position:absolute;
-  z-index:6;
-  top:3px;
-  left:50%;
-  width:2px;
-  height:13px;
-  transform:translateX(-50%) rotate(4deg);
-  background:linear-gradient(#8c7065,#5e463d);
-  border-radius:999px;
-  box-shadow:0 1px 1px rgba(62,39,31,.2);
-}
-
-.tdp-credits-fold:hover .tdp-credits-paper{
-  transform:rotateX(4deg) rotateZ(0deg) translateY(-2px);
-  box-shadow:
-    0 16px 26px rgba(74,47,33,.14),
-    inset 0 1px 0 rgba(255,255,255,.85);
-}
-
-.tdp-credits-thread{
-  position:absolute;
-  z-index:4;
-  left:-8px;right:-8px;
-  top:50%;
-  height:2px;
-  background:linear-gradient(90deg,#9b765e,#b58b6e 42%,#8e674f);
-  box-shadow:0 1px 1px rgba(64,40,27,.18);
-  transform:rotate(-2deg);
-  pointer-events:none;
-}
-
-.tdp-credits-thread::before{
-  content:"";
-  position:absolute;
-  left:49%;
-  top:-42px;
-  width:2px;
-  height:84px;
-  background:linear-gradient(#a78367,#8c664e);
-  transform:rotate(4deg);
-  border-radius:999px;
-}
-
-.tdp-credits-knot{
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:14px;
-  height:10px;
-  transform:translate(-50%,-50%);
-  border:2px solid #8f6851;
-  border-radius:50%;
-  background:#ad8468;
-  box-shadow:0 1px 3px rgba(69,42,28,.22);
-}
-
-.tdp-credits-tab{
-  position:relative;
-  z-index:2;
-  font:400 1.1rem/1 "Caveat","Segoe Print","Bradley Hand",cursive;
-  color:#5d3b2f;
-}
-
-.tdp-credits-hint{
-  position:relative;
-  z-index:2;
-  font:400 .5rem/1.35 "Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  color:#9c7867;
-}
-
-.tdp-end-credits.is-open .tdp-credits-fold{
-  pointer-events:none;
-}
-
-.tdp-end-credits.is-open .tdp-credits-thread{
-  animation:tdpThreadRelease .55s ease forwards;
-}
-
-.tdp-end-credits.is-open .tdp-credits-paper{
-  animation:tdpFoldOpen .58s cubic-bezier(.2,.75,.25,1) forwards;
-}
-
-@keyframes tdpThreadRelease{
-  45%{opacity:1;transform:rotate(-2deg) translateY(-3px)}
-  to{opacity:0;transform:rotate(-7deg) translateY(24px) scale(.96)}
-}
-
-@keyframes tdpFoldOpen{
-  0%{transform:rotateX(7deg) rotateZ(-.55deg) scale(1)}
-  55%{transform:rotateX(-13deg) rotateZ(.25deg) translateY(-3px) scale(1.015)}
-  100%{transform:rotateX(-72deg) rotateZ(0deg) translateY(-12px) scale(.96);opacity:0}
-}
-
-.tdp-credits-note{
-  margin:0 auto;
-  width:min(560px,100%);
+  text-align:left;
   opacity:0;
-  transform:translateY(-32px) scaleY(.72);
+  transform:translateY(-18px) scale(.86);
   transform-origin:top center;
-  transition:opacity .42s ease,transform .52s cubic-bezier(.2,.78,.24,1);
+  transition:opacity .32s ease,transform .42s cubic-bezier(.2,.78,.24,1);
+  -webkit-tap-highlight-color:transparent;
 }
-
 .tdp-end-credits.is-unfolded .tdp-credits-note{
   opacity:1;
-  transform:translateY(-8px) scaleY(1);
+  transform:translateY(0) scale(1);
 }
-
 .tdp-credits-note-inner{
   position:relative;
-  padding:34px clamp(25px,5vw,48px) 24px;
-  text-align:left;
-  border-radius:4px 4px 13px 13px;
+  display:block;
+  padding:26px 30px 20px;
+  border-radius:6px 6px 12px 12px;
   background:
-    repeating-linear-gradient(0deg,rgba(124,91,68,.025) 0 1px,transparent 1px 5px),
-    linear-gradient(160deg,#fffaf0 0%,#f7e8d4 68%,#efdac4 100%);
+    repeating-linear-gradient(0deg,rgba(124,91,68,.024) 0 1px,transparent 1px 5px),
+    linear-gradient(160deg,#fffaf0 0%,#f7e7d1 68%,#eed6bd 100%);
   border:1px solid rgba(107,73,54,.17);
   box-shadow:
-    0 18px 34px rgba(73,45,31,.12),
+    0 15px 28px rgba(73,45,31,.11),
     inset 0 1px 0 rgba(255,255,255,.86);
 }
-
 .tdp-credits-note-inner::before{
   content:"";
   position:absolute;
-  left:7%;right:7%;top:17px;
+  left:8%;right:8%;top:14px;
   height:1px;
-  background:linear-gradient(90deg,transparent,rgba(144,100,77,.18),transparent);
+  background:linear-gradient(90deg,transparent,rgba(144,100,77,.17),transparent);
 }
-
 .tdp-credits-small-title{
   display:block;
   text-align:center;
-  margin:0 0 21px;
-  font:500 .61rem/1 "Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  margin:0 0 17px;
+  font:500 .57rem/1 "Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   letter-spacing:.18em;
   text-transform:uppercase;
   color:#9d7462;
 }
-
-.tdp-credits-note p{
-  margin:0 0 1.12em;
+.tdp-credit-paragraph{
+  display:block;
+  margin:0 0 1em;
   font-family:"Kalam","Segoe Print","Bradley Hand",cursive;
-  font-size:clamp(1rem,2.1vw,1.11rem);
+  font-size:clamp(.95rem,2vw,1.06rem);
   font-weight:300;
-  line-height:1.84;
+  line-height:1.77;
   color:#5f4336;
   text-align:left;
 }
-
-.tdp-credits-note p:last-child{
-  margin-bottom:0;
+.tdp-credit-paragraph:last-of-type{margin-bottom:.7em}
+.tdp-credits-close-hint{
+  display:block;
+  text-align:center;
+  margin-top:13px;
+  font:500 .48rem/1.3 "Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#a18475;
 }
 
+/* final letter line — outside end credits */
 .tdp-letter-signoff{
-  margin:17px auto 0;
+  margin:12px auto 0!important;
+  padding:0!important;
   text-align:center;
   font-family:"Nothing You Could Do","Caveat","Segoe Print","Bradley Hand",cursive;
-  font-size:clamp(.68rem,1.35vw,.82rem);
+  font-size:clamp(.62rem,1.15vw,.73rem);
   font-weight:400;
-  line-height:1.35;
-  letter-spacing:.005em;
-  color:#111!important;
+  line-height:1.25;
+  letter-spacing:0;
+  color:#0b0b0b!important;
+}
+
+/* Kill the original large footer whitespace so the page ends at the sign-off */
+body .ending{
+  min-height:0!important;
+  padding-bottom:4px!important;
+  margin-bottom:0!important;
+}
+body .letter,
+body .site,
+body main{
+  padding-bottom:0!important;
+  margin-bottom:0!important;
+}
+.tdp-end-credits:last-child{
+  padding-bottom:2px!important;
+  margin-bottom:0!important;
 }
 
 @media(max-width:700px){
   .tdp-end-credits{
-    width:calc(100% - 18px);
-    margin-top:21px;
-    margin-bottom:28px;
+    width:calc(100% - 16px);
+    margin-top:16px!important;
   }
-  .tdp-credits-fold{
-    width:min(170px,64%);
+  .tdp-credits-bundle{
+    width:94px;
+    height:94px;
   }
-  .tdp-credits-paper{
-    min-height:58px;
-    padding:13px 16px 11px;
+  .tdp-bundle-copy strong{font-size:.93rem}
+  .tdp-bundle-copy small{font-size:.39rem}
+  .tdp-credits-note{
+    width:min(390px,100%);
   }
   .tdp-credits-note-inner{
-    padding:30px 22px 21px;
+    padding:24px 20px 18px;
   }
-  .tdp-credits-note p{
-    font-size:1rem;
-    line-height:1.8;
+  .tdp-credit-paragraph{
+    font-size:.94rem;
+    line-height:1.75;
   }
-}
-
-
-/* v131 — finish the page close to the handwritten sign-off */
-.ending{
-  padding-bottom:22px!important;
-}
-
-.tdp-end-credits{
-  margin-bottom:0!important;
-}
-
-.tdp-letter-signoff{
-  margin-bottom:0!important;
-  padding-bottom:0!important;
-}
-
-@media(max-width:700px){
-  .ending{
-    padding-bottom:14px!important;
-  }
-
   .tdp-letter-signoff{
-    margin-top:14px;
-    font-size:.69rem;
+    margin-top:10px!important;
+    font-size:.6rem;
+  }
+  body .ending{
+    padding-bottom:2px!important;
   }
 }
