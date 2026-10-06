@@ -1,0 +1,187 @@
+/* v125 — cassette-style voice message before the Khat player */
+.tdp-voice-note{
+  width:min(760px,calc(100% - 24px));
+  margin:30px auto 18px;
+  position:relative;
+  z-index:92;
+  color:#56382d;
+}
+.tdp-voice-note__intro{
+  text-align:center;
+  margin:0 auto 13px;
+}
+.tdp-voice-note__kicker{
+  display:block;
+  font-family:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:.68rem;
+  letter-spacing:.17em;
+  text-transform:uppercase;
+  color:#a26f67;
+  margin-bottom:2px;
+}
+.tdp-voice-note__title{
+  margin:0;
+  font:400 clamp(1.45rem,3vw,2rem)/1.08 "Caveat","Segoe Print","Bradley Hand",cursive;
+  color:#5c382d;
+}
+.tdp-cassette{
+  --tape:#51362e;
+  position:relative;
+  padding:16px 18px 15px;
+  border:1px solid rgba(99,63,49,.18);
+  border-radius:22px;
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.34),transparent 42%),
+    linear-gradient(180deg,#f4dfcf,#e9cbbb);
+  box-shadow:
+    0 15px 35px rgba(69,41,29,.14),
+    inset 0 1px 0 rgba(255,255,255,.64);
+  overflow:hidden;
+}
+.tdp-cassette::before,
+.tdp-cassette::after{
+  content:"";
+  position:absolute;
+  width:9px;height:9px;border-radius:50%;
+  top:11px;
+  background:#b68b78;
+  box-shadow:inset 0 1px 2px rgba(75,45,34,.35),0 1px 0 rgba(255,255,255,.5);
+}
+.tdp-cassette::before{left:12px}.tdp-cassette::after{right:12px}
+.tdp-cassette__label{
+  width:min(610px,92%);
+  margin:0 auto 11px;
+  padding:7px 13px 6px;
+  border-radius:7px;
+  background:rgba(255,249,239,.72);
+  border:1px solid rgba(112,75,59,.12);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  font-family:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.6rem;
+  color:#90685a;
+}
+.tdp-cassette__label strong{
+  font-weight:400;
+  color:#684539;
+}
+.tdp-cassette__window{
+  position:relative;
+  width:min(610px,92%);
+  min-height:116px;
+  margin:0 auto;
+  padding:15px clamp(18px,5vw,44px);
+  border-radius:13px;
+  display:grid;
+  grid-template-columns:82px 1fr 82px;
+  gap:17px;
+  align-items:center;
+  background:rgba(83,54,44,.82);
+  border:1px solid rgba(71,44,35,.4);
+  box-shadow:inset 0 3px 9px rgba(35,22,18,.28),0 1px rgba(255,255,255,.42);
+}
+.tdp-cassette__window::after{
+  content:"";
+  position:absolute;
+  left:22%;right:22%;bottom:17px;height:5px;border-radius:999px;
+  background:linear-gradient(90deg,transparent,var(--tape) 17% 83%,transparent);
+  opacity:.74;
+}
+.tdp-cassette__reel{
+  width:82px;height:82px;border-radius:50%;
+  position:relative;z-index:2;
+  background:
+    radial-gradient(circle,#e9d9cb 0 15%,#8f6556 16% 19%,#e8d6c8 20% 34%,#69493e 35% 38%,#f0dfd2 39% 57%,#9c7161 58% 61%,#dbc0b0 62%);
+  border:2px solid rgba(255,244,232,.38);
+  box-shadow:0 2px 8px rgba(23,14,12,.23);
+}
+.tdp-cassette__reel::before{
+  content:"";
+  position:absolute;inset:13px;border-radius:50%;
+  border:2px dashed rgba(86,55,45,.55);
+}
+.tdp-cassette__reel::after{
+  content:"";
+  position:absolute;inset:31px;border-radius:50%;
+  background:#6d4a3f;
+  box-shadow:0 0 0 3px #d9bbaa;
+}
+.tdp-cassette__bridge{
+  height:24px;
+  border-radius:999px;
+  background:rgba(246,225,212,.84);
+  border:1px solid rgba(255,255,255,.26);
+  box-shadow:inset 0 2px 6px rgba(72,45,37,.15);
+  position:relative;
+}
+.tdp-cassette__bridge::before{
+  content:"VOICE MESSAGE";
+  position:absolute;inset:0;
+  display:grid;place-items:center;
+  font:500 .54rem/1 "Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  letter-spacing:.17em;color:#765146;
+}
+.tdp-cassette__control{
+  width:min(650px,96%);
+  margin:13px auto 0;
+  display:grid;
+  grid-template-columns:46px minmax(0,1fr) auto;
+  gap:11px;
+  align-items:center;
+}
+.tdp-voice-play{
+  width:46px;height:46px;border:0;border-radius:50%;
+  display:grid;place-items:center;
+  color:#fff9f3;background:#6b493d;
+  box-shadow:0 7px 16px rgba(73,44,34,.2);
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.tdp-voice-play:active{transform:scale(.97)}
+.tdp-voice-play svg{width:20px;height:20px;fill:currentColor}
+.tdp-voice-play .pause-glyph{display:none}
+.tdp-voice-note.is-playing .tdp-voice-play .play-glyph{display:none}
+.tdp-voice-note.is-playing .tdp-voice-play .pause-glyph{display:block}
+.tdp-voice-seek{
+  width:100%;accent-color:#785247;
+  cursor:pointer;
+}
+.tdp-voice-time{
+  min-width:74px;
+  text-align:right;
+  font:500 .68rem/1 "Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:#7d5b50;
+  font-variant-numeric:tabular-nums;
+}
+.tdp-voice-note.is-playing .tdp-cassette__reel{
+  animation:tdpCassetteSpin 2.2s linear infinite;
+}
+@keyframes tdpCassetteSpin{to{transform:rotate(360deg)}}
+
+@media(max-width:700px){
+  .tdp-voice-note{width:calc(100% - 18px);margin-top:24px}
+  .tdp-cassette{padding:14px 10px}
+  .tdp-cassette__window{
+    width:96%;
+    min-height:96px;
+    grid-template-columns:64px 1fr 64px;
+    gap:10px;
+    padding:12px 14px;
+  }
+  .tdp-cassette__reel{width:64px;height:64px}
+  .tdp-cassette__reel::after{inset:23px}
+  .tdp-cassette__control{
+    grid-template-columns:43px minmax(0,1fr);
+  }
+  .tdp-voice-play{width:43px;height:43px}
+  .tdp-voice-time{
+    grid-column:2;
+    text-align:right;
+    min-width:0;
+    margin-top:-5px;
+  }
+}
