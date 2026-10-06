@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
+
+.tdp-end-credits{
+  width:min(500px,calc(100% - 18px));
+  margin:18px auto 0!important;
+  position:relative;
+  z-index:88;
+  text-align:center;
+  color:#5b3d32;
+}
+
+.tdp-credits-roll{
+  position:relative;
+  width:150px;
+  height:78px;
+  display:block;
+  margin:0 auto;
+  padding:0;
+  border:0;
+  background:none;
+  cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:transform .24s ease,opacity .25s ease;
+  filter:drop-shadow(0 12px 12px rgba(77,48,34,.14));
+}
+.tdp-credits-roll:hover{transform:translateY(-2px)}
+.tdp-credits-roll:active{transform:scale(.98)}
+.tdp-end-credits.is-open .tdp-credits-roll{
+  opacity:0;
+  transform:scale(.82) translateY(-6px);
+  pointer-events:none;
+  height:0;
+  margin:0 auto;
+}
+
+.tdp-roll-body{
+  position:absolute;
+  inset:0;
+  border-radius:40px;
+  background:
+    radial-gradient(circle at 25% 22%,rgba(255,255,255,.75),transparent 24%),
+    linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,0) 34%),
+    linear-gradient(145deg,#fffaf0 0%,#f0dcc4 62%,#e2c09d 100%);
+  border:1px solid rgba(112,77,58,.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.82),
+    inset 0 -8px 14px rgba(110,72,52,.07),
+    inset 12px 0 14px rgba(108,73,52,.04),
+    inset -12px 0 14px rgba(108,73,52,.04);
+  overflow:hidden;
+  transform:perspective(800px) rotateX(10deg);
+}
+
+.tdp-roll-cap{
+  position:absolute;
+  top:8px;
+  bottom:8px;
+  width:26px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 35%,#fff7ef 0 18%,#e8c9aa 38%,#c99d74 68%,#a97c58 100%);
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,.45),
+    inset 0 -3px 5px rgba(92,60,43,.15);
+}
+.tdp-roll-cap.left{left:7px}
+.tdp-roll-cap.right{right:7px}
+
+.tdp-roll-paper-lines{
+  position:absolute;
+  left:17px;
+  right:17px;
+  height:1px;
+  background:rgba(123,89,66,.1);
+}
+.tdp-roll-paper-lines.l1{top:28px}
+.tdp-roll-paper-lines.l2{top:48px}
+
+.tdp-roll-thread{
+  position:absolute;
+  z-index:3;
+  display:block;
+  border-radius:999px;
+  background:linear-gradient(90deg,#8d694f,#b48a6b 48%,#805d45);
+  box-shadow:0 1px 1px rgba(69,43,29,.18);
+}
+.tdp-roll-thread.thread-h{
+  left:8px;
+  right:8px;
+  top:50%;
+  height:2px;
+  transform:translateY(-50%);
+}
+.tdp-roll-thread.thread-v{
+  top:10px;
+  bottom:10px;
+  left:50%;
+  width:2px;
+  transform:translateX(-50%);
+}
+
+.tdp-roll-knot{
+  position:absolute;
+  z-index:4;
+  left:50%;
+  top:50%;
+  width:16px;
+  height:12px;
+  border:2px solid #885f47;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+  background:#ac7e60;
+  box-shadow:0 2px 3px rgba(69,43,29,.2);
+}
+
+.tdp-roll-copy{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+}
+.tdp-roll-copy strong{
+  font:400 1rem/1 "Caveat","Segoe Print","Bradley Hand",cursive;
+  color:#5d3d32;
+}
+.tdp-roll-copy small{
+  margin-top:4px;
+  max-width:84px;
+  font:500 .42rem/1.35 "Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:#977465;
+}
+
+.tdp-credits-note{
+  appearance:none;
+  -webkit-appearance:none;
+  width:min(450px,100%);
+  margin:0 auto;
+  padding:0;
+  border:0;
+  background:none;
+  cursor:pointer;
+  text-align:left;
+  opacity:0;
+  transform:translateY(-18px) scale(.88);
+  transform-origin:top center;
+  transition:opacity .32s ease,transform .42s cubic-bezier(.2,.78,.24,1);
+  -webkit-tap-highlight-color:transparent;
+}
+.tdp-end-credits.is-unfolded .tdp-credits-note{
+  opacity:1;
+  transform:translateY(0) scale(1);
+}
+.tdp-credits-note-inner{
+  position:relative;
+  display:block;
+  padding:26px 30px 20px;
+  border-radius:6px 6px 12px 12px;
+  background:
+    repeating-linear-gradient(0deg,rgba(124,91,68,.024) 0 1px,transparent 1px 5px),
+    linear-gradient(160deg,#fffaf0 0%,#f7e7d1 68%,#eed6bd 100%);
+  border:1px solid rgba(107,73,54,.17);
+  box-shadow:
+    0 15px 28px rgba(73,45,31,.11),
+    inset 0 1px 0 rgba(255,255,255,.86);
+}
+.tdp-credits-note-inner::before{
+  content:"";
+  position:absolute;
+  left:8%;
+  right:8%;
+  top:14px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(144,100,77,.17),transparent);
+}
+.tdp-credits-small-title{
+  display:block;
+  text-align:center;
+  margin:0 0 17px;
+  font:500 .57rem/1 "Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:#9d7462;
+}
+.tdp-credit-paragraph{
+  display:block;
+  margin:0 0 1em;
+  font-family:"Kalam","Segoe Print","Bradley Hand",cursive;
+  font-size:clamp(.95rem,2vw,1.06rem);
+  font-weight:300;
+  line-height:1.77;
+  color:#5f4336;
+  text-align:left;
+}
+.tdp-credit-paragraph:last-of-type{margin-bottom:.7em}
+.tdp-credits-close-hint{
+  display:block;
+  text-align:center;
+  margin-top:13px;
+  font:500 .48rem/1.3 "Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#a18475;
+}
+
+.tdp-letter-signoff{
+  margin:10px auto 0!important;
+  padding:0!important;
+  text-align:center;
+  font-family:"Nothing You Could Do","Caveat","Segoe Print","Bradley Hand",cursive;
+  font-size:clamp(.62rem,1.15vw,.73rem);
+  font-weight:400;
+  line-height:1.25;
+  color:#0b0b0b!important;
+}
+
+body .ending{
+  min-height:0!important;
+  padding-bottom:4px!important;
+  margin-bottom:0!important;
+}
+body .letter,
+body .site,
+body main{
+  padding-bottom:0!important;
+  margin-bottom:0!important;
+}
+.tdp-end-credits:last-child{
+  padding-bottom:2px!important;
+  margin-bottom:0!important;
+}
+
+@media(max-width:700px){
+  .tdp-end-credits{
+    width:calc(100% - 16px);
+    margin-top:16px!important;
+  }
+  .tdp-credits-roll{
+    width:132px;
+    height:70px;
+  }
+  .tdp-roll-copy strong{font-size:.94rem}
+  .tdp-roll-copy small{font-size:.39rem}
+  .tdp-credits-note{
+    width:min(390px,100%);
+  }
+  .tdp-credits-note-inner{
+    padding:24px 20px 18px;
+  }
+  .tdp-credit-paragraph{
+    font-size:.94rem;
+    line-height:1.75;
+  }
+  .tdp-letter-signoff{
+    margin-top:9px!important;
+    font-size:.6rem;
+  }
+  body .ending{
+    padding-bottom:2px!important;
+  }
+}
