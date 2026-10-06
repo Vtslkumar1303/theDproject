@@ -1,0 +1,136 @@
+/* v122 — device-aware reading layout
+   Phone, tablet and desktop each get their own measure and spacing.
+   Fonts/headings stay as already designed; this file only improves sizing,
+   alignment, width and wrapping across viewport classes. */
+
+html,body{
+  -webkit-text-size-adjust:100%;
+  text-size-adjust:100%;
+}
+
+.verse-card .verse-copy{
+  width:100%;
+  margin-inline:auto;
+  box-sizing:border-box;
+  text-align:left;
+}
+
+.verse-card .verse-copy p,
+.verse-card .verse-copy li,
+.verse-card .verse-copy blockquote,
+.verse-card .verse-copy .quote{
+  text-align:left!important;
+  word-break:normal;
+  overflow-wrap:anywhere;
+  hyphens:none;
+}
+
+/* Desktop / laptop */
+@media (min-width:1025px){
+  .verse-list{
+    width:min(1180px,calc(100% - 64px))!important;
+  }
+
+  .verse-card .verse-toggle{
+    padding:19px 26px!important;
+  }
+
+  .verse-card.open .verse-copy{
+    padding:10px 54px 34px!important;
+  }
+
+  .verse-card .verse-copy{
+    max-width:72ch!important;
+  }
+
+  .verse-card .verse-copy p{
+    font-size:clamp(1.08rem,1.15vw,1.2rem)!important;
+    line-height:1.9!important;
+    margin-bottom:1.18em!important;
+  }
+}
+
+/* Tablet — deliberately NOT the phone layout */
+@media (min-width:601px) and (max-width:1024px){
+  .verse-list{
+    width:min(900px,calc(100% - 44px))!important;
+  }
+
+  .section{
+    padding-left:28px!important;
+    padding-right:28px!important;
+  }
+
+  .verse-card .verse-toggle{
+    padding:18px 22px!important;
+  }
+
+  .verse-card.open .verse-copy{
+    padding:8px 34px 30px!important;
+  }
+
+  .verse-card .verse-copy{
+    max-width:64ch!important;
+  }
+
+  .verse-card .verse-copy p{
+    font-size:clamp(1.06rem,2.05vw,1.18rem)!important;
+    line-height:1.86!important;
+    margin-bottom:1.12em!important;
+  }
+
+  .verse-card .verse-toggle strong,
+  .verse-card .verse-heading strong,
+  .verse-card .verse-title-editable{
+    line-height:1.08!important;
+  }
+
+  .hero,
+  .ending{
+    padding-left:34px!important;
+    padding-right:34px!important;
+  }
+}
+
+/* Phone */
+@media (max-width:600px){
+  .verse-list{
+    width:calc(100% - 18px)!important;
+  }
+
+  .section{
+    padding-left:10px!important;
+    padding-right:10px!important;
+  }
+
+  .verse-card .verse-toggle{
+    padding:15px 15px!important;
+  }
+
+  .verse-card.open .verse-copy{
+    padding:6px 17px 24px!important;
+  }
+
+  .verse-card .verse-copy{
+    max-width:100%!important;
+  }
+
+  .verse-card .verse-copy p{
+    font-size:clamp(1rem,4.35vw,1.1rem)!important;
+    line-height:1.8!important;
+    margin-bottom:1.05em!important;
+  }
+
+  .hero,
+  .ending{
+    padding-left:18px!important;
+    padding-right:18px!important;
+  }
+}
+
+/* Prevent very wide displays from turning paragraphs into long scan lines. */
+@media (min-width:1440px){
+  .verse-card .verse-copy{
+    max-width:70ch!important;
+  }
+}
