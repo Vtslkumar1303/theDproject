@@ -17,15 +17,15 @@
     wrap.setAttribute('aria-label','Voice message');
     wrap.innerHTML=`
       <div class="tdp-voice-note__intro">
-        <span class="tdp-voice-note__kicker">Before the song</span>
-        <h3 class="tdp-voice-note__title">A little voice note</h3>
+        <span class="tdp-voice-note__kicker">A tiny message</span>
+        <h3 class="tdp-voice-note__title">From me, in my own voice</h3>
       </div>
       <div class="tdp-cassette">
-        <div class="tdp-cassette__label"><span>Side A</span><strong>just press play</strong><span>00:39</span></div>
+        <div class="tdp-cassette__label"><strong>VOICE MEMO</strong><span>00:39</span></div>
         <div class="tdp-cassette__window" aria-hidden="true">
-          <span class="tdp-cassette__reel"></span>
-          <span class="tdp-cassette__bridge"></span>
-          <span class="tdp-cassette__reel"></span>
+          <span class="tdp-rec-dot"></span>
+          <span class="tdp-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+          <span class="tdp-mini-mic"></span>
         </div>
         <div class="tdp-cassette__control">
           <button class="tdp-voice-play" type="button" aria-label="Play voice message">
