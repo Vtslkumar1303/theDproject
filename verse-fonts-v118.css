@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Kalam:wght@300;400&family=Poppins:wght@400&display=swap');
+
+/* v118 — Kalam inner verse text, light and readable */
+.verse-card .verse-toggle strong,
+.verse-card .verse-heading strong,
+.verse-card .verse-title-editable{
+  font-family:"Caveat","Segoe Print","Bradley Hand",cursive!important;
+  font-weight:400!important;
+}
+
+.verse-card .verse-copy,
+.verse-card .verse-copy p,
+.verse-card .verse-copy li,
+.verse-card .verse-copy blockquote,
+.verse-card .verse-copy .quote{
+  font-family:"Kalam","Segoe Print","Bradley Hand",cursive!important;
+  font-weight:300!important;
+  line-height:1.86!important;
+  text-shadow:none!important;
+}
+
+.verse-card .verse-copy strong,
+.verse-card .verse-copy b,
+.verse-card .tdp-em-bold,
+.verse-card .tdp-em-highlight,
+.verse-card .tdp-em-glow,
+.verse-card .tdp-em-pull,
+.verse-card .confession-final-stack span{
+  font-family:"Kalam","Segoe Print","Bradley Hand",cursive!important;
+  font-weight:400!important;
+  text-shadow:none!important;
+}
+
+.verse-card .verse-toggle small,
+.verse-card .verse-label-editable{
+  font-family:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif!important;
+  font-weight:400!important;
+}
+
+@media(max-width:700px){
+  .verse-card .verse-copy p{line-height:1.8!important}
+}
