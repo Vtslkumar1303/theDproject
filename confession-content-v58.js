@@ -84,7 +84,7 @@
       'Thank you for simply existing in this world.',
       'You truly are special.',
       'And whatever happens after this, I’ll still be grateful that somewhere in this life, our paths crossed.',
-      'Until next time, when the moment finds us again. 🤍'
+      'Thank you, March🤍🧿✨'
     ]
   };
 
