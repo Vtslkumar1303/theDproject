@@ -1,7 +1,7 @@
 /* v129 — optional folded-paper end credits after the Khat player */
 .tdp-end-credits{
-  width:min(620px,calc(100% - 24px));
-  margin:24px auto 34px;
+  width:min(500px,calc(100% - 24px));
+  margin:20px auto 28px;
   position:relative;
   z-index:88;
   text-align:center;
@@ -11,7 +11,7 @@
 .tdp-credits-fold{
   position:relative;
   display:block;
-  width:min(250px,78%);
+  width:min(180px,64%);
   margin:0 auto;
   padding:0;
   border:0;
@@ -22,13 +22,13 @@
 }
 
 .tdp-credits-paper{
-  min-height:86px;
+  min-height:62px;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   gap:5px;
-  padding:19px 24px 17px;
+  padding:14px 18px 12px;
   border-radius:5px 5px 9px 9px;
   background:
     linear-gradient(180deg,rgba(255,255,255,.58),rgba(255,255,255,0) 26%),
@@ -60,6 +60,38 @@
   top:-1px;left:50%;
   width:1px;height:102%;
   background:rgba(116,80,60,.08);
+}
+
+
+.tdp-credits-fold::before{
+  content:"";
+  position:absolute;
+  z-index:7;
+  top:-8px;
+  left:50%;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  transform:translateX(-50%);
+  background:
+    radial-gradient(circle at 35% 30%,#f7b8b0 0 18%,#c36f68 42%,#8f4f4a 72%,#6d3d39 100%);
+  box-shadow:
+    0 2px 4px rgba(72,43,35,.25),
+    inset 0 1px 1px rgba(255,255,255,.45);
+}
+
+.tdp-credits-fold::after{
+  content:"";
+  position:absolute;
+  z-index:6;
+  top:3px;
+  left:50%;
+  width:2px;
+  height:13px;
+  transform:translateX(-50%) rotate(4deg);
+  background:linear-gradient(#8c7065,#5e463d);
+  border-radius:999px;
+  box-shadow:0 1px 1px rgba(62,39,31,.2);
 }
 
 .tdp-credits-fold:hover .tdp-credits-paper{
@@ -109,14 +141,14 @@
 .tdp-credits-tab{
   position:relative;
   z-index:2;
-  font:400 1.34rem/1 "Caveat","Segoe Print","Bradley Hand",cursive;
+  font:400 1.1rem/1 "Caveat","Segoe Print","Bradley Hand",cursive;
   color:#5d3b2f;
 }
 
 .tdp-credits-hint{
   position:relative;
   z-index:2;
-  font:400 .57rem/1.4 "Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font:400 .5rem/1.35 "Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   letter-spacing:.08em;
   text-transform:uppercase;
   color:#9c7867;
@@ -205,15 +237,15 @@
   margin-bottom:0;
 }
 
-.tdp-credits-note .tdp-credits-signoff{
-  margin-top:28px;
-  padding-top:15px;
-  text-align:center!important;
-  font-family:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-  font-size:.65rem;
+.tdp-letter-signoff{
+  margin:22px auto 0;
+  text-align:center;
+  font-family:"Kalam","Segoe Print","Bradley Hand",cursive;
+  font-size:clamp(.9rem,1.8vw,1rem);
+  font-weight:300;
   line-height:1.5;
-  letter-spacing:.055em;
-  color:#9a7565;
+  letter-spacing:.01em;
+  color:#8f6b5c;
 }
 
 @media(max-width:700px){
@@ -223,11 +255,11 @@
     margin-bottom:28px;
   }
   .tdp-credits-fold{
-    width:min(225px,78%);
+    width:min(170px,64%);
   }
   .tdp-credits-paper{
-    min-height:79px;
-    padding:17px 20px 15px;
+    min-height:58px;
+    padding:13px 16px 11px;
   }
   .tdp-credits-note-inner{
     padding:30px 22px 21px;
