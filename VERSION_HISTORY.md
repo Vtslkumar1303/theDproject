@@ -150,3 +150,5 @@ For rollback, restore the selected version's tree in a new commit on main, prese
 - v116: Kalam still rendered visually too heavy even at its lightest weight, so the verse body was switched to Handlee for thinner handwritten strokes and better long-form readability. Caveat headings remain unchanged. All verse-body emphasis is kept at the same light Handlee weight with text shadows removed so no words appear excessively bold. Backup: `backup-before-handlee-verse-v116-20261005`.
 
 - v117: restored the verse inner-text font to the website's original pre-font-experiment handwritten stack (`Segoe Print`, `Bradley Hand`, `Comic Sans MS`, cursive), while keeping the newer Caveat verse headings. Emphasis remains softened so the body does not return to the old very-heavy bold styling. Backup: `backup-before-restore-original-verse-body-v117-20261006`.
+
+- v117: restored Kalam for all verse inner text after the Handlee experiment. Verse headings remain Caveat. Kalam body text uses the lighter 300 weight, with only special highlight/glow/pull emphasis at 400. Backup: `backup-before-kalam-restore-v117-20261006`.
