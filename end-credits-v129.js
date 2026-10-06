@@ -10,41 +10,49 @@
     section.setAttribute('aria-label','End credits');
 
     section.innerHTML=`
-      <button class="tdp-credits-fold" type="button" aria-expanded="false">
-        <span class="tdp-credits-thread" aria-hidden="true">
-          <span class="tdp-credits-knot"></span>
+      <button class="tdp-credits-bundle" type="button" aria-expanded="false" aria-label="Open end credits">
+        <span class="tdp-bundle-paper" aria-hidden="true">
+          <span class="tdp-bundle-fold f1"></span>
+          <span class="tdp-bundle-fold f2"></span>
+          <span class="tdp-bundle-fold f3"></span>
+          <span class="tdp-bundle-pin"></span>
         </span>
-        <span class="tdp-credits-paper">
-          <span class="tdp-credits-tab">End credits</span>
-          <span class="tdp-credits-hint">tap only if you’re curious</span>
+        <span class="tdp-bundle-thread thread-h" aria-hidden="true"></span>
+        <span class="tdp-bundle-thread thread-v" aria-hidden="true"></span>
+        <span class="tdp-bundle-knot" aria-hidden="true"></span>
+        <span class="tdp-bundle-copy">
+          <strong>End credits</strong>
+          <small>tap if you’re curious</small>
         </span>
       </button>
 
-      <div class="tdp-credits-note" hidden>
-        <div class="tdp-credits-note-inner">
+      <button class="tdp-credits-note" type="button" hidden aria-label="Close end credits">
+        <span class="tdp-credits-note-inner">
           <span class="tdp-credits-small-title">End credits</span>
 
-          <p>Okay, so… this all started as just a thought a year ago, when I began talking to you during Navratri.</p>
+          <span class="tdp-credit-paragraph">Okay, so… this all started as just a thought a year ago, when I began talking to you during Navratri.</span>
 
-          <p>And somehow, every little thought I had whenever I met you slowly became part of the whole idea behind this confession letter.</p>
+          <span class="tdp-credit-paragraph">And somehow, every little thought I had whenever I met you slowly became part of the whole idea behind this confession letter.</span>
 
-          <p>I don’t want this to come across as me boasting, because that’s not what this is. It was genuinely built from scratch — brick by brick, thought by thought — not copied from a template or pasted from somewhere else.</p>
+          <span class="tdp-credit-paragraph">I don’t want this to come across as me boasting, because that’s not what this is. It was genuinely built from scratch — brick by brick, thought by thought — not copied from a template or pasted from somewhere else.</span>
 
-          <p>Every little detail here came from something I felt, remembered, noticed, overthought, or simply wanted to say.</p>
-        </div>
-      </div>
+          <span class="tdp-credit-paragraph">Every little detail here came from something I felt, remembered, noticed, overthought, or simply wanted to say.</span>
+
+          <span class="tdp-credits-close-hint">tap the note to fold it back</span>
+        </span>
+      </button>
 
       <p class="tdp-letter-signoff">So that’s it… 1303, signing off.</p>
     `;
 
     khat.insertAdjacentElement('afterend',section);
 
-    const btn=section.querySelector('.tdp-credits-fold');
+    const bundle=section.querySelector('.tdp-credits-bundle');
     const note=section.querySelector('.tdp-credits-note');
 
-    btn.addEventListener('click',()=>{
-      const open=section.classList.toggle('is-open');
-      btn.setAttribute('aria-expanded',String(open));
+    const setOpen=(open)=>{
+      section.classList.toggle('is-open',open);
+      bundle.setAttribute('aria-expanded',String(open));
 
       if(open){
         note.hidden=false;
@@ -55,9 +63,12 @@
         section.classList.remove('is-unfolded');
         setTimeout(()=>{
           if(!section.classList.contains('is-open')) note.hidden=true;
-        },520);
+        },430);
       }
-    });
+    };
+
+    bundle.addEventListener('click',()=>setOpen(true));
+    note.addEventListener('click',()=>setOpen(false));
 
     return true;
   };
