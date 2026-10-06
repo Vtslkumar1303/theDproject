@@ -2,6 +2,7 @@
   function mount(){
     const player=document.querySelector('.spotify-player');
     const audio=document.getElementById('audio');
+    if(audio) audio['volume']=0.15;
     const title=document.getElementById('tt');
     const syncLines=window.KHAT_SYNC_LINES;
     if(!player||!audio||!title||!Array.isArray(syncLines)){
