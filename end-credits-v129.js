@@ -31,10 +31,10 @@
           <p>I don’t want this to come across as me boasting, because that’s not what this is. It was genuinely built from scratch — brick by brick, thought by thought — not copied from a template or pasted from somewhere else.</p>
 
           <p>Every little detail here came from something I felt, remembered, noticed, overthought, or simply wanted to say.</p>
-
-          <p class="tdp-credits-signoff">So that’s it… 1303, signing off.</p>
         </div>
       </div>
+
+      <p class="tdp-letter-signoff">So that’s it… 1303, signing off.</p>
     `;
 
     khat.insertAdjacentElement('afterend',section);
