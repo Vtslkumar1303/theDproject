@@ -39,6 +39,8 @@
 
           <span class="tdp-credit-paragraph">Every little detail here came from something I felt, remembered, noticed, overthought, or simply wanted to say.</span>
 
+          <span class="tdp-credit-paragraph">So, if you’re reading this part too, I want you to notice the small sentences, the words, and the tiny details hidden in between — and feel that they were intentionally kept there for you.</span>
+
           <span class="tdp-credits-close-hint">tap the note to roll it back</span>
         </span>
       </button>
