@@ -1,5 +1,6 @@
 (()=>{
   const AUDIO_URL='https://the-d-project-media.floot.app/_cdn/static/b69affdc-325d-4812-affc-5c93a33d63e9-voice-message-20261006.m4a';
+  const MAX_DURATION=34.20;
 
   const fmt=s=>{
     if(!Number.isFinite(s)||s<0)return '0:00';
@@ -18,10 +19,10 @@
     wrap.innerHTML=`
       <div class="tdp-voice-note__intro">
         <span class="tdp-voice-note__kicker">A tiny message</span>
-        <h3 class="tdp-voice-note__title">From me, in my own voice</h3>
+        <h3 class="tdp-voice-note__title">From all the voices in my head</h3>
       </div>
       <div class="tdp-cassette">
-        <div class="tdp-cassette__label"><strong>VOICE MEMO</strong><span>00:39</span></div>
+        <div class="tdp-cassette__label"><strong>VOICE MEMO</strong><span>00:34</span></div>
         <div class="tdp-cassette__window" aria-hidden="true">
           <span class="tdp-rec-dot"></span>
           <span class="tdp-wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
@@ -47,9 +48,10 @@
     const khatAudio=document.getElementById('audio');
 
     const sync=()=>{
-      const d=audio.duration||39.19;
-      seek.value=d?Math.round((audio.currentTime/d)*1000):0;
-      time.textContent=fmt(audio.currentTime)+' / '+fmt(d);
+      const d=MAX_DURATION;
+      const current=Math.min(audio.currentTime,d);
+      seek.value=Math.round((current/d)*1000);
+      time.textContent=fmt(current)+' / 0:34';
     };
     const setPlaying=on=>{
       wrap.classList.toggle('is-playing',on);
@@ -65,8 +67,8 @@
     });
 
     seek.addEventListener('input',()=>{
-      const d=audio.duration||39.19;
-      audio.currentTime=d*(Number(seek.value)/1000);
+      const d=MAX_DURATION;
+      audio.currentTime=Math.min(d,d*(Number(seek.value)/1000));
       sync();
     });
 
@@ -74,7 +76,13 @@
     audio.addEventListener('pause',()=>setPlaying(false));
     audio.addEventListener('ended',()=>{setPlaying(false);audio.currentTime=0;sync()});
     audio.addEventListener('loadedmetadata',sync);
-    audio.addEventListener('timeupdate',sync);
+    audio.addEventListener('timeupdate',()=>{
+      if(audio.currentTime>=MAX_DURATION){
+        audio.pause();
+        audio.currentTime=MAX_DURATION;
+      }
+      sync();
+    });
 
     if(khatAudio){
       khatAudio.addEventListener('play',()=>{if(!audio.paused)audio.pause()});
