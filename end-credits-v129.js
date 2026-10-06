@@ -10,17 +10,18 @@
     section.setAttribute('aria-label','End credits');
 
     section.innerHTML=`
-      <button class="tdp-credits-bundle" type="button" aria-expanded="false" aria-label="Open end credits">
-        <span class="tdp-bundle-paper" aria-hidden="true">
-          <span class="tdp-bundle-fold f1"></span>
-          <span class="tdp-bundle-fold f2"></span>
-          <span class="tdp-bundle-fold f3"></span>
-          <span class="tdp-bundle-pin"></span>
+      <button class="tdp-credits-roll" type="button" aria-expanded="false" aria-label="Open end credits">
+        <span class="tdp-roll-body" aria-hidden="true">
+          <span class="tdp-roll-cap left"></span>
+          <span class="tdp-roll-cap right"></span>
+          <span class="tdp-roll-paper-lines l1"></span>
+          <span class="tdp-roll-paper-lines l2"></span>
+          <span class="tdp-roll-thread thread-h"></span>
+          <span class="tdp-roll-thread thread-v"></span>
+          <span class="tdp-roll-knot"></span>
         </span>
-        <span class="tdp-bundle-thread thread-h" aria-hidden="true"></span>
-        <span class="tdp-bundle-thread thread-v" aria-hidden="true"></span>
-        <span class="tdp-bundle-knot" aria-hidden="true"></span>
-        <span class="tdp-bundle-copy">
+
+        <span class="tdp-roll-copy">
           <strong>End credits</strong>
           <small>tap if you’re curious</small>
         </span>
@@ -38,7 +39,7 @@
 
           <span class="tdp-credit-paragraph">Every little detail here came from something I felt, remembered, noticed, overthought, or simply wanted to say.</span>
 
-          <span class="tdp-credits-close-hint">tap the note to fold it back</span>
+          <span class="tdp-credits-close-hint">tap the note to roll it back</span>
         </span>
       </button>
 
@@ -47,12 +48,12 @@
 
     khat.insertAdjacentElement('afterend',section);
 
-    const bundle=section.querySelector('.tdp-credits-bundle');
+    const roll=section.querySelector('.tdp-credits-roll');
     const note=section.querySelector('.tdp-credits-note');
 
     const setOpen=(open)=>{
       section.classList.toggle('is-open',open);
-      bundle.setAttribute('aria-expanded',String(open));
+      roll.setAttribute('aria-expanded',String(open));
 
       if(open){
         note.hidden=false;
@@ -63,11 +64,11 @@
         section.classList.remove('is-unfolded');
         setTimeout(()=>{
           if(!section.classList.contains('is-open')) note.hidden=true;
-        },430);
+        },420);
       }
     };
 
-    bundle.addEventListener('click',()=>setOpen(true));
+    roll.addEventListener('click',()=>setOpen(true));
     note.addEventListener('click',()=>setOpen(false));
 
     return true;
