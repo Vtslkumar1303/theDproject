@@ -32,9 +32,9 @@
   padding:10px 11px 11px;
   border-radius:18px;
   background:
-    linear-gradient(180deg,rgba(255,255,255,.5),rgba(255,255,255,0) 28%),
-    linear-gradient(145deg,#efe4dc,#dbc7ba 58%,#c8ab9a);
-  border:1px solid rgba(88,58,46,.2);
+    linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,0) 28%),
+    linear-gradient(145deg,#fff4e8 0%,#f3dece 52%,#e5c1b2 100%);
+  border:1px solid rgba(111,71,58,.18);
   box-shadow:
     0 14px 24px rgba(61,37,29,.14),
     0 4px 8px rgba(61,37,29,.08),
@@ -72,12 +72,12 @@
   font-family:"Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   letter-spacing:.1em;
   font-size:.5rem;
-  color:#806157;
+  color:#9b7167;
 }
 .tdp-cassette__label strong{
   font-weight:600;
   letter-spacing:.15em;
-  color:#64493f;
+  color:#6f493e;
 }
 
 .tdp-cassette__window{
@@ -91,8 +91,8 @@
   gap:9px;
   padding:9px 11px;
   background:
-    linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0)),
-    #392f2b;
+    linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,0)),
+    linear-gradient(145deg,#65483f,#4d352f);
   border:1px solid rgba(39,28,24,.58);
   box-shadow:
     inset 0 5px 10px rgba(0,0,0,.2),
@@ -111,7 +111,7 @@
 
 .tdp-rec-dot{
   width:7px;height:7px;border-radius:50%;
-  background:#c86d67;
+  background:#c97c78;
   box-shadow:0 0 0 3px rgba(200,109,103,.1),0 0 8px rgba(200,109,103,.28);
 }
 
@@ -127,7 +127,7 @@
   width:3px;
   height:8px;
   border-radius:999px;
-  background:linear-gradient(180deg,#e5c9bb,#bc9180);
+  background:linear-gradient(180deg,#f1d5c7,#c99584);
   opacity:.9;
   transform-origin:center;
 }
@@ -145,7 +145,7 @@
 
 .tdp-mini-mic{
   width:12px;height:18px;border-radius:7px;
-  border:1.5px solid #c5a18f;
+  border:1.5px solid #d0a18f;
   position:relative;
   opacity:.8;
 }
@@ -154,7 +154,7 @@
   position:absolute;
   left:50%;bottom:-6px;
   width:1.5px;height:6px;
-  background:#c5a18f;
+  background:#d0a18f;
   transform:translateX(-50%);
 }
 .tdp-mini-mic::after{
@@ -185,7 +185,7 @@
   width:36px;height:36px;border:0;border-radius:50%;
   display:grid;place-items:center;
   color:#fff9f3;
-  background:linear-gradient(180deg,#76554a,#5b4037);
+  background:linear-gradient(180deg,#865d51,#68463d);
   box-shadow:
     0 5px 10px rgba(62,38,30,.18),
     inset 0 1px 1px rgba(255,255,255,.3),
