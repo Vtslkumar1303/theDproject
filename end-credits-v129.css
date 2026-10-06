@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
 
-/* v132 — round paper bundle with thread, tap open / tap close */
 .tdp-end-credits{
-  width:min(500px,calc(100% - 20px));
+  width:min(500px,calc(100% - 18px));
   margin:18px auto 0!important;
   position:relative;
   z-index:88;
@@ -10,134 +9,133 @@
   color:#5b3d32;
 }
 
-.tdp-credits-bundle{
+.tdp-credits-roll{
   position:relative;
-  width:108px;
-  height:108px;
+  width:150px;
+  height:78px;
   display:block;
   margin:0 auto;
   padding:0;
   border:0;
-  border-radius:50%;
   background:none;
   cursor:pointer;
   -webkit-tap-highlight-color:transparent;
-  filter:drop-shadow(0 9px 9px rgba(77,48,34,.13));
-  transition:transform .25s ease,filter .25s ease,opacity .26s ease;
+  transition:transform .24s ease,opacity .25s ease;
+  filter:drop-shadow(0 12px 12px rgba(77,48,34,.14));
 }
-.tdp-credits-bundle:hover{
-  transform:translateY(-2px) rotate(-1deg);
-  filter:drop-shadow(0 12px 12px rgba(77,48,34,.16));
-}
-.tdp-credits-bundle:active{transform:scale(.97)}
-.tdp-end-credits.is-open .tdp-credits-bundle{
+.tdp-credits-roll:hover{transform:translateY(-2px)}
+.tdp-credits-roll:active{transform:scale(.98)}
+.tdp-end-credits.is-open .tdp-credits-roll{
   opacity:0;
-  transform:scale(.74) rotate(8deg);
+  transform:scale(.82) translateY(-6px);
   pointer-events:none;
   height:0;
   margin:0 auto;
 }
 
-.tdp-bundle-paper{
+.tdp-roll-body{
   position:absolute;
-  inset:8px;
-  border-radius:50%;
-  overflow:hidden;
+  inset:0;
+  border-radius:40px;
   background:
-    radial-gradient(circle at 34% 24%,rgba(255,255,255,.7),transparent 24%),
-    repeating-linear-gradient(18deg,rgba(117,81,59,.025) 0 1px,transparent 1px 5px),
-    linear-gradient(145deg,#fff9ee 0%,#f2dfc8 65%,#e7c9ab 100%);
-  border:1px solid rgba(110,73,52,.18);
+    radial-gradient(circle at 25% 22%,rgba(255,255,255,.75),transparent 24%),
+    linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,0) 34%),
+    linear-gradient(145deg,#fffaf0 0%,#f0dcc4 62%,#e2c09d 100%);
+  border:1px solid rgba(112,77,58,.18);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.85),
-    inset -5px -7px 12px rgba(105,67,46,.06),
-    0 2px 4px rgba(83,51,35,.08);
+    inset 0 1px 0 rgba(255,255,255,.82),
+    inset 0 -8px 14px rgba(110,72,52,.07),
+    inset 12px 0 14px rgba(108,73,52,.04),
+    inset -12px 0 14px rgba(108,73,52,.04);
+  overflow:hidden;
+  transform:perspective(800px) rotateX(10deg);
 }
 
-.tdp-bundle-fold{
+.tdp-roll-cap{
   position:absolute;
-  background:rgba(120,82,59,.11);
-  transform-origin:center;
+  top:8px;
+  bottom:8px;
+  width:26px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 35%,#fff7ef 0 18%,#e8c9aa 38%,#c99d74 68%,#a97c58 100%);
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,.45),
+    inset 0 -3px 5px rgba(92,60,43,.15);
 }
-.tdp-bundle-fold.f1{
-  width:112%;height:1px;left:-6%;top:39%;transform:rotate(18deg)
-}
-.tdp-bundle-fold.f2{
-  width:112%;height:1px;left:-6%;top:61%;transform:rotate(-17deg)
-}
-.tdp-bundle-fold.f3{
-  width:1px;height:112%;left:50%;top:-6%;transform:rotate(7deg)
-}
+.tdp-roll-cap.left{left:7px}
+.tdp-roll-cap.right{right:7px}
 
-.tdp-bundle-thread{
+.tdp-roll-paper-lines{
   position:absolute;
-  z-index:4;
+  left:17px;
+  right:17px;
+  height:1px;
+  background:rgba(123,89,66,.1);
+}
+.tdp-roll-paper-lines.l1{top:28px}
+.tdp-roll-paper-lines.l2{top:48px}
+
+.tdp-roll-thread{
+  position:absolute;
+  z-index:3;
   display:block;
   border-radius:999px;
-  background:linear-gradient(90deg,#8e674d,#b28768 48%,#805c45);
-  box-shadow:0 1px 1px rgba(69,43,29,.2);
-  pointer-events:none;
+  background:linear-gradient(90deg,#8d694f,#b48a6b 48%,#805d45);
+  box-shadow:0 1px 1px rgba(69,43,29,.18);
 }
-.tdp-bundle-thread.thread-h{
-  left:2px;right:2px;top:52%;
+.tdp-roll-thread.thread-h{
+  left:8px;
+  right:8px;
+  top:50%;
   height:2px;
-  transform:rotate(-7deg);
+  transform:translateY(-50%);
 }
-.tdp-bundle-thread.thread-v{
-  top:2px;bottom:2px;left:50%;
+.tdp-roll-thread.thread-v{
+  top:10px;
+  bottom:10px;
+  left:50%;
   width:2px;
-  transform:rotate(8deg);
+  transform:translateX(-50%);
 }
 
-.tdp-bundle-knot{
+.tdp-roll-knot{
   position:absolute;
-  z-index:6;
-  left:50%;top:52%;
-  width:15px;height:12px;
-  border:2px solid #875f47;
+  z-index:4;
+  left:50%;
+  top:50%;
+  width:16px;
+  height:12px;
+  border:2px solid #885f47;
   border-radius:50%;
-  transform:translate(-50%,-50%) rotate(-7deg);
-  background:#ab7d5e;
+  transform:translate(-50%,-50%);
+  background:#ac7e60;
   box-shadow:0 2px 3px rgba(69,43,29,.2);
 }
 
-.tdp-bundle-pin{
+.tdp-roll-copy{
   position:absolute;
-  z-index:5;
-  width:12px;height:12px;
-  left:50%;top:10px;
-  transform:translateX(-50%);
-  border-radius:50%;
-  background:radial-gradient(circle at 34% 30%,#ffc6bc 0 20%,#c8756d 43%,#874b46 76%,#663934);
-  box-shadow:0 2px 3px rgba(72,43,35,.25),inset 0 1px 1px rgba(255,255,255,.45);
-}
-
-.tdp-bundle-copy{
-  position:absolute;
-  z-index:7;
   inset:0;
+  z-index:5;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
   pointer-events:none;
-  transform:rotate(-2deg);
 }
-.tdp-bundle-copy strong{
+.tdp-roll-copy strong{
   font:400 1rem/1 "Caveat","Segoe Print","Bradley Hand",cursive;
-  color:#624136;
-  text-shadow:0 1px rgba(255,255,255,.5);
+  color:#5d3d32;
 }
-.tdp-bundle-copy small{
-  margin-top:5px;
-  max-width:72px;
+.tdp-roll-copy small{
+  margin-top:4px;
+  max-width:84px;
   font:500 .42rem/1.35 "Poppins",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   letter-spacing:.06em;
   text-transform:uppercase;
-  color:#957060;
+  color:#977465;
 }
 
-/* Unfolded note */
 .tdp-credits-note{
   appearance:none;
   -webkit-appearance:none;
@@ -149,7 +147,7 @@
   cursor:pointer;
   text-align:left;
   opacity:0;
-  transform:translateY(-18px) scale(.86);
+  transform:translateY(-18px) scale(.88);
   transform-origin:top center;
   transition:opacity .32s ease,transform .42s cubic-bezier(.2,.78,.24,1);
   -webkit-tap-highlight-color:transparent;
@@ -174,7 +172,9 @@
 .tdp-credits-note-inner::before{
   content:"";
   position:absolute;
-  left:8%;right:8%;top:14px;
+  left:8%;
+  right:8%;
+  top:14px;
   height:1px;
   background:linear-gradient(90deg,transparent,rgba(144,100,77,.17),transparent);
 }
@@ -208,20 +208,17 @@
   color:#a18475;
 }
 
-/* final letter line — outside end credits */
 .tdp-letter-signoff{
-  margin:12px auto 0!important;
+  margin:10px auto 0!important;
   padding:0!important;
   text-align:center;
   font-family:"Nothing You Could Do","Caveat","Segoe Print","Bradley Hand",cursive;
   font-size:clamp(.62rem,1.15vw,.73rem);
   font-weight:400;
   line-height:1.25;
-  letter-spacing:0;
   color:#0b0b0b!important;
 }
 
-/* Kill the original large footer whitespace so the page ends at the sign-off */
 body .ending{
   min-height:0!important;
   padding-bottom:4px!important;
@@ -243,12 +240,12 @@ body main{
     width:calc(100% - 16px);
     margin-top:16px!important;
   }
-  .tdp-credits-bundle{
-    width:94px;
-    height:94px;
+  .tdp-credits-roll{
+    width:132px;
+    height:70px;
   }
-  .tdp-bundle-copy strong{font-size:.93rem}
-  .tdp-bundle-copy small{font-size:.39rem}
+  .tdp-roll-copy strong{font-size:.94rem}
+  .tdp-roll-copy small{font-size:.39rem}
   .tdp-credits-note{
     width:min(390px,100%);
   }
@@ -260,7 +257,7 @@ body main{
     line-height:1.75;
   }
   .tdp-letter-signoff{
-    margin-top:10px!important;
+    margin-top:9px!important;
     font-size:.6rem;
   }
   body .ending{
