@@ -95,6 +95,7 @@
   function setVerse(card,title,paras){
     const copy=copyNode(card); if(!copy)return;
     const keep=[...copy.children].filter(el=>el.classList?.contains('verse-audio'));
+    const responseBox=copy.querySelector(':scope > .verse-response');
     copy.querySelectorAll('p,blockquote,.quote,.small-note').forEach(el=>el.remove());
     const frag=document.createDocumentFragment();
     paras.forEach((text,i)=>{
@@ -105,6 +106,7 @@
     });
     if(keep.length){ const first=keep[0]; copy.insertBefore(frag,first); }
     else copy.appendChild(frag);
+    if(responseBox)copy.appendChild(responseBox);
   }
 
   function makeFinalAct(reference){
