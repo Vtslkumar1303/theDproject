@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap');
+
 /* v129 — optional folded-paper end credits after the Khat player */
 .tdp-end-credits{
   width:min(500px,calc(100% - 24px));
@@ -238,14 +240,14 @@
 }
 
 .tdp-letter-signoff{
-  margin:22px auto 0;
+  margin:17px auto 0;
   text-align:center;
-  font-family:"Kalam","Segoe Print","Bradley Hand",cursive;
-  font-size:clamp(.9rem,1.8vw,1rem);
-  font-weight:300;
-  line-height:1.5;
-  letter-spacing:.01em;
-  color:#8f6b5c;
+  font-family:"Nothing You Could Do","Caveat","Segoe Print","Bradley Hand",cursive;
+  font-size:clamp(.68rem,1.35vw,.82rem);
+  font-weight:400;
+  line-height:1.35;
+  letter-spacing:.005em;
+  color:#111!important;
 }
 
 @media(max-width:700px){
@@ -267,5 +269,31 @@
   .tdp-credits-note p{
     font-size:1rem;
     line-height:1.8;
+  }
+}
+
+
+/* v131 — finish the page close to the handwritten sign-off */
+.ending{
+  padding-bottom:22px!important;
+}
+
+.tdp-end-credits{
+  margin-bottom:0!important;
+}
+
+.tdp-letter-signoff{
+  margin-bottom:0!important;
+  padding-bottom:0!important;
+}
+
+@media(max-width:700px){
+  .ending{
+    padding-bottom:14px!important;
+  }
+
+  .tdp-letter-signoff{
+    margin-top:14px;
+    font-size:.69rem;
   }
 }
