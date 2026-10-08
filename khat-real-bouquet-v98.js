@@ -7,7 +7,7 @@
     if(player.querySelector('.khat-real-bouquet-v98'))return true;
     const img=document.createElement('img');
     img.className='khat-real-bouquet-v97 khat-real-bouquet-v98';
-    img.src='assets/khat_bouquet_v98.webp?v=20260927-khat-bouquet-asset-fix-v98';
+    img.src='assets/khat_bouquet_v99.webp?v=20261008-khat-bouquet-v99';
     img.alt='';
     img.setAttribute('aria-hidden','true');
     img.decoding='async';
