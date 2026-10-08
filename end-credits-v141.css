@@ -220,9 +220,15 @@
   -webkit-appearance:none;
   width:min(450px,100%);
   margin:0 auto;
-  padding:0;
-  border:0;
-  background:none;
+  padding:26px 28px 22px;
+  border:1px solid rgba(126,87,61,.18);
+  border-radius:10px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.42),rgba(255,255,255,0) 24%,rgba(116,78,52,.035) 100%),
+    linear-gradient(135deg,#f8e8d3,#fff8eb 48%,#f1dcc4);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.7),
+    0 10px 24px rgba(91,61,46,.11);
   cursor:pointer;
   text-align:left;
   opacity:0;
@@ -331,8 +337,6 @@ body main{
   .tdp-roll-copy small{font-size:.36rem}
   .tdp-credits-note{
     width:min(390px,100%);
-  }
-  .tdp-credits-note-inner{
     padding:24px 20px 18px;
   }
   .tdp-credit-paragraph{
