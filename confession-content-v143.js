@@ -100,7 +100,12 @@
     const frag=document.createDocumentFragment();
     paras.forEach((text,i)=>{
       const p=document.createElement('p');
-      p.textContent=text;
+      if(text.includes('[[HEART_SENTENCE]]')){
+        p.className='heart-confession-line';
+        p.textContent=text.replace(/\[\[\/?HEART_SENTENCE\]\]/g,'');
+      }else{
+        p.textContent=text;
+      }
       if((title==='Maybe This Time'&&(i===2||i===3))||(title==='Whatever Your Answer May Be'&&i===4)) p.className='confession-standalone-line';
       frag.appendChild(p);
     });
