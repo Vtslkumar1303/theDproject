@@ -33,7 +33,7 @@
 
           <span class="tdp-credit-paragraph">And somehow, every little thought I had whenever I met you slowly became part of the whole idea behind this confession letter.</span>
 
-          <span class="tdp-credit-paragraph">I don’t want this to come across as me boasting, because that’s not what this is. It was genuinely built from scratch — brick by brick, thought by thought — not copied from a template or pasted from somewhere else.</span>
+          <span class="tdp-credit-paragraph">I made this from scratch, because I wanted every little detail to carry a tiny piece of what I feel.</span>
 
           <span class="tdp-credit-paragraph">Every little detail here came from something I felt, remembered, noticed, overthought, or simply wanted to say.</span>
 
