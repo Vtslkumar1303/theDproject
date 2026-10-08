@@ -38,7 +38,7 @@
       'I don’t know if we’re on the same page right now, or if our maturity levels align perfectly — but I do believe that, if given a chance, we could be something unexpectedly wonderful.',
       'I’m sharing this because you genuinely deserve someone who admires you, appreciates you, believes in you, and makes you feel valued.',
       'And on my side, I’m looking for someone who truly deserves my sincerity and effort.',
-      'And I just want you to know that anyone doing something like this should be the bare minimum for you. If guys have approached you like this before — or maybe someone has even done something bigger, smoother, or more beautiful than this — then I guess I’m still in my learning phase. But either way, you deserve to be approached with genuine intention, effort, and respect.',
+      'I don’t think doing all of this makes me extraordinary. I just think when someone genuinely matters to you, you naturally want to put in the effort — not because you have to, but because you want to.',
       'Maybe someday you will meet someone who goes above and beyond for you, and they will call it the bare minimum — just like this.'
     ],
     'The Girl In My Stories':[
