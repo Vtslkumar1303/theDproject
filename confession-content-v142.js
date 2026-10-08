@@ -27,7 +27,7 @@
     ],
     'Curiosity Is A Love Language':[
       'Curiosity is my love language because I want to know how you think, how you feel, and how you react to those cute little moments when your favourite food arrives — the feelings, the little reactions, and the things you never say out loud.',
-      'I want you to ask me silly questions — whatever comes to your mind. I want to know how your mind works, what you overthink the most, and what makes you smile for no reason. I want to know about your fears, your dreams, and the little things you don’t tell everyone.',
+      'I want to know your silliest questions — whatever comes to your mind. I want to know how your mind works, what you overthink the most, and what makes you smile for no reason. I want to know about your fears, your dreams, and the little things you don’t tell everyone.',
       'I want to stay present, stay interested, and choose to learn you a little more every single day.',
       'And maybe that’s also how I want to know you — not just the obvious things, but all those tiny pieces of you that most people might never stop long enough to notice.'
     ],
