@@ -152,7 +152,29 @@
       if(label)label.textContent='Verse XI';
       if(!list.querySelector('.confession-final-act')) makeFinalAct(thank);
     }
-    document.documentElement.dataset.confessionContent='v58';
+
+    const desiredOrder=[
+      'A Thousand Thoughts Later',
+      'Then You Happened',
+      'The Art Of Noticing You',
+      'Curiosity Is A Love Language',
+      'The Girl In My Stories',
+      'The Possibility Of Us',
+      'Maybe This Time',
+      'The Courage Of Maybe',
+      'Whatever Your Answer May Be',
+      'A Final Act of Confession',
+      'Thank You, March'
+    ];
+    const ordered=[...list.querySelectorAll('.verse-card')];
+    desiredOrder.forEach(title=>{
+      const card=title==='A Final Act of Confession'
+        ? list.querySelector('.confession-final-act')
+        : ordered.find(c=>norm(titleNode(c)?.textContent)===norm(title));
+      if(card) list.appendChild(card);
+    });
+
+    document.documentElement.dataset.confessionContent='v59';
     return true;
   }
 
