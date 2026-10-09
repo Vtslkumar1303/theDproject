@@ -779,101 +779,105 @@ body.live-editing .spotify-player button,body.live-editing .freeze-time,body.liv
   width:fit-content;
   max-width:100%;
   margin:1.15em auto;
-  padding:.48em .78em .56em;
+  padding:.42em .72em .5em;
   text-align:center;
   font-weight:650;
-  letter-spacing:.01em;
+  letter-spacing:.012em;
   color:inherit;
   opacity:0;
-  transform:translateY(14px) scale(.985);
-  filter:blur(2.5px);
-  transition:
-    opacity 900ms cubic-bezier(.22,1,.36,1),
-    transform 1000ms cubic-bezier(.22,1,.36,1),
-    filter 900ms ease;
+  transform:translateY(18px) scale(.97);
+  filter:blur(5px);
+  clip-path:inset(0 100% 0 0 round 10px);
 }
 .main-confession-line::before{
   content:"";
   position:absolute;
   z-index:-1;
-  inset:-.18em -.55em;
+  left:-.5em;
+  right:-.5em;
+  top:18%;
+  bottom:10%;
   border-radius:999px;
-  background:radial-gradient(ellipse at center, rgba(255,190,214,.30), rgba(255,230,239,.12) 48%, transparent 74%);
+  background:linear-gradient(90deg,transparent,rgba(255,190,214,.22) 25%,rgba(255,220,232,.38) 50%,rgba(255,190,214,.22) 75%,transparent);
+  filter:blur(9px);
   opacity:0;
-  transform:scale(.82);
-  filter:blur(10px);
-  transition:
-    opacity 900ms ease,
-    transform 1200ms cubic-bezier(.22,1,.36,1);
+  transform:scaleX(.2);
+  transform-origin:left center;
 }
 .main-confession-line::after{
   content:"♡";
   position:absolute;
   top:-.48em;
-  right:-.32em;
-  font-size:.72em;
+  right:-.28em;
+  font-size:.76em;
   font-weight:400;
   line-height:1;
   opacity:0;
-  transform:translateY(5px) scale(.55) rotate(-12deg);
-  transition:
-    opacity 600ms ease 420ms,
-    transform 800ms cubic-bezier(.34,1.56,.64,1) 420ms;
+  transform:translate(2px,8px) scale(.35) rotate(-18deg);
 }
 .main-confession-line.is-visible{
-  opacity:1;
-  transform:translateY(0) scale(1);
-  filter:blur(0);
+  animation:tdpMainConfessionReveal 1250ms cubic-bezier(.22,1,.36,1) forwards;
 }
 .main-confession-line.is-visible::before{
-  opacity:1;
-  transform:scale(1);
-  animation:tdpMainConfessionGlow 2.8s ease-in-out 900ms infinite;
+  animation:tdpMainConfessionAura 1500ms cubic-bezier(.22,1,.36,1) 450ms forwards,
+             tdpMainConfessionBreathe 3.2s ease-in-out 2.1s infinite;
 }
 .main-confession-line.is-visible::after{
-  opacity:.78;
-  transform:translateY(0) scale(1) rotate(0deg);
-  animation:tdpMainConfessionHeart 2.4s ease-in-out 1.15s infinite;
+  animation:tdpMainConfessionHeart 850ms cubic-bezier(.34,1.56,.64,1) 1050ms forwards,
+             tdpMainConfessionHeartFloat 2.8s ease-in-out 2.1s infinite;
 }
-@keyframes tdpMainConfessionGlow{
-  0%,100%{opacity:.58;transform:scale(1)}
-  50%{opacity:.95;transform:scale(1.045)}
+@keyframes tdpMainConfessionReveal{
+  0%{opacity:0;transform:translateY(18px) scale(.97);filter:blur(5px);clip-path:inset(0 100% 0 0 round 10px)}
+  55%{opacity:1;transform:translateY(-2px) scale(1.012);filter:blur(0);clip-path:inset(0 8% 0 0 round 10px)}
+  100%{opacity:1;transform:translateY(0) scale(1);filter:blur(0);clip-path:inset(0 0 0 0 round 10px)}
+}
+@keyframes tdpMainConfessionAura{
+  0%{opacity:0;transform:scaleX(.2)}
+  60%{opacity:1;transform:scaleX(1.05)}
+  100%{opacity:.72;transform:scaleX(1)}
+}
+@keyframes tdpMainConfessionBreathe{
+  0%,100%{opacity:.48;transform:scaleX(1)}
+  50%{opacity:.78;transform:scaleX(1.025)}
 }
 @keyframes tdpMainConfessionHeart{
+  0%{opacity:0;transform:translate(2px,8px) scale(.35) rotate(-18deg)}
+  65%{opacity:.9;transform:translate(0,-2px) scale(1.12) rotate(5deg)}
+  100%{opacity:.78;transform:translate(0,0) scale(1) rotate(0deg)}
+}
+@keyframes tdpMainConfessionHeartFloat{
   0%,100%{transform:translateY(0) scale(1) rotate(0deg)}
-  50%{transform:translateY(-3px) scale(1.12) rotate(5deg)}
+  50%{transform:translateY(-3px) scale(1.08) rotate(4deg)}
 }
 @media (prefers-reduced-motion:reduce){
   .main-confession-line,
   .main-confession-line::before,
   .main-confession-line::after{
     animation:none!important;
-    transition:none!important;
   }
   .main-confession-line{
     opacity:1;
     transform:none;
     filter:none;
+    clip-path:none;
   }
-  .main-confession-line::before{opacity:.7;transform:none}
+  .main-confession-line::before{opacity:.65;transform:none}
   .main-confession-line::after{opacity:.78;transform:none}
 }
 </style>
 <script>
-document.addEventListener('DOMContentLoaded',function(){
-  var line=document.querySelector('.main-confession-line');
-  if(!line)return;
-  if(!('IntersectionObserver' in window)){
-    line.classList.add('is-visible');
-    return;
-  }
-  var observer=new IntersectionObserver(function(entries){
-    if(entries[0] && entries[0].isIntersecting){
-      line.classList.add('is-visible');
-      observer.disconnect();
-    }
-  },{threshold:.45});
-  observer.observe(line);
-});
+(function(){
+  var reveal=function(){
+    var line=document.querySelector('.main-confession-line');
+    if(line) line.classList.add('is-visible');
+  };
+  var watch=function(){
+    if(document.body.classList.contains('letter-main-open')) reveal();
+  };
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',watch,{once:true});
+  }else{watch();}
+  new MutationObserver(watch).observe(document.body,{attributes:true,attributeFilter:['class']});
+})();
 </script></body>
 </html>
