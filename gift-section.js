@@ -3,12 +3,13 @@
   const PHOTO_2='https://the-d-project-media.floot.app/_cdn/static/3fb38c4b-12d0-412e-bce5-526e9683c1eb-nameplate-final-2.jpeg';
 
   const styles=`
-  .tdp-gift-guide{position:fixed;right:16px;bottom:calc(18px + env(safe-area-inset-bottom));z-index:9998;display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid rgba(112,70,53,.16);border-radius:999px;background:rgba(255,248,235,.96);color:#704536;box-shadow:0 10px 28px rgba(70,42,29,.18);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:700 .72rem/1 Arial,sans-serif;letter-spacing:.01em;cursor:pointer;opacity:0;transform:translateY(12px) scale(.96);pointer-events:none;transition:opacity .45s ease,transform .45s ease,box-shadow .2s ease}
+  .tdp-gift-guide{position:fixed;left:14px;right:auto;bottom:calc(18px + env(safe-area-inset-bottom));z-index:9998;width:42px;height:42px;padding:0;display:grid;place-items:center;border:1px solid rgba(112,70,53,.16);border-radius:50%;background:rgba(255,248,235,.96);color:#704536;box-shadow:0 8px 22px rgba(70,42,29,.18);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:700 1.05rem/1 Arial,sans-serif;cursor:pointer;opacity:0;transform:translateY(12px) scale(.82);pointer-events:none;transition:opacity .45s ease,transform .45s ease,box-shadow .2s ease}
   .tdp-gift-guide.is-ready{opacity:1;transform:none;pointer-events:auto}
-  .tdp-gift-guide:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(70,42,29,.22)}
-  .tdp-gift-guide:active{transform:translateY(0) scale(.98)}
-  .tdp-gift-guide-heart{font-size:1rem;line-height:1}
-  @media(max-width:680px){.tdp-gift-guide{right:11px;bottom:calc(12px + env(safe-area-inset-bottom));padding:9px 12px;font-size:.68rem}}
+  .tdp-gift-guide:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 12px 28px rgba(70,42,29,.23)}
+  .tdp-gift-guide:active{transform:translateY(0) scale(.96)}
+  .tdp-gift-guide-heart{font-size:1.05rem;line-height:1}
+  .tdp-gift-guide-text{display:none}
+  @media(max-width:680px){.tdp-gift-guide{left:10px;bottom:calc(12px + env(safe-area-inset-bottom));width:38px;height:38px;font-size:.98rem}.tdp-gift-guide-heart{font-size:.98rem}}
 
   .tdp-gift-section{width:min(930px,calc(100% - 28px));margin:40px auto 80px;padding:30px 20px 30px;position:relative;z-index:12;overflow:hidden;border:1px solid rgba(101,69,49,.15);border-radius:28px;background:linear-gradient(rgba(250,240,220,.94),rgba(244,226,196,.95));box-shadow:0 18px 42px rgba(75,46,31,.12);color:#56382d;text-align:center}
   .tdp-gift-section:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 12% 4%,rgba(255,255,255,.68),transparent 26%),radial-gradient(circle at 92% 94%,rgba(191,143,102,.11),transparent 30%)}
@@ -102,7 +103,8 @@
     guide.type='button';
     guide.className='tdp-gift-guide';
     guide.setAttribute('aria-label','Jump to the little name plate gift');
-    guide.innerHTML='<span class="tdp-gift-guide-heart">♡</span><span>Bored already? 👀 Tap here</span>';
+    guide.title='Bored already? Tap here ♡';
+    guide.innerHTML='<span class="tdp-gift-guide-heart">🎁</span><span class="tdp-gift-guide-text">Bored already? 👀 Tap here</span>';
     document.body.appendChild(guide);
     const revealGuide=()=>{
       if(document.body.classList.contains('letter-main-open')) guide.classList.add('is-ready');
