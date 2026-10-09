@@ -784,10 +784,10 @@ body.live-editing .spotify-player button,body.live-editing .freeze-time,body.liv
   font-weight:650;
   letter-spacing:.012em;
   color:inherit;
-  opacity:0;
-  transform:translateY(18px) scale(.97);
-  filter:blur(5px);
-  clip-path:inset(0 100% 0 0 round 10px);
+  opacity:1;
+  transform:none;
+  filter:none;
+  clip-path:none;
 }
 .main-confession-line::before{
   content:"";
@@ -814,6 +814,9 @@ body.live-editing .spotify-player button,body.live-editing .freeze-time,body.liv
   line-height:1;
   opacity:0;
   transform:translate(2px,8px) scale(.35) rotate(-18deg);
+}
+body.letter-main-open .main-confession-line{
+  animation:tdpMainConfessionReveal 1250ms cubic-bezier(.22,1,.36,1) forwards;
 }
 .main-confession-line.is-visible{
   animation:tdpMainConfessionReveal 1250ms cubic-bezier(.22,1,.36,1) forwards;
