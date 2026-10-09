@@ -101,7 +101,8 @@
     paras.forEach((text,i)=>{
       const p=document.createElement('p');
       p.textContent=text;
-      if((title==='Maybe This Time'&&(i===2||i===3))||(title==='Whatever Your Answer May Be'&&i===4)) p.className='confession-standalone-line';
+      if(title==='The Girl In My Stories' && text==='I am genuinely interested in you.') p.className='confession-standalone-line main-confession-line';
+      else if((title==='Maybe This Time'&&(i===2||i===3))||(title==='Whatever Your Answer May Be'&&i===4)) p.className='confession-standalone-line';
       frag.appendChild(p);
     });
     if(keep.length){ const first=keep[0]; copy.insertBefore(frag,first); }
