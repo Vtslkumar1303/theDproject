@@ -23,9 +23,29 @@
       h=h.replace('</head>','<style>'+css+'</style>'+headAssets+'</head>');
       h=h.replace('</body>','<script>'+js+'</script>'+bodyScripts+'</body>');
       clearInterval(bootTimer);
-      document.open();
-      document.write(h);
-      document.close();
+      /* Replace the bootstrap document safely after the asynchronous fetch.
+         document.write() after an async fetch is unreliable/ignored in browsers. */
+      const parsed=new DOMParser().parseFromString(h,'text/html');
+      const scriptData=[...parsed.querySelectorAll('script')].map(s=>({
+        src:s.getAttribute('src'),
+        text:s.textContent||'',
+        type:s.getAttribute('type')||'',
+        attrs:[...s.attributes].map(a=>[a.name,a.value])
+      }));
+      document.documentElement.replaceWith(document.importNode(parsed.documentElement,true));
+      [...document.querySelectorAll('script')].forEach(s=>s.remove());
+      scriptData.forEach(info=>{
+        const s=document.createElement('script');
+        info.attrs.forEach(([name,value])=>{if(name!=='src'&&name!=='type')s.setAttribute(name,value)});
+        if(info.type)s.type=info.type;
+        if(info.src){
+          s.async=false;
+          s.src=info.src;
+        }else{
+          s.text=info.text;
+        }
+        document.body.appendChild(s);
+      });
     }catch(e){
       clearInterval(bootTimer);
       const boot=document.getElementById('boot');
