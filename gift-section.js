@@ -1,6 +1,6 @@
 (()=>{
   const PHOTO_1='https://the-d-project-media.floot.app/_cdn/static/ecfb55b9-7ff2-4953-8aca-077d7e62d6f7-nameplate-final-1.jpeg';
-  const PHOTO_2='https://the-d-project-media.floot.app/_cdn/static/3fb38c4b-12d0-412e-bce5-526e9683c1eb-nameplate-final-2.jpeg';
+  const PHOTO_2='./assets/to-my-march-jhumkhas.jpg?v=20261010';
 
   const styles=`
   .tdp-gift-guide{position:fixed;left:14px;right:auto;top:14px;bottom:auto;z-index:9998;width:auto;min-width:58px;height:34px;padding:0 12px;display:grid;place-items:center;border:1px solid rgba(112,70,53,.16);border-radius:50%;background:rgba(255,248,235,.96);color:#704536;box-shadow:0 8px 22px rgba(70,42,29,.18);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font:700 1.05rem/1 Arial,sans-serif;cursor:pointer;opacity:0;transform:translateY(12px) scale(.82);pointer-events:none;transition:opacity .45s ease,transform .45s ease,box-shadow .2s ease}
