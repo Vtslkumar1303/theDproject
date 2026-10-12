@@ -661,20 +661,53 @@ body.live-editing .spotify-player button,body.live-editing .freeze-time,body.liv
       num?.remove();ttl?.remove();
       panel.appendChild(copy);article.append(header,panel);
       const expander=header.querySelector('.verse-expander');
-      const toggle=()=>{if(body.classList.contains('live-editing'))return;const open=sec.classList.toggle('open');expander.setAttribute('aria-expanded',String(open));expander.setAttribute('aria-label',open?'Close verse':'Open verse')};
-      /* Use pointerup on the card itself so taps on the verse number, title, text, whitespace, etc. all toggle reliably on iOS. */
       sec.style.cursor='pointer';
       sec.style.touchAction='manipulation';
-      sec.addEventListener('pointerup',e=>{
-        if(body.classList.contains('live-editing'))return;
-        if(e.pointerType==='mouse' && e.button!==0)return;
-        if(e.target.closest('a,input,select,textarea,audio,video,.verse-audio,.spotify-player'))return;
-        if(e.target.closest('button')&&!e.target.closest('.verse-expander'))return;
-        e.preventDefault();
-        toggle();
-      },true);
       wrap.appendChild(sec);
     });
+
+    /*
+     * One delegated tap handler for every verse. Some iOS hit targets in the
+     * animated verse panel can resolve to a decorative/overlapping element,
+     * so inspect the elements under the actual tap point as well as event.target.
+     * Track down/up coordinates to avoid toggling while the user scrolls.
+     */
+    let verseTapStart=null;
+    function verseAtPoint(e){
+      const candidates=[];
+      if(e.target instanceof Element)candidates.push(e.target);
+      if(typeof document.elementsFromPoint==='function'){
+        document.elementsFromPoint(e.clientX,e.clientY).forEach(el=>candidates.push(el));
+      }else if(typeof document.elementFromPoint==='function'){
+        const el=document.elementFromPoint(e.clientX,e.clientY);if(el)candidates.push(el);
+      }
+      for(const el of candidates){
+        const card=el.closest?.('.verse-card');
+        if(card&&wrap.contains(card))return {card,el};
+      }
+      return null;
+    }
+    document.addEventListener('pointerdown',e=>{
+      if(body.classList.contains('live-editing')||e.isPrimary===false)return;
+      const hit=verseAtPoint(e);
+      if(!hit||e.target.closest?.('a,input,select,textarea,audio,video,.verse-audio,.spotify-player')){verseTapStart=null;return}
+      if(e.target.closest?.('button')&&!e.target.closest('.verse-expander')){verseTapStart=null;return}
+      verseTapStart={card:hit.card,x:e.clientX,y:e.clientY,pointerId:e.pointerId};
+    },true);
+    document.addEventListener('pointerup',e=>{
+      const start=verseTapStart;verseTapStart=null;
+      if(!start||body.classList.contains('live-editing')||e.isPrimary===false)return;
+      if(start.pointerId!==e.pointerId||Math.hypot(e.clientX-start.x,e.clientY-start.y)>12)return;
+      const hit=verseAtPoint(e);
+      if(!hit||hit.card!==start.card)return;
+      if(e.target.closest?.('a,input,select,textarea,audio,video,.verse-audio,.spotify-player'))return;
+      if(e.target.closest?.('button')&&!e.target.closest('.verse-expander'))return;
+      e.preventDefault();
+      const card=start.card,open=card.classList.toggle('open'),button=card.querySelector('.verse-expander');
+      button?.setAttribute('aria-expanded',String(open));
+      button?.setAttribute('aria-label',open?'Close verse':'Open verse');
+    },true);
+    document.addEventListener('pointercancel',()=>{verseTapStart=null},true);
     hero?.insertAdjacentElement('afterend',wrap);
     wrap.insertAdjacentElement('beforebegin',fav);
     wrap.insertAdjacentElement('afterend',doc);
