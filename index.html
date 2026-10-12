@@ -661,9 +661,13 @@ body.live-editing .spotify-player button,body.live-editing .freeze-time,body.liv
       num?.remove();ttl?.remove();
       panel.appendChild(copy);article.append(header,panel);
       const expander=header.querySelector('.verse-expander');
-      const toggle=()=>{if(body.classList.contains('live-editing'))return;const open=sec.classList.toggle('open');expander.setAttribute('aria-expanded',String(open))};
-      expander.addEventListener('click',toggle);
-      header.querySelector('.verse-heading').addEventListener('click',toggle);
+      const toggle=()=>{if(body.classList.contains('live-editing'))return;const open=sec.classList.toggle('open');expander.setAttribute('aria-expanded',String(open));expander.setAttribute('aria-label',open?'Close verse':'Open verse')};
+      /* Make the entire verse card tappable, not just the right-side expander or heading. */
+      sec.addEventListener('click',e=>{
+        if(body.classList.contains('live-editing'))return;
+        if(e.target.closest('button,a,input,select,textarea,audio,video,.verse-audio,.spotify-player'))return;
+        toggle();
+      });
       wrap.appendChild(sec);
     });
     hero?.insertAdjacentElement('afterend',wrap);
