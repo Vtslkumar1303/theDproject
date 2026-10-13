@@ -44,7 +44,23 @@
                 <div class="tdp-ticket-meta"><span><b>Row</b>D4</span><span><b>Seat</b>Beside You</span><span><b>Entry</b>Us</span></div>
                 <div class="tdp-ticket-printline"><span>GATE 04 · DATE: SOMEDAY<br>REF: BLUE-NIGHT-002</span><i class="tdp-ticket-barcode"></i></div>
               </article>
-              <article class="tdp-ticket">
+              <article class="tdp-ticket tdp-ticket-arijit-j">
+                <span class="tdp-ticket-paper"></span><span class="tdp-ticket-fold"></span><span class="tdp-ticket-stubmark">booking confirmed</span>
+                <div class="tdp-ticket-band"><span>Arijit Singh · India Tour</span><span>NO. 0901</span></div>
+                <h4 class="tdp-ticket-name">Ahmedabad · J Block</h4>
+                <p class="tdp-ticket-note">09 Jan 2027 · 6 PM onwards · Narendra Modi Stadium</p>
+                <div class="tdp-ticket-meta"><span><b>Block</b>J</span><span><b>Tickets</b>01 of 02</span><span><b>Entry</b>Confirmed</span></div>
+                <div class="tdp-ticket-printline"><span>AHMEDABAD · 09 JAN 2027<br>REF: ARIJIT-J-001</span><i class="tdp-ticket-barcode"></i></div>
+              </article>
+              <article class="tdp-ticket tdp-ticket-arijit-j">
+                <span class="tdp-ticket-paper"></span><span class="tdp-ticket-fold"></span><span class="tdp-ticket-stubmark">booking confirmed</span>
+                <div class="tdp-ticket-band"><span>Arijit Singh · India Tour</span><span>NO. 0902</span></div>
+                <h4 class="tdp-ticket-name">Ahmedabad · J Block</h4>
+                <p class="tdp-ticket-note">09 Jan 2027 · 6 PM onwards · Narendra Modi Stadium</p>
+                <div class="tdp-ticket-meta"><span><b>Block</b>J</span><span><b>Tickets</b>02 of 02</span><span><b>Entry</b>Confirmed</span></div>
+                <div class="tdp-ticket-printline"><span>AHMEDABAD · 09 JAN 2027<br>REF: ARIJIT-J-002</span><i class="tdp-ticket-barcode"></i></div>
+              </article>
+              <article class="tdp-ticket tdp-ticket-bts">
                 <span class="tdp-ticket-paper"></span><span class="tdp-ticket-fold"></span><span class="tdp-ticket-stubmark">purple hour</span>
                 <div class="tdp-ticket-band"><span>purple hour · keepsake</span><span>07 ✦</span></div>
                 <h4 class="tdp-ticket-name">For My Favourite ARMY</h4>
