@@ -1,17 +1,21 @@
 (()=>{
   const makeIndependent=()=>{
     const shell=document.querySelector('.tdp-dreamboard-shell');
-    if(!shell || shell.dataset.independentDreamboard==='1') return !!shell;
+    if(!shell) return false;
     shell.dataset.independentDreamboard='1';
     /* Always repair the ticket list, including when cached markup already contains one or two Arijit cards. */
     const tickets=shell.querySelector('.tdp-tickets');
     if(tickets){
+      tickets.style.setProperty('display','grid','important');
+      tickets.style.setProperty('position','relative','important');
+      tickets.style.setProperty('height','auto','important');
+      tickets.style.setProperty('overflow','visible','important');
       const getName=(card)=>card.querySelector('.tdp-ticket-name')?.textContent.trim()||'';
       const cards=()=>Array.from(tickets.querySelectorAll('.tdp-ticket'));
       const findByName=(predicate)=>cards().find(card=>predicate(getName(card)));
       const darshan=findByName(name=>name==='Darshan Raval');
       let arijit=cards().filter(card=>card.classList.contains('tdp-ticket-arijit-j'));
-      const bts=findByName(name=>name.includes('ARMY')||name.includes('BTS'));
+      const bts=findByName(name=>name.includes('ARMY')||name.includes('BTS')) || cards().find(card=>card.classList.contains('tdp-ticket-bts')) || cards()[cards().length-1];
       const makeTicket=(n)=>{
         const ticket=document.createElement('article');
         ticket.className='tdp-ticket tdp-ticket-arijit-j';
@@ -24,13 +28,23 @@
       }else{
         arijit=arijit.slice(0,2);
       }
-      if(darshan && bts){
+      if(darshan && bts && darshan!==bts){
         arijit.forEach(card=>card.remove());
         let anchor=darshan;
         arijit.forEach(card=>{anchor.insertAdjacentElement('afterend',card);anchor=card;});
       }else if(arijit.some(card=>!card.isConnected)){
         arijit.forEach(card=>tickets.appendChild(card));
       }
+      cards().forEach(card=>{
+        card.style.setProperty('position','relative','important');
+        card.style.setProperty('inset','auto','important');
+        card.style.setProperty('width','auto','important');
+        card.style.setProperty('height','auto','important');
+        card.style.setProperty('opacity','1','important');
+        card.style.setProperty('visibility','visible','important');
+        card.style.setProperty('grid-row','auto','important');
+        card.style.setProperty('grid-column','auto','important');
+      });
     }
     shell.classList.add('cover-visible');
     const cover=shell.querySelector('.tdp-memory-cover');
