@@ -38,3 +38,39 @@
 .tdp-dreamboard-shell .tdp-ticket-bts .tdp-ticket-band,.tdp-dreamboard-shell .tdp-ticket-bts .tdp-ticket-meta b,.tdp-dreamboard-shell .tdp-ticket:nth-child(5) .tdp-ticket-band,.tdp-dreamboard-shell .tdp-ticket:nth-child(5) .tdp-ticket-meta b{color:#8e709a!important}
 @media(max-width:760px){.tdp-dreamboard-shell .tdp-tickets{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px}.tdp-dreamboard-shell .tdp-ticket{padding:19px 15px 17px}.tdp-dreamboard-shell .tdp-ticket-arijit-j .tdp-ticket-name{font-size:1.05rem}}
 @media(max-width:430px){.tdp-dreamboard-shell .tdp-tickets{grid-template-columns:minmax(0,1fr)!important;max-width:330px}.tdp-dreamboard-shell .tdp-ticket{min-height:190px}}
+
+
+/* 2026-10-13 ticket repair: prevent the keepsake cards from collapsing into a 3D pile on mobile. */
+.tdp-dreamboard-shell .tdp-tickets{
+  display:grid!important;
+  position:relative!important;
+  grid-auto-flow:row!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  align-items:stretch!important;
+  gap:18px!important;
+  width:100%!important;
+  max-width:520px!important;
+  margin:0 auto!important;
+  padding:10px 4px 22px!important;
+}
+.tdp-dreamboard-shell .tdp-tickets > .tdp-ticket{
+  display:block!important;
+  position:relative!important;
+  inset:auto!important;
+  grid-area:auto!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:190px!important;
+  margin:0!important;
+  opacity:1!important;
+  visibility:visible!important;
+  transform:none!important;
+  animation:none!important;
+  float:none!important;
+}
+.tdp-dreamboard-shell .tdp-ticket-arijit-j{
+  background:linear-gradient(136deg,#fffdf5,#dce9f4 62%,#f0d8b9)!important;
+  border-color:rgba(54,104,150,.32)!important;
+}
+.tdp-dreamboard-shell .tdp-ticket-arijit-j .tdp-ticket-name{color:#173c65!important}
+.tdp-dreamboard-shell .tdp-ticket-bts .tdp-ticket-name{color:#674b73!important}
