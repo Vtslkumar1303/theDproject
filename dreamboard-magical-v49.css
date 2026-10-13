@@ -27,3 +27,14 @@
 
 @media(max-width:700px){.tdp-dreamboard-shell.is-open .tdp-memory-cover{transform:translateY(-31px) rotateX(66deg) scale(.95)!important}.tdp-dreamboard-shell.is-closing .tdp-dreamboard-stage{transform:rotateX(-50deg) translateY(-42px) scale(.975)!important}}
 @media(prefers-reduced-motion:reduce){.tdp-dreamboard-shell:before,.tdp-dreamboard-shell:after{display:none}.tdp-memory-cover,.tdp-dreamboard-stage{transition:none!important}}
+
+/* Final-order overrides for the five concert keepsakes; loaded after the base ticket styles. */
+.tdp-dreamboard-shell .tdp-tickets{grid-template-columns:repeat(3,minmax(0,1fr))}
+.tdp-dreamboard-shell .tdp-ticket-arijit-j{background:linear-gradient(136deg,#fffdf5,#dce9f4 62%,#f0d8b9)!important;border-color:rgba(54,104,150,.32)!important}
+.tdp-dreamboard-shell .tdp-ticket-arijit-j .tdp-ticket-band,.tdp-dreamboard-shell .tdp-ticket-arijit-j .tdp-ticket-meta b{color:#3479b6!important}
+.tdp-dreamboard-shell .tdp-ticket-arijit-j .tdp-ticket-name{color:#173c65!important;font-size:clamp(1rem,2.3vw,1.28rem)}
+.tdp-dreamboard-shell .tdp-ticket-bts,.tdp-dreamboard-shell .tdp-ticket:nth-child(5){background:linear-gradient(136deg,#fffaf6,#efe4f1)!important;border-color:rgba(108,75,126,.22)!important}
+.tdp-dreamboard-shell .tdp-ticket-bts .tdp-ticket-name,.tdp-dreamboard-shell .tdp-ticket:nth-child(5) .tdp-ticket-name{color:#674b73!important}
+.tdp-dreamboard-shell .tdp-ticket-bts .tdp-ticket-band,.tdp-dreamboard-shell .tdp-ticket-bts .tdp-ticket-meta b,.tdp-dreamboard-shell .tdp-ticket:nth-child(5) .tdp-ticket-band,.tdp-dreamboard-shell .tdp-ticket:nth-child(5) .tdp-ticket-meta b{color:#8e709a!important}
+@media(max-width:760px){.tdp-dreamboard-shell .tdp-tickets{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:14px}.tdp-dreamboard-shell .tdp-ticket{padding:19px 15px 17px}.tdp-dreamboard-shell .tdp-ticket-arijit-j .tdp-ticket-name{font-size:1.05rem}}
+@media(max-width:430px){.tdp-dreamboard-shell .tdp-tickets{grid-template-columns:minmax(0,1fr)!important;max-width:330px}.tdp-dreamboard-shell .tdp-ticket{min-height:190px}}
