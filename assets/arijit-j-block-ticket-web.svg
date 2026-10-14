@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="260" viewBox="0 0 1000 260">
+<defs>
+ <linearGradient id="poster" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d7e5ec"/><stop offset=".48" stop-color="#718eaa"/><stop offset="1" stop-color="#172c48"/></linearGradient>
+ <linearGradient id="stub" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#101e32"/><stop offset="1" stop-color="#182c45"/></linearGradient>
+ <linearGradient id="light" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#e9f3f8" stop-opacity=".9"/><stop offset="1" stop-color="#7896b1" stop-opacity="0"/></linearGradient>
+</defs>
+<rect width="1000" height="260" rx="7" fill="#f0e7d5"/>
+<rect x="7" y="7" width="606" height="246" rx="4" fill="url(#poster)"/>
+<path d="M7 190 Q120 110 230 176 T430 155 T613 174 V253 H7Z" fill="#263d59" opacity=".8"/>
+<path d="M7 215 Q140 160 260 207 T460 185 T613 203 V253 H7Z" fill="#101e32" opacity=".72"/>
+<path d="M18 20 H603 V135 Q500 112 390 140 T180 128 T18 151Z" fill="url(#light)"/>
+<text x="30" y="48" fill="#142b45" font-family="Arial,sans-serif" font-size="15" letter-spacing="4">INDIA TOUR · AHMEDABAD</text>
+<text x="30" y="99" fill="#fffaf0" font-family="Georgia,serif" font-size="52" font-weight="bold" letter-spacing="1">ARIJIT</text>
+<text x="30" y="151" fill="#fffaf0" font-family="Georgia,serif" font-size="52" font-weight="bold" letter-spacing="1">SINGH</text>
+<text x="31" y="228" fill="#f6ead8" font-family="Arial,sans-serif" font-size="13" letter-spacing="2">LIVE MUSIC · BIGGER TOGETHER</text>
+<path d="M623 7 V253" stroke="#f0e7d5" stroke-width="2" stroke-dasharray="5 5"/>
+<rect x="633" y="7" width="360" height="246" rx="4" fill="url(#stub)"/>
+<text x="660" y="38" fill="#a9c1d8" font-family="Arial,sans-serif" font-size="13" letter-spacing="3">BOOKING CONFIRMED</text>
+<text x="660" y="75" fill="#fffaf0" font-family="Arial,sans-serif" font-size="27" font-weight="bold">ARIJIT SINGH</text>
+<path d="M660 91 H965" stroke="#4b627b" stroke-width="1"/>
+<text x="660" y="119" fill="#dbe6ef" font-family="Arial,sans-serif" font-size="14">09 JAN 2027 · 6:00 PM ONWARDS</text>
+<text x="660" y="145" fill="#dbe6ef" font-family="Arial,sans-serif" font-size="13">NARENDRA MODI STADIUM</text>
+<text x="660" y="164" fill="#dbe6ef" font-family="Arial,sans-serif" font-size="13">AHMEDABAD</text>
+<rect x="660" y="183" width="133" height="39" rx="2" fill="#e7dfce"/>
+<text x="676" y="209" fill="#17283c" font-family="Arial,sans-serif" font-size="20" font-weight="bold">BLOCK J</text>
+<g fill="#f0e7d5"><rect x="825" y="184" width="4" height="39"/><rect x="833" y="184" width="2" height="39"/><rect x="839" y="184" width="5" height="39"/><rect x="848" y="184" width="2" height="39"/><rect x="854" y="184" width="3" height="39"/><rect x="862" y="184" width="6" height="39"/><rect x="872" y="184" width="2" height="39"/><rect x="879" y="184" width="4" height="39"/><rect x="887" y="184" width="2" height="39"/><rect x="893" y="184" width="6" height="39"/><rect x="904" y="184" width="3" height="39"/><rect x="911" y="184" width="2" height="39"/><rect x="918" y="184" width="5" height="39"/><rect x="927" y="184" width="2" height="39"/><rect x="933" y="184" width="4" height="39"/><rect x="941" y="184" width="2" height="39"/><rect x="948" y="184" width="6" height="39"/></g>
+</svg>
