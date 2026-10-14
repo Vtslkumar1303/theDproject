@@ -1137,3 +1137,53 @@
  .tdp-kd-concerts .tdp-ar-ticket-stub small{font-size:4.5px!important}
  .tdp-kd-concerts .tdp-ar-ticket-stub strong{font-size:8px!important}
 }
+
+
+/* v76 — make both Arijit ticket faces legible at the keepsake card's actual size. */
+.tdp-kd-concerts .tdp-arijit-real-ticket{
+  grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)!important;
+  height:82px!important;
+  overflow:hidden!important;
+}
+.tdp-kd-concerts .tdp-ar-ticket-art{
+  min-width:0!important;padding:4px 7px!important;
+}
+.tdp-kd-concerts .tdp-ar-ticket-stub{
+  min-width:0!important;gap:2px!important;padding:4px 7px!important;
+}
+.tdp-kd-concerts .tdp-ar-ticket-stub small{
+  white-space:nowrap!important;font-size:5px!important;line-height:1.1!important;
+}
+.tdp-kd-concerts .tdp-ar-ticket-stub b{
+  white-space:nowrap!important;font-size:clamp(7px,2.2vw,9px)!important;line-height:1.05!important;
+}
+.tdp-kd-concerts .tdp-ar-ticket-stub span{
+  white-space:normal!important;overflow-wrap:anywhere!important;
+  font-size:clamp(4.2px,1.35vw,5.5px)!important;line-height:1.15!important;
+}
+.tdp-kd-concerts .tdp-ar-ticket-stub strong{
+  white-space:nowrap!important;font-size:clamp(7px,2vw,9px)!important;line-height:1!important;
+  margin-top:2px!important;
+}
+.tdp-kd-concerts .tdp-arijit-real-ticket-front .tdp-ar-ticket-stub strong:before{
+  content:none!important;
+}
+.tdp-kd-concerts .tdp-ar-ticket-stub:after{pointer-events:none!important;z-index:0!important}
+.tdp-kd-concerts .tdp-ar-ticket-stub>*{position:relative!important;z-index:1!important}
+.tdp-kd-concerts .tdp-ar-ticket-art span{
+  white-space:nowrap!important;font-size:clamp(12px,3.4vw,18px)!important;
+}
+.tdp-kd-concerts .tdp-ar-ticket-art b{
+  white-space:nowrap!important;font-size:clamp(8px,2.3vw,11px)!important;
+}
+.tdp-kd-concerts .tdp-ar-ticket-art small{
+  white-space:normal!important;font-size:clamp(4px,1.3vw,5.5px)!important;
+}
+@media(max-width:520px){
+ .tdp-kd-concerts .tdp-arijit-real-ticket{height:76px!important}
+ .tdp-kd-concerts .tdp-ar-ticket-stub{padding:3px 4px!important}
+ .tdp-kd-concerts .tdp-ar-ticket-stub small{font-size:4.2px!important}
+ .tdp-kd-concerts .tdp-ar-ticket-stub b{font-size:6.7px!important}
+ .tdp-kd-concerts .tdp-ar-ticket-stub span{font-size:4px!important}
+ .tdp-kd-concerts .tdp-ar-ticket-stub strong{font-size:7.2px!important}
+}
