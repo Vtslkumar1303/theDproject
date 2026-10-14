@@ -1187,3 +1187,36 @@
  .tdp-kd-concerts .tdp-ar-ticket-stub span{font-size:4px!important}
  .tdp-kd-concerts .tdp-ar-ticket-stub strong{font-size:7.2px!important}
 }
+
+
+/* v77 — render the actual supplied Arijit ticket artwork, not a CSS approximation. */
+.tdp-kd-concerts .tdp-arijit-real-ticket{
+  display:block!important;
+  overflow:hidden!important;
+  background:#122238!important;
+}
+.tdp-kd-concerts .tdp-ar-ticket-image{
+  position:absolute!important;
+  inset:0!important;
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  max-width:none!important;
+  object-fit:fill!important;
+  object-position:center!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  z-index:3!important;
+}
+.tdp-kd-concerts .tdp-arijit-real-ticket .tdp-ar-ticket-art,
+.tdp-kd-concerts .tdp-arijit-real-ticket .tdp-ar-ticket-stub{
+  display:none!important;
+}
+.tdp-kd-concerts .tdp-arijit-real-ticket-back .tdp-ar-ticket-image{
+  opacity:1!important;
+}
+.tdp-kd-concerts .tdp-arijit-real-ticket-front .tdp-ar-ticket-image{
+  opacity:1!important;
+}
