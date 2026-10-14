@@ -28,11 +28,15 @@
                 <div class="tdp-ticket-portrait tdp-ticket-portrait-bts"><span></span><span></span><span></span></div>
                 <div class="tdp-ticket-barcode"></div>
               </div>
-              <div class="tdp-ticket tdp-ticket-arijit">
-                <div class="tdp-ticket-side">AS<small>LIVE</small></div>
-                <div class="tdp-ticket-body"><b>ARIJIT SINGH</b><small>ONE EVENING · LIVE</small><i>Row: Agar Tum Saath Ho</i></div>
-                <div class="tdp-ticket-portrait tdp-ticket-portrait-solo"><span></span></div>
-                <div class="tdp-ticket-barcode"></div>
+              <div class="tdp-ticket tdp-ticket-arijit tdp-arijit-double-ticket" aria-label="Two Arijit Singh Ahmedabad J Block concert tickets">
+                <div class="tdp-arijit-real-ticket tdp-arijit-real-ticket-back" aria-hidden="true">
+                  <div class="tdp-ar-ticket-art"><span>ARIJIT</span><b>SINGH</b><small>INDIA TOUR · AHMEDABAD</small></div>
+                  <div class="tdp-ar-ticket-stub"><small>BOOKING CONFIRMED</small><b>ARIJIT SINGH</b><span>09 JAN 2027 · 6:00 PM ONWARDS</span><span>NARENDRA MODI STADIUM, AHMEDABAD</span><strong>BLOCK J</strong></div>
+                </div>
+                <div class="tdp-arijit-real-ticket tdp-arijit-real-ticket-front">
+                  <div class="tdp-ar-ticket-art"><span>ARIJIT</span><b>SINGH</b><small>INDIA TOUR · AHMEDABAD</small><em>LIVE MUSIC · BIGGER TOGETHER</em></div>
+                  <div class="tdp-ar-ticket-stub"><small>BOOKING CONFIRMED</small><b>ARIJIT SINGH</b><span>09 JAN 2027 · 6:00 PM ONWARDS</span><span>NARENDRA MODI STADIUM, AHMEDABAD</span><strong>▣ BLOCK J</strong></div>
+                </div>
               </div>
               <div class="tdp-ticket tdp-ticket-darshan">
                 <div class="tdp-ticket-side">DR<small>LIVE</small></div>
