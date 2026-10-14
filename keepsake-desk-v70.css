@@ -934,3 +934,40 @@
 /* v109 Gujarati Navratri keepsake line */
 .tdp-kd-gujarati{display:block;margin-top:8px;font:600 .78rem/1.55 "Noto Sans Gujarati","Nirmala UI","Segoe UI",sans-serif;color:#7b4f43;text-align:center;letter-spacing:.01em}
 @media(max-width:520px){.tdp-kd-gujarati{font-size:.72rem;line-height:1.5}}
+
+
+/* Final concert-ticket fix: use two real rectangular image assets in the keepsake feature. */
+.tdp-kd-concerts .tdp-ticket-stack.tdp-arijit-image-stack{
+  position:relative!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  width:min(430px,96%)!important;max-width:100%!important;height:auto!important;min-height:0!important;
+  margin:8px auto 0!important;padding:8px 0 12px!important;gap:0!important;overflow:visible!important;
+  transform:none!important;perspective:none!important;
+}
+.tdp-kd-concerts .tdp-arijit-image-stack>.tdp-arijit-image-card{
+  position:relative!important;inset:auto!important;display:block!important;flex:none!important;
+  width:100%!important;max-width:100%!important;height:auto!important;min-height:0!important;
+  margin:0!important;padding:0!important;overflow:visible!important;box-sizing:border-box!important;
+  border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;
+  opacity:1!important;visibility:visible!important;transform:none!important;translate:none!important;
+  rotate:0deg!important;animation:none!important;transition:margin .35s ease,width .35s ease!important;
+  line-height:0!important;
+}
+.tdp-kd-concerts .tdp-arijit-image-stack>.tdp-arijit-image-card:nth-child(2){
+  width:97%!important;margin-top:-6%!important;margin-left:3%!important;z-index:2!important;
+}
+.tdp-kd-concerts .tdp-arijit-image-stack>.tdp-arijit-image-card::before,
+.tdp-kd-concerts .tdp-arijit-image-stack>.tdp-arijit-image-card::after{display:none!important;content:none!important}
+.tdp-kd-concerts .tdp-arijit-image-stack .tdp-arijit-image-card img{
+  display:block!important;width:100%!important;max-width:100%!important;height:auto!important;
+  aspect-ratio:350/116!important;object-fit:contain!important;object-position:center!important;
+  margin:0!important;padding:0!important;border:0!important;border-radius:2px!important;
+  background:transparent!important;box-shadow:0 8px 18px rgba(38,28,24,.16)!important;
+}
+.tdp-kd-concerts.is-open .tdp-ticket-stack.tdp-arijit-image-stack{height:auto!important;min-height:0!important;gap:0!important}
+.tdp-kd-concerts.is-open .tdp-arijit-image-stack>.tdp-arijit-image-card:nth-child(2){
+  width:97%!important;margin-top:-4%!important;margin-left:3%!important;
+}
+@media(max-width:480px){
+  .tdp-kd-concerts .tdp-ticket-stack.tdp-arijit-image-stack{width:min(100%,370px)!important;padding:5px 0 10px!important}
+  .tdp-kd-concerts .tdp-arijit-image-stack .tdp-arijit-image-card img{border-radius:1px!important}
+}
