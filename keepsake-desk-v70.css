@@ -1006,3 +1006,64 @@
  .tdp-kd-concerts .tdp-ticket-body i{font-size:.54rem!important}
  .tdp-kd-concerts.is-open .tdp-ticket-stack{height:266px!important}
 }
+
+
+/* Two realistic Arijit Ahmedabad tickets, layered like a keepsake photo. */
+.tdp-kd-concerts .tdp-ticket-stack>.tdp-ticket-arijit.tdp-arijit-double-ticket{
+  display:block!important;position:absolute!important;overflow:visible!important;
+  background:transparent!important;border:0!important;box-shadow:none!important;
+  height:82px!important;min-height:82px!important;padding:0!important;
+}
+.tdp-kd-concerts .tdp-arijit-real-ticket{
+  position:absolute!important;display:grid!important;grid-template-columns:1.2fr 1fr!important;
+  width:100%!important;height:74px!important;box-sizing:border-box!important;
+  border:1px solid rgba(13,27,46,.35)!important;border-radius:5px!important;overflow:hidden!important;
+  background:#f1e8d7!important;color:#172337!important;
+  box-shadow:0 4px 10px rgba(38,30,25,.18)!important;
+}
+.tdp-kd-concerts .tdp-arijit-real-ticket-back{
+  left:7px!important;top:-5px!important;z-index:1!important;
+  transform:rotate(-2.2deg)!important;opacity:.96!important;
+}
+.tdp-kd-concerts .tdp-arijit-real-ticket-front{
+  left:0!important;top:5px!important;z-index:2!important;
+  transform:rotate(.8deg)!important;
+}
+.tdp-kd-concerts .tdp-ar-ticket-art{
+  position:relative!important;display:flex!important;flex-direction:column!important;justify-content:center!important;
+  padding:4px 7px!important;overflow:hidden!important;
+  background:linear-gradient(120deg,#f6e5bf 0%,#d4dced 62%,#e9d7bb 100%)!important;
+  border-right:1px dashed rgba(17,35,54,.55)!important;
+}
+.tdp-kd-concerts .tdp-ar-ticket-art span{
+  display:block!important;font:900 15px/.85 Arial,Helvetica,sans-serif!important;letter-spacing:.07em!important;color:#101a2a!important
+}
+.tdp-kd-concerts .tdp-ar-ticket-art b{
+  display:block!important;font:900 12px/.9 Arial,Helvetica,sans-serif!important;letter-spacing:.2em!important;color:#101a2a!important
+}
+.tdp-kd-concerts .tdp-ar-ticket-art small{
+  display:block!important;margin-top:4px!important;font:700 5px/1.1 Arial,Helvetica,sans-serif!important;letter-spacing:.09em!important;color:#26384e!important
+}
+.tdp-kd-concerts .tdp-ar-ticket-art em{
+  display:block!important;margin-top:3px!important;font:italic 5px/1 Arial,Helvetica,sans-serif!important;letter-spacing:.08em!important;color:#26384e!important
+}
+.tdp-kd-concerts .tdp-ar-ticket-stub{
+  display:flex!important;flex-direction:column!important;justify-content:center!important;gap:2px!important;
+  padding:4px 5px!important;min-width:0!important;background:#122238!important;color:#fff4dc!important;
+  font-family:Arial,Helvetica,sans-serif!important;overflow:hidden!important
+}
+.tdp-kd-concerts .tdp-ar-ticket-stub small{display:block!important;font:700 5px/1 Arial,Helvetica,sans-serif!important;letter-spacing:.1em!important;color:#e7c67f!important}
+.tdp-kd-concerts .tdp-ar-ticket-stub b{display:block!important;font:900 8px/1 Arial,Helvetica,sans-serif!important;letter-spacing:.04em!important;color:#fff!important}
+.tdp-kd-concerts .tdp-ar-ticket-stub span{display:block!important;font:500 5px/1.15 Arial,Helvetica,sans-serif!important;color:#fff4dc!important}
+.tdp-kd-concerts .tdp-ar-ticket-stub strong{display:block!important;margin-top:1px!important;font:900 9px/1 Arial,Helvetica,sans-serif!important;letter-spacing:.12em!important;color:#e7c67f!important}
+.tdp-kd-concerts .tdp-ticket-stack>.tdp-ticket-arijit .tdp-ticket-side,
+.tdp-kd-concerts .tdp-ticket-stack>.tdp-ticket-arijit .tdp-ticket-body,
+.tdp-kd-concerts .tdp-ticket-stack>.tdp-ticket-arijit .tdp-ticket-portrait,
+.tdp-kd-concerts .tdp-ticket-stack>.tdp-ticket-arijit .tdp-ticket-barcode{display:none!important}
+@media(max-width:520px){
+ .tdp-kd-concerts .tdp-arijit-real-ticket{height:70px!important}
+ .tdp-kd-concerts .tdp-ar-ticket-art span{font-size:13px!important}
+ .tdp-kd-concerts .tdp-ar-ticket-art b{font-size:10px!important}
+ .tdp-kd-concerts .tdp-ar-ticket-stub b{font-size:7px!important}
+ .tdp-kd-concerts .tdp-ar-ticket-stub span{font-size:4.5px!important}
+}
