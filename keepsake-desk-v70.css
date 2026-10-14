@@ -934,29 +934,3 @@
 /* v109 Gujarati Navratri keepsake line */
 .tdp-kd-gujarati{display:block;margin-top:8px;font:600 .78rem/1.55 "Noto Sans Gujarati","Nirmala UI","Segoe UI",sans-serif;color:#7b4f43;text-align:center;letter-spacing:.01em}
 @media(max-width:520px){.tdp-kd-gujarati{font-size:.72rem;line-height:1.5}}
-
-
-/* Restore the earlier rectangular Arijit ticket artwork on the keepsake stack. */
-.tdp-kd-concerts .tdp-ticket-stack.tdp-arijit-image-stack{
-  position:relative!important;display:block!important;width:min(350px,92%)!important;
-  height:210px!important;margin:20px auto 14px!important;overflow:visible!important;
-}
-.tdp-kd-concerts .tdp-ticket-stack.tdp-arijit-image-stack>.tdp-arijit-image-card{
-  position:absolute!important;display:block!important;width:100%!important;max-width:100%!important;
-  height:auto!important;min-height:0!important;aspect-ratio:350/116!important;padding:0!important;
-  border:0!important;border-radius:3px!important;overflow:hidden!important;
-  background:transparent!important;box-shadow:0 12px 24px rgba(70,45,30,.20)!important;
-}
-.tdp-kd-concerts .tdp-ticket-stack.tdp-arijit-image-stack>.tdp-arijit-image-card:first-child{
-  left:0!important;top:54px!important;transform:rotate(-5deg)!important;z-index:1!important;
-}
-.tdp-kd-concerts .tdp-ticket-stack.tdp-arijit-image-stack>.tdp-arijit-image-card:nth-child(2){
-  left:8px!important;top:12px!important;transform:rotate(3deg)!important;z-index:2!important;
-}
-.tdp-kd-concerts .tdp-ticket-stack.tdp-arijit-image-stack>.tdp-arijit-image-card img{
-  display:block!important;width:100%!important;height:100%!important;max-width:100%!important;
-  aspect-ratio:350/116!important;object-fit:fill!important;border:0!important;border-radius:3px!important;
-}
-@media(max-width:700px){
- .tdp-kd-concerts .tdp-ticket-stack.tdp-arijit-image-stack{width:min(350px,94%)!important;height:190px!important}
-}
