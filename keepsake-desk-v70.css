@@ -971,3 +971,17 @@
   .tdp-kd-concerts .tdp-ticket-stack.tdp-arijit-image-stack{width:min(100%,370px)!important;padding:5px 0 10px!important}
   .tdp-kd-concerts .tdp-arijit-image-stack .tdp-arijit-image-card img{border-radius:1px!important}
 }
+
+
+/* v2 mobile hardening: keep ticket artwork shallow and use a subdirectory-safe asset URL. */
+.tdp-kd-concerts .tdp-arijit-image-stack,
+.tdp-kd-concerts .tdp-arijit-image-stack *{box-sizing:border-box!important}
+.tdp-kd-concerts .tdp-arijit-image-stack>.tdp-arijit-image-card{height:auto!important;min-height:0!important;aspect-ratio:auto!important}
+.tdp-kd-concerts .tdp-arijit-image-stack .tdp-arijit-image-card img{
+  display:block!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;
+  aspect-ratio:350 / 116!important;object-fit:contain!important;object-position:center!important;
+}
+@media(max-width:700px){
+  .tdp-kd-concerts .tdp-arijit-image-stack{width:calc(100% - 20px)!important;max-width:370px!important}
+  .tdp-kd-concerts .tdp-arijit-image-stack .tdp-arijit-image-card img{height:auto!important}
+}
