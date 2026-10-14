@@ -30,12 +30,12 @@
               </div>
               <div class="tdp-ticket tdp-ticket-arijit tdp-arijit-double-ticket" aria-label="Two Arijit Singh Ahmedabad J Block concert tickets">
                 <div class="tdp-arijit-real-ticket tdp-arijit-real-ticket-back" aria-hidden="true">
-                  <img class="tdp-ar-ticket-image" src="https://79acab3a-5b42-432e-beac-6ca20e16bfec.sandbox.floot.app/_cdn/static/8185f241-e5f4-4c44-aa14-19b0e1c50228-arijit-j-block-ticket-web.jpg" alt="" />
+                  <img class="tdp-ar-ticket-image" src="./assets/arijit-j-block-ticket-web.svg" alt="" />
                   <div class="tdp-ar-ticket-art"><span>ARIJIT</span><b>SINGH</b><small>INDIA TOUR · AHMEDABAD</small></div>
                   <div class="tdp-ar-ticket-stub"><small>BOOKING CONFIRMED</small><b>ARIJIT SINGH</b><span>09 JAN 2027 · 6:00 PM ONWARDS</span><span>NARENDRA MODI STADIUM, AHMEDABAD</span><strong>BLOCK J</strong></div>
                 </div>
                 <div class="tdp-arijit-real-ticket tdp-arijit-real-ticket-front">
-                  <img class="tdp-ar-ticket-image" src="https://79acab3a-5b42-432e-beac-6ca20e16bfec.sandbox.floot.app/_cdn/static/8185f241-e5f4-4c44-aa14-19b0e1c50228-arijit-j-block-ticket-web.jpg" alt="Arijit Singh Ahmedabad concert ticket, Block J" />
+                  <img class="tdp-ar-ticket-image" src="./assets/arijit-j-block-ticket-web.svg" alt="Arijit Singh Ahmedabad concert ticket, Block J" />
                   <div class="tdp-ar-ticket-art"><span>ARIJIT</span><b>SINGH</b><small>INDIA TOUR · AHMEDABAD</small><em>LIVE MUSIC · BIGGER TOGETHER</em></div>
                   <div class="tdp-ar-ticket-stub"><small>BOOKING CONFIRMED</small><b>ARIJIT SINGH</b><span>09 JAN 2027 · 6:00 PM ONWARDS</span><span>NARENDRA MODI STADIUM, AHMEDABAD</span><strong>▣ BLOCK J</strong></div>
                 </div>
