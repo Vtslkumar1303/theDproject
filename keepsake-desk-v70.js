@@ -21,24 +21,12 @@
         <article class="tdp-kd-item tdp-kd-concerts">
           <button class="tdp-kd-trigger" type="button" aria-expanded="false">
             <span class="tdp-kd-label">for the songs I’d save for us</span>
-            <div class="tdp-ticket-stack" aria-hidden="true">
-              <div class="tdp-ticket tdp-ticket-bts">
-                <div class="tdp-ticket-side">BTS<small>ARMY</small></div>
-                <div class="tdp-ticket-body"><b>PURPLE HOUR</b><small>ADMIT TWO · SOMEDAY</small><i>Seat: Right Beside You</i></div>
-                <div class="tdp-ticket-portrait tdp-ticket-portrait-bts"><span></span><span></span><span></span></div>
-                <div class="tdp-ticket-barcode"></div>
+            <div class="tdp-ticket-stack tdp-arijit-image-stack" aria-label="Two Arijit Singh concert tickets">
+              <div class="tdp-ticket tdp-ticket-arijit tdp-arijit-image-card">
+                <img src="/theDproject/assets/arijit-j-block-ticket.jpg?v=20261014-finaltickets1" alt="Arijit Singh Ahmedabad concert ticket, Block J" width="350" height="116" loading="eager" decoding="async">
               </div>
-              <div class="tdp-ticket tdp-ticket-arijit">
-                <div class="tdp-ticket-side">AS<small>LIVE</small></div>
-                <div class="tdp-ticket-body"><b>ARIJIT SINGH</b><small>ONE EVENING · LIVE</small><i>Row: Agar Tum Saath Ho</i></div>
-                <div class="tdp-ticket-portrait tdp-ticket-portrait-solo"><span></span></div>
-                <div class="tdp-ticket-barcode"></div>
-              </div>
-              <div class="tdp-ticket tdp-ticket-darshan">
-                <div class="tdp-ticket-side">DR<small>LIVE</small></div>
-                <div class="tdp-ticket-body"><b>DARSHAN RAVAL</b><small>BLUE LIGHTS · SOMEDAY</small><i>Gate: One More Song</i></div>
-                <div class="tdp-ticket-portrait tdp-ticket-portrait-solo"><span></span></div>
-                <div class="tdp-ticket-barcode"></div>
+              <div class="tdp-ticket tdp-ticket-darshan tdp-arijit-image-card">
+                <img src="/theDproject/assets/arijit-j-block-ticket.jpg?v=20261014-finaltickets1" alt="Second Arijit Singh Ahmedabad concert ticket, Block J" width="350" height="116" loading="eager" decoding="async">
               </div>
             </div>
             <span class="tdp-kd-hint">tap the tickets</span>
