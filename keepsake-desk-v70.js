@@ -23,10 +23,10 @@
             <span class="tdp-kd-label">for the songs I’d save for us</span>
             <div class="tdp-ticket-stack tdp-arijit-image-stack" aria-label="Two Arijit Singh concert tickets">
               <div class="tdp-ticket tdp-ticket-arijit tdp-arijit-image-card">
-                <img src="assets/arijit-j-block-ticket.jpg?v=20261014-ticketpathfix2" alt="Arijit Singh Ahmedabad concert ticket, Block J" width="350" height="116" loading="eager" decoding="async">
+                <img src="https://raw.githubusercontent.com/Vtslkumar1303/theDproject/main/assets/arijit-j-block-ticket.jpg?v=20261014-ticketpathfix3" alt="Arijit Singh Ahmedabad concert ticket, Block J" width="350" height="116" loading="eager" decoding="async">
               </div>
               <div class="tdp-ticket tdp-ticket-darshan tdp-arijit-image-card">
-                <img src="assets/arijit-j-block-ticket.jpg?v=20261014-ticketpathfix2" alt="Second Arijit Singh Ahmedabad concert ticket, Block J" width="350" height="116" loading="eager" decoding="async">
+                <img src="https://raw.githubusercontent.com/Vtslkumar1303/theDproject/main/assets/arijit-j-block-ticket.jpg?v=20261014-ticketpathfix3" alt="Second Arijit Singh Ahmedabad concert ticket, Block J" width="350" height="116" loading="eager" decoding="async">
               </div>
             </div>
             <span class="tdp-kd-hint">tap the tickets</span>
