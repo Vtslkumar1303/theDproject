@@ -13,6 +13,21 @@
    document.getElementById('dream').textContent=count(a,'dreamboard_opened');
    document.getElementById('sessions').textContent=new Set(a.map(x=>x.session_id)).size;
    const sd=a.filter(x=>x.event_name==='scroll_depth').at(-1);document.getElementById('scroll').textContent=(sd?.event_value||0)+'%';
+   const clicks=a.filter(x=>x.event_name==='button_click');
+   const hits=(re)=>clicks.filter(x=>re.test(String(x.event_value||'')+' '+String(x.meta?.id||'')+' '+String(x.meta?.classes||''))).length;
+   document.getElementById('music').textContent=hits(/music|playlist|spotify|play|pause|cassette|vinyl/i);
+   document.getElementById('voice').textContent=hits(/voice|recording|listen|audio|note/i);
+   document.getElementById('keepsake').textContent=hits(/ticket|keepsake|desk|polaroid|postcard|passport|gift|jhumka/i);
+   document.getElementById('wishlist').textContent=hits(/wishlist|dream|dreamboard|wish|confess|confession|prayer|lyrics|khat/i);
+   const featureRows=[
+     ['Music & Spotify playlist',/music|playlist|spotify|play|pause|cassette|vinyl/i],
+     ['Voice notes',/voice|recording|listen|audio|note/i],
+     ['Tickets & keepsake desk',/ticket|keepsake|desk|polaroid|postcard|passport|gift|jhumka/i],
+     ['Wishlist & dreamboard',/wishlist|dream|dreamboard|wish/i],
+     ['Confession & verse content',/confess|confession|verse|lyrics|khat/i],
+     ['Prayer flags & decorations',/prayer|flag|decor|petal/i]
+   ];
+   document.getElementById('features').innerHTML=featureRows.map(([label,re])=>'<div class="sectionrow"><strong>'+esc(label)+'</strong><span class="muted"> · '+hits(re)+' click(s)</span></div>').join('');
    const ready=localStorage.getItem(READY);
    const status=document.getElementById('collectorStatus');
    if(ready){let r={};try{r=JSON.parse(ready)}catch(e){};status.innerHTML='<b style="color:#9ce6b5">Collector detected ✓</b><br><span class="muted">Last initialized: '+esc(r.at||'unknown')+'</span>'}
