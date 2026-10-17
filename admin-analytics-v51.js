@@ -20,18 +20,26 @@
    document.getElementById('keepsake').textContent=hits(/ticket|keepsake|desk|polaroid|postcard|passport|gift|jhumka/i);
    document.getElementById('wishlist').textContent=hits(/wishlist|dream|dreamboard|wish|confess|confession|prayer|lyrics|khat/i);
    const featureRows=[
-     ['Arijit J Block tickets',/arijit|ticket|concert|j.block/i],
-     ['Khat bouquet & floating lyrics',/khat|bouquet|lyrics|floating/i],
-     ['Tibetan prayer flags & petals',/prayer|flag|petal|decoration/i],
-     ['Jhumka gift experience',/jhumka|gift|earring/i],
-     ['Keepsake desk: polaroids, postcards & passport',/keepsake|desk|polaroid|postcard|passport/i],
-     ['Hidden dream notes',/hidden|dream.?note|secret.?note/i],
-     ['Wishlist & dreamboard',/wishlist|dream|dreamboard|wish/i],
-     ['Music & Spotify playlist',/music|playlist|spotify|play|pause|cassette|vinyl/i],
-     ['Voice notes',/voice|recording|listen|audio|note/i],
-     ['Confession & verse reading',/confess|confession|verse|smooth.?read|emphasis/i]
+     ['Arijit J Block tickets',/arijit|ticket|concert|j[. -]?block/i,/ticket|keepsake/i],
+     ['Khat bouquet & floating lyrics',/khat|bouquet|lyrics|floating/i,/khat|lyrics/i],
+     ['Tibetan prayer flags & petals',/prayer|flag|petal|decoration/i,/prayer|flag|petal/i],
+     ['Jhumka gift experience',/jhumka|gift|earring/i,/gift_opened|jhumka|gift/i],
+     ['Keepsake desk: polaroids, postcards & passport',/keepsake|desk|polaroid|postcard|passport/i,/keepsake|ticket/i],
+     ['Hidden dream notes',/hidden|dream.?note|secret.?note/i,/hidden|dream.?note/i],
+     ['Wishlist & dreamboard',/wishlist|dream|dreamboard|wish/i,/dreamboard_opened|wishlist|dream/i],
+     ['Music & Spotify playlist',/music|playlist|spotify|play|pause|cassette|vinyl/i,/music|playlist|spotify/i],
+     ['Voice notes',/voice|recording|listen|audio|note/i,/voice|recording|audio/i],
+     ['Confession & verse reading',/confess|confession|verse|smooth.?read|emphasis/i,/confess|verse|reading/i],
+     ['Gift reveal & opening screen',/opening|envelope|unlock|password|gift/i,/password_correct|gift_opened|password_panel_opened/i],
+     ['Scroll depth & section reading',/scroll|section|read|verse/i,/scroll_depth|section_enter|section_exit/i],
+     ['End credits',/end.?credit|credits|finale/i,/end.?credit|credits/i]
    ];
-   document.getElementById('features').innerHTML=featureRows.map(([label,re])=>'<div class="sectionrow"><strong>'+esc(label)+'</strong><span class="muted"> · '+hits(re)+' click(s)</span></div>').join('');
+   const eventRows=a.filter(x=>x.event_name);
+   document.getElementById('features').innerHTML=featureRows.map(([label,clickRe,eventRe])=>{
+     const clickCount=hits(clickRe);
+     const eventCount=eventRows.filter(x=>eventRe.test(String(x.event_name||''))).length;
+     return '<div class="sectionrow"><strong>'+esc(label)+'</strong><span class="muted"> · '+clickCount+' click(s) · '+eventCount+' tracked event(s)</span></div>';
+   }).join('');
    const ready=localStorage.getItem(READY);
    const status=document.getElementById('collectorStatus');
    if(ready){let r={};try{r=JSON.parse(ready)}catch(e){};status.innerHTML='<b style="color:#9ce6b5">Collector detected ✓</b><br><span class="muted">Last initialized: '+esc(r.at||'unknown')+'</span>'}
