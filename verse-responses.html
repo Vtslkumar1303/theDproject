@@ -169,12 +169,8 @@ button,a.btn{border:1px solid rgba(95,61,45,.16);background:rgba(255,250,239,.84
       const logs=await fetchCentral();
       draw(logs);
 
-      migrateLocalResponses().then(async()=>{
-        try{
-          const refreshed=await fetchCentral();
-          draw(refreshed);
-        }catch(e){}
-      }).catch(()=>{});
+      // Do not auto-migrate legacy browser-local logs into the shared archive.
+      // This keeps an intentional archive clear from being repopulated by stale local data.
     }catch(e){
       totalEl.textContent='—';verseCountEl.textContent='—';latestEl.textContent='—';
       logsEl.innerHTML='<div class="empty">The response page could not reach its shared archive right now. Please refresh once.</div>';
