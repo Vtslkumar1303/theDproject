@@ -20,17 +20,19 @@
    document.getElementById('keepsake').textContent=hits(/ticket|keepsake|desk|polaroid|postcard|passport|gift|jhumka/i);
    document.getElementById('wishlist').textContent=hits(/wishlist|dream|dreamboard|wish|confess|confession|prayer|lyrics|khat/i);
    const featureRows=[
-     ['Arijit J Block tickets',/arijit|ticket|concert|j[. -]?block/i,/ticket|keepsake/i],
-     ['Khat bouquet & floating lyrics',/khat|bouquet|lyrics|floating/i,/khat|lyrics/i],
-     ['Tibetan prayer flags & petals',/prayer|flag|petal|decoration/i,/prayer|flag|petal/i],
+     ['Arijit J Block concert · two-ticket reveal',/arijit|ticket|concert|j[. -]?block/i,/ticket|keepsake/i],
+     ['Embedded ticket artwork & keepsake desk',/embedded|ticket|keepsake|desk|polaroid|postcard|passport/i,/ticket|keepsake/i],
+     ['Khat bouquet, lyrics & music player',/khat|bouquet|lyrics|floating|cassette|vinyl/i,/khat|lyrics|music|playlist/i],
+     ['Tibetan prayer flags, petals & floating decor',/prayer|flag|petal|decoration|floating/i,/prayer|flag|petal/i],
      ['Jhumka gift experience',/jhumka|gift|earring/i,/gift_opened|jhumka|gift/i],
      ['Keepsake desk: polaroids, postcards & passport',/keepsake|desk|polaroid|postcard|passport/i,/keepsake|ticket/i],
      ['Hidden dream notes',/hidden|dream.?note|secret.?note/i,/hidden|dream.?note/i],
-     ['Wishlist & dreamboard',/wishlist|dream|dreamboard|wish/i,/dreamboard_opened|wishlist|dream/i],
+     ['Wishlist, dreamboard & hidden dream notes',/wishlist|dream|dreamboard|wish|hidden.?note/i,/dreamboard_opened|wishlist|dream|hidden.?note/i],
      ['Music & Spotify playlist',/music|playlist|spotify|play|pause|cassette|vinyl/i,/music|playlist|spotify/i],
      ['Voice notes',/voice|recording|listen|audio|note/i,/voice|recording|audio/i],
      ['Confession & verse reading',/confess|confession|verse|smooth.?read|emphasis/i,/confess|verse|reading/i],
-     ['Gift reveal & opening screen',/opening|envelope|unlock|password|gift/i,/password_correct|gift_opened|password_panel_opened/i],
+     ['Envelope unlock, password & gift reveal',/opening|envelope|unlock|password|gift/i,/password_correct|gift_opened|password_panel_opened/i],
+     ['Responsive reading & smooth verse emphasis',/responsive|smooth.?read|verse|emphasis|confession/i,/verse|reading|confess/i],
      ['Scroll depth & section reading',/scroll|section|read|verse/i,/scroll_depth|section_enter|section_exit/i],
      ['End credits',/end.?credit|credits|finale/i,/end.?credit|credits/i]
    ];
