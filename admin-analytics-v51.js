@@ -20,12 +20,16 @@
    document.getElementById('keepsake').textContent=hits(/ticket|keepsake|desk|polaroid|postcard|passport|gift|jhumka/i);
    document.getElementById('wishlist').textContent=hits(/wishlist|dream|dreamboard|wish|confess|confession|prayer|lyrics|khat/i);
    const featureRows=[
+     ['Arijit J Block tickets',/arijit|ticket|concert|j.block/i],
+     ['Khat bouquet & floating lyrics',/khat|bouquet|lyrics|floating/i],
+     ['Tibetan prayer flags & petals',/prayer|flag|petal|decoration/i],
+     ['Jhumka gift experience',/jhumka|gift|earring/i],
+     ['Keepsake desk: polaroids, postcards & passport',/keepsake|desk|polaroid|postcard|passport/i],
+     ['Hidden dream notes',/hidden|dream.?note|secret.?note/i],
+     ['Wishlist & dreamboard',/wishlist|dream|dreamboard|wish/i],
      ['Music & Spotify playlist',/music|playlist|spotify|play|pause|cassette|vinyl/i],
      ['Voice notes',/voice|recording|listen|audio|note/i],
-     ['Tickets & keepsake desk',/ticket|keepsake|desk|polaroid|postcard|passport|gift|jhumka/i],
-     ['Wishlist & dreamboard',/wishlist|dream|dreamboard|wish/i],
-     ['Confession & verse content',/confess|confession|verse|lyrics|khat/i],
-     ['Prayer flags & decorations',/prayer|flag|decor|petal/i]
+     ['Confession & verse reading',/confess|confession|verse|smooth.?read|emphasis/i]
    ];
    document.getElementById('features').innerHTML=featureRows.map(([label,re])=>'<div class="sectionrow"><strong>'+esc(label)+'</strong><span class="muted"> · '+hits(re)+' click(s)</span></div>').join('');
    const ready=localStorage.getItem(READY);
@@ -38,11 +42,13 @@
    document.getElementById('rows').innerHTML=a.slice().reverse().slice(0,500).map(x=>'<tr><td>'+esc(new Date(x.created_at).toLocaleString())+'</td><td>'+esc(x.event_name)+'</td><td>'+esc(x.section||x.event_value||'—')+'</td><td>'+esc((x.session_id||'').slice(0,14))+'</td><td>'+esc(x.meta?.dwell_ms?Math.round(x.meta.dwell_ms/1000)+'s':'')+'</td></tr>').join('');
  }
  document.getElementById('refresh').onclick=render;
+ document.getElementById('openResponses').onclick=()=>window.open('./verse-responses.html','_blank','noopener');
+ async function refreshResponseCount(){const n=document.getElementById('responseTotal'),s=document.getElementById('responseStatus');try{const r=await fetch('https://the-d-project-responses.floot.app/_api/responses',{cache:'no-store'});if(!r.ok)throw new Error('archive unavailable');const raw=await r.json();const p=raw&&raw.json?raw.json:raw;const rows=Array.isArray(p&&p.responses)?p.responses:[];n.textContent=rows.length;s.textContent=rows.length===0?'Archive is clear':'Shared archive · live count';s.className=rows.length===0?'good':'muted'}catch(e){n.textContent='—';s.textContent='Archive unavailable';s.className='bad'}}
  document.getElementById('openTracked').onclick=()=>window.open('./?v=analytics-diagnostic-v51&share=admin-test','_blank','noopener');
  document.getElementById('test').onclick=()=>{const rows=read();rows.push({id:'test_'+Date.now(),created_at:new Date().toISOString(),visitor_id:'admin-test',session_id:'admin-test',event_name:'diagnostic_test',event_value:'dashboard storage OK',section:null,path:location.pathname,meta:{lang:navigator.language,screen:screen.width+'x'+screen.height,viewport:innerWidth+'x'+innerHeight,referrer:document.referrer||'direct'}});localStorage.setItem(STORE,JSON.stringify(rows.slice(-2000)));render()};
  document.getElementById('export').onclick=()=>{const blob=new Blob([JSON.stringify(read(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='tdp-local-analytics.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
  document.getElementById('clear').onclick=()=>{if(confirm('Clear analytics stored in this browser?')){localStorage.removeItem(STORE);localStorage.removeItem(READY);render()}};
  try{const bc=new BroadcastChannel(BC);bc.onmessage=render}catch(e){}
  addEventListener('storage',e=>{if(e.key===STORE||e.key===READY)render()});
- render();setInterval(render,1000);
+ render();refreshResponseCount();setInterval(render,1000);setInterval(refreshResponseCount,15000);
 })();
