@@ -220,6 +220,18 @@ body::before{
   .password-input,.unlock-btn{width:100%}
 }
 
+
+
+/* Featured verse: the main line of the story */
+.main-line-verse{position:relative;isolation:isolate;background:linear-gradient(135deg,rgba(124,31,42,.10),rgba(255,244,225,.46) 48%,rgba(168,121,67,.12))!important}
+.main-line-verse::before{content:"";position:absolute;inset:22px clamp(10px,3vw,30px);border:1px solid rgba(124,31,42,.24);border-radius:28px;pointer-events:none;z-index:0}
+.main-line-verse .verse{padding:clamp(22px,4vw,38px);border-radius:22px;background:rgba(255,249,238,.50);box-shadow:0 18px 44px rgba(83,39,33,.08)}
+.main-line-verse .verse-number{display:inline-block;color:#fff8ec;background:#7c1f2a;padding:7px 12px;border-radius:999px;letter-spacing:.16em}
+.main-line-verse .verse h2{color:#70212d}
+.main-line-verse .main-confession-line{position:relative;margin:30px 0 26px;padding:24px 18px;text-align:center;font:italic 700 clamp(1.35rem,4.6vw,2.15rem)/1.35 Georgia,serif;color:#fff8ee;background:linear-gradient(120deg,#70212d,#a63f4c 58%,#8e603e);border-radius:18px;box-shadow:0 10px 28px rgba(112,33,45,.22)}
+.main-line-verse .main-confession-line::before,.main-line-verse .main-confession-line::after{content:"♥";display:block;font:normal 12px Georgia,serif;opacity:.8;margin:0 auto 7px}
+.main-line-verse .main-confession-line::after{margin:7px auto 0}
+@media(max-width:520px){.main-line-verse::before{inset:14px 7px;border-radius:22px}.main-line-verse .verse{padding:22px 18px}.main-line-verse .main-confession-line{padding:21px 13px}}
 </style>
 <style>
 /* Preserve the original DraftD silky paper/background. */
@@ -352,7 +364,7 @@ body.live-editing .spotify-player button,body.live-editing .freeze-time,body.liv
     </article>
   </section>
 
-  <section class="section">
+  <section class="section main-line-verse">
     <img class="side-object breath-left" src="assets/asset-04-96ecfc0d24b6.png" alt="" loading="lazy" decoding="async">
     <article class="verse">
       <div class="verse-number">Verse II</div>
