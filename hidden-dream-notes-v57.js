@@ -62,7 +62,7 @@
             </span>
             <span class="tdp-note-reveal">
               <span class="tdp-note-art tdp-art-navratri" aria-hidden="true"></span>
-              <h4>One Navratri evening.</h4>
+              <h4>હું તું અને નવરાત્રીની એ Endless રાતો✨</h4>
               <p>Traditional clothes, loud garba, tired feet, late-night food, and one memory that feels very Gujarat.</p>
             </span>
           </button>
