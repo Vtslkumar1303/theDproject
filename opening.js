@@ -288,28 +288,28 @@
       <span><b data-unit="seconds">--</b><small>seconds</small></span>
     </div>
     <p class="tdp-waiting-note">Let time find its moment.</p>`;
-  card.prepend(waitingPanel);
+  card.append(waitingPanel);
 
   const waitingStyle = document.createElement('style');
   waitingStyle.textContent = `
-    .tdp-waiting-panel{position:relative;z-index:5;margin:0 auto 26px;padding:2px 8px 18px;text-align:center;color:#fff4e3}
-    .tdp-waiting-title{margin:0 auto 12px;font:italic 600 clamp(1.35rem,5vw,2rem)/1.25 Georgia,serif}
-    .tdp-waiting-note{margin:12px 0 0;font:italic .92rem Georgia,serif;color:rgba(255,244,227,.82)}
-    .tdp-countdown{display:flex;justify-content:center;gap:clamp(10px,3vw,22px);margin:14px auto 0}
-    .tdp-countdown span{display:grid;gap:3px;min-width:48px}
-    .tdp-countdown b{font:500 clamp(1.25rem,5vw,1.8rem)/1 Georgia,serif;font-variant-numeric:tabular-nums;color:#f3d39a}
+    .tdp-waiting-panel{position:relative;z-index:5;width:min(100%,300px);margin:12px auto 0;padding:8px;text-align:center;color:#fff4e3}
+    .tdp-waiting-title{margin:0 auto 12px;font:italic 600 clamp(.88rem,3.2vw,1.05rem)/1.25 Georgia,serif}
+    .tdp-waiting-note{margin:12px 0 0;font:italic .72rem Georgia,serif;color:rgba(255,244,227,.82)}
+    .tdp-countdown{display:flex;justify-content:center;gap:clamp(10px,3vw,22px);margin:8px auto 0}
+    .tdp-countdown span{display:grid;gap:3px;min-width:36px}
+    .tdp-countdown b{font:500 clamp(.88rem,3.6vw,1.1rem)/1 Georgia,serif;font-variant-numeric:tabular-nums;color:#f3d39a}
     .tdp-countdown small{font:500 .62rem Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,244,227,.7)}
-    .tdp-hourglass{position:relative;width:72px;height:92px;margin:0 auto 8px;filter:drop-shadow(0 0 12px rgba(224,181,111,.2))}
-    .tdp-glass-top,.tdp-glass-bottom{position:absolute;left:12px;width:48px;height:39px;overflow:hidden;border:1.5px solid rgba(240,207,151,.9);background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.035))}
+    .tdp-hourglass{position:relative;width:38px;height:50px;margin:0 auto 8px;filter:drop-shadow(0 0 12px rgba(224,181,111,.2))}
+    .tdp-glass-top,.tdp-glass-bottom{position:absolute;left:7px;width:24px;height:21px;overflow:hidden;border:1.5px solid rgba(240,207,151,.9);background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.035))}
     .tdp-glass-top{top:5px;clip-path:polygon(0 0,100% 0,58% 100%,42% 100%);border-radius:5px 5px 12px 12px}
     .tdp-glass-bottom{bottom:5px;clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);border-radius:12px 12px 5px 5px}
     .tdp-glass-top i,.tdp-glass-bottom i{position:absolute;left:4px;right:4px;bottom:0;height:70%;background:linear-gradient(180deg,#f5d99e,#bd8744);opacity:.92}
     .tdp-glass-top i{clip-path:polygon(0 0,100% 0,58% 100%,42% 100%);transform-origin:bottom;animation:tdpTopSand 12s linear infinite}
     .tdp-glass-bottom i{height:18%;clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);animation:tdpBottomSand 12s linear infinite}
-    .tdp-glass-neck{position:absolute;z-index:2;left:34px;top:40px;width:4px;height:13px;background:#e8c78e}
-    .tdp-sand-stream{position:absolute;z-index:3;left:35px;top:45px;width:2px;height:18px;background:linear-gradient(#f8e5b9,rgba(248,229,185,0));transform-origin:top;animation:tdpSandFlow .85s ease-in-out infinite}
+    .tdp-glass-neck{position:absolute;z-index:2;left:18px;top:22px;width:2px;height:7px;background:#e8c78e}
+    .tdp-sand-stream{position:absolute;z-index:3;left:18px;top:27px;width:1px;height:9px;background:linear-gradient(#f8e5b9,rgba(248,229,185,0));transform-origin:top;animation:tdpSandFlow .85s ease-in-out infinite}
     .tdp-glass-frame{position:absolute;inset:0;border-top:2px solid #d9b77e;border-bottom:2px solid #d9b77e;pointer-events:none}
-    .tdp-glass-frame:before,.tdp-glass-frame:after{content:"";position:absolute;left:10px;width:52px;height:2px;background:#d9b77e}
+    .tdp-glass-frame:before,.tdp-glass-frame:after{content:"";position:absolute;left:6px;width:26px;height:1px;background:#d9b77e}
     .tdp-glass-frame:before{top:1px}.tdp-glass-frame:after{bottom:1px}
     @keyframes tdpTopSand{0%{transform:scaleY(1)}100%{transform:scaleY(.05)}}
     @keyframes tdpBottomSand{0%{height:8%}100%{height:82%}}
