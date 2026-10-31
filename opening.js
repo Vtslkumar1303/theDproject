@@ -277,7 +277,6 @@
   waitingPanel.className = 'tdp-waiting-panel';
   waitingPanel.setAttribute('aria-live','polite');
   waitingPanel.innerHTML = `
-    <h2 class="tdp-waiting-title">A little note before the seal rests</h2>
     <div class="tdp-progress-wrap">
       <div class="tdp-progress-meta"><span>Until the last fold</span><b data-progress-label>0%</b></div>
       <div class="tdp-progress-track" role="progressbar" aria-label="Progress towards the envelope being sealed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-progressbar>
@@ -303,7 +302,6 @@
   const waitingStyle = document.createElement('style');
   waitingStyle.textContent = `
     .tdp-waiting-panel{position:relative;z-index:5;width:min(100%,238px);margin:9px auto 0;padding:5px;text-align:center;color:#fff4e3}
-    .tdp-waiting-title{margin:0 auto 6px;font:italic 400 clamp(.58rem,2.1vw,.66rem)/1.3 Georgia,serif;letter-spacing:.01em;color:rgba(255,244,227,.56)}
     .tdp-waiting-note{margin:8px 0 0;font:italic .55rem Georgia,serif;color:rgba(255,244,227,.58)}
     .tdp-countdown-stage{position:relative;width:min(100%,180px);margin:11px auto 0;padding-top:20px}
     .tdp-countdown{display:flex;justify-content:center;gap:clamp(6px,2vw,11px);margin:0 auto}
@@ -323,7 +321,6 @@
     @keyframes tdpCometFlight{0%{opacity:0;transform:translate(-10px,14px) scale(.72)}8%{opacity:1}48%{opacity:1;transform:translate(195px,-4px) scale(1)}57%,100%{opacity:0;transform:translate(205px,-10px) scale(.78)}}
     @keyframes tdpCometTrail{0%,5%{opacity:0;transform:translate(-10px,14px) rotate(-25deg) scaleX(.1)}15%{opacity:.9}48%{opacity:.65;transform:translate(195px,-4px) rotate(-25deg) scaleX(1)}57%,100%{opacity:0;transform:translate(205px,-10px) rotate(-25deg) scaleX(.12)}}
     @keyframes tdpCometSparkle{0%,34%,100%{opacity:0;transform:translate(0,0) scale(.4)}39%{opacity:.85;transform:translate(8px,-6px) scale(1)}45%{opacity:0;transform:translate(12px,-10px) scale(.5)}}
-    .tdp-season-ended .tdp-waiting-title{max-width:22ch}
     .tdp-season-ended .tdp-countdown,.tdp-season-ended .tdp-waiting-note{display:none}
     .tdp-season-ended .tdp-shooting-star{opacity:.62}
     .tdp-season-ended .tdp-star-core,.tdp-season-ended .tdp-star-trail{animation:none}
@@ -353,7 +350,6 @@
     updateTimelineProgress(now);
     if(remaining <= 0){
       updateTimelineProgress(seasonDeadline);
-      waitingPanel.querySelector('.tdp-waiting-title').textContent='The envelope has found its final fold';
       waitingPanel.classList.add('tdp-season-ended');
       card.classList.add('tdp-season-ended');
       sealOpenBtn.disabled=true;
