@@ -276,10 +276,8 @@
   waitingPanel.setAttribute('aria-live','polite');
   waitingPanel.innerHTML = `
     <h2 class="tdp-waiting-title">This chapter is nearing its last page</h2>
-    <div class="tdp-hourglass" role="img" aria-label="Animated golden hourglass">
-      <span class="tdp-glass-top"><i></i></span><span class="tdp-glass-neck"></span>
-      <span class="tdp-sand-stream"></span><span class="tdp-glass-bottom"><i></i></span>
-      <span class="tdp-glass-frame"></span>
+    <div class="tdp-shooting-star" role="img" aria-label="Animated golden shooting star">
+      <span class="tdp-star-trail"></span><span class="tdp-star-core">✦</span>
     </div>
     <div class="tdp-countdown" aria-label="Time remaining">
       <span><b data-unit="days">--</b><small>days</small></span>
@@ -299,31 +297,21 @@
     .tdp-countdown span{display:grid;gap:3px;min-width:36px}
     .tdp-countdown b{font:500 clamp(.88rem,3.6vw,1.1rem)/1 Georgia,serif;font-variant-numeric:tabular-nums;color:#f3d39a}
     .tdp-countdown small{font:500 .62rem Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,244,227,.7)}
-    .tdp-hourglass{position:relative;width:38px;height:50px;margin:0 auto 8px;filter:drop-shadow(0 0 12px rgba(224,181,111,.2))}
-    .tdp-glass-top,.tdp-glass-bottom{position:absolute;left:7px;width:24px;height:21px;overflow:hidden;border:1.5px solid rgba(240,207,151,.9);background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.035))}
-    .tdp-glass-top{top:5px;clip-path:polygon(0 0,100% 0,58% 100%,42% 100%);border-radius:5px 5px 12px 12px}
-    .tdp-glass-bottom{bottom:5px;clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);border-radius:12px 12px 5px 5px}
-    .tdp-glass-top i,.tdp-glass-bottom i{position:absolute;left:4px;right:4px;bottom:0;height:70%;background:linear-gradient(180deg,#f5d99e,#bd8744);opacity:.92}
-    .tdp-glass-top i{clip-path:polygon(0 0,100% 0,58% 100%,42% 100%);transform-origin:bottom;animation:tdpTopSand 12s linear infinite}
-    .tdp-glass-bottom i{height:18%;clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);animation:tdpBottomSand 12s linear infinite}
-    .tdp-glass-neck{position:absolute;z-index:2;left:18px;top:22px;width:2px;height:7px;background:#e8c78e}
-    .tdp-sand-stream{position:absolute;z-index:3;left:18px;top:27px;width:1px;height:9px;background:linear-gradient(#f8e5b9,rgba(248,229,185,0));transform-origin:top;animation:tdpSandFlow .85s ease-in-out infinite}
-    .tdp-glass-frame{position:absolute;inset:0;border-top:2px solid #d9b77e;border-bottom:2px solid #d9b77e;pointer-events:none}
-    .tdp-glass-frame:before,.tdp-glass-frame:after{content:"";position:absolute;left:6px;width:26px;height:1px;background:#d9b77e}
-    .tdp-glass-frame:before{top:1px}.tdp-glass-frame:after{bottom:1px}
-    @keyframes tdpTopSand{0%{transform:scaleY(1)}100%{transform:scaleY(.05)}}
-    @keyframes tdpBottomSand{0%{height:8%}100%{height:82%}}
-    @keyframes tdpSandFlow{0%,100%{opacity:.35;transform:scaleY(.65)}50%{opacity:1;transform:scaleY(1)}}
+    .tdp-shooting-star{position:relative;width:62px;height:34px;margin:0 auto 8px;overflow:visible;filter:drop-shadow(0 0 7px rgba(238,197,126,.28))}
+    .tdp-star-core{position:absolute;left:28px;top:4px;font:26px/1 Georgia,serif;color:#ffe8b6;text-shadow:0 0 7px rgba(255,222,164,.9),0 0 16px rgba(224,174,99,.55);animation:tdpStarPulse 2.8s ease-in-out infinite}
+    .tdp-star-trail{position:absolute;left:3px;top:18px;width:34px;height:1.5px;border-radius:100%;background:linear-gradient(90deg,transparent,rgba(218,169,99,.08),rgba(255,226,174,.9));transform:rotate(-25deg);transform-origin:right center;filter:blur(.25px);animation:tdpStarTrail 2.8s ease-in-out infinite}
+    .tdp-star-trail:after{content:"";position:absolute;right:0;top:-2px;width:5px;height:5px;border-radius:50%;background:#fff0cb;box-shadow:0 0 8px 2px rgba(255,221,164,.55)}
+    @keyframes tdpStarPulse{0%,100%{opacity:.72;transform:translate(0,0) scale(.9)}45%{opacity:1;transform:translate(9px,-5px) scale(1.12)}65%{opacity:.95;transform:translate(12px,-7px) scale(1)}}
+    @keyframes tdpStarTrail{0%,18%{opacity:0;transform:translate(-7px,5px) rotate(-25deg) scaleX(.25)}42%{opacity:1;transform:translate(0,0) rotate(-25deg) scaleX(1)}72%{opacity:.45;transform:translate(8px,-5px) rotate(-25deg) scaleX(.72)}100%{opacity:0;transform:translate(15px,-9px) rotate(-25deg) scaleX(.1)}}
     .tdp-season-ended .tdp-waiting-title{max-width:22ch}
     .tdp-season-ended .tdp-countdown,.tdp-season-ended .tdp-waiting-note{display:none}
-    .tdp-season-ended .tdp-sand-stream{display:none}
-    .tdp-season-ended .tdp-glass-top i{height:3%;animation:none}
-    .tdp-season-ended .tdp-glass-bottom i{height:88%;animation:none}
+    .tdp-season-ended .tdp-shooting-star{opacity:.62}
+    .tdp-season-ended .tdp-star-core,.tdp-season-ended .tdp-star-trail{animation:none}
     .tdp-season-ended #sealOpenBtn{pointer-events:none!important;opacity:.55;filter:grayscale(.4)}
     .tdp-season-ended #passwordGate{display:none!important}
     .tdp-season-ended .wax-seal-real{cursor:not-allowed!important}
     @media(max-width:420px){.tdp-waiting-panel{margin-bottom:18px}.tdp-countdown span{min-width:42px}}
-    @media(prefers-reduced-motion:reduce){.tdp-glass-top i,.tdp-glass-bottom i,.tdp-sand-stream{animation:none!important}}
+    @media(prefers-reduced-motion:reduce){.tdp-star-core,.tdp-star-trail{animation:none!important}}
   `;
   document.head.appendChild(waitingStyle);
 
