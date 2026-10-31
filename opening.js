@@ -302,22 +302,24 @@
     .tdp-waiting-panel{position:relative;z-index:5;width:min(100%,300px);margin:12px auto 0;padding:8px;text-align:center;color:#fff4e3}
     .tdp-waiting-title{margin:0 auto 12px;font:italic 600 clamp(.88rem,3.2vw,1.05rem)/1.25 Georgia,serif}
     .tdp-waiting-note{margin:12px 0 0;font:italic .72rem Georgia,serif;color:rgba(255,244,227,.82)}
-    .tdp-countdown{display:flex;justify-content:center;gap:clamp(10px,3vw,22px);margin:8px auto 0}
-    .tdp-countdown span{display:grid;gap:3px;min-width:36px}
+    .tdp-countdown-stage{position:relative;width:min(100%,270px);margin:2px auto 0;padding-top:35px}
+    .tdp-countdown{display:flex;justify-content:center;gap:clamp(10px,3vw,22px);margin:0 auto}
+    .tdp-countdown span{display:grid;gap:5px;min-width:36px}
     .tdp-countdown b{font:500 clamp(.88rem,3.6vw,1.1rem)/1 Georgia,serif;font-variant-numeric:tabular-nums;color:#f3d39a}
-    .tdp-countdown small{font:500 .62rem Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,244,227,.7)}
+    .tdp-countdown small{font:500 .58rem Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,244,227,.68)}
     .tdp-progress-wrap{width:min(100%,252px);margin:14px auto 0;text-align:left}
     .tdp-progress-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font:italic .68rem Georgia,serif;color:rgba(255,244,227,.78)}
     .tdp-progress-meta b{font:600 .68rem Arial,sans-serif;font-variant-numeric:tabular-nums;color:#f3d39a}
     .tdp-progress-track{height:4px;overflow:hidden;border-radius:99px;background:rgba(255,244,227,.2);box-shadow:inset 0 0 0 1px rgba(255,231,190,.12)}
     .tdp-progress-fill{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#b9874d,#f5dda9,#fff0cb);box-shadow:0 0 8px rgba(243,211,154,.42);transition:width .8s linear}
     .tdp-progress-caption{margin:6px 0 0;text-align:center;font:italic .61rem Georgia,serif;color:rgba(255,244,227,.62)}
-    .tdp-shooting-star{position:relative;width:62px;height:34px;margin:0 auto 8px;overflow:visible;filter:drop-shadow(0 0 7px rgba(238,197,126,.28))}
-    .tdp-star-core{position:absolute;left:22px;top:4px;font:25px/1 Georgia,serif;color:#ffe8b6;text-shadow:0 0 7px rgba(255,222,164,.9),0 0 16px rgba(224,174,99,.55);animation:tdpStarPulse 2.8s ease-in-out infinite}
-    .tdp-star-trail{position:absolute;left:3px;top:18px;width:34px;height:1.5px;border-radius:100%;background:linear-gradient(90deg,transparent,rgba(218,169,99,.08),rgba(255,226,174,.9));transform:rotate(-25deg);transform-origin:right center;filter:blur(.25px);animation:tdpStarTrail 2.8s ease-in-out infinite}
-    .tdp-star-trail:after{content:"";position:absolute;right:0;top:-2px;width:5px;height:5px;border-radius:50%;background:#fff0cb;box-shadow:0 0 8px 2px rgba(255,221,164,.55)}
-    @keyframes tdpStarPulse{0%,100%{opacity:.72;transform:translate(0,0) scale(.9)}45%{opacity:1;transform:translate(9px,-5px) scale(1.12)}65%{opacity:.95;transform:translate(12px,-7px) scale(1)}}
-    @keyframes tdpStarTrail{0%,18%{opacity:0;transform:translate(-7px,5px) rotate(-25deg) scaleX(.25)}42%{opacity:1;transform:translate(0,0) rotate(-25deg) scaleX(1)}72%{opacity:.45;transform:translate(8px,-5px) rotate(-25deg) scaleX(.72)}100%{opacity:0;transform:translate(15px,-9px) rotate(-25deg) scaleX(.1)}}
+    .tdp-shooting-star{position:absolute;z-index:2;left:0;top:0;width:100%;height:30px;overflow:visible;pointer-events:none}
+    .tdp-star-core{position:absolute;left:0;top:2px;font:19px/1 Georgia,serif;color:#ffe8b6;text-shadow:0 0 6px rgba(255,222,164,.9),0 0 13px rgba(224,174,99,.5);animation:tdpCometFlight 3.8s cubic-bezier(.22,.62,.35,1) infinite}
+    .tdp-star-trail{position:absolute;left:0;top:12px;width:42px;height:1.5px;border-radius:100%;background:linear-gradient(90deg,transparent,rgba(218,169,99,.12),rgba(255,226,174,.9));transform:rotate(-25deg);transform-origin:right center;filter:blur(.25px);animation:tdpCometTrail 3.8s cubic-bezier(.22,.62,.35,1) infinite}
+    .tdp-star-sparkle{position:absolute;left:0;top:0;font:11px/1 Georgia,serif;color:#fff0cb;text-shadow:0 0 7px rgba(255,221,164,.8);opacity:0;animation:tdpCometSparkle 3.8s ease-in-out infinite}
+    @keyframes tdpCometFlight{0%{opacity:0;transform:translate(-12px,18px) scale(.72)}8%{opacity:1}48%{opacity:1;transform:translate(250px,-5px) scale(1)}57%,100%{opacity:0;transform:translate(265px,-13px) scale(.78)}}
+    @keyframes tdpCometTrail{0%,5%{opacity:0;transform:translate(-12px,18px) rotate(-25deg) scaleX(.1)}15%{opacity:.9}48%{opacity:.65;transform:translate(250px,-5px) rotate(-25deg) scaleX(1)}57%,100%{opacity:0;transform:translate(265px,-13px) rotate(-25deg) scaleX(.12)}}
+    @keyframes tdpCometSparkle{0%,34%,100%{opacity:0;transform:translate(0,0) scale(.4)}39%{opacity:.85;transform:translate(10px,-7px) scale(1)}45%{opacity:0;transform:translate(15px,-12px) scale(.5)}}
     .tdp-season-ended .tdp-waiting-title{max-width:22ch}
     .tdp-season-ended .tdp-countdown,.tdp-season-ended .tdp-waiting-note{display:none}
     .tdp-season-ended .tdp-shooting-star{opacity:.62}
@@ -326,7 +328,7 @@
     .tdp-season-ended #passwordGate{display:none!important}
     .tdp-season-ended .wax-seal-real{cursor:not-allowed!important}
     @media(max-width:420px){.tdp-waiting-panel{margin-bottom:18px}.tdp-countdown span{min-width:42px}}
-    @media(prefers-reduced-motion:reduce){.tdp-star-core,.tdp-star-trail{animation:none!important}}
+    @media(prefers-reduced-motion:reduce){.tdp-star-core,.tdp-star-trail,.tdp-star-sparkle{animation:none!important;opacity:.7}}
   `;
   document.head.appendChild(waitingStyle);
 
