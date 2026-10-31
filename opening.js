@@ -347,7 +347,8 @@
     const remaining = seasonDeadline - now;
     updateTimelineProgress(now);
     if(remaining <= 0){
-      updateTimelineProgress(seasonDeadline);\n      waitingPanel.querySelector('.tdp-waiting-title').textContent='This little chapter has reached the end of its season';
+      updateTimelineProgress(seasonDeadline);
+      waitingPanel.querySelector('.tdp-waiting-title').textContent='This little chapter has reached the end of its season';
       waitingPanel.classList.add('tdp-season-ended');
       card.classList.add('tdp-season-ended');
       sealOpenBtn.disabled=true;
