@@ -277,9 +277,9 @@
   waitingPanel.className = 'tdp-waiting-panel';
   waitingPanel.setAttribute('aria-live','polite');
   waitingPanel.innerHTML = `
-    <h2 class="tdp-waiting-title">This chapter is nearing its last page</h2>
-    <div class="tdp-shooting-star" role="img" aria-label="Animated golden shooting star">
-      <span class="tdp-star-trail"></span><span class="tdp-star-core">✦</span>
+    <h2 class="tdp-waiting-title">A little note before the seal rests</h2>
+    <div class="tdp-shooting-star" role="img" aria-label="A little envelope nearing its seal">
+      <span class="tdp-star-trail"></span><span class="tdp-star-core">✉</span>
     </div>
     <div class="tdp-countdown" aria-label="Time remaining">
       <span><b data-unit="days">--</b><small>days</small></span>
@@ -288,13 +288,13 @@
       <span><b data-unit="seconds">--</b><small>seconds</small></span>
     </div>
     <div class="tdp-progress-wrap">
-      <div class="tdp-progress-meta"><span>Our little timeline</span><b data-progress-label>0%</b></div>
-      <div class="tdp-progress-track" role="progressbar" aria-label="Time elapsed in this chapter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-progressbar>
+      <div class="tdp-progress-meta"><span>Until the seal rests</span><b data-progress-label>0%</b></div>
+      <div class="tdp-progress-track" role="progressbar" aria-label="Progress towards the envelope being sealed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-progressbar>
         <span class="tdp-progress-fill" data-progress-fill></span>
       </div>
-      <p class="tdp-progress-caption">A little more of the journey, every second.</p>
+      <p class="tdp-progress-caption">With every passing moment, the envelope draws closer to its final fold.</p>
     </div>
-    <p class="tdp-waiting-note">Let time find its moment.</p>`;
+    <p class="tdp-waiting-note">Soon, this little letter will be tucked away.</p>`;
   card.append(waitingPanel);
 
   const waitingStyle = document.createElement('style');
@@ -313,7 +313,7 @@
     .tdp-progress-fill{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#b9874d,#f5dda9,#fff0cb);box-shadow:0 0 8px rgba(243,211,154,.42);transition:width .8s linear}
     .tdp-progress-caption{margin:6px 0 0;text-align:center;font:italic .61rem Georgia,serif;color:rgba(255,244,227,.62)}
     .tdp-shooting-star{position:relative;width:62px;height:34px;margin:0 auto 8px;overflow:visible;filter:drop-shadow(0 0 7px rgba(238,197,126,.28))}
-    .tdp-star-core{position:absolute;left:28px;top:4px;font:26px/1 Georgia,serif;color:#ffe8b6;text-shadow:0 0 7px rgba(255,222,164,.9),0 0 16px rgba(224,174,99,.55);animation:tdpStarPulse 2.8s ease-in-out infinite}
+    .tdp-star-core{position:absolute;left:22px;top:4px;font:25px/1 Georgia,serif;color:#ffe8b6;text-shadow:0 0 7px rgba(255,222,164,.9),0 0 16px rgba(224,174,99,.55);animation:tdpStarPulse 2.8s ease-in-out infinite}
     .tdp-star-trail{position:absolute;left:3px;top:18px;width:34px;height:1.5px;border-radius:100%;background:linear-gradient(90deg,transparent,rgba(218,169,99,.08),rgba(255,226,174,.9));transform:rotate(-25deg);transform-origin:right center;filter:blur(.25px);animation:tdpStarTrail 2.8s ease-in-out infinite}
     .tdp-star-trail:after{content:"";position:absolute;right:0;top:-2px;width:5px;height:5px;border-radius:50%;background:#fff0cb;box-shadow:0 0 8px 2px rgba(255,221,164,.55)}
     @keyframes tdpStarPulse{0%,100%{opacity:.72;transform:translate(0,0) scale(.9)}45%{opacity:1;transform:translate(9px,-5px) scale(1.12)}65%{opacity:.95;transform:translate(12px,-7px) scale(1)}}
@@ -348,7 +348,7 @@
     updateTimelineProgress(now);
     if(remaining <= 0){
       updateTimelineProgress(seasonDeadline);
-      waitingPanel.querySelector('.tdp-waiting-title').textContent='This little chapter has reached the end of its season';
+      waitingPanel.querySelector('.tdp-waiting-title').textContent='The envelope has found its final fold';
       waitingPanel.classList.add('tdp-season-ended');
       card.classList.add('tdp-season-ended');
       sealOpenBtn.disabled=true;
