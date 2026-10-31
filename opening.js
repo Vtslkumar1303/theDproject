@@ -268,4 +268,88 @@
 
   unlockBtn.addEventListener('click',unlockLetter);
   passwordInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlockLetter()});
+
+  /* Golden hourglass countdown for The D Project. */
+  const seasonDeadline = new Date('2026-11-01T23:59:59+05:30').getTime();
+  const waitingPanel = document.createElement('section');
+  waitingPanel.className = 'tdp-waiting-panel';
+  waitingPanel.setAttribute('aria-live','polite');
+  waitingPanel.innerHTML = `
+    <h2 class="tdp-waiting-title">This chapter is nearing its last page</h2>
+    <div class="tdp-hourglass" role="img" aria-label="Animated golden hourglass">
+      <span class="tdp-glass-top"><i></i></span><span class="tdp-glass-neck"></span>
+      <span class="tdp-sand-stream"></span><span class="tdp-glass-bottom"><i></i></span>
+      <span class="tdp-glass-frame"></span>
+    </div>
+    <div class="tdp-countdown" aria-label="Time remaining">
+      <span><b data-unit="days">--</b><small>days</small></span>
+      <span><b data-unit="hours">--</b><small>hours</small></span>
+      <span><b data-unit="minutes">--</b><small>minutes</small></span>
+      <span><b data-unit="seconds">--</b><small>seconds</small></span>
+    </div>
+    <p class="tdp-waiting-note">Let time find its moment.</p>`;
+  card.prepend(waitingPanel);
+
+  const waitingStyle = document.createElement('style');
+  waitingStyle.textContent = `
+    .tdp-waiting-panel{position:relative;z-index:5;margin:0 auto 26px;padding:2px 8px 18px;text-align:center;color:#fff4e3}
+    .tdp-waiting-title{margin:0 auto 12px;font:italic 600 clamp(1.35rem,5vw,2rem)/1.25 Georgia,serif}
+    .tdp-waiting-note{margin:12px 0 0;font:italic .92rem Georgia,serif;color:rgba(255,244,227,.82)}
+    .tdp-countdown{display:flex;justify-content:center;gap:clamp(10px,3vw,22px);margin:14px auto 0}
+    .tdp-countdown span{display:grid;gap:3px;min-width:48px}
+    .tdp-countdown b{font:500 clamp(1.25rem,5vw,1.8rem)/1 Georgia,serif;font-variant-numeric:tabular-nums;color:#f3d39a}
+    .tdp-countdown small{font:500 .62rem Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,244,227,.7)}
+    .tdp-hourglass{position:relative;width:72px;height:92px;margin:0 auto 8px;filter:drop-shadow(0 0 12px rgba(224,181,111,.2))}
+    .tdp-glass-top,.tdp-glass-bottom{position:absolute;left:12px;width:48px;height:39px;overflow:hidden;border:1.5px solid rgba(240,207,151,.9);background:linear-gradient(135deg,rgba(255,255,255,.22),rgba(255,255,255,.035))}
+    .tdp-glass-top{top:5px;clip-path:polygon(0 0,100% 0,58% 100%,42% 100%);border-radius:5px 5px 12px 12px}
+    .tdp-glass-bottom{bottom:5px;clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);border-radius:12px 12px 5px 5px}
+    .tdp-glass-top i,.tdp-glass-bottom i{position:absolute;left:4px;right:4px;bottom:0;height:70%;background:linear-gradient(180deg,#f5d99e,#bd8744);opacity:.92}
+    .tdp-glass-top i{clip-path:polygon(0 0,100% 0,58% 100%,42% 100%);transform-origin:bottom;animation:tdpTopSand 12s linear infinite}
+    .tdp-glass-bottom i{height:18%;clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);animation:tdpBottomSand 12s linear infinite}
+    .tdp-glass-neck{position:absolute;z-index:2;left:34px;top:40px;width:4px;height:13px;background:#e8c78e}
+    .tdp-sand-stream{position:absolute;z-index:3;left:35px;top:45px;width:2px;height:18px;background:linear-gradient(#f8e5b9,rgba(248,229,185,0));transform-origin:top;animation:tdpSandFlow .85s ease-in-out infinite}
+    .tdp-glass-frame{position:absolute;inset:0;border-top:2px solid #d9b77e;border-bottom:2px solid #d9b77e;pointer-events:none}
+    .tdp-glass-frame:before,.tdp-glass-frame:after{content:"";position:absolute;left:10px;width:52px;height:2px;background:#d9b77e}
+    .tdp-glass-frame:before{top:1px}.tdp-glass-frame:after{bottom:1px}
+    @keyframes tdpTopSand{0%{transform:scaleY(1)}100%{transform:scaleY(.05)}}
+    @keyframes tdpBottomSand{0%{height:8%}100%{height:82%}}
+    @keyframes tdpSandFlow{0%,100%{opacity:.35;transform:scaleY(.65)}50%{opacity:1;transform:scaleY(1)}}
+    .tdp-season-ended .tdp-waiting-title{max-width:22ch}
+    .tdp-season-ended .tdp-countdown,.tdp-season-ended .tdp-waiting-note{display:none}
+    .tdp-season-ended .tdp-sand-stream{display:none}
+    .tdp-season-ended .tdp-glass-top i{height:3%;animation:none}
+    .tdp-season-ended .tdp-glass-bottom i{height:88%;animation:none}
+    .tdp-season-ended #sealOpenBtn{pointer-events:none!important;opacity:.55;filter:grayscale(.4)}
+    .tdp-season-ended #passwordGate{display:none!important}
+    .tdp-season-ended .wax-seal-real{cursor:not-allowed!important}
+    @media(max-width:420px){.tdp-waiting-panel{margin-bottom:18px}.tdp-countdown span{min-width:42px}}
+    @media(prefers-reduced-motion:reduce){.tdp-glass-top i,.tdp-glass-bottom i,.tdp-sand-stream{animation:none!important}}
+  `;
+  document.head.appendChild(waitingStyle);
+
+  const countdownNodes = Object.fromEntries([...waitingPanel.querySelectorAll('[data-unit]')].map(node=>[node.dataset.unit,node]));
+  let waitingTimer = 0;
+  function updateWaitingExperience(){
+    const remaining = seasonDeadline - Date.now();
+    if(remaining <= 0){
+      waitingPanel.querySelector('.tdp-waiting-title').textContent='This little chapter has reached the end of its season';
+      waitingPanel.classList.add('tdp-season-ended');
+      card.classList.add('tdp-season-ended');
+      sealOpenBtn.disabled=true;
+      sealOpenBtn.setAttribute('aria-disabled','true');
+      sealOpenBtn.setAttribute('aria-label','Envelope closed');
+      passwordGate.inert=true;
+      passwordGate.hidden=true;
+      passwordGate.setAttribute('aria-hidden','true');
+      clearInterval(waitingTimer);
+      return;
+    }
+    const seconds=Math.floor(remaining/1000);
+    countdownNodes.days.textContent=String(Math.floor(seconds/86400)).padStart(2,'0');
+    countdownNodes.hours.textContent=String(Math.floor(seconds%86400/3600)).padStart(2,'0');
+    countdownNodes.minutes.textContent=String(Math.floor(seconds%3600/60)).padStart(2,'0');
+    countdownNodes.seconds.textContent=String(seconds%60).padStart(2,'0');
+  }
+  updateWaitingExperience();
+  waitingTimer=setInterval(updateWaitingExperience,1000);
 })();
