@@ -278,14 +278,16 @@
   waitingPanel.setAttribute('aria-live','polite');
   waitingPanel.innerHTML = `
     <h2 class="tdp-waiting-title">A little note before the seal rests</h2>
-    <div class="tdp-shooting-star" role="img" aria-label="A little envelope nearing its seal">
-      <span class="tdp-star-trail"></span><span class="tdp-star-core">✉</span>
-    </div>
-    <div class="tdp-countdown" aria-label="Time remaining">
-      <span><b data-unit="days">--</b><small>days</small></span>
-      <span><b data-unit="hours">--</b><small>hours</small></span>
-      <span><b data-unit="minutes">--</b><small>minutes</small></span>
-      <span><b data-unit="seconds">--</b><small>seconds</small></span>
+    <div class="tdp-countdown-stage">
+      <div class="tdp-shooting-star" role="img" aria-label="A small golden shooting star">
+        <span class="tdp-star-trail"></span><span class="tdp-star-core">✦</span><span class="tdp-star-sparkle">✧</span>
+      </div>
+      <div class="tdp-countdown" aria-label="Time remaining">
+        <span><b data-unit="days">--</b><small>D</small></span>
+        <span><b data-unit="hours">--</b><small>H</small></span>
+        <span><b data-unit="minutes">--</b><small>M</small></span>
+        <span><b data-unit="seconds">--</b><small>S</small></span>
+      </div>
     </div>
     <div class="tdp-progress-wrap">
       <div class="tdp-progress-meta"><span>Until the last fold</span><b data-progress-label>0%</b></div>
