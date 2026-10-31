@@ -302,27 +302,27 @@
 
   const waitingStyle = document.createElement('style');
   waitingStyle.textContent = `
-    .tdp-waiting-panel{position:relative;z-index:5;width:min(100%,300px);margin:12px auto 0;padding:8px;text-align:center;color:#fff4e3}
-    .tdp-waiting-title{margin:0 auto 8px;font:italic 400 clamp(.68rem,2.5vw,.78rem)/1.35 Georgia,serif;letter-spacing:.015em;color:rgba(255,244,227,.56)}
-    .tdp-waiting-note{margin:10px 0 0;font:italic .66rem Georgia,serif;color:rgba(255,244,227,.58)}
-    .tdp-countdown-stage{position:relative;width:min(100%,230px);margin:15px auto 0;padding-top:25px}
-    .tdp-countdown{display:flex;justify-content:center;gap:clamp(8px,2.5vw,15px);margin:0 auto}
-    .tdp-countdown span{display:grid;gap:3px;min-width:29px}
-    .tdp-countdown b{font:400 clamp(.72rem,2.8vw,.84rem)/1 Georgia,serif;font-variant-numeric:tabular-nums;color:#f3d39a}
-    .tdp-countdown small{font:400 .48rem Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,244,227,.68)}
-    .tdp-progress-wrap{width:min(100%,252px);margin:14px auto 0;text-align:left}
-    .tdp-progress-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font:italic .68rem Georgia,serif;color:rgba(255,244,227,.78)}
-    .tdp-progress-meta b{font:600 .68rem Arial,sans-serif;font-variant-numeric:tabular-nums;color:#f3d39a}
-    .tdp-progress-track{height:4px;overflow:hidden;border-radius:99px;background:rgba(255,244,227,.2);box-shadow:inset 0 0 0 1px rgba(255,231,190,.12)}
-    .tdp-progress-fill{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#b9874d,#f5dda9,#fff0cb);box-shadow:0 0 8px rgba(243,211,154,.42);transition:width .8s linear}
-    .tdp-progress-caption{margin:6px 0 0;text-align:center;font:italic .61rem Georgia,serif;color:rgba(255,244,227,.62)}
-    .tdp-shooting-star{position:absolute;z-index:2;left:0;top:0;width:100%;height:30px;overflow:visible;pointer-events:none}
-    .tdp-star-core{position:absolute;left:0;top:2px;font:19px/1 Georgia,serif;color:#ffe8b6;text-shadow:0 0 6px rgba(255,222,164,.9),0 0 13px rgba(224,174,99,.5);animation:tdpCometFlight 3.8s cubic-bezier(.22,.62,.35,1) infinite}
-    .tdp-star-trail{position:absolute;left:0;top:12px;width:42px;height:1.5px;border-radius:100%;background:linear-gradient(90deg,transparent,rgba(218,169,99,.12),rgba(255,226,174,.9));transform:rotate(-25deg);transform-origin:right center;filter:blur(.25px);animation:tdpCometTrail 3.8s cubic-bezier(.22,.62,.35,1) infinite}
-    .tdp-star-sparkle{position:absolute;left:0;top:0;font:11px/1 Georgia,serif;color:#fff0cb;text-shadow:0 0 7px rgba(255,221,164,.8);opacity:0;animation:tdpCometSparkle 3.8s ease-in-out infinite}
-    @keyframes tdpCometFlight{0%{opacity:0;transform:translate(-12px,18px) scale(.72)}8%{opacity:1}48%{opacity:1;transform:translate(250px,-5px) scale(1)}57%,100%{opacity:0;transform:translate(265px,-13px) scale(.78)}}
-    @keyframes tdpCometTrail{0%,5%{opacity:0;transform:translate(-12px,18px) rotate(-25deg) scaleX(.1)}15%{opacity:.9}48%{opacity:.65;transform:translate(250px,-5px) rotate(-25deg) scaleX(1)}57%,100%{opacity:0;transform:translate(265px,-13px) rotate(-25deg) scaleX(.12)}}
-    @keyframes tdpCometSparkle{0%,34%,100%{opacity:0;transform:translate(0,0) scale(.4)}39%{opacity:.85;transform:translate(10px,-7px) scale(1)}45%{opacity:0;transform:translate(15px,-12px) scale(.5)}}
+    .tdp-waiting-panel{position:relative;z-index:5;width:min(100%,238px);margin:9px auto 0;padding:5px;text-align:center;color:#fff4e3}
+    .tdp-waiting-title{margin:0 auto 6px;font:italic 400 clamp(.58rem,2.1vw,.66rem)/1.3 Georgia,serif;letter-spacing:.01em;color:rgba(255,244,227,.56)}
+    .tdp-waiting-note{margin:8px 0 0;font:italic .55rem Georgia,serif;color:rgba(255,244,227,.58)}
+    .tdp-countdown-stage{position:relative;width:min(100%,180px);margin:11px auto 0;padding-top:20px}
+    .tdp-countdown{display:flex;justify-content:center;gap:clamp(6px,2vw,11px);margin:0 auto}
+    .tdp-countdown span{display:grid;gap:2px;min-width:23px}
+    .tdp-countdown b{font:400 clamp(.62rem,2.3vw,.72rem)/1 Georgia,serif;font-variant-numeric:tabular-nums;color:#f3d39a}
+    .tdp-countdown small{font:400 .41rem Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,244,227,.68)}
+    .tdp-progress-wrap{width:min(100%,198px);margin:10px auto 0;text-align:left}
+    .tdp-progress-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;font:italic .57rem Georgia,serif;color:rgba(255,244,227,.78)}
+    .tdp-progress-meta b{font:600 .57rem Arial,sans-serif;font-variant-numeric:tabular-nums;color:#f3d39a}
+    .tdp-progress-track{height:3px;overflow:hidden;border-radius:99px;background:rgba(255,244,227,.2);box-shadow:inset 0 0 0 1px rgba(255,231,190,.12)}
+    .tdp-progress-fill{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#b9874d,#f5dda9,#fff0cb);box-shadow:0 0 6px rgba(243,211,154,.42);transition:width .8s linear}
+    .tdp-progress-caption{margin:5px 0 0;text-align:center;font:italic .51rem Georgia,serif;color:rgba(255,244,227,.62)}
+    .tdp-shooting-star{position:absolute;z-index:2;left:0;top:0;width:100%;height:24px;overflow:visible;pointer-events:none}
+    .tdp-star-core{position:absolute;left:0;top:2px;font:15px/1 Georgia,serif;color:#ffe8b6;text-shadow:0 0 5px rgba(255,222,164,.9),0 0 10px rgba(224,174,99,.5);animation:tdpCometFlight 3.8s cubic-bezier(.22,.62,.35,1) infinite}
+    .tdp-star-trail{position:absolute;left:0;top:10px;width:32px;height:1px;border-radius:100%;background:linear-gradient(90deg,transparent,rgba(218,169,99,.12),rgba(255,226,174,.9));transform:rotate(-25deg);transform-origin:right center;filter:blur(.25px);animation:tdpCometTrail 3.8s cubic-bezier(.22,.62,.35,1) infinite}
+    .tdp-star-sparkle{position:absolute;left:0;top:0;font:9px/1 Georgia,serif;color:#fff0cb;text-shadow:0 0 6px rgba(255,221,164,.8);opacity:0;animation:tdpCometSparkle 3.8s ease-in-out infinite}
+    @keyframes tdpCometFlight{0%{opacity:0;transform:translate(-10px,14px) scale(.72)}8%{opacity:1}48%{opacity:1;transform:translate(195px,-4px) scale(1)}57%,100%{opacity:0;transform:translate(205px,-10px) scale(.78)}}
+    @keyframes tdpCometTrail{0%,5%{opacity:0;transform:translate(-10px,14px) rotate(-25deg) scaleX(.1)}15%{opacity:.9}48%{opacity:.65;transform:translate(195px,-4px) rotate(-25deg) scaleX(1)}57%,100%{opacity:0;transform:translate(205px,-10px) rotate(-25deg) scaleX(.12)}}
+    @keyframes tdpCometSparkle{0%,34%,100%{opacity:0;transform:translate(0,0) scale(.4)}39%{opacity:.85;transform:translate(8px,-6px) scale(1)}45%{opacity:0;transform:translate(12px,-10px) scale(.5)}}
     .tdp-season-ended .tdp-waiting-title{max-width:22ch}
     .tdp-season-ended .tdp-countdown,.tdp-season-ended .tdp-waiting-note{display:none}
     .tdp-season-ended .tdp-shooting-star{opacity:.62}
