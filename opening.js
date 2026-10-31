@@ -269,8 +269,10 @@
   unlockBtn.addEventListener('click',unlockLetter);
   passwordInput.addEventListener('keydown',e=>{if(e.key==='Enter')unlockLetter()});
 
-  /* Golden hourglass countdown for The D Project. */
+  /* Shooting-star countdown and timeline progress for The D Project. */
+  const progressStart = new Date('2026-10-29T21:35:00+05:30').getTime();
   const seasonDeadline = new Date('2026-11-01T23:59:59+05:30').getTime();
+  const progressDuration = seasonDeadline - progressStart;
   const waitingPanel = document.createElement('section');
   waitingPanel.className = 'tdp-waiting-panel';
   waitingPanel.setAttribute('aria-live','polite');
@@ -285,6 +287,13 @@
       <span><b data-unit="minutes">--</b><small>minutes</small></span>
       <span><b data-unit="seconds">--</b><small>seconds</small></span>
     </div>
+    <div class="tdp-progress-wrap">
+      <div class="tdp-progress-meta"><span>Our little timeline</span><b data-progress-label>0%</b></div>
+      <div class="tdp-progress-track" role="progressbar" aria-label="Time elapsed in this chapter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-progressbar>
+        <span class="tdp-progress-fill" data-progress-fill></span>
+      </div>
+      <p class="tdp-progress-caption">A little more of the journey, every second.</p>
+    </div>
     <p class="tdp-waiting-note">Let time find its moment.</p>`;
   card.append(waitingPanel);
 
@@ -297,6 +306,12 @@
     .tdp-countdown span{display:grid;gap:3px;min-width:36px}
     .tdp-countdown b{font:500 clamp(.88rem,3.6vw,1.1rem)/1 Georgia,serif;font-variant-numeric:tabular-nums;color:#f3d39a}
     .tdp-countdown small{font:500 .62rem Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,244,227,.7)}
+    .tdp-progress-wrap{width:min(100%,252px);margin:14px auto 0;text-align:left}
+    .tdp-progress-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font:italic .68rem Georgia,serif;color:rgba(255,244,227,.78)}
+    .tdp-progress-meta b{font:600 .68rem Arial,sans-serif;font-variant-numeric:tabular-nums;color:#f3d39a}
+    .tdp-progress-track{height:4px;overflow:hidden;border-radius:99px;background:rgba(255,244,227,.2);box-shadow:inset 0 0 0 1px rgba(255,231,190,.12)}
+    .tdp-progress-fill{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#b9874d,#f5dda9,#fff0cb);box-shadow:0 0 8px rgba(243,211,154,.42);transition:width .8s linear}
+    .tdp-progress-caption{margin:6px 0 0;text-align:center;font:italic .61rem Georgia,serif;color:rgba(255,244,227,.62)}
     .tdp-shooting-star{position:relative;width:62px;height:34px;margin:0 auto 8px;overflow:visible;filter:drop-shadow(0 0 7px rgba(238,197,126,.28))}
     .tdp-star-core{position:absolute;left:28px;top:4px;font:26px/1 Georgia,serif;color:#ffe8b6;text-shadow:0 0 7px rgba(255,222,164,.9),0 0 16px rgba(224,174,99,.55);animation:tdpStarPulse 2.8s ease-in-out infinite}
     .tdp-star-trail{position:absolute;left:3px;top:18px;width:34px;height:1.5px;border-radius:100%;background:linear-gradient(90deg,transparent,rgba(218,169,99,.08),rgba(255,226,174,.9));transform:rotate(-25deg);transform-origin:right center;filter:blur(.25px);animation:tdpStarTrail 2.8s ease-in-out infinite}
@@ -316,11 +331,23 @@
   document.head.appendChild(waitingStyle);
 
   const countdownNodes = Object.fromEntries([...waitingPanel.querySelectorAll('[data-unit]')].map(node=>[node.dataset.unit,node]));
+  const progressBar = waitingPanel.querySelector('[data-progressbar]');
+  const progressFill = waitingPanel.querySelector('[data-progress-fill]');
+  const progressLabel = waitingPanel.querySelector('[data-progress-label]');
   let waitingTimer = 0;
+  function updateTimelineProgress(now){
+    const percentage = Math.max(0,Math.min(100,((now-progressStart)/progressDuration)*100));
+    const rounded = percentage.toFixed(1);
+    progressFill.style.width = percentage + '%';
+    progressLabel.textContent = rounded + '%';
+    progressBar.setAttribute('aria-valuenow',rounded);
+  }
   function updateWaitingExperience(){
-    const remaining = seasonDeadline - Date.now();
+    const now = Date.now();
+    const remaining = seasonDeadline - now;
+    updateTimelineProgress(now);
     if(remaining <= 0){
-      waitingPanel.querySelector('.tdp-waiting-title').textContent='This little chapter has reached the end of its season';
+      updateTimelineProgress(seasonDeadline);\n      waitingPanel.querySelector('.tdp-waiting-title').textContent='This little chapter has reached the end of its season';
       waitingPanel.classList.add('tdp-season-ended');
       card.classList.add('tdp-season-ended');
       sealOpenBtn.disabled=true;
