@@ -278,6 +278,8 @@
   waitingPanel.setAttribute('aria-live','polite');
   waitingPanel.innerHTML = `
     <div class="tdp-progress-meta"><span>Until the last fold</span></div>
+    <p class="tdp-progress-caption">With every passing moment, the envelope draws closer to its final fold.</p>
+    <p class="tdp-waiting-note">This little memory will soon be tucked away.</p>
     <div class="tdp-countdown-stage">
       <div class="tdp-shooting-star" role="img" aria-label="A small golden shooting star">
         <span class="tdp-star-trail"></span><span class="tdp-star-core">✦</span><span class="tdp-star-sparkle">✧</span>
@@ -293,26 +295,24 @@
       <div class="tdp-progress-track" role="progressbar" aria-label="Progress towards the envelope being sealed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-progressbar>
         <span class="tdp-progress-fill" data-progress-fill></span>
       </div>
-      <p class="tdp-progress-caption">With every passing moment, the envelope draws closer to its final fold.</p>
     </div>
-    <p class="tdp-waiting-note">This little memory will soon be tucked away.</p>
   `;
   card.append(waitingPanel);
 
   const waitingStyle = document.createElement('style');
   waitingStyle.textContent = `
     .tdp-waiting-panel{position:relative;z-index:5;width:min(100%,238px);margin:9px auto 0;padding:5px;text-align:center;color:#fff4e3}
-    .tdp-waiting-note{margin:7px 0 0;font:italic .55rem Georgia,serif;color:rgba(255,244,227,.58)}
-    .tdp-countdown-stage{position:relative;width:min(100%,180px);margin:11px auto 0;padding-top:20px}
+    .tdp-waiting-note{margin:3px 0 0;font:italic .55rem Georgia,serif;color:rgba(255,244,227,.58)}
+    .tdp-countdown-stage{position:relative;width:min(100%,180px);margin:8px auto 0;padding-top:20px}
     .tdp-countdown{display:flex;justify-content:center;gap:clamp(6px,2vw,11px);margin:0 auto}
     .tdp-countdown span{display:grid;gap:2px;min-width:23px}
     .tdp-countdown b{font:400 clamp(.62rem,2.3vw,.72rem)/1 Georgia,serif;font-variant-numeric:tabular-nums;color:#f3d39a}
     .tdp-countdown small{font:400 .41rem Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,244,227,.68)}
     .tdp-progress-wrap{width:min(100%,198px);margin:9px auto 0;text-align:left}
-    .tdp-progress-meta{display:flex;justify-content:center;align-items:center;margin:0 auto 8px;font:italic .57rem Georgia,serif;color:rgba(255,244,227,.78)}
+    .tdp-progress-meta{display:flex;justify-content:center;align-items:center;margin:0 auto 4px;font:italic .57rem Georgia,serif;color:rgba(255,244,227,.78)}
     .tdp-progress-track{height:3px;overflow:hidden;border-radius:99px;background:rgba(255,244,227,.2);box-shadow:inset 0 0 0 1px rgba(255,231,190,.12)}
     .tdp-progress-fill{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#b9874d,#f5dda9,#fff0cb);box-shadow:0 0 6px rgba(243,211,154,.42);transition:width .8s linear}
-    .tdp-progress-caption{margin:5px 0 0;text-align:center;font:italic .51rem Georgia,serif;color:rgba(255,244,227,.62)}
+    .tdp-progress-caption{margin:0 auto;text-align:center;font:italic .51rem Georgia,serif;color:rgba(255,244,227,.62)}
     .tdp-shooting-star{position:absolute;z-index:2;left:0;top:0;width:100%;height:24px;overflow:visible;pointer-events:none}
     .tdp-star-core{position:absolute;left:0;top:2px;font:15px/1 Georgia,serif;color:#ffe8b6;text-shadow:0 0 5px rgba(255,222,164,.9),0 0 10px rgba(224,174,99,.5);animation:tdpCometFlight 3.8s cubic-bezier(.22,.62,.35,1) infinite}
     .tdp-star-trail{position:absolute;left:0;top:10px;width:32px;height:1px;border-radius:100%;background:linear-gradient(90deg,transparent,rgba(218,169,99,.12),rgba(255,226,174,.9));transform:rotate(-25deg);transform-origin:right center;filter:blur(.25px);animation:tdpCometTrail 3.8s cubic-bezier(.22,.62,.35,1) infinite}
