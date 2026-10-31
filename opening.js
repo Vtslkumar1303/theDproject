@@ -278,6 +278,14 @@
   waitingPanel.setAttribute('aria-live','polite');
   waitingPanel.innerHTML = `
     <h2 class="tdp-waiting-title">A little note before the seal rests</h2>
+    <div class="tdp-progress-wrap">
+      <div class="tdp-progress-meta"><span>Until the last fold</span><b data-progress-label>0%</b></div>
+      <div class="tdp-progress-track" role="progressbar" aria-label="Progress towards the envelope being sealed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-progressbar>
+        <span class="tdp-progress-fill" data-progress-fill></span>
+      </div>
+      <p class="tdp-progress-caption">With every passing moment, the envelope draws closer to its final fold.</p>
+    </div>
+    <p class="tdp-waiting-note">This little memory will soon be tucked away.</p>
     <div class="tdp-countdown-stage">
       <div class="tdp-shooting-star" role="img" aria-label="A small golden shooting star">
         <span class="tdp-star-trail"></span><span class="tdp-star-core">✦</span><span class="tdp-star-sparkle">✧</span>
@@ -289,26 +297,19 @@
         <span><b data-unit="seconds">--</b><small>S</small></span>
       </div>
     </div>
-    <div class="tdp-progress-wrap">
-      <div class="tdp-progress-meta"><span>Until the last fold</span><b data-progress-label>0%</b></div>
-      <div class="tdp-progress-track" role="progressbar" aria-label="Progress towards the envelope being sealed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-progressbar>
-        <span class="tdp-progress-fill" data-progress-fill></span>
-      </div>
-      <p class="tdp-progress-caption">With every passing moment, the envelope draws closer to its final fold.</p>
-    </div>
-    <p class="tdp-waiting-note">This little memory will soon be tucked away.</p>`;
+  `;
   card.append(waitingPanel);
 
   const waitingStyle = document.createElement('style');
   waitingStyle.textContent = `
     .tdp-waiting-panel{position:relative;z-index:5;width:min(100%,300px);margin:12px auto 0;padding:8px;text-align:center;color:#fff4e3}
-    .tdp-waiting-title{margin:0 auto 12px;font:italic 600 clamp(.88rem,3.2vw,1.05rem)/1.25 Georgia,serif}
-    .tdp-waiting-note{margin:12px 0 0;font:italic .72rem Georgia,serif;color:rgba(255,244,227,.82)}
-    .tdp-countdown-stage{position:relative;width:min(100%,270px);margin:2px auto 0;padding-top:35px}
-    .tdp-countdown{display:flex;justify-content:center;gap:clamp(10px,3vw,22px);margin:0 auto}
-    .tdp-countdown span{display:grid;gap:5px;min-width:36px}
-    .tdp-countdown b{font:500 clamp(.88rem,3.6vw,1.1rem)/1 Georgia,serif;font-variant-numeric:tabular-nums;color:#f3d39a}
-    .tdp-countdown small{font:500 .58rem Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,244,227,.68)}
+    .tdp-waiting-title{margin:0 auto 8px;font:italic 400 clamp(.68rem,2.5vw,.78rem)/1.35 Georgia,serif;letter-spacing:.015em;color:rgba(255,244,227,.56)}
+    .tdp-waiting-note{margin:10px 0 0;font:italic .66rem Georgia,serif;color:rgba(255,244,227,.58)}
+    .tdp-countdown-stage{position:relative;width:min(100%,230px);margin:15px auto 0;padding-top:25px}
+    .tdp-countdown{display:flex;justify-content:center;gap:clamp(8px,2.5vw,15px);margin:0 auto}
+    .tdp-countdown span{display:grid;gap:3px;min-width:29px}
+    .tdp-countdown b{font:400 clamp(.72rem,2.8vw,.84rem)/1 Georgia,serif;font-variant-numeric:tabular-nums;color:#f3d39a}
+    .tdp-countdown small{font:400 .48rem Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,244,227,.68)}
     .tdp-progress-wrap{width:min(100%,252px);margin:14px auto 0;text-align:left}
     .tdp-progress-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font:italic .68rem Georgia,serif;color:rgba(255,244,227,.78)}
     .tdp-progress-meta b{font:600 .68rem Arial,sans-serif;font-variant-numeric:tabular-nums;color:#f3d39a}
@@ -329,7 +330,7 @@
     .tdp-season-ended #sealOpenBtn{pointer-events:none!important;opacity:.55;filter:grayscale(.4)}
     .tdp-season-ended #passwordGate{display:none!important}
     .tdp-season-ended .wax-seal-real{cursor:not-allowed!important}
-    @media(max-width:420px){.tdp-waiting-panel{margin-bottom:18px}.tdp-countdown span{min-width:42px}}
+    @media(max-width:420px){.tdp-waiting-panel{margin-bottom:18px}.tdp-countdown span{min-width:29px}}
     @media(prefers-reduced-motion:reduce){.tdp-star-core,.tdp-star-trail,.tdp-star-sparkle{animation:none!important;opacity:.7}}
   `;
   document.head.appendChild(waitingStyle);
