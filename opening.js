@@ -288,13 +288,13 @@
       <span><b data-unit="seconds">--</b><small>seconds</small></span>
     </div>
     <div class="tdp-progress-wrap">
-      <div class="tdp-progress-meta"><span>Until the seal rests</span><b data-progress-label>0%</b></div>
+      <div class="tdp-progress-meta"><span>Until the last fold</span><b data-progress-label>0%</b></div>
       <div class="tdp-progress-track" role="progressbar" aria-label="Progress towards the envelope being sealed" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" data-progressbar>
         <span class="tdp-progress-fill" data-progress-fill></span>
       </div>
       <p class="tdp-progress-caption">With every passing moment, the envelope draws closer to its final fold.</p>
     </div>
-    <p class="tdp-waiting-note">Soon, this little letter will be tucked away.</p>`;
+    <p class="tdp-waiting-note">This little memory will soon be tucked away.</p>`;
   card.append(waitingPanel);
 
   const waitingStyle = document.createElement('style');
