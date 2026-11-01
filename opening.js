@@ -315,7 +315,7 @@
     .tdp-progress-meta{display:flex;justify-content:center;align-items:center;margin:0 auto 4px;font:italic .57rem Georgia,serif;color:rgba(255,244,227,.78)}
     .tdp-progress-track{height:3px;overflow:hidden;border-radius:99px;background:rgba(255,244,227,.2);box-shadow:inset 0 0 0 1px rgba(255,231,190,.12)}
     .tdp-progress-fill{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#b9874d,#f5dda9,#fff0cb);box-shadow:0 0 6px rgba(243,211,154,.42);transition:width .8s linear}
-    .tdp-signoff{display:flex;justify-content:center;align-items:center;margin:12px auto 0;font:italic .58rem Georgia,serif;letter-spacing:.13em;color:rgba(244,216,174,.78);opacity:0;transform:translateY(7px);animation:tdpSignoffReveal 1.25s cubic-bezier(.2,.7,.25,1) 1.1s forwards}
+    .tdp-signoff{display:flex;justify-content:center;align-items:center;margin:20px auto 0;font:italic .58rem Georgia,serif;letter-spacing:.13em;color:rgba(244,216,174,.78);opacity:0;transform:translateY(7px);animation:tdpSignoffReveal 1.25s cubic-bezier(.2,.7,.25,1) 1.1s forwards}
     .tdp-signoff>span{display:inline-block;animation:tdpSignoffGlow 4.8s ease-in-out 2.4s infinite}
     .tdp-signoff-gap{width:.3em}
     .tdp-signoff-ellipsis{letter-spacing:.22em;animation:tdpSignoffDots 2.2s ease-in-out 2.5s infinite!important}
