@@ -277,8 +277,8 @@
   waitingPanel.className = 'tdp-waiting-panel';
   waitingPanel.setAttribute('aria-live','polite');
   waitingPanel.innerHTML = `
-    <div class="tdp-progress-meta"><span>Until the last fold</span></div>
-    <p class="tdp-progress-caption">With every passing moment, the envelope draws closer to its final fold.</p>
+    <div class="tdp-progress-meta"><span>The final fold has arrived.</span></div>
+    <p class="tdp-progress-caption">What was once awaited is now simply a part of the story.</p>
     <p class="tdp-waiting-note">This little memory will soon be tucked away.</p>
     <div class="tdp-countdown-stage">
       <div class="tdp-shooting-star" role="img" aria-label="A small golden shooting star">
