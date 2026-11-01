@@ -296,6 +296,9 @@
         <span class="tdp-progress-fill" data-progress-fill></span>
       </div>
     </div>
+    <p class="tdp-signoff" aria-label="1303 Signing Off">
+      <span>1303</span><span class="tdp-signoff-gap"> </span><span>Signing Off</span><span class="tdp-signoff-ellipsis">…</span>
+    </p>
   `;
   card.append(waitingPanel);
 
@@ -312,6 +315,14 @@
     .tdp-progress-meta{display:flex;justify-content:center;align-items:center;margin:0 auto 4px;font:italic .57rem Georgia,serif;color:rgba(255,244,227,.78)}
     .tdp-progress-track{height:3px;overflow:hidden;border-radius:99px;background:rgba(255,244,227,.2);box-shadow:inset 0 0 0 1px rgba(255,231,190,.12)}
     .tdp-progress-fill{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#b9874d,#f5dda9,#fff0cb);box-shadow:0 0 6px rgba(243,211,154,.42);transition:width .8s linear}
+    .tdp-signoff{display:flex;justify-content:center;align-items:center;margin:12px auto 0;font:italic .58rem Georgia,serif;letter-spacing:.13em;color:rgba(244,216,174,.78);opacity:0;transform:translateY(7px);animation:tdpSignoffReveal 1.25s cubic-bezier(.2,.7,.25,1) 1.1s forwards}
+    .tdp-signoff>span{display:inline-block;animation:tdpSignoffGlow 4.8s ease-in-out 2.4s infinite}
+    .tdp-signoff-gap{width:.3em}
+    .tdp-signoff-ellipsis{letter-spacing:.22em;animation:tdpSignoffDots 2.2s ease-in-out 2.5s infinite!important}
+    @keyframes tdpSignoffReveal{to{opacity:1;transform:translateY(0)}}
+    @keyframes tdpSignoffGlow{0%,100%{text-shadow:0 0 0 rgba(244,216,174,0)}50%{text-shadow:0 0 8px rgba(244,216,174,.42)}}
+    @keyframes tdpSignoffDots{0%,100%{opacity:.45;transform:translateY(0)}50%{opacity:1;transform:translateY(-1px)}}
+
     .tdp-progress-caption{margin:0 auto;text-align:center;font:italic .51rem Georgia,serif;color:rgba(255,244,227,.62)}
     .tdp-shooting-star{position:absolute;z-index:2;left:0;top:0;width:100%;height:24px;overflow:visible;pointer-events:none}
     .tdp-star-core{position:absolute;left:0;top:2px;font:15px/1 Georgia,serif;color:#ffe8b6;text-shadow:0 0 5px rgba(255,222,164,.9),0 0 10px rgba(224,174,99,.5);animation:tdpCometFlight 3.8s cubic-bezier(.22,.62,.35,1) infinite}
