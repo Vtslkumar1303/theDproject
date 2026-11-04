@@ -125,3 +125,57 @@
   .letter-transition .confession-sheet{transform:translateX(-50%) translateY(-206px) scale(1.01) translateZ(30px)}
   .letter-transition .sheet-original-hero{padding:64px 18px 32px!important}
 }
+
+/* Automatic opening-page paper crumple: envelope only; leave the dark stage empty. */
+.tdp-auto-crumple .real-envelope{
+  pointer-events:none;
+  animation:tdpEnvelopeCrumple 1.45s cubic-bezier(.62,.02,.86,.42) forwards;
+  transform-origin:52% 48%;
+}
+.tdp-auto-crumple .real-envelope:before{
+  content:"";
+  position:absolute;
+  z-index:30;
+  inset:3%;
+  pointer-events:none;
+  border-radius:8px;
+  opacity:0;
+  background:
+    linear-gradient(34deg,transparent 42%,rgba(110,70,48,.22) 43%,rgba(255,248,226,.62) 44%,transparent 47%),
+    linear-gradient(145deg,transparent 48%,rgba(119,76,51,.24) 49%,rgba(255,249,231,.54) 50%,transparent 53%),
+    linear-gradient(78deg,transparent 47%,rgba(117,73,50,.20) 48%,rgba(255,249,231,.55) 49%,transparent 52%);
+  animation:tdpPaperWrinkles 1.45s ease-in forwards;
+}
+.tdp-auto-crumple .real-envelope:after{
+  content:"";
+  position:absolute;
+  z-index:31;
+  inset:0;
+  pointer-events:none;
+  opacity:0;
+  border-radius:50%;
+  background:repeating-conic-gradient(from 12deg at 50% 48%,rgba(112,70,49,.22) 0deg 3deg,rgba(255,247,225,.48) 4deg 7deg,transparent 8deg 17deg);
+  animation:tdpPaperBall 1.45s ease-in forwards;
+}
+@keyframes tdpEnvelopeCrumple{
+  0%{opacity:1;transform:translate(0,0) rotate(0) scale(1,1);border-radius:0;clip-path:polygon(0 0,100% 0,100% 100%,0 100%);filter:drop-shadow(0 30px 36px rgba(0,0,0,.34))}
+  22%{opacity:1;transform:translate(-2vw,2vh) rotate(-5deg) scale(.82,.78);border-radius:18% 12% 22% 16%;clip-path:polygon(4% 0,94% 5%,100% 89%,86% 100%,8% 96%,0 18%)}
+  48%{opacity:1;transform:translate(3vw,10vh) rotate(22deg) scale(.48,.42);border-radius:38% 24% 42% 30%;clip-path:polygon(22% 3%,78% 0,100% 34%,82% 100%,20% 90%,0 42%)}
+  68%{opacity:.96;transform:translate(9vw,24vh) rotate(68deg) scale(.20,.19);border-radius:50%;clip-path:polygon(36% 0,78% 12%,100% 50%,72% 100%,18% 86%,0 34%);filter:blur(.2px)}
+  100%{opacity:0;transform:translate(17vw,112vh) rotate(520deg) scale(.035,.035);border-radius:50%;clip-path:circle(48% at 50% 50%);filter:blur(2px) drop-shadow(0 0 0 transparent)}
+}
+@keyframes tdpPaperWrinkles{
+  0%,18%{opacity:0;transform:scale(1)}
+  38%{opacity:.9;transform:scale(.8) rotate(8deg)}
+  68%{opacity:1;transform:scale(.25) rotate(28deg)}
+  100%{opacity:0;transform:scale(.04) rotate(50deg)}
+}
+@keyframes tdpPaperBall{
+  0%,35%{opacity:0;transform:scale(1) rotate(0)}
+  62%{opacity:.7;transform:scale(.35) rotate(35deg)}
+  100%{opacity:0;transform:scale(.04) rotate(110deg)}
+}
+@media(prefers-reduced-motion:reduce){
+  .tdp-auto-crumple .real-envelope{animation-duration:.25s}
+  .tdp-auto-crumple .real-envelope:before,.tdp-auto-crumple .real-envelope:after{animation-duration:.25s}
+}
