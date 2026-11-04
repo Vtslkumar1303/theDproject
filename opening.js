@@ -77,6 +77,18 @@
   const passwordMessage=document.getElementById('passwordMessage');
   const confessionSheet=document.getElementById('confessionSheet');
   const closeEnvelopeBtn=document.getElementById('closePasswordEnvelopeBtn');
+
+  // Let the opening envelope be seen briefly, then crumple it away automatically.
+  const autoCrumpleTimer=setTimeout(()=>{
+    if(card.classList.contains('password-visible')||card.classList.contains('is-unlocking'))return;
+    card.classList.add('tdp-auto-crumple');
+  },2000);
+  document.getElementById('realEnvelope').addEventListener('animationend',e=>{
+    if(e.target===e.currentTarget&&e.animationName==='tdpEnvelopeCrumple'){
+      card.style.display='none';
+      card.setAttribute('aria-hidden','true');
+    }
+  });
   let focusTimer=null;
   let validationAttempt=0;
   let validating=false;
