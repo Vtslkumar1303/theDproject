@@ -277,8 +277,10 @@
   waitingPanel.className = 'tdp-waiting-panel';
   waitingPanel.setAttribute('aria-live','polite');
   waitingPanel.innerHTML = `
-    <div class="tdp-progress-meta"><span>The final fold has arrived.</span></div>
-    <p class="tdp-progress-caption">What was once awaited is now simply a part of the story.</p>
+    <div class="tdp-letter-paper" aria-label="A little letter">
+      <div class="tdp-progress-meta"><span>The final fold has arrived.</span></div>
+      <p class="tdp-progress-caption">What was once awaited is now simply a part of the story.</p>
+    </div>
     <p class="tdp-waiting-note">This little memory will soon be tucked away.</p>
     <div class="tdp-countdown-stage">
       <div class="tdp-shooting-star" role="img" aria-label="A small golden shooting star">
@@ -301,10 +303,39 @@
     </p>
   `;
   card.append(waitingPanel);
+  const letterPaper = waitingPanel.querySelector('.tdp-letter-paper');
+  if(letterPaper){
+    requestAnimationFrame(()=>setTimeout(()=>{
+      if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        letterPaper.classList.add('tdp-letter-crumpling');
+        setTimeout(()=>letterPaper.remove(),1250);
+      }else{
+        letterPaper.style.transition='opacity .35s ease, transform .35s ease';
+        letterPaper.style.opacity='0';
+        letterPaper.style.transform='translateY(12px)';
+        setTimeout(()=>letterPaper.remove(),400);
+      }
+    },2000));
+  }
 
   const waitingStyle = document.createElement('style');
   waitingStyle.textContent = `
     .tdp-waiting-panel{position:relative;z-index:5;width:min(100%,238px);margin:9px auto 0;padding:5px;text-align:center;color:#fff4e3}
+    .tdp-letter-paper{position:relative;isolation:isolate;width:fit-content;max-width:100%;margin:0 auto 7px;padding:11px 13px 10px;border:1px solid rgba(183,143,91,.42);border-radius:2px;background:linear-gradient(145deg,#fff8e9 0%,#f3e5cc 55%,#ead7b8 100%);color:#5c4632;box-shadow:0 5px 13px rgba(0,0,0,.2),inset 0 0 18px rgba(164,119,67,.1);transform-origin:52% 48%;will-change:transform,opacity,clip-path,filter}
+    .tdp-letter-paper:before,.tdp-letter-paper:after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0}
+    .tdp-letter-paper:before{background:repeating-linear-gradient(28deg,transparent 0 9px,rgba(112,83,55,.24) 9.5px 10px,transparent 10.5px 17px),repeating-linear-gradient(147deg,transparent 0 13px,rgba(255,255,255,.72) 13.5px 14px,transparent 14.5px 22px);mix-blend-mode:multiply}
+    .tdp-letter-paper:after{inset:2px;background:radial-gradient(ellipse at 25% 20%,rgba(255,255,255,.8),transparent 48%),linear-gradient(135deg,transparent 42%,rgba(93,65,39,.26) 49%,transparent 56%),linear-gradient(35deg,transparent 42%,rgba(255,255,255,.72) 49%,transparent 56%);filter:contrast(1.2)}
+    .tdp-letter-paper .tdp-progress-meta{margin:0 auto 5px;color:#765a3e;font:italic .68rem Georgia,serif}
+    .tdp-letter-paper .tdp-progress-caption{color:#80674c;font:italic .58rem/1.35 Georgia,serif}
+    .tdp-letter-paper.tdp-letter-crumpling{animation:tdpLetterCrumple 1.15s cubic-bezier(.45,0,.8,.35) forwards}
+    .tdp-letter-paper.tdp-letter-crumpling:before,.tdp-letter-paper.tdp-letter-crumpling:after{opacity:.9;transition:opacity .18s ease}
+    @keyframes tdpLetterCrumple{
+      0%{transform:perspective(500px) rotate(0) scale(1);clip-path:polygon(0 0,100% 0,100% 100%,0 100%);filter:none;opacity:1}
+      24%{transform:perspective(500px) rotateX(28deg) rotateZ(-9deg) scale(.88,.82);clip-path:polygon(8% 0,92% 4%,100% 86%,12% 100%);filter:contrast(1.08)}
+      48%{transform:perspective(500px) rotateX(-32deg) rotateY(24deg) rotateZ(17deg) scale(.58,.62);clip-path:polygon(28% 5%,82% 18%,96% 72%,62% 100%,8% 78%,16% 30%);filter:contrast(1.22) drop-shadow(0 4px 3px rgba(0,0,0,.2))}
+      70%{transform:perspective(500px) rotateX(55deg) rotateY(-38deg) rotateZ(-35deg) scale(.34,.4);clip-path:polygon(35% 0,78% 18%,100% 55%,72% 100%,20% 86%,0 38%);filter:contrast(1.35) drop-shadow(0 6px 4px rgba(0,0,0,.24))}
+      100%{transform:perspective(500px) translate(48px,125vh) rotateX(160deg) rotateY(210deg) rotateZ(760deg) scale(.08);clip-path:polygon(42% 10%,75% 22%,88% 55%,65% 88%,25% 82%,12% 44%);filter:blur(2px);opacity:0}
+    }
     .tdp-waiting-note{margin:3px 0 0;font:italic .55rem Georgia,serif;color:rgba(255,244,227,.58)}
     .tdp-countdown-stage{position:relative;width:min(100%,180px);margin:8px auto 0;padding-top:20px}
     .tdp-countdown{display:flex;justify-content:center;gap:clamp(6px,2vw,11px);margin:0 auto}
